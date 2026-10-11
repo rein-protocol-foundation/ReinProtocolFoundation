@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { supabaseAuthEmailConfiguration, supabaseAuthEmailTemplates, supabaseAuthEmailPreviews } from '@/lib/supabase-auth-email'
+import { createSupabaseAuthEmailTemplates, supabaseAuthEmailConfiguration, supabaseAuthEmailTemplates, supabaseAuthEmailPreviews } from '@/lib/supabase-auth-email'
 import { participantConfirmationTemplate } from '@/lib/email-templates'
 
 describe('Rein Supabase Auth emails', () => {
@@ -21,8 +21,16 @@ describe('Rein Supabase Auth emails', () => {
     expect(readFileSync(`supabase/templates/${name}.html`, 'utf8')).toBe(`${html}\n`)
     const config = readFileSync('supabase/config.toml', 'utf8')
     const section = config.split(`[auth.email.template.${name}]\n`)[1]?.split('\n[')[0]
-    expect(section).toContain(subject)
-    expect(section).toContain(`content_path = "./supabase/templates/${name}.html"`)
+    if (['confirmation', 'magic_link'].includes(name)) {
+      const callbacks = [...config.match(/^additional_redirect_urls = \[([\s\S]*?)^\]/m)![1].matchAll(/"([^"\n]+)"/g)].map((match) => match[1])
+      const localEmail = createSupabaseAuthEmailTemplates(callbacks).find((email) => email.name === name)!
+      expect(section).toContain(localEmail.subject)
+      expect(section).toContain(`content_path = "./supabase/templates/local/${name}.html"`)
+      expect(readFileSync(`supabase/templates/local/${name}.html`, 'utf8')).toBe(`${localEmail.html}\n`)
+    } else {
+      expect(section).toContain(subject)
+      expect(section).toContain(`content_path = "./supabase/templates/${name}.html"`)
+    }
   })
 
   it.each(supabaseAuthEmailTemplates.filter(({ name }) => ['invite', 'recovery', 'email_change'].includes(name)))('retains the Supabase verification URL for $name, including a copyable fallback', ({ html }) => {
@@ -58,7 +66,7 @@ describe('Rein Supabase Auth emails', () => {
       expect(email.html).toContain('eq .RedirectTo (print .SiteURL "/auth/confirm")')
       expect(email.subject).toContain('Your sign-in code')
       expect(email.html).not.toContain('{{ .Data')
-      expect(email.html).not.toContain('href="{{ .RedirectTo }}"')
+      expect(email.html).toContain('href="{{ .RedirectTo }}#token_hash={{ .TokenHash }}&amp;flow=admin-signin"')
     }
   })
 

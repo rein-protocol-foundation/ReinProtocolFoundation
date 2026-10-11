@@ -9,7 +9,7 @@ marketing message. These templates are English and are independent of the Admin 
 - Supabase-ready HTML: `supabase/templates/*.html`.
 - Regenerate: `node scripts/generate-supabase-auth-templates.mjs`.
 - Check generated files: `node scripts/generate-supabase-auth-templates.mjs --check`.
-- Local configuration: `auth.email.template.*` in `supabase/config.toml`.
+- Local configuration: `auth.email.template.*` in `supabase/config.toml`; generated `supabase/templates/local/{confirmation,magic_link}.html` also match the exact callbacks in `additional_redirect_urls`. Regenerate after changing that allowlist. Hosted templates exclude these local origins.
 - Hosted settings: **Authentication > Email Templates** and **Authentication > SMTP Settings**.
 
 `magic_link` covers existing-account passwordless sign-in; `confirmation` covers email
@@ -28,6 +28,9 @@ The button and copyable fallback use the same URL. For administrator requests, t
 `RedirectTo` selects mutually exclusive email variants: `/auth/confirm` sends a link-only
 email, and `/auth/code` sends a code-only email with a credential-free code-entry link.
 Both confirmation and magic_link templates support these variants, including first sign-in.
+Matched administrator branches use the exact trusted `RedirectTo` for the credential-bearing
+link or credential-free code-entry URL, so alternate local origins keep their host and port.
+Other requests retain the Site URL fallback; user metadata never chooses the variant.
 The first-party page reads the fragment into component memory, removes it from the address
 bar and automatically POSTs once to exchange it. HTTP GET, HEAD and non-JavaScript prefetch
 do not consume credentials. Cross-browser sign-in does not require the requesting browser's
@@ -127,6 +130,14 @@ SUPABASE_SECRET_KEY=<local secret key>
 AUTH_E2E_MAIL_URL=http://127.0.0.1:54324
 AUTH_EMAIL_OTP_LENGTH=8
 ```
+
+Before starting local Supabase, regenerate templates with
+`node scripts/generate-supabase-auth-templates.mjs`. The local templates support the default
+`http://127.0.0.1:3108` test app even when Auth `site_url` is `http://localhost:3000`.
+If `AUTH_E2E_PORT` changes, add both exact callback URLs to `additional_redirect_urls` and
+regenerate. To check email selection, subjects and action URLs without starting Docker, run
+`node scripts/test-auth-email-templates.mjs` (requires Go); it executes the generated HTML
+and configured subjects using Supabase’s standard Go `html/template` engine.
 
 Use a running local Supabase instance with the repository migrations, email confirmations
 and a local Mailpit SMTP catcher. The test builds into `.next-auth-e2e`, starts the website

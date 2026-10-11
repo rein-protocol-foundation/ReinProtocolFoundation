@@ -255,12 +255,12 @@ otp_expiry = 7200
 # sender_name = "Admin"
 
 [auth.email.template.confirmation]
-subject = '{{ if eq .RedirectTo (print .SiteURL "/auth/code") }}Your sign-in code — Rein Protocol Foundation{{ else if eq .RedirectTo (print .SiteURL "/auth/confirm") }}Your sign-in link — Rein Protocol Foundation{{ else }}Confirm your email — Rein Protocol Foundation{{ end }}'
-content_path = "./supabase/templates/confirmation.html"
+subject = '{{ if eq .RedirectTo (print .SiteURL "/auth/code") "http://localhost:3000/auth/code" "http://127.0.0.1:3000/auth/code" "http://127.0.0.1:3108/auth/code" }}Your sign-in code — Rein Protocol Foundation{{ else if eq .RedirectTo (print .SiteURL "/auth/confirm") "http://localhost:3000/auth/confirm" "http://127.0.0.1:3000/auth/confirm" "http://127.0.0.1:3108/auth/confirm" }}Your sign-in link — Rein Protocol Foundation{{ else }}Confirm your email — Rein Protocol Foundation{{ end }}'
+content_path = "./supabase/templates/local/confirmation.html"
 
 [auth.email.template.magic_link]
-subject = '{{ if eq .RedirectTo (print .SiteURL "/auth/code") }}Your sign-in code — Rein Protocol Foundation{{ else if eq .RedirectTo (print .SiteURL "/auth/confirm") }}Your sign-in link — Rein Protocol Foundation{{ else }}Your sign-in link — Rein Protocol Foundation{{ end }}'
-content_path = "./supabase/templates/magic_link.html"
+subject = '{{ if eq .RedirectTo (print .SiteURL "/auth/code") "http://localhost:3000/auth/code" "http://127.0.0.1:3000/auth/code" "http://127.0.0.1:3108/auth/code" }}Your sign-in code — Rein Protocol Foundation{{ else if eq .RedirectTo (print .SiteURL "/auth/confirm") "http://localhost:3000/auth/confirm" "http://127.0.0.1:3000/auth/confirm" "http://127.0.0.1:3108/auth/confirm" }}Your sign-in link — Rein Protocol Foundation{{ else }}Your sign-in link — Rein Protocol Foundation{{ end }}'
+content_path = "./supabase/templates/local/magic_link.html"
 
 [auth.email.template.invite]
 subject = "You are invited to Rein — Rein Protocol Foundation"

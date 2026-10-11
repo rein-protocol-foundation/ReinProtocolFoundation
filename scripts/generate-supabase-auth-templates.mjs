@@ -3,7 +3,7 @@ import ts from 'typescript'
 
 const source = readFileSync(new URL('../lib/supabase-auth-email.ts', import.meta.url), 'utf8')
 const javascript = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText
-const { supabaseAuthEmailTemplates, supabaseAuthEmailPreviews } = await import(`data:text/javascript;base64,${Buffer.from(javascript).toString('base64')}`)
+const { supabaseAuthEmailTemplates, supabaseAuthEmailPreviews, createSupabaseAuthEmailTemplates } = await import(`data:text/javascript;base64,${Buffer.from(javascript).toString('base64')}`)
 const directory = new URL('../supabase/templates/', import.meta.url)
 const checkOnly = process.argv.includes('--check')
 
@@ -17,6 +17,28 @@ for (const email of supabaseAuthEmailTemplates) {
     writeFileSync(path, html)
   }
 }
+
+// Local Auth can serve several explicitly allowlisted app origins independently
+// of site_url. Keep these callbacks out of the hosted templates above.
+const configPath = new URL('../supabase/config.toml', import.meta.url)
+const config = readFileSync(configPath, 'utf8')
+const redirects = config.match(/^additional_redirect_urls = \[([\s\S]*?)^\]/m)?.[1] ?? ''
+const allowedUrls = [...redirects.matchAll(/"([^"\n]+)"/g)].map((match) => match[1])
+const localEmails = createSupabaseAuthEmailTemplates(allowedUrls).filter((email) => ['confirmation', 'magic_link'].includes(email.name))
+if (!checkOnly) mkdirSync(new URL('local/', directory), { recursive: true })
+let nextConfig = config
+for (const email of localEmails) {
+  const path = new URL(`local/${email.name}.html`, directory)
+  const html = `${email.html}\n`
+  const section = `[auth.email.template.${email.name}]\nsubject = '${email.subject}'\ncontent_path = "./supabase/templates/local/${email.name}.html"`
+  nextConfig = nextConfig.replace(new RegExp(`\\[auth\\.email\\.template\\.${email.name}\\]\\n[^\\[]*?(?=\\n\\n)`), section)
+  if (checkOnly) {
+    if (readFileSync(path, 'utf8') !== html) throw new Error(`Regenerate local ${email.name}.html.`)
+  } else writeFileSync(path, html)
+}
+if (checkOnly) {
+  if (nextConfig !== config) throw new Error('Regenerate local Auth subjects and content paths.')
+} else writeFileSync(configPath, nextConfig)
 
 const escapeAttribute = (value) => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
 const preview = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rein Auth email previews</title><style>body{background:#e8ddc8;color:#302a25;font:16px Arial,sans-serif;margin:24px}main{max-width:760px;margin:auto}iframe{width:100%;height:1400px;border:0}h1,h2{font-family:Georgia,serif}p{line-height:1.6}</style></head><body><main><h1>Rein Auth email previews</h1><p>Generated from the canonical templates. Preview credentials are placeholders. Email link and code sign-in are separate variants. Links sign in automatically; codes are entered on Rein. Other flows retain their Supabase URL.</p>${supabaseAuthEmailPreviews.map((email) => {

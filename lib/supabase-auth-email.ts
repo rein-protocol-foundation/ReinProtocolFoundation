@@ -64,12 +64,15 @@ const definitions: AuthEmail[] = [
   },
 ]
 
-function renderAuthEmail(email: AuthEmail, codeOnly = false) {
+function renderAuthEmail(email: AuthEmail, codeOnly = false, useRedirect = false) {
   const firstParty = email.name === 'confirmation' || email.name === 'magic_link'
   const flow = email.name === 'confirmation' ? 'confirm-email' : 'admin-signin'
-  const actionUrl = firstParty ? `{{ .SiteURL }}/auth/confirm#token_hash={{ .TokenHash }}&amp;flow=${flow}` : '{{ .ConfirmationURL }}'
+  // RedirectTo is used only inside a branch matching an exact trusted callback.
+  const callback = useRedirect ? '{{ .RedirectTo }}' : '{{ .SiteURL }}/auth/confirm'
+  const codeUrl = useRedirect ? '{{ .RedirectTo }}' : '{{ .SiteURL }}/auth/code'
+  const actionUrl = firstParty ? `${callback}#token_hash={{ .TokenHash }}&amp;flow=${flow}` : '{{ .ConfirmationURL }}'
   const actionHtml = codeOnly || !email.action
-    ? '<p style="margin:0 0 20px;padding:18px;border:1px solid #d0c3ad;color:#a83f22;font-size:28px;font-weight:bold;letter-spacing:6px;line-height:1.5;text-align:center;">{{ .Token }}</p>' + (codeOnly ? '<p style="margin:0 0 20px;">Enter this code on the sign-in page you just used, or <a href="{{ .SiteURL }}/auth/code" style="color:#a83f22;">open the code sign-in page</a>.</p>' : '')
+    ? '<p style="margin:0 0 20px;padding:18px;border:1px solid #d0c3ad;color:#a83f22;font-size:28px;font-weight:bold;letter-spacing:6px;line-height:1.5;text-align:center;">{{ .Token }}</p>' + (codeOnly ? `<p style="margin:0 0 20px;">Enter this code on the sign-in page you just used, or <a href="${codeUrl}" style="color:#a83f22;">open the code sign-in page</a>.</p>` : '')
     : `<table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td bgcolor="#a83f22" style="border:1px solid #a83f22;mso-padding-alt:13px 22px;"><a href="${actionUrl}" style="display:inline-block;padding:13px 22px;color:#ffffff;font-size:14px;font-weight:bold;line-height:1.4;text-decoration:none;">${email.action}</a></td></tr></table>
 <p style="margin:22px 0 16px;color:#75695e;font-size:13px;line-height:1.65;">If the button does not work, copy and paste this link into your browser:<br><a href="${actionUrl}" style="color:#a83f22;text-decoration:underline;word-break:break-all;">${actionUrl}</a></p>`
 
@@ -117,17 +120,27 @@ const codeEmail: AuthEmail = {
   introduction: 'Enter this 8-digit code on the Rein sign-in page. It is valid for 2 hours.', action: undefined,
   securityNote: 'If you did not request this sign-in code, you can safely ignore this message. Never share this code with anyone.',
 }
-const isCode = 'eq .RedirectTo (print .SiteURL "/auth/code")'
-const isAdminLink = 'eq .RedirectTo (print .SiteURL "/auth/confirm")'
-
-export const supabaseAuthEmailTemplates = definitions.map((email) => {
-  const firstParty = email.name === 'confirmation' || email.name === 'magic_link'
-  return {
-    name: email.name,
-    subject: firstParty ? `{{ if ${isCode} }}${codeEmail.subject}{{ else if ${isAdminLink} }}${magicLink.subject}{{ else }}${email.subject}{{ end }}` : email.subject,
-    html: firstParty ? `{{ if ${isCode} }}${renderAuthEmail(codeEmail, true)}{{ else if ${isAdminLink} }}${renderAuthEmail(magicLink)}{{ else }}${renderAuthEmail(email)}{{ end }}` : renderAuthEmail(email),
+export function createSupabaseAuthEmailTemplates(allowedRedirectUrls: string[] = []) {
+  const matchesCallback = (path: string) => {
+    const callbacks = [...new Set(allowedRedirectUrls)].filter((value) => {
+      const url = new URL(value)
+      return ['http:', 'https:'].includes(url.protocol) && url.pathname === path && !url.search && !url.hash && !url.username && !url.password
+    })
+    return `eq .RedirectTo (print .SiteURL "${path}")${callbacks.map((value) => ` ${JSON.stringify(value)}`).join('')}`
   }
-})
+  const isCode = matchesCallback('/auth/code')
+  const isAdminLink = matchesCallback('/auth/confirm')
+  return definitions.map((email) => {
+    const firstParty = email.name === 'confirmation' || email.name === 'magic_link'
+    return {
+      name: email.name,
+      subject: firstParty ? `{{ if ${isCode} }}${codeEmail.subject}{{ else if ${isAdminLink} }}${magicLink.subject}{{ else }}${email.subject}{{ end }}` : email.subject,
+      html: firstParty ? `{{ if ${isCode} }}${renderAuthEmail(codeEmail, true, true)}{{ else if ${isAdminLink} }}${renderAuthEmail(magicLink, false, true)}{{ else }}${renderAuthEmail(email)}{{ end }}` : renderAuthEmail(email),
+    }
+  })
+}
+
+export const supabaseAuthEmailTemplates = createSupabaseAuthEmailTemplates()
 
 // Preview actual variants rather than displaying unexecuted Go template branches.
 export const supabaseAuthEmailPreviews = definitions.flatMap((email) => ['confirmation', 'magic_link'].includes(email.name)
