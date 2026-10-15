@@ -1,0 +1,221 @@
+{
+  "checked_on": "2026-10-15",
+  "method": "Anonymous HTTPS GET, reading at most 1024 bytes per URL; does not establish unrestricted enrollment or exercise execution.",
+  "checks": [
+    {
+      "url": "https://academy.claude.com/",
+      "http_status": 200,
+      "resolved_url": "https://academy.claude.com/"
+    },
+    {
+      "url": "https://academy.claude.com/courses/building-effective-human-agent-teams",
+      "http_status": 200,
+      "resolved_url": "https://academy.claude.com/courses/building-effective-human-agent-teams"
+    },
+    {
+      "url": "https://academy.claude.com/courses/building-effective-human-agent-teams/why-multiplayer-ai-matters",
+      "http_status": 200,
+      "resolved_url": "https://academy.claude.com/courses/building-effective-human-agent-teams/why-multiplayer-ai-matters"
+    },
+    {
+      "url": "https://academy.claude.com/courses/building-with-the-claude-api",
+      "http_status": 200,
+      "resolved_url": "https://academy.claude.com/courses/building-with-the-claude-api"
+    },
+    {
+      "url": "https://academy.claude.com/courses/building-with-the-claude-api/accessing-the-api",
+      "http_status": 200,
+      "resolved_url": "https://academy.claude.com/courses/building-with-the-claude-api/accessing-the-api"
+    },
+    {
+      "url": "https://academy.claude.com/courses/introduction-to-agent-skills",
+      "http_status": 200,
+      "resolved_url": "https://academy.claude.com/courses/introduction-to-agent-skills"
+    },
+    {
+      "url": "https://academy.claude.com/courses/introduction-to-model-context-protocol",
+      "http_status": 200,
+      "resolved_url": "https://academy.claude.com/courses/introduction-to-model-context-protocol"
+    },
+    {
+      "url": "https://academy.openai.com/public/courses/agents-and-workflows-bieml",
+      "http_status": 200,
+      "resolved_url": "https://academy.openai.com/public/courses/agents-and-workflows-bieml"
+    },
+    {
+      "url": "https://cs329z.stanford.edu/",
+      "http_status": 200,
+      "resolved_url": "https://cs329z.stanford.edu/"
+    },
+    {
+      "url": "https://cs329z.stanford.edu/logistics",
+      "http_status": 200,
+      "resolved_url": "https://cs329z.stanford.edu/logistics"
+    },
+    {
+      "url": "https://developers.openai.com/tracks/building-agents",
+      "http_status": 200,
+      "resolved_url": "https://developers.openai.com/tracks/building-agents"
+    },
+    {
+      "url": "https://dpfried.github.io/",
+      "http_status": 200,
+      "resolved_url": "https://dpfried.github.io/"
+    },
+    {
+      "url": "https://github.com/cmu-agents/assignment-1",
+      "http_status": 200,
+      "resolved_url": "https://github.com/cmu-agents/assignment-1"
+    },
+    {
+      "url": "https://github.com/huggingface/agents-course/blob/main/LICENSE",
+      "http_status": 200,
+      "resolved_url": "https://github.com/huggingface/agents-course/blob/main/LICENSE"
+    },
+    {
+      "url": "https://github.com/huggingface/agents-course/tree/main/units",
+      "http_status": 200,
+      "resolved_url": "https://github.com/huggingface/agents-course/tree/main/units"
+    },
+    {
+      "url": "https://github.com/huggingface/mcp-course/blob/main/LICENSE",
+      "http_status": 200,
+      "resolved_url": "https://github.com/huggingface/mcp-course/blob/main/LICENSE"
+    },
+    {
+      "url": "https://github.com/huggingface/mcp-course/blob/main/units/vi/unit0/introduction.mdx",
+      "http_status": 200,
+      "resolved_url": "https://github.com/huggingface/mcp-course/blob/main/units/vi/unit0/introduction.mdx"
+    },
+    {
+      "url": "https://github.com/huggingface/mcp-course/tree/main/units",
+      "http_status": 200,
+      "resolved_url": "https://github.com/huggingface/mcp-course/tree/main/units"
+    },
+    {
+      "url": "https://github.com/microsoft/ai-agents-for-beginners",
+      "http_status": 200,
+      "resolved_url": "https://github.com/microsoft/ai-agents-for-beginners"
+    },
+    {
+      "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/LICENSE",
+      "http_status": 200,
+      "resolved_url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/LICENSE"
+    },
+    {
+      "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/translations/zh-CN/README.md",
+      "http_status": 200,
+      "resolved_url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/translations/zh-CN/README.md"
+    },
+    {
+      "url": "https://help.openai.com/en/articles/20001270-openai-academy-courses",
+      "http_status": 200,
+      "resolved_url": "https://help.openai.com/en/articles/20001270-openai-academy-courses"
+    },
+    {
+      "url": "https://huggingface.co/learn/agents-course/en/unit0/introduction",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/agents-course/en/unit0/introduction"
+    },
+    {
+      "url": "https://huggingface.co/learn/agents-course/es/unit0/introduction",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/agents-course/es/unit0/introduction"
+    },
+    {
+      "url": "https://huggingface.co/learn/agents-course/fr/unit0/introduction",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/agents-course/fr/unit0/introduction"
+    },
+    {
+      "url": "https://huggingface.co/learn/agents-course/ko/unit0/introduction",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/agents-course/ko/unit0/introduction"
+    },
+    {
+      "url": "https://huggingface.co/learn/agents-course/ru-RU/unit0/introduction",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/agents-course/ru-RU/unit0/introduction"
+    },
+    {
+      "url": "https://huggingface.co/learn/agents-course/vi/unit0/introduction",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/agents-course/vi/unit0/introduction"
+    },
+    {
+      "url": "https://huggingface.co/learn/agents-course/zh-CN/unit0/introduction",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/agents-course/zh-CN/unit0/introduction"
+    },
+    {
+      "url": "https://huggingface.co/learn/agents-course/zh-CN/unit0/onboarding",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/agents-course/zh-CN/unit0/onboarding"
+    },
+    {
+      "url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction",
+      "http_status": 200,
+      "resolved_url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction"
+    },
+    {
+      "url": "https://openai.com/academy/",
+      "http_status": 200,
+      "resolved_url": "https://openai.com/academy/"
+    },
+    {
+      "url": "https://rdi.berkeley.edu/adv-llm-agents/sp25",
+      "http_status": 200,
+      "resolved_url": "https://rdi.berkeley.edu/adv-llm-agents/sp25"
+    },
+    {
+      "url": "https://rdi.berkeley.edu/llm-agents/f24",
+      "http_status": 200,
+      "resolved_url": "https://rdi.berkeley.edu/llm-agents/f24"
+    },
+    {
+      "url": "https://rdi.berkeley.edu/publicCourses",
+      "http_status": 200,
+      "resolved_url": "https://rdi.berkeley.edu/publicCourses"
+    },
+    {
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "http_status": 200,
+      "resolved_url": "https://www.anthropic.com/engineering/building-effective-agents"
+    },
+    {
+      "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+      "http_status": 200,
+      "resolved_url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+    },
+    {
+      "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "http_status": 200,
+      "resolved_url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+    },
+    {
+      "url": "https://www.cmu-agents.com/",
+      "http_status": 200,
+      "resolved_url": "https://www.cmu-agents.com/"
+    },
+    {
+      "url": "https://www.cmu-agents.com/slides/lecture-01-agents.pdf",
+      "http_status": 200,
+      "resolved_url": "https://www.cmu-agents.com/slides/lecture-01-agents.pdf"
+    },
+    {
+      "url": "https://www.lti.cs.cmu.edu/misc-pages/intranet-course-info.html",
+      "http_status": 200,
+      "resolved_url": "https://www.lti.cs.cmu.edu/misc-pages/intranet-course-info.html"
+    },
+    {
+      "url": "https://www.youtube.com/live/g0Dwtf3BH-0",
+      "http_status": 200,
+      "resolved_url": "https://www.youtube.com/live/g0Dwtf3BH-0"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=UwfjzyLnvMg",
+      "http_status": 200,
+      "resolved_url": "https://www.youtube.com/watch?v=UwfjzyLnvMg"
+    }
+  ]
+}
