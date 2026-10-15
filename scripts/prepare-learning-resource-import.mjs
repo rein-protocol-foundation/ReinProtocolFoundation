@@ -18,14 +18,16 @@ const types = new Set(['Course', 'Article / Document', 'Tool / Reference', 'Vide
 for (const row of catalog.resources) {
   const meta = row.learning_metadata
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(row.slug) || slugs.has(row.slug)) throw new Error(`Invalid/duplicate slug: ${row.slug}`)
-  if (urls.has(row.public_url) || new URL(row.public_url).protocol !== 'https:') throw new Error(`Invalid/duplicate URL: ${row.slug}`)
+  // Use the database's lower(trim(public_url)) identity for incoming duplicates.
+  const normalizedUrl = row.public_url.trim().toLowerCase()
+  if (urls.has(normalizedUrl) || new URL(row.public_url).protocol !== 'https:') throw new Error(`Invalid/duplicate URL: ${row.slug}`)
   if (!row.title || !row.summary || row.summary.length > 600 || !row.author_publisher || !types.has(row.resource_type)) throw new Error(`Invalid content: ${row.slug}`)
   if (meta?.schema_version !== 1 || meta.verification?.checked_on !== catalog.curated_on || !meta.verification.sources.length || meta.verification.primary_http_status !== 200) throw new Error(`Missing verification: ${row.slug}`)
   if (!['beginner', 'intermediate', 'advanced'].includes(meta.level) || !meta.audiences.length || !meta.goals.length || !meta.languages.length) throw new Error(`Missing recommendation fields: ${row.slug}`)
   if (meta.access?.materials_free !== true || meta.rights?.catalog_use !== 'official_link_and_original_summary_only') throw new Error(`Invalid access/rights policy: ${row.slug}`)
   if (meta.rights.open_license && !meta.rights.license_url) throw new Error(`Missing license evidence: ${row.slug}`)
   slugs.add(row.slug)
-  urls.add(row.public_url)
+  urls.add(normalizedUrl)
 }
 
 const payload = JSON.stringify(catalog.resources)

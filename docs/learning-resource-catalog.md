@@ -36,7 +36,7 @@ Schema version 1 uses these fields:
 | `verification` | Check date, method, official evidence URLs, and anonymous HTTP results. HTTP 200 does not prove unrestricted lesson access, enrollment, or successful execution of exercises. |
 | `recommendation` | Fit notes and related resource slugs. |
 
-Scope values currently include `self_paced_course`, `learning_track`, `article`, `public_course_materials`, and `public_slides_and_assignments`. Stanford CS329Z is deliberately an `Article / Document` entry for public materials; its Canvas-only recordings are not described as an open video course.
+Scope values currently include `self_paced_course`, `learning_track`, `article`, `public_learning_materials`, `public_course_materials`, and `public_slides_and_assignments`. Microsoft's AI Agents for Beginners uses `public_learning_materials` for its public repository lessons and code samples. Stanford CS329Z is deliberately an `Article / Document` entry for public materials; its Canvas-only recordings are not described as an open video course.
 
 The existing public reader selects a subset of resource columns. A future recommender must explicitly select `learning_metadata` from the database or its own authorized data layer. No recommendation service is implemented by this catalog change.
 
