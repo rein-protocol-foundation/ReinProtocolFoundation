@@ -29,7 +29,7 @@ export function SiteHeader() {
   const inCommunity = pathname === '/community' || pathname.startsWith('/community/')
   const activeCommunityHref = pathname.startsWith('/community/contribute')
     ? '/community#contribute'
-    : pathname.startsWith('/community/gather/')
+    : pathname.startsWith('/community/gather/') || pathname === '/community/learn'
       ? '/community#program'
       : pathname === '/community'
         ? communityHash === '#program' || communityHash === '#learn' || communityHash === '#gather'

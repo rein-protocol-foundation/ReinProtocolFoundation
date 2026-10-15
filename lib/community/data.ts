@@ -30,12 +30,14 @@ export async function getPublicPeople(options: { featured?: boolean } = {}): Pro
   return error ? [] : (data as PublicPerson[])
 }
 
-export async function getPublishedResources(): Promise<PublicResource[]> {
+export async function getPublishedResources({ limit = 12, offset = 0 } = {}): Promise<{ resources: PublicResource[]; hasMore: boolean }> {
   noStore()
   const client = getPublicClient()
-  if (!client) return []
-  const { data, error } = await client.from('resources').select('id,slug,title,summary,public_url,resource_type,language,difficulty,topics,author_publisher,access_notes,featured').eq('publication_status', 'published').order('sort_order').order('published_at', { ascending: false })
-  return error ? [] : (data as PublicResource[])
+  if (!client) return { resources: [], hasMore: false }
+  const { data, error } = await client.from('resources').select('id,slug,title,summary,public_url,resource_type,language,difficulty,topics,author_publisher,access_notes,featured').eq('publication_status', 'published').order('sort_order').order('published_at', { ascending: false }).order('id').range(offset, offset + limit)
+  if (error) return { resources: [], hasMore: false }
+  const resources = (data ?? []) as PublicResource[]
+  return { resources: resources.slice(0, limit), hasMore: resources.length > limit }
 }
 
 export async function getPublishedEvents(): Promise<PublicEvent[]> {

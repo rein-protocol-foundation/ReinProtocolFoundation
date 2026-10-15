@@ -52,7 +52,6 @@ test.describe('Community overview and navigation', () => {
   }
 
   for (const redirect of [
-    { path: '/community/learn', hash: '#program', heading: 'Online community and learning.' },
     { path: '/community/gather', hash: '#program', heading: 'In-person events.' },
     { path: '/community/people', hash: '#people', heading: 'People behind the work.' },
   ] as const) {
@@ -62,6 +61,64 @@ test.describe('Community overview and navigation', () => {
       await expect(page.getByRole('heading', { name: redirect.heading })).toBeVisible()
     })
   }
+})
+
+test.describe('Community learning resources', () => {
+  test('overview limits the resource preview and links to the catalog', async ({ page }) => {
+    await page.goto('/community')
+    await expect(page.getByRole('heading', { name: 'Online community and learning.' })).toBeVisible()
+
+    const resources = page.locator('.resource-list .resource-card')
+    const previewCount = await resources.count()
+    expect(previewCount).toBeLessThanOrEqual(3)
+
+    const showMore = page.getByRole('link', { name: 'Show More', exact: true })
+    if (await showMore.count()) {
+      expect(previewCount).toBe(3)
+      await expect(showMore).toHaveAttribute('href', '/community/learn')
+      await showMore.click()
+      await expect(page).toHaveURL(/\/community\/learn$/)
+      await expect(page.getByRole('heading', { level: 1, name: 'Learning resources.' })).toBeVisible()
+    }
+  })
+
+  test('catalog provides bounded pages and navigation back to the community', async ({ page }) => {
+    await page.goto('/community/learn')
+    await expect(page).toHaveURL(/\/community\/learn$/)
+    await expect(page.getByRole('heading', { level: 1, name: 'Learning resources.' })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Submit a learning resource' })).toHaveAttribute('href', '/community/contribute/resources/submit')
+    await expect(page.getByRole('link', { name: 'Back to community', exact: true })).toHaveAttribute('href', '/community#program')
+    await expect(page.getByLabel('Loading learning resources', { exact: true })).toHaveCount(0)
+
+    const catalogCount = await page.locator('.resource-card').count()
+    expect(catalogCount).toBeLessThanOrEqual(12)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+
+    const pagination = page.getByRole('navigation', { name: 'Learning resource pages' })
+    const nextPage = pagination.getByRole('link', { name: 'Next page', exact: true })
+    if (await nextPage.count()) {
+      const firstResourceTitle = await page.locator('.resource-card h3').first().innerText()
+      await expect(pagination.getByText('Page 1', { exact: true })).toBeVisible()
+      await expect(nextPage).toHaveAttribute('href', '/community/learn?page=2')
+      await nextPage.click()
+      await expect(page).toHaveURL(/\/community\/learn\?page=2$/)
+      await expect(page.getByLabel('Loading learning resources', { exact: true })).toHaveCount(0)
+      await expect(pagination.getByText('Page 2', { exact: true })).toBeVisible()
+      expect(await page.locator('.resource-card').count()).toBeLessThanOrEqual(12)
+      await expect(page.locator('.resource-card h3').first()).not.toHaveText(firstResourceTitle)
+
+      const previousPage = pagination.getByRole('link', { name: 'Previous page', exact: true })
+      await previousPage.click()
+      await expect(page).toHaveURL(/\/community\/learn(?:\?page=1)?$/)
+      await expect(page.getByLabel('Loading learning resources', { exact: true })).toHaveCount(0)
+      await expect(pagination.getByText('Page 1', { exact: true })).toBeVisible()
+    }
+
+    if (catalogCount > 3) {
+      await page.goto('/community')
+      await expect(page.getByRole('link', { name: 'Show More', exact: true })).toHaveAttribute('href', '/community/learn')
+    }
+  })
 })
 
 test.describe('Community contribution and policies', () => {
