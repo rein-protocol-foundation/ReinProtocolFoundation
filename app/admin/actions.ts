@@ -324,14 +324,14 @@ export async function setResourcePublication(formData: FormData) {
   const update = { publication_status: status, featured: formData.get('featured') === 'on', sort_order: Number(value(formData, 'sort_order') || 100), published_at: status === 'published' ? new Date().toISOString() : null, access_verified_at: status === 'published' ? new Date().toISOString() : undefined, access_verified_by: status === 'published' ? user.id : undefined, updated_at: new Date().toISOString() }
   const { error } = await service.from('resources').update(update).eq('id', id); if (error) throw error
   await audit('resource.publication_changed', 'resource', id, update)
-  revalidatePath('/admin/learn'); revalidatePath('/community/learn')
+  revalidatePath('/admin/learn'); revalidatePath('/community/learn'); revalidatePath('/community')
 }
 
 export async function updateResource(formData: FormData) {
   const { service } = await requireAdmin(); const id = value(formData,'id'); const publicUrl = value(formData,'public_url'); assertExternalUrl(publicUrl)
   const { error } = await service.from('resources').update({ title:value(formData,'title'), summary:value(formData,'summary'), public_url:publicUrl, resource_type:value(formData,'resource_type'), language:value(formData,'language'), difficulty:nullable(formData,'difficulty'), topics:value(formData,'topics').split(',').map((item)=>item.trim()).filter(Boolean), author_publisher:nullable(formData,'author_publisher'), access_notes:nullable(formData,'access_notes'), access_verified_at:null, access_verified_by:null, publication_status:'draft', published_at:null, updated_at:new Date().toISOString() }).eq('id',id); if (error) throw error
   await audit('resource.updated','resource',id)
-  revalidatePath(`/admin/learn/${id}`); revalidatePath(`/admin/learn/preview/${id}`); revalidatePath('/admin/learn'); revalidatePath('/community/learn')
+  revalidatePath(`/admin/learn/${id}`); revalidatePath(`/admin/learn/preview/${id}`); revalidatePath('/admin/learn'); revalidatePath('/community/learn'); revalidatePath('/community')
 }
 
 export async function reviewResourceSubmission(formData: FormData) {

@@ -1,0 +1,1912 @@
+{
+  "schema_version": 1,
+  "curated_on": "2026-10-15",
+  "inclusion_policy": "Official public links, original summaries, verified free learning access, explicit practice-cost and reuse limits. Institution reputation is a quality signal, not a claim of any universal top-five ranking.",
+  "resources": [
+    {
+      "slug": "hugging-face-ai-agents-course",
+      "title": "Hugging Face AI Agents Course",
+      "summary": "A free practical introduction to LLM agents, tool use, smolagents, LlamaIndex, LangGraph, and Agentic RAG. Work through exercises and a final agent project. Includes English and Simplified Chinese editions; Python and basic LLM knowledge are expected. Model inference or local compute for exercises can have separate costs.",
+      "public_url": "https://huggingface.co/learn/agents-course/en/unit0/introduction",
+      "resource_type": "Course",
+      "language": "Multilingual · English, 简体中文 & more",
+      "difficulty": "Beginner",
+      "topics": [
+        "AI Agents",
+        "Tool Use",
+        "Agentic RAG",
+        "LangGraph",
+        "smolagents",
+        "LlamaIndex"
+      ],
+      "author_publisher": "Hugging Face",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Repository license: Apache-2.0; third-party and external media may have separate rights.",
+      "featured": false,
+      "sort_order": 100,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "免费实战课程，覆盖智能体基础、工具调用、smolagents、LlamaIndex、LangGraph 和 Agentic RAG，含练习与最终项目；支持简体中文等语言。适合已有 Python 和 LLM 基础的学习者，实操推理或算力可能另收费。",
+        "provider_kind": "official_ai_provider",
+        "level": "beginner",
+        "beginner_suitable": true,
+        "audiences": [
+          "developer",
+          "student"
+        ],
+        "goals": [
+          "understand_agent_fundamentals",
+          "build_first_agent",
+          "learn_agent_frameworks"
+        ],
+        "prerequisites": [
+          "python_basics",
+          "llm_basics"
+        ],
+        "prerequisite_notes": "The course lists basic Python and LLM knowledge as prerequisites.",
+        "coding_requirement": "required_for_exercises",
+        "formats": [
+          "text",
+          "code",
+          "exercises"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://huggingface.co/learn/agents-course/en/unit0/introduction"
+          },
+          {
+            "code": "zh-CN",
+            "url": "https://huggingface.co/learn/agents-course/zh-CN/unit0/introduction"
+          },
+          {
+            "code": "es",
+            "url": "https://huggingface.co/learn/agents-course/es/unit0/introduction"
+          },
+          {
+            "code": "fr",
+            "url": "https://huggingface.co/learn/agents-course/fr/unit0/introduction"
+          },
+          {
+            "code": "ko",
+            "url": "https://huggingface.co/learn/agents-course/ko/unit0/introduction"
+          },
+          {
+            "code": "ru-RU",
+            "url": "https://huggingface.co/learn/agents-course/ru-RU/unit0/introduction"
+          },
+          {
+            "code": "vi",
+            "url": "https://huggingface.co/learn/agents-course/vi/unit0/introduction"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "Materials are public. A Hugging Face account is needed for some hosted exercises, project sharing, or certificates.",
+          "scope": "self_paced_course",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": "Apache-2.0",
+          "license_url": "https://github.com/huggingface/agents-course/blob/main/LICENSE",
+          "license_scope": "License verified for the official course repository; separately hosted media and third-party readings require their own checks.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://huggingface.co/learn/agents-course/en/unit0/introduction",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://github.com/huggingface/agents-course/tree/main/units",
+              "supports": [
+                "translation_directories"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://huggingface.co/learn/agents-course/zh-CN/unit0/onboarding",
+              "supports": [
+                "chinese_materials",
+                "local_model_option"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://github.com/huggingface/agents-course/blob/main/LICENSE",
+              "supports": [
+                "repository_license"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://huggingface.co/learn/agents-course/en/unit0/introduction"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "microsoft-ai-agents-for-beginners"
+          ]
+        },
+        "translation_notes": "Language directories verified in the official repository; translation completeness and freshness can differ."
+      }
+    },
+    {
+      "slug": "openai-academy-agents-and-workflows",
+      "title": "OpenAI Academy: Agents and Workflows",
+      "summary": "A free self-paced introduction to delegating structured work to agents. Learn to provide context, define boundaries and checkpoints, and review results. Designed for people who already use AI at work. A ChatGPT account is required to start the course; product access for hands-on practice can depend on the learner's plan.",
+      "public_url": "https://academy.openai.com/public/courses/agents-and-workflows-bieml",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Beginner",
+      "topics": [
+        "AI Agents",
+        "Workflows",
+        "Human Oversight"
+      ],
+      "author_publisher": "OpenAI",
+      "access_notes": "Course enrollment is free. Hands-on use of ChatGPT Work or other product features may require separate product access; no free paid-feature entitlement is promised. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 110,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "面向已有日常 AI 使用经验的非技术用户，学习任务委派、提供上下文、设定边界与检查点，以及审核智能体结果。课程免费，开始学习需 ChatGPT 账号；实际产品练习可能受套餐权限限制。",
+        "provider_kind": "official_ai_provider",
+        "level": "beginner",
+        "beginner_suitable": true,
+        "audiences": [
+          "nontechnical_professional",
+          "team_lead",
+          "educator"
+        ],
+        "goals": [
+          "delegate_to_agents",
+          "review_agent_outputs",
+          "apply_human_oversight"
+        ],
+        "prerequisites": [
+          "everyday_ai_use"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "none",
+        "formats": [
+          "guided_lessons",
+          "exercises"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://academy.openai.com/public/courses/agents-and-workflows-bieml"
+          }
+        ],
+        "duration_minutes": {
+          "min": 75,
+          "max": 90
+        },
+        "duration_basis": "Provider estimate in the OpenAI Help Center course catalog.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": true,
+          "registration_notes": "Free course, open to the public with a ChatGPT account; sign-in is required to start and save progress.",
+          "scope": "self_paced_course",
+          "practice_may_cost": true,
+          "cost_notes": "Course enrollment is free. Hands-on use of ChatGPT Work or other product features may require separate product access; no free paid-feature entitlement is promised."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": [
+            "Enrollment and full lesson access were not tested with a signed-in account."
+          ]
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://academy.openai.com/public/courses/agents-and-workflows-bieml",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://openai.com/academy/",
+              "supports": [
+                "official_course_link",
+                "course_topic"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://help.openai.com/en/articles/20001270-openai-academy-courses",
+              "supports": [
+                "free_global_enrollment",
+                "account_required",
+                "duration",
+                "course_curriculum"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://academy.openai.com/public/courses/agents-and-workflows-bieml"
+        },
+        "recommendation": {
+          "notes": "Good starting point for non-programmers who already use AI. Recommend the conceptual track when paid product access is unavailable.",
+          "related_resource_slugs": [
+            "anthropic-building-effective-human-agent-teams"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "anthropic-building-effective-human-agent-teams",
+      "title": "Anthropic: Building Effective Human-Agent Teams (beta)",
+      "summary": "A free short course for team leads moving from individual AI use to shared human-agent work. Covers roles, shared objectives, delegation, and appropriate information access. No technical background is required. The course is marked beta; practical use of Claude products may require separate access.",
+      "public_url": "https://academy.claude.com/courses/building-effective-human-agent-teams",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Beginner",
+      "topics": [
+        "AI Agents",
+        "Human-Agent Collaboration",
+        "Governance"
+      ],
+      "author_publisher": "Anthropic",
+      "access_notes": "Course materials are free. Applying the workflow in Claude products may require separate product access. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 120,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "面向团队负责人及非技术人员的短课，讲解人机团队的角色分工、共同目标、渐进授权和信息访问边界；无需技术背景。课程目前标为 beta，实际 Claude 产品使用可能需要单独权限。",
+        "provider_kind": "official_ai_provider",
+        "level": "beginner",
+        "beginner_suitable": true,
+        "audiences": [
+          "nontechnical_professional",
+          "team_lead",
+          "nonprofit_staff"
+        ],
+        "goals": [
+          "delegate_to_agents",
+          "apply_human_oversight",
+          "organize_human_agent_teams"
+        ],
+        "prerequisites": [
+          "everyday_ai_use"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "none",
+        "formats": [
+          "text",
+          "guided_lessons",
+          "quiz"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://academy.claude.com/courses/building-effective-human-agent-teams"
+          }
+        ],
+        "duration_minutes": {
+          "min": 45,
+          "max": 45
+        },
+        "duration_basis": "Official course overview lists 45 minutes.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "Lessons can be opened publicly; sign-in is offered to save progress and obtain completion records.",
+          "scope": "self_paced_course",
+          "practice_may_cost": true,
+          "cost_notes": "Course materials are free. Applying the workflow in Claude products may require separate product access."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "beta",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://academy.claude.com/courses/building-effective-human-agent-teams",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://academy.claude.com/",
+              "supports": [
+                "free_official_courses"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://academy.claude.com/courses/building-effective-human-agent-teams/why-multiplayer-ai-matters",
+              "supports": [
+                "public_lesson"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://academy.claude.com/courses/building-effective-human-agent-teams"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "openai-academy-agents-and-workflows"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "anthropic-building-effective-agents",
+      "title": "Anthropic: Building Effective Agents",
+      "summary": "A public engineering primer on choosing between fixed workflows and autonomous agents. Explains routing, task decomposition, parallel work, iterative evaluation, and tool design. Useful before choosing a framework. The article dates from 2024; consult current documentation before copying API or tooling details.",
+      "public_url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "resource_type": "Article / Document",
+      "language": "English",
+      "difficulty": "Beginner",
+      "topics": [
+        "AI Agents",
+        "Agent Architecture",
+        "Workflows",
+        "Tool Use"
+      ],
+      "author_publisher": "Anthropic",
+      "access_notes": "Public article can be read free without an account. Implementing its patterns may require paid model inference. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 130,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "官方工程入门文章，帮助理解固定工作流与自主智能体的区别，以及路由、任务分解、并行工作、迭代评估和工具设计。适合选框架之前阅读；文章起源于 2024 年，具体工具与 API 需对照当前文档。",
+        "provider_kind": "official_ai_provider",
+        "level": "beginner",
+        "beginner_suitable": true,
+        "audiences": [
+          "developer",
+          "technical_product_manager",
+          "student"
+        ],
+        "goals": [
+          "understand_agent_fundamentals",
+          "choose_agent_architecture"
+        ],
+        "prerequisites": [
+          "llm_basics"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "optional",
+        "formats": [
+          "text"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://www.anthropic.com/engineering/building-effective-agents"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "article",
+          "practice_may_cost": true,
+          "cost_notes": "Public article can be read free without an account. Implementing its patterns may require paid model inference."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": [
+            "Provider flags that tooling has changed since the original publication."
+          ]
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://www.anthropic.com/engineering/building-effective-agents",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://www.anthropic.com/engineering/building-effective-agents"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "openai-building-agents-track",
+            "anthropic-building-with-claude-api"
+          ]
+        },
+        "content_date": "2024-12-19"
+      }
+    },
+    {
+      "slug": "openai-building-agents-track",
+      "title": "OpenAI: Building Agents Learning Track",
+      "summary": "A free official learning track covering agent components, tools, orchestration, guardrails, and implementation examples. Start with the concepts, then follow code and SDK references. Reading requires no account; running OpenAI API examples requires API access and may incur usage charges.",
+      "public_url": "https://developers.openai.com/tracks/building-agents",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Beginner",
+      "topics": [
+        "AI Agents",
+        "Tool Use",
+        "Orchestration",
+        "Guardrails",
+        "OpenAI"
+      ],
+      "author_publisher": "OpenAI",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 140,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "免费官方学习路径，覆盖智能体组件、工具、编排、护栏与代码示例。无需账号即可阅读；执行 API 示例需要 API 权限并可能产生调用费用。适合已有编程基础的 Agent 开发入门者。",
+        "provider_kind": "official_ai_provider",
+        "level": "beginner",
+        "beginner_suitable": true,
+        "audiences": [
+          "developer",
+          "student",
+          "technical_product_manager"
+        ],
+        "goals": [
+          "understand_agent_fundamentals",
+          "build_first_agent",
+          "apply_agent_safety"
+        ],
+        "prerequisites": [
+          "programming_basics",
+          "api_basics"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "required_for_exercises",
+        "formats": [
+          "text",
+          "code"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://developers.openai.com/tracks/building-agents"
+          }
+        ],
+        "duration_minutes": {
+          "min": 60,
+          "max": 180
+        },
+        "duration_basis": "Official learning track lists 1–3 hours.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "learning_track",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://developers.openai.com/tracks/building-agents",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://developers.openai.com/tracks/building-agents"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "anthropic-building-effective-agents",
+            "anthropic-demystifying-agent-evals"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "microsoft-ai-agents-for-beginners",
+      "title": "Microsoft: AI Agents for Beginners",
+      "summary": "An official open-source course introducing agent concepts, tools, planning, memory, retrieval, multi-agent systems, and safety through lessons and code samples. Includes Simplified Chinese and other translations. Materials are free; current Microsoft Foundry examples can require an Azure account and billable services.",
+      "public_url": "https://github.com/microsoft/ai-agents-for-beginners",
+      "resource_type": "Course",
+      "language": "Multilingual · English, 简体中文 & more",
+      "difficulty": "Beginner",
+      "topics": [
+        "AI Agents",
+        "Planning",
+        "Memory",
+        "Agentic RAG",
+        "Multi-Agent Systems",
+        "Safety"
+      ],
+      "author_publisher": "Microsoft",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Repository license: MIT; third-party and external media may have separate rights.",
+      "featured": false,
+      "sort_order": 150,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "微软官方开源入门课程，涵盖工具调用、规划、记忆、检索、多智能体与安全，配有代码；有简体中文等翻译。教材免费，当前 Foundry 示例可能需要 Azure 账号及付费云资源。",
+        "provider_kind": "official_ai_provider",
+        "level": "beginner",
+        "beginner_suitable": true,
+        "audiences": [
+          "developer",
+          "student"
+        ],
+        "goals": [
+          "build_first_agent",
+          "learn_agent_design_patterns",
+          "apply_agent_safety"
+        ],
+        "prerequisites": [
+          "programming_basics",
+          "generative_ai_basics"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "required_for_exercises",
+        "formats": [
+          "text",
+          "code",
+          "exercises"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://github.com/microsoft/ai-agents-for-beginners"
+          },
+          {
+            "code": "zh-CN",
+            "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/translations/zh-CN/README.md"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "public_learning_materials",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": "MIT",
+          "license_url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/LICENSE",
+          "license_scope": "Official repository code and accompanying documentation under MIT; externally linked assets may have separate terms.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://github.com/microsoft/ai-agents-for-beginners",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/LICENSE",
+              "supports": [
+                "repository_license"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://github.com/microsoft/ai-agents-for-beginners/blob/main/translations/zh-CN/README.md",
+              "supports": [
+                "simplified_chinese_materials"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://github.com/microsoft/ai-agents-for-beginners"
+        },
+        "recommendation": {
+          "notes": "Use for hands-on beginners with programming experience. Do not describe the Azure-backed exercises as guaranteed zero-cost.",
+          "related_resource_slugs": [
+            "hugging-face-ai-agents-course"
+          ]
+        },
+        "translation_notes": "Many additional translations are listed in the repository; translations are automated and can differ in quality."
+      }
+    },
+    {
+      "slug": "anthropic-building-with-claude-api",
+      "title": "Anthropic: Building with the Claude API",
+      "summary": "A free developer course spanning API fundamentals, prompting, tool calling, retrieval, MCP, and agent architectures. Includes exercises and quizzes. Intended for Python developers who can handle JSON. The teaching material is free; hands-on model calls need an Anthropic API key and can incur charges.",
+      "public_url": "https://academy.claude.com/courses/building-with-the-claude-api",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Intermediate",
+      "topics": [
+        "Claude API",
+        "AI Agents",
+        "Tool Use",
+        "RAG",
+        "MCP",
+        "Evaluation"
+      ],
+      "author_publisher": "Anthropic",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 160,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "面向 Python 开发者的免费系统课程，覆盖 API、提示词、工具调用、RAG、MCP 与智能体架构，含练习和测验。需要 Python、JSON 基础；实操 API 调用可能另收费。",
+        "provider_kind": "official_ai_provider",
+        "level": "intermediate",
+        "beginner_suitable": true,
+        "audiences": [
+          "developer",
+          "student"
+        ],
+        "goals": [
+          "build_agents_with_claude",
+          "integrate_tools",
+          "build_rag",
+          "evaluate_agents"
+        ],
+        "prerequisites": [
+          "python",
+          "json",
+          "api_basics"
+        ],
+        "prerequisite_notes": "Official prerequisites: Python proficiency, JSON familiarity, and access to an Anthropic API key.",
+        "coding_requirement": "required_for_exercises",
+        "formats": [
+          "text",
+          "code",
+          "exercises",
+          "quiz"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://academy.claude.com/courses/building-with-the-claude-api"
+          }
+        ],
+        "duration_minutes": {
+          "min": 540,
+          "max": 540
+        },
+        "duration_basis": "Official course overview lists 9 hours; hands-on time varies.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "Public lesson text is accessible; sign-in is offered for progress and completion records. API exercises require an API account/key.",
+          "scope": "self_paced_course",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://academy.claude.com/courses/building-with-the-claude-api",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://academy.claude.com/",
+              "supports": [
+                "free_official_courses"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://academy.claude.com/courses/building-with-the-claude-api/accessing-the-api",
+              "supports": [
+                "public_lesson"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://academy.claude.com/courses/building-with-the-claude-api"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "anthropic-introduction-to-mcp",
+            "anthropic-demystifying-agent-evals"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "anthropic-introduction-to-mcp",
+      "title": "Anthropic: Introduction to Model Context Protocol",
+      "summary": "A free focused course on connecting agents to external tools and data with MCP. Build Python servers and clients, then work with tools, resources, prompts, and the inspector. Python, async/await, and API familiarity are expected. Reading and local protocol exploration are free; model-backed integrations can incur API fees.",
+      "public_url": "https://academy.claude.com/courses/introduction-to-model-context-protocol",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Intermediate",
+      "topics": [
+        "MCP",
+        "Tool Integration",
+        "AI Agents"
+      ],
+      "author_publisher": "Anthropic",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 170,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "免费 MCP 专题课，从 Python 服务端与客户端入手学习工具、资源、提示词和调试器。适合有 Python、异步编程和 API 基础的开发者；本地协议学习免费，接入模型可能另收费。",
+        "provider_kind": "official_ai_provider",
+        "level": "intermediate",
+        "beginner_suitable": true,
+        "audiences": [
+          "developer",
+          "student"
+        ],
+        "goals": [
+          "connect_agents_to_tools",
+          "build_mcp_servers"
+        ],
+        "prerequisites": [
+          "python_basics",
+          "async_await",
+          "api_basics"
+        ],
+        "prerequisite_notes": "Official prerequisites: basic Python, async/await, and API concepts.",
+        "coding_requirement": "required_for_exercises",
+        "formats": [
+          "text",
+          "code",
+          "exercises",
+          "quiz"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://academy.claude.com/courses/introduction-to-model-context-protocol"
+          }
+        ],
+        "duration_minutes": {
+          "min": 60,
+          "max": 60
+        },
+        "duration_basis": "Official course overview lists 1 hour; project work can take longer.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "Lessons are public; sign-in is offered to save progress and completion records.",
+          "scope": "self_paced_course",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://academy.claude.com/courses/introduction-to-model-context-protocol",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://academy.claude.com/",
+              "supports": [
+                "free_official_courses"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://academy.claude.com/courses/introduction-to-model-context-protocol"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "hugging-face-mcp-course"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "hugging-face-mcp-course",
+      "title": "Hugging Face and Anthropic: MCP Course",
+      "summary": "A free hands-on course on MCP concepts, SDKs, end-to-end applications, and custom workflow servers. Includes projects and an optional completion pathway. English and Vietnamese material is present in the official repository. Public reading is free; hosted exercises and model integrations may require accounts or paid inference.",
+      "public_url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction",
+      "resource_type": "Course",
+      "language": "Multilingual · English, Tiếng Việt",
+      "difficulty": "Intermediate",
+      "topics": [
+        "MCP",
+        "AI Agents",
+        "Tool Integration"
+      ],
+      "author_publisher": "Hugging Face, in partnership with Anthropic",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Repository license: Apache-2.0; third-party and external media may have separate rights.",
+      "featured": false,
+      "sort_order": 180,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "Hugging Face 与 Anthropic 合作的免费 MCP 实战课，涵盖协议基础、SDK、端到端应用和工作流服务端。官方仓库有英文和越南文内容；部分托管练习与模型推理可能需要账号或付费资源。",
+        "provider_kind": "official_ai_provider",
+        "level": "intermediate",
+        "beginner_suitable": true,
+        "audiences": [
+          "developer",
+          "student"
+        ],
+        "goals": [
+          "connect_agents_to_tools",
+          "build_mcp_servers",
+          "build_agent_applications"
+        ],
+        "prerequisites": [
+          "programming_basics",
+          "api_basics",
+          "llm_basics"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "required_for_exercises",
+        "formats": [
+          "text",
+          "code",
+          "exercises"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction"
+          },
+          {
+            "code": "vi",
+            "url": "https://github.com/huggingface/mcp-course/blob/main/units/vi/unit0/introduction.mdx",
+            "delivery": "repository"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "Public reading needs no sign-in. Project hosting or certificates can require a Hugging Face account.",
+          "scope": "self_paced_course",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": "Apache-2.0",
+          "license_url": "https://github.com/huggingface/mcp-course/blob/main/LICENSE",
+          "license_scope": "Verified for the official course repository; external materials and hosted media are not automatically covered.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": [
+            "Vietnamese materials are linked as repository source; a hosted Vietnamese course introduction was not accessible on the check date."
+          ]
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://github.com/huggingface/mcp-course/blob/main/LICENSE",
+              "supports": [
+                "repository_license"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://github.com/huggingface/mcp-course/tree/main/units",
+              "supports": [
+                "translation_directories"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://huggingface.co/learn/mcp-course/en/unit0/introduction"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "anthropic-introduction-to-mcp"
+          ]
+        },
+        "translation_notes": "English hosted course verified. Vietnamese translation files exist in the official repository; the hosted Vietnamese introduction returned 404, so link to the repository instead. No Chinese edition verified."
+      }
+    },
+    {
+      "slug": "anthropic-introduction-to-agent-skills",
+      "title": "Anthropic: Introduction to Agent Skills",
+      "summary": "A free short course on creating reusable skills for Claude Code, configuring their instructions, testing when they activate, and sharing them with a team. Useful after learning basic agent tools. The lessons are public; following along in Claude Code can require separately paid product or API access.",
+      "public_url": "https://academy.claude.com/courses/introduction-to-agent-skills",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Intermediate",
+      "topics": [
+        "Agent Skills",
+        "Claude Code",
+        "Reusable Workflows"
+      ],
+      "author_publisher": "Anthropic",
+      "access_notes": "Course material is free. Claude Code use can require an eligible subscription or billable API access. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 190,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "免费短课，学习创建、配置、测试与团队分发 Claude Code 技能。适合已经理解工具调用并使用过 Claude Code 的学习者；实际运行 Claude Code 可能需要单独付费权限。",
+        "provider_kind": "official_ai_provider",
+        "level": "intermediate",
+        "beginner_suitable": false,
+        "audiences": [
+          "developer",
+          "technical_product_manager"
+        ],
+        "goals": [
+          "create_reusable_agent_skills",
+          "customize_coding_agents"
+        ],
+        "prerequisites": [
+          "claude_code_basics",
+          "terminal_basics"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "optional",
+        "formats": [
+          "text",
+          "exercises"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://academy.claude.com/courses/introduction-to-agent-skills"
+          }
+        ],
+        "duration_minutes": {
+          "min": 60,
+          "max": 60
+        },
+        "duration_basis": "Official course overview lists 1 hour.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "Public lessons; sign-in is offered to save progress.",
+          "scope": "self_paced_course",
+          "practice_may_cost": true,
+          "cost_notes": "Course material is free. Claude Code use can require an eligible subscription or billable API access."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://academy.claude.com/courses/introduction-to-agent-skills",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://academy.claude.com/",
+              "supports": [
+                "free_official_courses"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://academy.claude.com/courses/introduction-to-agent-skills"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "anthropic-building-with-claude-api"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "anthropic-context-engineering-for-agents",
+      "title": "Anthropic: Effective Context Engineering for AI Agents",
+      "summary": "A public engineering guide to managing the information an agent receives across long tasks. Covers context selection, tool interfaces, retrieval, compaction, and memory. Best after a basic agent tutorial. Reading is free; applying the techniques may involve paid model calls.",
+      "public_url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "resource_type": "Article / Document",
+      "language": "English",
+      "difficulty": "Intermediate",
+      "topics": [
+        "Context Engineering",
+        "Memory",
+        "Retrieval",
+        "Reliability"
+      ],
+      "author_publisher": "Anthropic",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 200,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "官方工程指南，讲解长任务中的上下文选择、工具接口、检索、压缩与记忆。适合完成基础 Agent 教程后阅读，帮助改进可靠性；阅读免费，实践模型调用可能另收费。",
+        "provider_kind": "official_ai_provider",
+        "level": "intermediate",
+        "beginner_suitable": false,
+        "audiences": [
+          "developer",
+          "researcher"
+        ],
+        "goals": [
+          "manage_agent_context",
+          "improve_agent_reliability"
+        ],
+        "prerequisites": [
+          "llm_basics",
+          "agent_basics"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "optional",
+        "formats": [
+          "text"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "article",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "anthropic-building-effective-agents",
+            "anthropic-demystifying-agent-evals"
+          ]
+        },
+        "content_date": "2025-09-29"
+      }
+    },
+    {
+      "slug": "anthropic-demystifying-agent-evals",
+      "title": "Anthropic: Demystifying Evals for AI Agents",
+      "summary": "A public guide to evaluating agents that act over multiple steps. Learn how to define tasks, trials, grading rules, traces, and outcomes, then combine evaluation methods and diagnose failures. Suited to developers who already have an agent prototype. Reading is free; running evaluations can incur model and infrastructure costs.",
+      "public_url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+      "resource_type": "Article / Document",
+      "language": "English",
+      "difficulty": "Intermediate",
+      "topics": [
+        "Agent Evaluation",
+        "Reliability",
+        "Safety",
+        "Testing"
+      ],
+      "author_publisher": "Anthropic",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 210,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "官方 Agent 评估指南，解释任务、试次、评分器、运行轨迹与最终结果，并介绍评估组合和失败诊断。适合已有原型的开发者；阅读免费，运行评估可能产生模型或基础设施费用。",
+        "provider_kind": "official_ai_provider",
+        "level": "intermediate",
+        "beginner_suitable": false,
+        "audiences": [
+          "developer",
+          "researcher",
+          "safety_practitioner"
+        ],
+        "goals": [
+          "evaluate_agents",
+          "improve_agent_reliability",
+          "apply_agent_safety"
+        ],
+        "prerequisites": [
+          "agent_basics",
+          "programming_basics"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "optional",
+        "formats": [
+          "text"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "article",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": []
+        },
+        "quality": {
+          "basis": "First-party teaching material from the organization that builds the relevant models, tools, or protocols.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "openai-building-agents-track",
+            "cmu-11-768-ai-agents-fall-2026"
+          ]
+        },
+        "content_date": "2026-01-09"
+      }
+    },
+    {
+      "slug": "berkeley-llm-agents-fall-2024",
+      "title": "UC Berkeley: Large Language Model Agents (Fall 2024)",
+      "summary": "A university lecture series introducing LLM reasoning, planning, tools, retrieval, agent frameworks, applications, evaluation, and safety. The official schedule links public edited videos and slides. Basic machine learning and deep learning background is recommended. Campus grading, discussion systems, and credit are separate from the public materials.",
+      "public_url": "https://rdi.berkeley.edu/llm-agents/f24",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Intermediate",
+      "topics": [
+        "AI Agents",
+        "Reasoning",
+        "Planning",
+        "RAG",
+        "Evaluation",
+        "Safety"
+      ],
+      "author_publisher": "UC Berkeley RDI — Dawn Song and guest lecturers",
+      "access_notes": "Public edited videos, slides, and readings are free. Independent implementations can require model or compute spending. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 220,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "伯克利官方课程系列，覆盖推理、规划、工具、RAG、框架、应用、评估和安全；课表提供公开剪辑视频与课件。建议具备机器学习和深度学习基础；校内成绩、讨论平台及学分不属于公开资源。",
+        "provider_kind": "official_university",
+        "level": "intermediate",
+        "beginner_suitable": false,
+        "audiences": [
+          "student",
+          "developer",
+          "researcher"
+        ],
+        "goals": [
+          "understand_agent_fundamentals",
+          "survey_agent_research",
+          "apply_agent_safety"
+        ],
+        "prerequisites": [
+          "machine_learning_basics",
+          "deep_learning_basics"
+        ],
+        "prerequisite_notes": "Official course strongly encourages prior ML/deep-learning study.",
+        "coding_requirement": "optional",
+        "formats": [
+          "video",
+          "slides",
+          "readings"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://rdi.berkeley.edu/llm-agents/f24"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "public_course_materials",
+          "practice_may_cost": true,
+          "cost_notes": "Public edited videos, slides, and readings are free. Independent implementations can require model or compute spending."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": [
+            "Original recordings linked through bCourses can require campus access; use the official public Edited Video links.",
+            "No campus credit, staff support, or current certificate availability promised.",
+            "2024 framework/API examples can be outdated."
+          ]
+        },
+        "quality": {
+          "basis": "Official UC Berkeley RDI course taught by faculty and invited researchers; public teaching materials linked from the university site.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://rdi.berkeley.edu/llm-agents/f24",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://rdi.berkeley.edu/publicCourses",
+              "supports": [
+                "university_public_course_catalog"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://rdi.berkeley.edu/llm-agents/f24"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "berkeley-advanced-llm-agents-spring-2025"
+          ]
+        },
+        "course_code": "CS 194/294-196",
+        "term": "Fall 2024"
+      }
+    },
+    {
+      "slug": "cmu-11-768-ai-agents-fall-2026",
+      "title": "CMU 11-768: AI Agents (Fall 2026)",
+      "summary": "A graduate course on LLM agents, tools, context, memory, planning, evaluation, training, safety, and interaction. The official site links public slides, recordings, and assignments as they are released. Requires prior experience training neural language models. The Fall 2026 course is still in progress; it is an advanced resource, not a zero-background introduction.",
+      "public_url": "https://www.cmu-agents.com/",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Advanced",
+      "topics": [
+        "AI Agents",
+        "Agent Harnesses",
+        "Tool Use",
+        "Memory",
+        "Planning",
+        "Reinforcement Learning",
+        "Safety",
+        "Evaluation"
+      ],
+      "author_publisher": "Carnegie Mellon University — Daniel Fried and Graham Neubig",
+      "access_notes": "Public released materials are free. Model training, inference, and assignment compute can incur substantial separate costs; campus credits are not promised to the public. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 230,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "CMU 研究生课程，涵盖工具、上下文、记忆、规划、评估、训练、安全和人机交互，官方站提供已发布课件、录像与作业。要求具备神经语言模型训练经验；2026 秋季仍在进行，应按进阶课程推荐。",
+        "provider_kind": "official_university",
+        "level": "advanced",
+        "beginner_suitable": false,
+        "audiences": [
+          "researcher",
+          "advanced_developer",
+          "graduate_student"
+        ],
+        "goals": [
+          "engineer_agent_harnesses",
+          "evaluate_agents",
+          "train_agent_models",
+          "study_agent_safety"
+        ],
+        "prerequisites": [
+          "neural_language_model_training",
+          "deep_learning",
+          "python"
+        ],
+        "prerequisite_notes": "Official syllabus requires prior neural language model training experience; 11-667, 11-711, 10-202, or equivalent experience is recommended.",
+        "coding_requirement": "required_for_exercises",
+        "formats": [
+          "video",
+          "slides",
+          "code",
+          "assignments"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://www.cmu-agents.com/"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "public_course_materials",
+          "practice_may_cost": true,
+          "cost_notes": "Public released materials are free. Model training, inference, and assignment compute can incur substantial separate costs; campus credits are not promised to the public."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "in_progress",
+          "limitations": [
+            "Fall 2026 materials are released progressively; do not claim a complete finished course.",
+            "Campus Canvas, Piazza, grading, and sponsor credits can be restricted to enrolled students."
+          ]
+        },
+        "quality": {
+          "basis": "Official course linked by instructor Daniel Fried and listed in the CMU Language Technologies Institute course catalog.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://www.cmu-agents.com/",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://dpfried.github.io/",
+              "supports": [
+                "instructor_endorsement_of_course_site"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://www.lti.cs.cmu.edu/misc-pages/intranet-course-info.html",
+              "supports": [
+                "official_course_identity"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://www.cmu-agents.com/slides/lecture-01-agents.pdf",
+              "supports": [
+                "public_slides"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://www.youtube.com/watch?v=UwfjzyLnvMg",
+              "supports": [
+                "official_site_linked_recording"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://github.com/cmu-agents/assignment-1",
+              "supports": [
+                "public_assignment"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://www.cmu-agents.com/"
+        },
+        "recommendation": {
+          "notes": "Recommend for research or model-training goals only after checking the model-training prerequisite. For an Agent beginner, prefer Hugging Face or the official provider introductions.",
+          "related_resource_slugs": [
+            "berkeley-llm-agents-fall-2024"
+          ]
+        },
+        "course_code": "11-768",
+        "term": "Fall 2026"
+      }
+    },
+    {
+      "slug": "berkeley-advanced-llm-agents-spring-2025",
+      "title": "UC Berkeley: Advanced LLM Agents (Spring 2025)",
+      "summary": "An advanced university lecture series on agent reasoning, inference-time search, post-training, code generation, verification, and mathematical problem solving. Public videos and slides are linked from the official course schedule. Best for learners who already understand LLMs and basic agents; campus enrollment and grading are separate.",
+      "public_url": "https://rdi.berkeley.edu/adv-llm-agents/sp25",
+      "resource_type": "Course",
+      "language": "English",
+      "difficulty": "Advanced",
+      "topics": [
+        "AI Agents",
+        "Reasoning",
+        "Search",
+        "Post-Training",
+        "Code Generation",
+        "Verification"
+      ],
+      "author_publisher": "UC Berkeley RDI — Dawn Song and guest lecturers",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 240,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "伯克利进阶课程，研究推理、推理时搜索、后训练、代码生成、验证与数学问题求解。官方课表提供公开视频和课件；适合已有 LLM 与 Agent 基础的研究学习者。",
+        "provider_kind": "official_university",
+        "level": "advanced",
+        "beginner_suitable": false,
+        "audiences": [
+          "researcher",
+          "advanced_developer",
+          "graduate_student"
+        ],
+        "goals": [
+          "study_agent_reasoning",
+          "train_agent_models",
+          "survey_agent_research"
+        ],
+        "prerequisites": [
+          "llm_basics",
+          "agent_basics",
+          "deep_learning_basics"
+        ],
+        "prerequisite_notes": "Prerequisite tags are curator guidance unless explicitly identified as a provider requirement.",
+        "coding_requirement": "optional",
+        "formats": [
+          "video",
+          "slides",
+          "readings"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://rdi.berkeley.edu/adv-llm-agents/sp25"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "public_course_materials",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "available",
+          "limitations": [
+            "Public materials do not include campus credit or guaranteed current certificate enrollment."
+          ]
+        },
+        "quality": {
+          "basis": "Official UC Berkeley RDI course taught by faculty and invited researchers, with public video and slide links.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://rdi.berkeley.edu/adv-llm-agents/sp25",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://www.youtube.com/live/g0Dwtf3BH-0",
+              "supports": [
+                "official_site_linked_public_video"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://rdi.berkeley.edu/adv-llm-agents/sp25"
+        },
+        "recommendation": {
+          "notes": "Match goals and prerequisites before recommending; disclose exercise costs and access limits.",
+          "related_resource_slugs": [
+            "berkeley-llm-agents-fall-2024"
+          ]
+        },
+        "course_code": "CS 194/294-280",
+        "term": "Spring 2025"
+      }
+    },
+    {
+      "slug": "stanford-cs329z-public-materials-fall-2026",
+      "title": "Stanford CS329Z: Engineering AI Agents — Public Materials (Fall 2026)",
+      "summary": "Public slides, readings, and released assignments from a university course on agent engineering, retrieval, tools, memory, evaluation, and safety. The Fall 2026 course is in progress and assumes NLP background. Lecture recordings are accessed through Stanford Canvas; this entry covers public materials and does not promise an open video course.",
+      "public_url": "https://cs329z.stanford.edu/",
+      "resource_type": "Article / Document",
+      "language": "English",
+      "difficulty": "Advanced",
+      "topics": [
+        "AI Agents",
+        "RAG",
+        "MCP",
+        "Memory",
+        "Evaluation",
+        "Safety",
+        "DSPy"
+      ],
+      "author_publisher": "Stanford University — Diyi Yang, Michael Ryan, and John Yang",
+      "access_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges. Official link and original summary only; no redistribution license verified.",
+      "featured": false,
+      "sort_order": 250,
+      "learning_metadata": {
+        "schema_version": 1,
+        "catalog_batch": "ai-agents-2026-10-15",
+        "summary_zh_CN": "斯坦福 Agent 工程课的公开课件、阅读列表与已发布作业，涉及检索、工具、记忆、评估和安全。2026 秋季仍在进行，需 NLP 基础；录像通过校内 Canvas 提供，本条仅收录公开材料。",
+        "provider_kind": "official_university",
+        "level": "advanced",
+        "beginner_suitable": false,
+        "audiences": [
+          "advanced_developer",
+          "graduate_student",
+          "researcher"
+        ],
+        "goals": [
+          "engineer_agent_harnesses",
+          "evaluate_agents",
+          "apply_agent_safety"
+        ],
+        "prerequisites": [
+          "nlp_background",
+          "programming_basics",
+          "llm_basics"
+        ],
+        "prerequisite_notes": "Official prerequisite: CS224N, CS224U, CS224V, CS336, or equivalent NLP background.",
+        "coding_requirement": "required_for_exercises",
+        "formats": [
+          "slides",
+          "readings",
+          "assignments"
+        ],
+        "languages": [
+          {
+            "code": "en",
+            "url": "https://cs329z.stanford.edu/"
+          }
+        ],
+        "duration_minutes": null,
+        "duration_basis": "No reliable total duration verified; do not present a guessed study time.",
+        "access": {
+          "materials_free": true,
+          "institutional_enrollment_required": false,
+          "registration_required_for_materials": false,
+          "registration_notes": "No sign-in needed for the linked public materials.",
+          "scope": "public_slides_and_assignments",
+          "practice_may_cost": true,
+          "cost_notes": "Reading and watching the public materials is free; running model APIs or cloud exercises may incur separate charges."
+        },
+        "rights": {
+          "catalog_use": "official_link_and_original_summary_only",
+          "open_license": null,
+          "license_url": null,
+          "license_scope": "No explicit reuse license verified for the linked teaching material.",
+          "reuse_notes": "An official public page is not permission to copy its text, slides, videos, or images. Check asset-specific rights before reuse; repository licenses do not automatically cover externally hosted media."
+        },
+        "availability": {
+          "release_status": "in_progress",
+          "limitations": [
+            "Lecture recordings require the course Canvas login; public video access is not verified.",
+            "Only materials already released on the public course site are included.",
+            "Public readers do not receive university credit or staff support."
+          ]
+        },
+        "quality": {
+          "basis": "Stanford-hosted official course and logistics pages, with released public slide and homework links.",
+          "ranking_claim": null
+        },
+        "verification": {
+          "checked_on": "2026-10-15",
+          "method": "Official pages read anonymously; linked curriculum and access conditions reviewed. No paid account enrollment or full exercise execution performed.",
+          "sources": [
+            {
+              "url": "https://cs329z.stanford.edu/",
+              "supports": [
+                "official_provider",
+                "curriculum",
+                "public_access"
+              ],
+              "http_status": 200
+            },
+            {
+              "url": "https://cs329z.stanford.edu/logistics",
+              "supports": [
+                "prerequisites",
+                "restricted_recordings"
+              ],
+              "http_status": 200
+            }
+          ],
+          "primary_http_status": 200,
+          "primary_resolved_url": "https://cs329z.stanford.edu/"
+        },
+        "recommendation": {
+          "notes": "Offer only when the user is comfortable studying slides and papers. Do not recommend as a complete free video course or a zero-background introduction.",
+          "related_resource_slugs": [
+            "cmu-11-768-ai-agents-fall-2026"
+          ]
+        },
+        "course_code": "CS329Z",
+        "term": "Fall 2026"
+      }
+    }
+  ]
+}

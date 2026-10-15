@@ -250,6 +250,7 @@
   border-bottom: 1px solid var(--line);
 }
 
+.resource-card h3,
 .resource-card h4,
 .event-card h4 {
   margin: 0 0 .5rem;
@@ -258,6 +259,73 @@
   font-weight: 430;
   letter-spacing: -.02em;
   line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.resource-card__summary {
+  margin: 0;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.resource-list--preview .resource-card h4,
+.resource-list--preview .resource-card__summary {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.resource-list--preview .resource-card h4 {
+  -webkit-line-clamp: 2;
+}
+
+.resource-list--preview .resource-card__summary {
+  -webkit-line-clamp: 3;
+}
+
+.resource-preview__more {
+  margin-top: 1rem;
+}
+
+.learning-catalog {
+  max-width: 64rem;
+  padding-block: clamp(2rem, 5vw, 4rem) var(--space-section);
+}
+
+.learning-catalog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.learning-catalog__actions .text-action,
+.resource-pagination .text-action {
+  margin-top: 0;
+}
+
+.resource-pagination {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.resource-pagination p {
+  margin: 0;
+  color: var(--ink-faint);
+  font-size: .8rem;
+}
+
+.resource-pagination__next {
+  justify-self: end;
+}
+
+.resource-pagination__back {
+  transform: rotate(180deg);
 }
 
 .resource-card a,

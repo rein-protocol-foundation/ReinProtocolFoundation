@@ -7,6 +7,7 @@ import { CommunitySection } from '@/components/community-shell'
 import { ContributionPaths, getContributionIssueLinks } from '@/components/contribution-paths'
 import { ParticipantForm } from '@/components/forms/participant-form'
 import { ProfileCard } from '@/components/profile-card'
+import { ResourceCard } from '@/components/resource-card'
 import { getPublishedEvents, getPublishedResources, getPublicMemberMetrics, getPublicPeople } from '@/lib/community/data'
 import { publicCommunityAudience } from '@/lib/community/presentation'
 
@@ -23,8 +24,8 @@ async function CommunityAudience() {
 }
 
 async function CommunityProgram() {
-  const [resources, events, contributionIssueLinks] = await Promise.all([
-    getPublishedResources(),
+  const [{ resources, hasMore }, events, contributionIssueLinks] = await Promise.all([
+    getPublishedResources({ limit: 3 }),
     getPublishedEvents(),
     getContributionIssueLinks(),
   ])
@@ -38,7 +39,14 @@ async function CommunityProgram() {
       </article>
       <article>
         <div><p className="article-kicker">02 / Connect online</p><h3>Online community and learning.</h3><p>Continue the conversation in Slack and Discord, take part in online presentations and events, and exchange questions and ideas about AI agents.</p><p>Share learning materials, discuss research, and offer project feedback or career guidance to members preparing for AI agent roles. Bring your experience, whether you are new to the field or already working in it.</p><Link href="/community/contribute/resources/submit" className="primary-action community-program-action">Submit a learning resource <Arrow /></Link></div>
-        {resources.length ? <div className="resource-list">{resources.map((resource) => <article className="resource-card" key={resource.id}><span className="resource-card__meta">{resource.resource_type} · {resource.language}{resource.difficulty ? ` · ${resource.difficulty}` : ''}</span><h4>{resource.title}</h4><p>{resource.summary}</p><a href={resource.public_url} target="_blank" rel="noreferrer">Open resource <span aria-hidden="true">↗</span></a></article>)}</div> : null}
+        {resources.length ? (
+          <div className="resource-preview">
+            <div className="resource-list resource-list--preview">
+              {resources.map((resource) => <ResourceCard resource={resource} headingLevel={4} key={resource.id} />)}
+            </div>
+            {hasMore ? <Link href="/community/learn" className="text-action resource-preview__more">Show More <Arrow /></Link> : null}
+          </div>
+        ) : null}
       </article>
       {upcomingEvents.length ? <article><div><p className="article-kicker">Event calendar</p><h3>Upcoming events.</h3><p>Explore in-person, online, and hybrid sessions.</p></div><div className="event-list">{upcomingEvents.map((event) => { const start = firstStart(event); return <article className="event-card" key={event.id}><span className="event-card__meta">{event.format.replace('_', ' ')} · {event.attendance_status}</span><h4>{event.title}</h4><p>{event.summary}</p>{start ? <p className="field-hint">{new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short', timeZone: event.timezone }).format(start)}</p> : null}<Link href={`/community/gather/${event.slug}`}>Event details</Link></article> })}</div></article> : null}
     </div>
