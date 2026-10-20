@@ -34,7 +34,7 @@ export const participantWelcomeHtml = `<!doctype html>
 <p style="margin:0 0 20px;">Warmly,<br><strong>Rein Protocol Foundation</strong></p>
 </td></tr>
 <tr><td style="padding:20px 24px 24px;border-top:1px solid #d5c7b1;color:#75695e;font-size:11px;line-height:1.65;">
-<p style="margin:0 0 10px;">You received this welcome email because you registered for the Rein community. Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. Community registration does not confer legal membership or governance rights.</p>
+<p style="margin:0 0 10px;">You received this welcome email because you registered for the Rein community. Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. Community registration does not confer legal membership or governance rights.</p>
 <p style="margin:0;"><a href="https://rein-protocol.org/" style="color:#75695e;">rein-protocol.org</a> · <a href="https://rein-protocol.org/privacy" style="color:#75695e;">Privacy</a></p>
 </td></tr></table>
 <!--[if mso]></td></tr></table><![endif]-->

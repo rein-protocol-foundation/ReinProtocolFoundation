@@ -8,7 +8,7 @@
 
 ## Legal status
 
-As of **October 20, 2026**, Rein Protocol Foundation is an incorporated **Wyoming nonprofit corporation**, with an IRS **Employer Identification Number (EIN)** obtained. **501(c)(3) recognition is being applied for; IRS approval has not yet been granted.** Incorporation and an EIN do not establish federal tax-exempt recognition or assure donation deductibility.
+Rein Protocol Foundation was incorporated on **Oct 9, 2026** in the **STATE OF WYOMING** as a nonprofit corporation and has obtained an IRS **Employer Identification Number (EIN)**. Contact: [admin@rein-protocol.org](mailto:admin@rein-protocol.org).
 
 See the [Foundation status and giving standards](https://rein-protocol.org/giving#foundation-status). The [founding blueprint](./PROJECT.md) includes historical formation planning and proposed governance mechanisms; those plans do not change the Foundation’s completed incorporation or establish that every proposed program is active.
 

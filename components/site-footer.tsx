@@ -21,7 +21,8 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="footer-legal page-shell">
-        <p>{foundationStatus.formation} EIN obtained. {foundationStatus.tax} <Link href="/giving#foundation-status">Foundation status</Link></p>
+        <p>{foundationStatus.formation} EIN obtained. <Link href="/giving#foundation-status">Foundation status</Link></p>
+        <p><a href={`mailto:${foundationStatus.contactEmail}`}>{foundationStatus.contactEmail}</a></p>
         <p><Link href="/privacy">Privacy</Link> · <Link href="/community/code-of-conduct">Code of Conduct</Link></p>
         <p>© 2026 Rein Protocol Foundation</p>
       </div>

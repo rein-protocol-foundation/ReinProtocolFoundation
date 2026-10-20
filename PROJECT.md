@@ -2,17 +2,19 @@
 
 ## Founding Constitution & Operating Blueprint — Draft v0.5
 
-## Current organizational status — October 20, 2026
+## Foundation identity
 
-**Rein Protocol Foundation is legally incorporated in Wyoming as a nonprofit corporation and has obtained an IRS Employer Identification Number (EIN). 501(c)(3) recognition is being applied for; IRS approval has not yet been granted.** Incorporation, EIN assignment, federal tax-exempt recognition and fundraising activation are separate milestones.
+**Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an IRS Employer Identification Number (EIN).** Contact: [admin@rein-protocol.org](mailto:admin@rein-protocol.org).
 
 This blueprint includes historical pre-incorporation planning, cost comparisons and website launch records. References below to selecting a jurisdiction, forming the Foundation or obtaining an EIN are historical planning, not outstanding formation tasks. Proposed DAO structures, program plans and fundraising controls remain subject to their own adoption and implementation. Current public status is summarized in the [README](./README.md) and [official Foundation status page](https://rein-protocol.org/giving#foundation-status).
 
 **Legal Name:** Rein Protocol Foundation
 **Public Brand:** Rein Protocol
-**Legal Jurisdiction:** Wyoming, United States; later DAO jurisdiction remains under evaluation
+**Incorporation Date:** Oct 9, 2026
+**Legal Jurisdiction:** STATE OF WYOMING, United States; later DAO jurisdiction remains under evaluation
 **Legal Form:** Incorporated Wyoming nonprofit corporation; later DAO form remains under evaluation
-**Tax / Public-Benefit Status:** EIN obtained; 501(c)(3) recognition being applied for, not yet approved
+**Employer Identification Number:** Obtained
+**Contact Email:** admin@rein-protocol.org
 **Organizational Model:** Web3-first, decentralized and Agent-operated, with one or more legally recognized entities where required
 **Initial Tax Requirement:** The initial structure must support U.S. tax-deductible charitable contributions
 **Token Status:** No token during the initial fundraising phase; a transferable governance token is intended for a later protocol phase
@@ -268,7 +270,7 @@ Donor personally identifiable information, security-sensitive information and le
 
 ## Decision status
 
-The initial Wyoming nonprofit corporation is now legally formed and has obtained an EIN. Federal 501(c)(3) recognition is being applied for. The jurisdiction and form of the later protocol DAO remain open.
+The Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. The jurisdiction and form of the later protocol DAO remain open.
 
 California and Delaware are retained below as historical comparison jurisdictions for the initial charity. International options including the Cayman Islands and the United Arab Emirates concern only later, distinct entities or regional operations. The following jurisdiction analysis records the original planning rationale rather than an unresolved decision about the Foundation’s incorporation.
 
@@ -360,7 +362,7 @@ The professional allowances assume a custom, credible launch rather than a bare 
 
 ## Formation and fundraising sequence
 
-**Status update — October 20, 2026:** Incorporation and EIN assignment are complete. The sequence below records the original plan. Its pre-formation steps and proposed funding threshold for an exemption application are not current instructions to defer incorporation or the 501(c)(3) application, which is being pursued.
+**Formation milestones:** Incorporation and EIN assignment are complete. The sequence below records the original plan; its pre-formation steps and proposed filing threshold are historical planning.
 
 The Foundation should **not** begin charitable fundraising through a separate Wyoming DAO LLC and later attempt to convert or transfer those donations into a newly formed §501(c)(3) public charity.
 
@@ -380,9 +382,9 @@ The original low-cost sequence was:
 5. **Submit the full Form 1023 after the initial funding threshold.** If the application is filed within 27 months after the end of the month of legal formation and is approved, federal exemption and donation deductibility can generally be recognized back to the formation date. While the application is pending, donors have no advance assurance that their gifts will ultimately be deductible.
 6. **Offer a fiscal-sponsor route if immediate deductibility is important to an early donor.** Donations must be made to the existing §501(c)(3) sponsor, which must retain legal discretion and control; the DAO may recommend but cannot bind the sponsor's use of sponsored funds.
 
-Until the IRS determination letter is issued, fundraising pages and receipts should state substantially:
+Public formation copy:
 
-> Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an IRS Employer Identification Number (EIN). Recognition under §501(c)(3) is being applied for; IRS approval has not yet been granted. Tax deductibility is not assured while recognition is pending.
+> Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an IRS Employer Identification Number (EIN). Contact: admin@rein-protocol.org.
 
 ## Why a separate DAO entity may be needed later
 
@@ -425,7 +427,7 @@ The following milestones are operational gates, not promises of financial return
 
 ### More than $2,000 received — U.S. exemption filing
 
-**Historical planning threshold, superseded by the current application process.** The original plan tied full Form 1023 submission to Qualified Fundraising Receipts exceeding $2,000 and $750 of unrestricted liquid assets for filing and related costs. As of October 20, 2026, 501(c)(3) recognition is being applied for; this former threshold must not be read as a current instruction to wait before pursuing recognition.
+**Historical planning threshold.** The original plan tied full Form 1023 submission to Qualified Fundraising Receipts exceeding $2,000 and $750 of unrestricted liquid assets for filing and related costs. This former threshold is retained as planning history rather than a current filing instruction.
 
 ### More than $20,000 received — Cayman feasibility process
 
@@ -501,7 +503,7 @@ If the repository containing `PROJECT.md` becomes public, internal and confident
 
 # 5. United States Tax-Exempt Structure
 
-The Foundation is pursuing recognition, which has not yet been approved, under:
+The tax-exempt structure described in this blueprint targets:
 
 **501(c)(3) charitable status**
 
@@ -1377,6 +1379,28 @@ Detailed AI-Agent participation in constitutional amendments and organization re
 - legally reserved Board powers;
 - emergency pauses and public override records.
 
+## Organizational setup — Board and Bylaws
+
+The Foundation’s organizational setup includes forming its Board of Directors and creating and adopting its Bylaws. These are governance workstreams with their own appointment records, resolutions and approved documents. This blueprint describes the work and its deliverables; signed organizational records establish which steps have been completed.
+
+### Board formation
+
+1. Identify and confirm the initial directors using the composition and expertise goals below, record their acceptance and collect conflict-of-interest disclosures.
+2. Document director appointments and establish a Board roster with roles, terms and responsibilities.
+3. Hold and document the organizational meeting or execute the appropriate written organizational actions. Appoint officers and define authority for administration, finance, records and external correspondence.
+4. Adopt an initial meeting schedule and a process for agendas, minutes, resolutions and follow-up actions.
+5. Keep signed appointment and organizational records in the Foundation’s records. Publish approved professional roles and biographies through official channels, using **admin@rein-protocol.org** for public contact.
+
+### Bylaws creation and adoption
+
+1. Prepare the Bylaws in alignment with the filed Articles of Incorporation and the Foundation’s mission.
+2. Define Board composition, director appointment and succession, terms, vacancies, removal, officer roles, meeting procedures, quorum, voting, written actions and amendments.
+3. Define conflict-of-interest handling, recordkeeping, financial oversight and the boundaries of any authority delegated to committees, community governance or AI Agents.
+4. Review the draft with the Board and obtain appropriate professional review before adoption.
+5. Adopt the approved Bylaws through a documented Board action, retaining the final version, adoption date and resolution in the Foundation’s records. Record later amendments in the same way.
+
+The governance record should include the director roster and appointment actions, officer appointments, organizational meeting minutes or written actions, adopted Bylaws, and the Conflict of Interest Policy. Publish only the versions approved for public release.
+
 ## Human legal governance
 
 Initial Board:
@@ -1743,16 +1767,16 @@ The redesigned informational website and technical preview are complete. The org
 
 ## Phase 0 — Legal Foundation
 
-**Current progress — October 20, 2026:** The nonprofit corporation has been formed and its EIN obtained. 501(c)(3) recognition is being applied for. The numbered list below is the original planning checklist; completion of other governance, treasury and registration items must be verified separately.
+**Formation milestones:** The nonprofit corporation was incorporated on Oct 9, 2026 in the STATE OF WYOMING and has obtained its EIN. The checklist below covers organizational setup; completion of governance, treasury and registration items is documented separately.
 
 1. Confirm legal and trademark availability of **Rein Protocol Foundation**.
 2. **Completed:** Incorporate the Wyoming nonprofit corporation.
 3. **Completed:** Obtain EIN.
-4. Adopt Certificate, Bylaws and Conflict of Interest Policy.
-5. Appoint initial Board.
+4. Establish the initial Board, document director appointments and hold the organizational meeting, following [Board formation](#board-formation).
+5. Draft, review and formally adopt the Bylaws and Conflict of Interest Policy, following [Bylaws creation and adoption](#bylaws-creation-and-adoption).
 6. Adopt the initial tokenless DAO constitution and binding delegation policy.
 7. Establish Foundation-controlled Safe, bank and accounting infrastructure.
-8. Pursue IRS 501(c)(3) recognition; the application process is underway and approval has not yet been granted.
+8. Maintain the tax-exemption and filing records described in the tax-exempt structure plan.
 9. Because an initial director or officer will work from California, register early with the California Attorney General and determine any additional California foreign-entity and tax filings rather than waiting for a California-targeted campaign.
 
 ---
@@ -1893,4 +1917,4 @@ This document is a conceptual founding and operating charter.
 
 It is **not** the Foundation's Certificate of Incorporation, Bylaws, Investment Policy, tax opinion or legal advice.
 
-The Foundation is already legally incorporated and has obtained an EIN. Proposed digital-asset custody, Agent payment flows, international donations, charitable solicitation, sanctions compliance and autonomous transaction authority should receive appropriate professional review before implementation. Federal 501(c)(3) recognition remains a separate application process.
+The Foundation is already legally incorporated and has obtained an EIN. Proposed digital-asset custody, Agent payment flows, international donations, charitable solicitation, sanctions compliance and autonomous transaction authority should receive appropriate professional review before implementation.

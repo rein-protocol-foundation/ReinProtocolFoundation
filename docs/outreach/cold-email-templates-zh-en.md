@@ -2,7 +2,7 @@
 
 > Shared structure: recipient-specific relevance → brief mission and credible stage → role-specific primary ask → low-friction reply. A 15-minute conversation is optional, not the only way to respond.
 
-> Stage note: Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. Agent operations, programs, events and research support are planned work. The $10M figure is a fundraising target supplied for outreach, not money already raised or an approved allocation.
+> Stage note: Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. Agent operations, programs, events and research support are planned work. The $10M figure is a fundraising target supplied for outreach, not money already raised or an approved allocation.
 
 | Recipient | Primary help requested | Alternative help |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. The Agents and programs described are planned work.
+Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work.
 ```
 
 ## VC / Investor / Mission-aligned donor (`investor.eml`)
@@ -61,7 +61,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. The Agents and programs described are planned work. We are not offering a commercial investment or token return. Fundraising channels still require approval.
+Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work. We are not offering a commercial investment or token return. Fundraising channels still require approval.
 ```
 
 ## AI researcher (`researcher.eml`)
@@ -85,7 +85,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. The Agents and programs described are planned work.
+Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work.
 ```
 
 ## AI startup founder (`ai_startup_founder.eml`)
@@ -109,7 +109,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. The Agents and programs described are planned work. No company endorsement or affiliation is assumed.
+Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work. No company endorsement or affiliation is assumed.
 ```
 
 ## 朋友 / 中文 (`friend-zh.eml`)
@@ -133,7 +133,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation 已在美国怀俄明州注册为非营利法人，并取得 EIN。501(c)(3) 免税资格正在申请中，尚未获 IRS 批准。Agents 和项目活动仍在建设阶段。
+Rein Protocol Foundation 于 2026 年 10 月 9 日（Oct 9, 2026）在美国怀俄明州（STATE OF WYOMING）注册为非营利法人，并取得 EIN。联系邮箱：admin@rein-protocol.org。Agents 和项目活动仍在建设阶段。
 ```
 
 ## Before sending / 发送前检查
@@ -142,7 +142,7 @@ Rein Protocol Foundation 已在美国怀俄明州注册为非营利法人，并�
 - For the funder template, verify founding-team headcount and community membership separately, with an as-of date. Do not substitute registrations, projected reach or event attendance for member counts. If no reliable count exists, replace the numerical sentence with “We are a small founding team building our initial community.”
 - Fill the event-plan field with a real proposed location, cadence and attendance estimate. Label these as plans; do not imply confirmed venues, university partnerships or events already delivered.
 - Keep one primary ask per recipient. Alternatives should help the recipient respond, not become a checklist of commitments. Prepare the referenced one-page agenda, pilot outline, workshop brief or proposed budget before offering it.
-- The $10M amount is a target, not funds raised, a fixed budget breakdown or a claim of fundraising readiness. Ask about donation intent only; do not include payment instructions or promise tax deductibility while IRS recognition and fundraising approval remain outstanding.
+- The $10M amount is a target, not funds raised, a fixed budget breakdown or a claim of fundraising readiness. Ask about donation intent only; do not include payment instructions or promise tax deductibility before fundraising channels are approved.
 - Describe Agent operations as planned, permission-bounded work with human accountability—not a fully autonomous organization already operating.
 - HTML and plain-text versions carry the same message. The HTML website button is for background information, not the primary response request. Preserve the small brand mark and current legal-status disclosure.
 - These files are unsent drafts. Do not add recipient addresses or send automatically.

@@ -7,7 +7,7 @@ import './admin.css'
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rein-protocol.org'),
   title: { default: 'Rein Protocol Foundation', template: '%s — Rein Protocol Foundation' },
-  description: 'Rein Protocol Foundation is a Wyoming nonprofit with an EIN, advancing AI agent safety through community, open source, and research. 501(c)(3) recognition is being applied for.',
+  description: 'Rein Protocol Foundation is a nonprofit incorporated on Oct 9, 2026 in the STATE OF WYOMING, advancing AI agent safety through community, open source, and research.',
   openGraph: { type: 'website', siteName: 'Rein Protocol Foundation' },
   manifest: '/site.webmanifest',
   appleWebApp: { title: 'Rein Protocol' },

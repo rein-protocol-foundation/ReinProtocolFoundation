@@ -67,7 +67,7 @@ test.describe('institutional site', () => {
     await expect(page.getByRole('link', { name: 'Read our mission' })).toHaveAttribute('href', '/mission')
     await expect(page.getByRole('heading', { name: /A public network of/ })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Enter the community' })).toHaveAttribute('href', '/community')
-    await expect(page.locator('.giving-standard')).toContainText('Incorporated in Wyoming as a nonprofit corporation.')
+    await expect(page.locator('.giving-standard')).toContainText('Incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation.')
     await expect(page.getByText(/not active|not ready|pre-launch|in formation/i)).toHaveCount(0)
   })
 
