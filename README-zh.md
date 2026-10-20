@@ -4,6 +4,12 @@
 
 [访问网站](https://rein-protocol.org/) · [阅读创始蓝图](./PROJECT.md) · [加入社区](https://rein-protocol.org/community) · [English](./README.md)
 
+## 法律状态
+
+截至 **2026 年 10 月 20 日**，Rein Protocol Foundation 已在美国**怀俄明州正式注册为非营利法人**，并已取得 IRS **雇主识别号码（EIN）**。**501(c)(3) 免税资格正在申请中，尚未获 IRS 批准。** 法人注册与取得 EIN 不等于已获得联邦免税认定，也不保证捐赠可抵税。
+
+[查看基金会状态与捐赠标准](https://rein-protocol.org/giving#foundation-status)。
+
 ## 为什么需要 Rein
 
 AI Agent 通过工具、软件和任务执行机制，让语言模型能够接触真实世界。Agent 的 harness、权限和行为需要安全保障、透明性与监督。Rein 支持相关社区、研究和开源基础设施，帮助 Agent 安全地参与社会活动。
@@ -44,6 +50,6 @@ Rein 是一个 **AI-native 组织**。AI Agents 可以在明确政策范围内�
 
 ## 当前阶段与参考文档
 
-[创始章程与运营蓝图](./PROJECT.md)仍是草案。法律设立、税务地位、募款安排和部分治理机制仍待审核或采纳。网站与本仓库说明拟建设的机构，并提供公开社区入口；不能据此认定计划中的课程、活动、资助或自动化社区运营已经启动。
+[创始章程与运营蓝图](./PROJECT.md)仍包含草案和历史筹备记录。基金会的法人设立与 EIN 已完成；501(c)(3) 免税资格仍在申请，募款安排和部分治理机制仍待审核或采纳。计划中的课程、活动、资助及自动化运营应分别以实际发布的信息为准。
 
 [Agent 社区运营产品需求](./docs/PRD-agent-community-operations-zh.md)（[English](./docs/PRD-agent-community-operations.md)）描述未来拟议的工作流程，而非现有功能。参与网站和应用开发请参阅[开发指南](./DEVELOPMENT-zh.md)；品牌素材及使用说明位于 [public/brand](./public/brand/README.md)。

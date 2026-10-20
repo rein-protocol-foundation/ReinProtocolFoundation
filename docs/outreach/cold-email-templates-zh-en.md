@@ -2,7 +2,7 @@
 
 > Shared structure: recipient-specific relevance → brief mission and credible stage → role-specific primary ask → low-friction reply. A 15-minute conversation is optional, not the only way to respond.
 
-> Stage note: Rein Protocol Foundation is being prepared. Agent operations, programs, events and research support are planned work. The $10M figure is a fundraising target supplied for outreach, not money already raised or an approved allocation.
+> Stage note: Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. Agent operations, programs, events and research support are planned work. The $10M figure is a fundraising target supplied for outreach, not money already raised or an approved allocation.
 
 | Recipient | Primary help requested | Alternative help |
 | --- | --- | --- |
@@ -19,7 +19,7 @@
 ```text
 Dear [Name],
 
-I’m reaching out because of your work on [specific research area or paper]. I’d like your help shaping the research agenda for Rein Protocol Foundation, an independent AI-native NGO in preparation focused on public participation in AI Agent safety.
+I’m reaching out because of your work on [specific research area or paper]. I’d like your help shaping the research agenda for Rein Protocol Foundation, an independent AI-native nonprofit NGO focused on public participation in AI Agent safety.
 
 We plan free learning resources and university-based paper discussions and workshops that connect researchers with students and practitioners. Our approach is to use AI Agents to analyze and oversee AI Agents. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
 
@@ -33,7 +33,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation is in preparation. The Agents and programs described are planned work.
+Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. The Agents and programs described are planned work.
 ```
 
 ## VC / Investor / Mission-aligned donor (`investor.eml`)
@@ -43,15 +43,15 @@ Rein Protocol Foundation is in preparation. The Agents and programs described ar
 ```text
 Dear [Name],
 
-I’m reaching out because of your support for [specific public-interest initiative or relevant focus]. I’m preparing Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
+I’m reaching out because of your support for [specific public-interest initiative or relevant focus]. I’m helping build Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
 
-We are at the formation stage, with [verified founding-team headcount] people on the founding team and [verified community member count, as of date] community members. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
+We are building our initial community, with [verified founding-team headcount] people on the founding team and [verified community member count, as of date] community members. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
 
 We plan university and business-venue workshops, paper discussions and practitioner meetups that bring researchers, founders, investors and newcomers together. Our initial event plan is [location, proposed cadence and expected attendance; distinguish plans from confirmed bookings].
 
 Our fundraising target is $10M to support free AI learning resources, in-person programs, AI Agent Safety research and the infrastructure needed to operate and report on this work. This is a donation-oriented public-benefit effort, not an equity investment or a promise of financial or token returns.
 
-Would you consider making a donation toward this goal once our legal and fundraising arrangements are established? If donations are outside your mandate, could you introduce us to a philanthropist or foundation that supports AI safety or education?
+Would you consider making a donation toward this goal once our fundraising channels are approved? If donations are outside your mandate, could you introduce us to a philanthropist or foundation that supports AI safety or education?
 
 A brief reply about donation interest would be very helpful. I can share a proposed budget and program plan; if useful, could we discuss them for 15 minutes?
 
@@ -61,7 +61,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation is in preparation. The Agents and programs described are planned work. We are not offering a commercial investment or token return. Legal and fundraising arrangements are still being established.
+Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. The Agents and programs described are planned work. We are not offering a commercial investment or token return. Fundraising channels still require approval.
 ```
 
 ## AI researcher (`researcher.eml`)
@@ -71,7 +71,7 @@ Rein Protocol Foundation is in preparation. The Agents and programs described ar
 ```text
 Hello [Name],
 
-I’m reaching out because of your work on [specific paper, benchmark or project]. I’m preparing Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
+I’m reaching out because of your work on [specific paper, benchmark or project]. I’m helping build Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
 
 We would like to start with a focused research pilot on [specific Agent safety question], supported by open learning materials and small research discussions. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
 
@@ -85,7 +85,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation is in preparation. The Agents and programs described are planned work.
+Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. The Agents and programs described are planned work.
 ```
 
 ## AI startup founder (`ai_startup_founder.eml`)
@@ -95,7 +95,7 @@ Rein Protocol Foundation is in preparation. The Agents and programs described ar
 ```text
 Hello [Name],
 
-I’m reaching out because of [specific product or Agent use case] at [Company]. I’m preparing Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
+I’m reaching out because of [specific product or Agent use case] at [Company]. I’m helping build Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
 
 We plan practical workshops at universities and business venues where participants can learn how Agents are built, evaluated and used safely. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
 
@@ -109,7 +109,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation is in preparation. The Agents and programs described are planned work. No company endorsement or affiliation is assumed.
+Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an EIN. 501(c)(3) recognition is being applied for; IRS approval has not yet been granted. The Agents and programs described are planned work. No company endorsement or affiliation is assumed.
 ```
 
 ## 朋友 / 中文 (`friend-zh.eml`)
@@ -119,7 +119,7 @@ Rein Protocol Foundation is in preparation. The Agents and programs described ar
 ```text
 嗨 [Name]，
 
-想到你在 [相关领域／社群] 的人脉，我想请你帮忙引荐一位可能支持 AI 公益项目的伙伴。我正在筹备 Rein Protocol Foundation，一个面向 Agent era 的独立 AI-native NGO，希望让更多公众参与 AI Agent Safety；我们的思路是用 AI Agents 来分析和监督 AI Agents。
+想到你在 [相关领域／社群] 的人脉，我想请你帮忙引荐一位可能支持 AI 公益项目的伙伴。我正在参与建设 Rein Protocol Foundation，一个面向 Agent era 的独立 AI-native NGO，希望让更多公众参与 AI Agent Safety；我们的思路是用 AI Agents 来分析和监督 AI Agents。
 
 我们计划提供免费的 AI 学习资源，在高校和商业场景举办工作坊、论文讨论和交流活动，并支持 AI Agent Safety 研究。AI-native 运营模式会让 Agents 在明确权限内承担社群协调、活动筹备和进展整理，人类负责治理、资源分配、线下执行与异常处理。
 
@@ -133,7 +133,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation 正在筹备中。Agents 和项目活动仍在建设阶段。
+Rein Protocol Foundation 已在美国怀俄明州注册为非营利法人，并取得 EIN。501(c)(3) 免税资格正在申请中，尚未获 IRS 批准。Agents 和项目活动仍在建设阶段。
 ```
 
 ## Before sending / 发送前检查
@@ -142,7 +142,7 @@ Rein Protocol Foundation 正在筹备中。Agents 和项目活动仍在建设阶
 - For the funder template, verify founding-team headcount and community membership separately, with an as-of date. Do not substitute registrations, projected reach or event attendance for member counts. If no reliable count exists, replace the numerical sentence with “We are a small founding team building our initial community.”
 - Fill the event-plan field with a real proposed location, cadence and attendance estimate. Label these as plans; do not imply confirmed venues, university partnerships or events already delivered.
 - Keep one primary ask per recipient. Alternatives should help the recipient respond, not become a checklist of commitments. Prepare the referenced one-page agenda, pilot outline, workshop brief or proposed budget before offering it.
-- The $10M amount is a target, not funds raised, a fixed budget breakdown or a claim of fundraising readiness. Ask about donation intent only; do not include payment instructions or promise tax deductibility while legal and fundraising arrangements remain unestablished.
+- The $10M amount is a target, not funds raised, a fixed budget breakdown or a claim of fundraising readiness. Ask about donation intent only; do not include payment instructions or promise tax deductibility while IRS recognition and fundraising approval remain outstanding.
 - Describe Agent operations as planned, permission-bounded work with human accountability—not a fully autonomous organization already operating.
-- HTML and plain-text versions carry the same message. The HTML website button is for background information, not the primary response request. Preserve the small brand mark and preparation-stage disclaimer.
+- HTML and plain-text versions carry the same message. The HTML website button is for background information, not the primary response request. Preserve the small brand mark and current legal-status disclosure.
 - These files are unsent drafts. Do not add recipient addresses or send automatically.

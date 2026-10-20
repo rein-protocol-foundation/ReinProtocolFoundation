@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { GivingPage } from '@/components/institutional-pages'
+import { foundationStatus } from '@/lib/foundation-status'
 
-export const metadata: Metadata = { title: 'Giving', description: 'Support for community events, shared learning, open-source projects, and AI agent safety research, with verified giving channels subject to approval.' }
+export const metadata: Metadata = { title: 'Giving', description: `${foundationStatus.summary} Giving channels remain subject to approval.`, alternates: { canonical: '/giving' } }
 export default GivingPage

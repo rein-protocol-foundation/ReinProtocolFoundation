@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { FoundationMark } from '@/components/icons'
+import { foundationStatus } from '@/lib/foundation-status'
 
 export function SiteFooter() {
   return (
@@ -20,7 +21,7 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="footer-legal page-shell">
-        <p>Making AI agents safe through community, open source, and research.</p>
+        <p>{foundationStatus.formation} EIN obtained. {foundationStatus.tax} <Link href="/giving#foundation-status">Foundation status</Link></p>
         <p><Link href="/privacy">Privacy</Link> · <Link href="/community/code-of-conduct">Code of Conduct</Link></p>
         <p>© 2026 Rein Protocol Foundation</p>
       </div>

@@ -697,6 +697,12 @@
   font-weight: 430;
 }
 
+.giving-standard p {
+  margin: 0.5rem 0 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
 .asset-summary {
   margin: 1rem 0 2rem;
   color: var(--ink-faint);

@@ -2,11 +2,17 @@
 
 ## Founding Constitution & Operating Blueprint — Draft v0.5
 
+## Current organizational status — October 20, 2026
+
+**Rein Protocol Foundation is legally incorporated in Wyoming as a nonprofit corporation and has obtained an IRS Employer Identification Number (EIN). 501(c)(3) recognition is being applied for; IRS approval has not yet been granted.** Incorporation, EIN assignment, federal tax-exempt recognition and fundraising activation are separate milestones.
+
+This blueprint includes historical pre-incorporation planning, cost comparisons and website launch records. References below to selecting a jurisdiction, forming the Foundation or obtaining an EIN are historical planning, not outstanding formation tasks. Proposed DAO structures, program plans and fundraising controls remain subject to their own adoption and implementation. Current public status is summarized in the [README](./README.md) and [official Foundation status page](https://rein-protocol.org/giving#foundation-status).
+
 **Legal Name:** Rein Protocol Foundation
 **Public Brand:** Rein Protocol
-**Legal Jurisdiction:** Wyoming is the working selection for the initial U.S. entity; later DAO jurisdiction remains under evaluation
-**Legal Form:** Wyoming nonprofit corporation for the initial charity, subject to final legal review; later DAO form remains under evaluation
-**Tax / Public-Benefit Status:** To be determined by jurisdiction and entity design
+**Legal Jurisdiction:** Wyoming, United States; later DAO jurisdiction remains under evaluation
+**Legal Form:** Incorporated Wyoming nonprofit corporation; later DAO form remains under evaluation
+**Tax / Public-Benefit Status:** EIN obtained; 501(c)(3) recognition being applied for, not yet approved
 **Organizational Model:** Web3-first, decentralized and Agent-operated, with one or more legally recognized entities where required
 **Initial Tax Requirement:** The initial structure must support U.S. tax-deductible charitable contributions
 **Token Status:** No token during the initial fundraising phase; a transferable governance token is intended for a later protocol phase
@@ -262,9 +268,9 @@ Donor personally identifiable information, security-sensitive information and le
 
 ## Decision status
 
-Wyoming is the working selection for the initial U.S. nonprofit corporation, subject to final review of the Articles, Bylaws, DAO delegation architecture and California compliance before filing. The jurisdiction and form of the later protocol DAO remain open.
+The initial Wyoming nonprofit corporation is now legally formed and has obtained an EIN. Federal 501(c)(3) recognition is being applied for. The jurisdiction and form of the later protocol DAO remain open.
 
-California and Delaware remain comparison jurisdictions for the initial charity. International options including the Cayman Islands and the United Arab Emirates are being evaluated only for later, distinct entities or regional operations.
+California and Delaware are retained below as historical comparison jurisdictions for the initial charity. International options including the Cayman Islands and the United Arab Emirates concern only later, distinct entities or regional operations. The following jurisdiction analysis records the original planning rationale rather than an unresolved decision about the Foundation’s incorporation.
 
 The founders and initial directors expect to work from California, Wyoming, Hong Kong and Singapore rather than from a single operational center. Initial fundraising will be conducted through global online AI and Web3 communities without an initial California-targeted advertising or offline campaign.
 
@@ -312,7 +318,7 @@ The precise governance mechanism, membership system, voting model, token design 
 
 The ability of donors in the United States to make tax-deductible charitable contributions is an important part of the Foundation's initial funding model. The initial legal architecture should therefore include a U.S. entity eligible to receive tax-deductible charitable contributions.
 
-Wyoming is the working state of formation. The decision should be confirmed after final review of the Foundation's operating locations, governance requirements, Web3 architecture, California obligations, cost and regulatory burden.
+The Foundation is incorporated in Wyoming. Its operating locations, governance requirements, Web3 architecture and California obligations still require appropriate ongoing compliance review.
 
 ## Planned evolution
 
@@ -354,6 +360,8 @@ The professional allowances assume a custom, credible launch rather than a bare 
 
 ## Formation and fundraising sequence
 
+**Status update — October 20, 2026:** Incorporation and EIN assignment are complete. The sequence below records the original plan. Its pre-formation steps and proposed funding threshold for an exemption application are not current instructions to defer incorporation or the 501(c)(3) application, which is being pursued.
+
 The Foundation should **not** begin charitable fundraising through a separate Wyoming DAO LLC and later attempt to convert or transfer those donations into a newly formed §501(c)(3) public charity.
 
 That sequence has four disadvantages:
@@ -363,10 +371,10 @@ That sequence has four disadvantages:
 * California-targeted activity may subject an LLC to California registration, returns and the $800 annual LLC tax;
 * any promise that contributors will receive future transferable Tokens could cause the payment to be treated as a Token purchase or investment transaction rather than a charitable gift.
 
-The recommended low-cost sequence is:
+The original low-cost sequence was:
 
-1. **Form the Wyoming nonprofit corporation before public fundraising.** The state filing fee is $50. The tokenless on-chain community, governance process and DAO Mission Treasury can launch at the same time without first creating a separate DAO LLC.
-2. **Adopt the charitable organizing language and governance architecture from the beginning.** Obtain an EIN, appoint the initial Board, adopt Bylaws and DAO delegation rules, and establish the Foundation-controlled Safe and accounting records.
+1. **Completed: Form the Wyoming nonprofit corporation.** The original plan placed incorporation before public fundraising; the proposed tokenless on-chain community and DAO Mission Treasury remain separate implementation work.
+2. **EIN obtained; verify governance and treasury implementation separately.** The original plan also called for an initial Board, Bylaws, DAO delegation rules, a Foundation-controlled Safe and accounting records.
 3. **Address California during launch.** Because an initial director or officer will work from California, file the California charity registration early and in all events no later than the applicable deadline after first receiving charitable assets. Obtain advice on any additional foreign-entity qualification and tax filings before beginning California-targeted or offline fundraising.
 4. **Use early Foundation funds for reasonable organizational expenses.** The Wyoming nonprofit may use accepted charitable funds for its Form 1023 fee, registered agent, legal and accounting work, website, security and other reasonable mission and administration costs. All such expenses must be documented and must not provide improper private benefit.
 5. **Submit the full Form 1023 after the initial funding threshold.** If the application is filed within 27 months after the end of the month of legal formation and is approved, federal exemption and donation deductibility can generally be recognized back to the formation date. While the application is pending, donors have no advance assurance that their gifts will ultimately be deductible.
@@ -374,7 +382,7 @@ The recommended low-cost sequence is:
 
 Until the IRS determination letter is issued, fundraising pages and receipts should state substantially:
 
-> Rein Protocol Foundation has applied, or intends timely to apply, for recognition under §501(c)(3). If the application is timely filed and approved, exemption and qualifying contributions are expected to be recognized retroactively to the Foundation's formation date. Deductibility is not assured while the application is pending, and donors should consult their tax advisers.
+> Rein Protocol Foundation is an incorporated Wyoming nonprofit corporation with an IRS Employer Identification Number (EIN). Recognition under §501(c)(3) is being applied for; IRS approval has not yet been granted. Tax deductibility is not assured while recognition is pending.
 
 ## Why a separate DAO entity may be needed later
 
@@ -417,7 +425,7 @@ The following milestones are operational gates, not promises of financial return
 
 ### More than $2,000 received — U.S. exemption filing
 
-Begin or complete submission of the full IRS Form 1023 when **Qualified Fundraising Receipts exceed $2,000** and the Foundation has at least **$750 of unrestricted, immediately liquid assets** available for the $600 filing fee and directly related costs. The organizing documents, activity narrative, budgets and governance explanation should be drafted before this threshold so that filing is not materially delayed after the threshold is reached.
+**Historical planning threshold, superseded by the current application process.** The original plan tied full Form 1023 submission to Qualified Fundraising Receipts exceeding $2,000 and $750 of unrestricted liquid assets for filing and related costs. As of October 20, 2026, 501(c)(3) recognition is being applied for; this former threshold must not be read as a current instruction to wait before pursuing recognition.
 
 ### More than $20,000 received — Cayman feasibility process
 
@@ -493,7 +501,7 @@ If the repository containing `PROJECT.md` becomes public, internal and confident
 
 # 5. United States Tax-Exempt Structure
 
-The Foundation should seek:
+The Foundation is pursuing recognition, which has not yet been approved, under:
 
 **501(c)(3) charitable status**
 
@@ -1454,6 +1462,8 @@ Transactions, grants, licenses and shared services between the Foundation and th
 
 # 26. Proposed Launch Sequence
 
+**Historical launch planning:** This section retains the original launch gates and implementation records. Incorporation and EIN assignment are now complete, and the official website is live at https://rein-protocol.org/. Historical pre-launch, formation and preview assessments below do not describe the Foundation’s current legal existence. Fundraising activation, IRS recognition and proposed governance mechanisms remain separate matters.
+
 ## Launch TODO — Required Owner Inputs
 
 This is the consolidated handoff list for the official website launch. Items remain unchecked until the final information, evidence or production URL has been supplied and verified in the deployed website.
@@ -1507,7 +1517,7 @@ The current document is sufficiently developed to begin:
 
 It is not yet sufficient to activate public fundraising. A public website and a fundraising website are two different launch stages. Publishing a donation address, donation checkout or direct request for contributions counts as activating fundraising even if only a small amount is expected.
 
-### Current Go / No-Go Status
+### Historical Go / No-Go Assessment
 
 | Activity | Current status | Condition |
 |---|---:|---|
@@ -1534,7 +1544,7 @@ The following public-positioning decisions are now adopted for website v1:
 
 Website v1.1 uses a progressive-disclosure structure:
 
-- a persistent status banner stating that the Foundation is in formation, the site is a public pre-launch and donations are not open;
+- an historical pre-incorporation status banner; completed incorporation and EIN assignment are now reflected in the public Foundation status, while donation channels remain subject to separate approval;
 - a concise Landing Page limited to the mission, public values, four program directions, the charitable-fund path, the governance roles, the intended giving rails and the current donation status;
 - a dedicated `/mission` page for the constructive and protective mission, program descriptions and summarized use of funds;
 - a dedicated `/governance` page for the human Board, DAO, operating Agents, collective-vote translation, charitable-fund boundaries and transparency cadence;
@@ -1607,9 +1617,9 @@ Required before public informational launch:
 - Add a scam warning stating that official donation addresses, when available, will appear only on the canonical domain and verified social accounts;
 - Do not display a donation button, wallet address, payment link or tax-deductibility statement.
 
-Recommended primary call to action during this stage:
+Historical primary call to action during that pre-incorporation stage (superseded):
 
-> Join the community and follow the Foundation's formation process.
+> Join the community and follow the Foundation's development.
 
 ### Stage B — Fundraising Activation Gate
 
@@ -1720,7 +1730,7 @@ The following matters remain open and must not be inferred by a website designer
 - the first-year output, participation and outcome targets for each of the four programs;
 - the exact membership, quorum, proposal and vote-calculation rules for the DAO's single collective governance vote.
 
-### Readiness Conclusion
+### Historical Readiness Conclusion
 
 The redesigned informational website and technical preview are complete. The organization is not yet ready for a promoted institutional launch, publication of donation addresses or promotional fundraising. The preferred sequence is therefore:
 
@@ -1733,14 +1743,16 @@ The redesigned informational website and technical preview are complete. The org
 
 ## Phase 0 — Legal Foundation
 
+**Current progress — October 20, 2026:** The nonprofit corporation has been formed and its EIN obtained. 501(c)(3) recognition is being applied for. The numbered list below is the original planning checklist; completion of other governance, treasury and registration items must be verified separately.
+
 1. Confirm legal and trademark availability of **Rein Protocol Foundation**.
-2. Complete final counsel review of the working Wyoming selection and incorporate the Wyoming nonprofit corporation before public charitable solicitation.
-3. Obtain EIN.
+2. **Completed:** Incorporate the Wyoming nonprofit corporation.
+3. **Completed:** Obtain EIN.
 4. Adopt Certificate, Bylaws and Conflict of Interest Policy.
 5. Appoint initial Board.
 6. Adopt the initial tokenless DAO constitution and binding delegation policy.
 7. Establish Foundation-controlled Safe, bank and accounting infrastructure.
-8. Prepare the full IRS Form 1023 package for submission after the initial funding threshold.
+8. Pursue IRS 501(c)(3) recognition; the application process is underway and approval has not yet been granted.
 9. Because an initial director or officer will work from California, register early with the California Attorney General and determine any additional California foreign-entity and tax filings rather than waiting for a California-targeted campaign.
 
 ---
@@ -1881,4 +1893,4 @@ This document is a conceptual founding and operating charter.
 
 It is **not** the Foundation's Certificate of Incorporation, Bylaws, Investment Policy, tax opinion or legal advice.
 
-Before formation, the proposed structure—particularly digital-asset custody, Agent payment flows, international donations, charitable solicitation, sanctions compliance and autonomous transaction authority—should be reviewed by U.S. nonprofit counsel and a tax professional experienced with digital assets.
+The Foundation is already legally incorporated and has obtained an EIN. Proposed digital-asset custody, Agent payment flows, international donations, charitable solicitation, sanctions compliance and autonomous transaction authority should receive appropriate professional review before implementation. Federal 501(c)(3) recognition remains a separate application process.
