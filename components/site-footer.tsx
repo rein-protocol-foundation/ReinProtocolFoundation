@@ -6,10 +6,17 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-main page-shell">
-        <Link href="/" className="wordmark wordmark--footer">
-          <FoundationMark variant="footer" />
-          <span>Rein Protocol<small>Foundation</small></span>
-        </Link>
+        <details className="foundation-name-note">
+          <summary className="wordmark wordmark--footer" aria-label="Why we are called Rein Protocol Foundation">
+            <FoundationMark variant="footer" />
+            <span>Rein Protocol<sup aria-hidden="true">*</sup><small>Foundation</small></span>
+          </summary>
+          <div className="foundation-name-note__body">
+            <p><strong>Rein</strong> means the reins used to guide and control. It points to our research into agent harnesses: the structures that guide AI agents and define how they act.</p>
+            <p><strong>Protocol</strong> expresses our ambition to operate through explicit, executable rules. We pursue AI-native automation, with AI agents handling day-to-day administration, member onboarding, community growth and maintenance. Our long-term aim is autonomous operation: moving organizational processes onto a public blockchain, where smart contracts sustain automation and agents interact with them to carry out authorized treasury activities.</p>
+            <p><strong>Foundation</strong> describes our purpose: raising funds and putting them to work in service of our mission.</p>
+          </div>
+        </details>
         <p className="footer-thesis">An AI-native community for agent safety.</p>
         <nav aria-label="Footer navigation">
           <Link href="/">Home</Link>

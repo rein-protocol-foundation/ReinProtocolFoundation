@@ -2,7 +2,7 @@
 
 > Shared structure: recipient-specific relevance → brief mission and credible stage → role-specific primary ask → low-friction reply. A 15-minute conversation is optional, not the only way to respond.
 
-> Stage note: Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. Agent operations, programs, events and research support are planned work. The $10M figure is a fundraising target supplied for outreach, not money already raised or an approved allocation.
+> Stage note: Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. Agent operations, programs, events and research support are planned work. The $10M figure is a fundraising target supplied for outreach, not money already raised or an approved allocation.
 
 | Recipient | Primary help requested | Alternative help |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work.
+Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work.
 ```
 
 ## VC / Investor / Mission-aligned donor (`investor.eml`)
@@ -61,7 +61,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work. We are not offering a commercial investment or token return. Fundraising channels still require approval.
+Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work. We are not offering a commercial investment or token return. Fundraising channels still require approval.
 ```
 
 ## AI researcher (`researcher.eml`)
@@ -85,7 +85,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work.
+Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work.
 ```
 
 ## AI startup founder (`ai_startup_founder.eml`)
@@ -109,7 +109,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work. No company endorsement or affiliation is assumed.
+Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. Contact: admin@rein-protocol.org. The Agents and programs described are planned work. No company endorsement or affiliation is assumed.
 ```
 
 ## 朋友 / 中文 (`friend-zh.eml`)
@@ -133,7 +133,7 @@ Tempest
 Founding Board Chair
 Rein Protocol Foundation
 
-Rein Protocol Foundation 于 2026 年 10 月 9 日（Oct 9, 2026）在美国怀俄明州（STATE OF WYOMING）注册为非营利法人，并取得 EIN。联系邮箱：admin@rein-protocol.org。Agents 和项目活动仍在建设阶段。
+Rein Protocol Foundation 于 Oct 2026在美国怀俄明州（STATE OF WYOMING）注册为非营利法人，并取得 EIN。联系邮箱：admin@rein-protocol.org。Agents 和项目活动仍在建设阶段。
 ```
 
 ## Before sending / 发送前检查

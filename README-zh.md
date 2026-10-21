@@ -6,7 +6,7 @@
 
 ## 法律状态
 
-Rein Protocol Foundation 于 **2026 年 10 月 9 日（Oct 9, 2026）**在美国**怀俄明州（STATE OF WYOMING）**正式注册为非营利法人，并已取得 IRS **雇主识别号码（EIN）**。联系邮箱：[admin@rein-protocol.org](mailto:admin@rein-protocol.org)。
+Rein Protocol Foundation 于 **Oct 2026**在美国**怀俄明州（STATE OF WYOMING）**正式注册为非营利法人，并已取得 IRS **雇主识别号码（EIN）**。联系邮箱：[admin@rein-protocol.org](mailto:admin@rein-protocol.org)。
 
 [查看基金会状态与捐赠标准](https://rein-protocol.org/giving#foundation-status)。
 

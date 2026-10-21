@@ -1656,6 +1656,48 @@
   gap: 2.5rem;
 }
 
+.foundation-name-note > summary {
+  width: fit-content;
+  min-height: 2.75rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.foundation-name-note > summary::-webkit-details-marker {
+  display: none;
+}
+
+.foundation-name-note > summary:focus-visible {
+  outline: 2px solid var(--paper-light);
+  outline-offset: 6px;
+}
+
+.foundation-name-note sup {
+  margin-left: 0.3em;
+  color: var(--paper-light);
+  font-size: 0.8em;
+}
+
+.foundation-name-note > summary:hover sup,
+.foundation-name-note[open] sup {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.foundation-name-note__body {
+  max-width: 42rem;
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line-dark);
+  color: oklch(77% 0.016 70);
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.foundation-name-note__body strong {
+  color: var(--paper-light);
+}
+
 .footer-thesis {
   max-width: 28rem;
   margin: 0;

@@ -4,13 +4,13 @@
 
 ## Foundation identity
 
-**Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an IRS Employer Identification Number (EIN).** Contact: [admin@rein-protocol.org](mailto:admin@rein-protocol.org).
+**Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an IRS Employer Identification Number (EIN).** Contact: [admin@rein-protocol.org](mailto:admin@rein-protocol.org).
 
 This blueprint includes historical pre-incorporation planning, cost comparisons and website launch records. References below to selecting a jurisdiction, forming the Foundation or obtaining an EIN are historical planning, not outstanding formation tasks. Proposed DAO structures, program plans and fundraising controls remain subject to their own adoption and implementation. Current public status is summarized in the [README](./README.md) and [official Foundation status page](https://rein-protocol.org/giving#foundation-status).
 
 **Legal Name:** Rein Protocol Foundation
 **Public Brand:** Rein Protocol
-**Incorporation Date:** Oct 9, 2026
+**Incorporation Date:** Oct 2026
 **Legal Jurisdiction:** STATE OF WYOMING, United States; later DAO jurisdiction remains under evaluation
 **Legal Form:** Incorporated Wyoming nonprofit corporation; later DAO form remains under evaluation
 **Employer Identification Number:** Obtained
@@ -270,7 +270,7 @@ Donor personally identifiable information, security-sensitive information and le
 
 ## Decision status
 
-The Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. The jurisdiction and form of the later protocol DAO remain open.
+The Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an EIN. The jurisdiction and form of the later protocol DAO remain open.
 
 California and Delaware are retained below as historical comparison jurisdictions for the initial charity. International options including the Cayman Islands and the United Arab Emirates concern only later, distinct entities or regional operations. The following jurisdiction analysis records the original planning rationale rather than an unresolved decision about the Foundation’s incorporation.
 
@@ -384,7 +384,7 @@ The original low-cost sequence was:
 
 Public formation copy:
 
-> Rein Protocol Foundation was incorporated on Oct 9, 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an IRS Employer Identification Number (EIN). Contact: admin@rein-protocol.org.
+> Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as a nonprofit corporation and has obtained an IRS Employer Identification Number (EIN). Contact: admin@rein-protocol.org.
 
 ## Why a separate DAO entity may be needed later
 
@@ -1767,7 +1767,7 @@ The redesigned informational website and technical preview are complete. The org
 
 ## Phase 0 — Legal Foundation
 
-**Formation milestones:** The nonprofit corporation was incorporated on Oct 9, 2026 in the STATE OF WYOMING and has obtained its EIN. The checklist below covers organizational setup; completion of governance, treasury and registration items is documented separately.
+**Formation milestones:** The nonprofit corporation was incorporated in Oct 2026 in the STATE OF WYOMING and has obtained its EIN. The checklist below covers organizational setup; completion of governance, treasury and registration items is documented separately.
 
 1. Confirm legal and trademark availability of **Rein Protocol Foundation**.
 2. **Completed:** Incorporate the Wyoming nonprofit corporation.
