@@ -674,35 +674,6 @@
   line-height: 1.55;
 }
 
-.giving-standard {
-  display: grid;
-  gap: 0.25rem;
-  margin-top: 2rem;
-  padding: 1rem 0;
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-}
-
-.giving-standard span {
-  color: var(--accent-dark);
-  font-size: 0.75rem;
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.giving-standard strong {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 430;
-}
-
-.giving-standard p {
-  margin: 0.5rem 0 0;
-  color: var(--ink-soft);
-  line-height: 1.6;
-}
-
 .asset-summary {
   margin: 1rem 0 2rem;
   color: var(--ink-faint);
@@ -1636,135 +1607,79 @@
 
 }
 
+/* A compact institutional colophon; supplementary notes never shift layout. */
 .site-footer {
-  padding-block: 3.5rem max(2rem, env(safe-area-inset-bottom));
+  padding-block: 2rem max(0.75rem, env(safe-area-inset-bottom));
   color: var(--paper-light);
   background: var(--ink);
-  border-top: 0.35rem solid var(--accent);
-}
-
-.wordmark--footer {
-  color: var(--paper-light);
-}
-
-.wordmark--footer small {
-  color: oklch(70% 0.015 70);
-}
-
-.footer-main {
-  display: grid;
-  gap: 2.5rem;
-}
-
-.foundation-name-note > summary {
-  width: fit-content;
-  min-height: 2.75rem;
-  cursor: pointer;
-  list-style: none;
-}
-
-.foundation-name-note > summary::-webkit-details-marker {
-  display: none;
-}
-
-.foundation-name-note > summary:focus-visible {
-  outline: 2px solid var(--paper-light);
-  outline-offset: 6px;
-}
-
-.foundation-name-note sup {
-  margin-left: 0.3em;
-  color: var(--paper-light);
-  font-size: 0.8em;
-}
-
-.foundation-name-note > summary:hover sup,
-.foundation-name-note[open] sup {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
-
-.foundation-name-note__body {
-  max-width: 42rem;
-  margin-top: 1.5rem;
-  padding-top: 0.5rem;
   border-top: 1px solid var(--line-dark);
-  color: oklch(77% 0.016 70);
-  font-size: 0.875rem;
-  line-height: 1.75;
 }
-
-.foundation-name-note__body strong {
-  color: var(--paper-light);
-}
-
+.wordmark--footer { color: var(--paper-light); }
+.wordmark--footer small { color: oklch(77% 0.016 70); }
+.footer-main { display: flex; justify-content: space-between; gap: 2rem; }
+.footer-brand { display: flex; align-items: center; gap: 1.5rem; }
 .footer-thesis {
-  max-width: 28rem;
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-}
-
-.footer-main nav {
-  display: flex;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-}
-
-.footer-main nav a {
-  min-height: 2.75rem;
-  align-content: center;
-  color: oklch(77% 0.016 70);
-  font-size: 0.78rem;
-  text-decoration: none;
-}
-
-.footer-legal {
-  display: grid;
-  gap: 1rem;
-  margin-top: 3rem;
-  padding-block: 1.5rem;
-  color: oklch(65% 0.014 70);
-  border-top: 1px solid var(--line-dark);
-  border-bottom: 1px solid var(--line-dark);
-  font-size: 0.75rem;
-  line-height: 1.7;
-}
-
-.footer-legal p {
-  max-width: 45rem;
-  margin: 0;
-}
-
-.image-credits {
-  padding-top: 1rem;
-  color: oklch(65% 0.014 70);
-  font-size: 0.75rem;
-}
-
-.image-credits summary {
-  min-height: 2.75rem;
-  align-content: center;
-  cursor: pointer;
-}
-
-.image-credits p {
-  max-width: 48rem;
-}
-
-.image-credits ul {
   margin: 1rem 0 0;
-  padding: 0;
-  list-style: none;
+  color: oklch(85% 0.02 70);
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  line-height: 1.4;
 }
-
-.image-credits li {
-  margin-bottom: 0.5rem;
+.footer-connect { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+.footer-main nav { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+.footer-main nav a, .footer-contact {
+  display: inline-flex; align-items: center; min-height: 2.75rem;
+  color: var(--paper-light); font-size: 0.8125rem; text-decoration: none;
 }
-
-.image-credits a {
-  color: inherit;
-  text-underline-offset: 0.2em;
+.footer-contact { color: oklch(77% 0.016 70); }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.5rem 2rem;
+  margin-top: 1.5rem; padding-top: 0.5rem;
+  border-top: 1px solid var(--line-dark);
+  color: oklch(77% 0.016 70); font-size: 0.6875rem;
+}
+.footer-copyright, .footer-policies { display: flex; align-items: center; gap: 0 1.25rem; }
+.footer-policies > a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+.site-footer :focus-visible { outline: 2px solid var(--paper-light); outline-offset: 4px; }
+.footer-note { position: relative; display: inline-flex; }
+.footer-note__trigger {
+  display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem;
+  padding: 0; border: 0; background: none; color: oklch(77% 0.016 70);
+  font: inherit; font-size: 0.6875rem; cursor: pointer; text-align: left;
+}
+.footer-note__trigger:hover { color: var(--paper-light); }
+.footer-note__symbol { font-size: 0.75rem; }
+.footer-note__panel {
+  position: absolute; z-index: 10; bottom: 100%; left: 0;
+  width: min(21rem, calc(100vw - 3rem)); padding: 1rem 1.125rem;
+  border: 1px solid var(--line); background: var(--paper-light); color: var(--ink);
+  box-shadow: 0 4px 20px oklch(10% 0.02 60 / 0.16);
+  font-size: 0.75rem; font-weight: 400; line-height: 1.65;
+  max-height: min(27rem, 65dvh); overflow-y: auto;
+}
+.footer-note__panel[role="dialog"] > * { display: block; margin-bottom: 0.5rem; }
+.footer-note__panel[role="dialog"] > :last-child { margin-bottom: 0; }
+.footer-note__panel a { color: inherit; text-underline-offset: 0.2em; }
+.footer-note__panel :focus-visible { outline-color: var(--ink); }
+.footer-credits-intro { color: var(--ink-soft); }
+@media (max-width: 1000px) {
+  .footer-main { gap: 1.25rem; }
+  .footer-main nav { gap: 0 1rem; }
+  .footer-bottom { flex-wrap: wrap; }
+  .footer-brand { gap: 1rem; }
+}
+@media (max-width: 700px) {
+  .site-footer { padding-top: 1.5rem; }
+  .footer-main { flex-direction: column; gap: 1rem; }
+  .footer-connect { align-items: flex-start; gap: 0; }
+  .footer-thesis { font-size: 1.0625rem; }
+  .footer-line-break { display: none; }
+  .footer-thesis { max-width: 25rem; }
+  .footer-main nav { gap: 0 1.125rem; }
+  .footer-bottom { margin-top: 1rem; gap: 0; }
+  .footer-copyright { flex-wrap: wrap; gap: 0 0.75rem; }
+  .footer-policies { gap: 0 1.25rem; }
 }
 
 .hero-enter {
@@ -2347,8 +2262,7 @@
     gap: 2.5rem;
   }
 
-  .giving-lead,
-  .giving-standard {
+  .giving-lead {
     margin-top: 1.25rem;
   }
 
