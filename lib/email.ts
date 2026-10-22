@@ -55,16 +55,13 @@ export async function sendTransactionalEmail(message: Message) {
 }
 
 export async function sendParticipantConfirmation(email: string, name?: string, participantId?: string) {
-  const templateId = process.env.RESEND_WELCOME_TEMPLATE_ID
   return sendTransactionalEmail({
     to: email,
     subject: 'You are registered with the Rein community',
     category: 'participant_confirmation',
     relatedType: participantId ? 'community_participant' : undefined,
     relatedId: participantId,
-    ...(templateId
-      ? { template: { id: templateId, variables: { USER_NAME: name?.trim() || 'there' } } }
-      : { html: participantConfirmationTemplate(name) }),
+    html: participantConfirmationTemplate(name),
   })
 }
 

@@ -5,7 +5,7 @@ const institutionalRoutes = [
   { path: '/mission', heading: 'Making AI agents safe for people and society.', title: 'Mission' },
   { path: '/programs', heading: 'Meet in person. Keep learning together online.', title: 'Programs and Public Work' },
   { path: '/governance', heading: 'AI agents help run Rein. People remain responsible.', title: 'Governance and Stewardship' },
-  { path: '/giving', heading: 'Support AI agent safety and community.', title: 'Giving' },
+  { path: '/giving', heading: 'Support AI agent safety.', title: 'Giving' },
 ] as const
 
 test.describe('institutional site', () => {
@@ -67,7 +67,7 @@ test.describe('institutional site', () => {
     await expect(page.getByRole('link', { name: 'Read our mission' })).toHaveAttribute('href', '/mission')
     await expect(page.getByRole('heading', { name: /A public network of/ })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Enter the community' })).toHaveAttribute('href', '/community')
-    await expect(page.locator('.giving-standard')).toContainText('Incorporated in Wyoming as a nonprofit corporation.')
+    await expect(page.locator('.giving-content')).toContainText('Support a safer future for AI agents.')
     await expect(page.getByText(/not active|not ready|pre-launch|in formation/i)).toHaveCount(0)
   })
 
