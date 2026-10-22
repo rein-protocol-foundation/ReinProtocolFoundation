@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FoundationMark } from '@/components/icons'
+import { FoundationMark, MailIcon } from '@/components/icons'
 import { FooterNote } from '@/components/footer-note'
 import { foundationStatus } from '@/lib/foundation-status'
 
@@ -19,7 +19,7 @@ export function SiteFooter() {
               <strong>Foundation</strong> — resources in service of the public good.
             </FooterNote>
           </div>
-          <p className="footer-thesis">Advancing AI agent safety through research,<br className="footer-line-break" /> researcher support, and public participation.</p>
+          <p className="footer-thesis">The first AI-native nonprofit organization advancing AI agent safety through research, researcher support, and public participation.</p>
         </div>
         <div className="footer-connect">
           <nav aria-label="Footer navigation">
@@ -29,7 +29,7 @@ export function SiteFooter() {
             <Link href="/community">Community</Link>
             <Link href="/giving">Giving</Link>
           </nav>
-          <a className="footer-contact" href={`mailto:${foundationStatus.contactEmail}`}>{foundationStatus.contactEmail}<span aria-hidden="true"> ↗</span></a>
+          <a className="footer-contact" href={`mailto:${foundationStatus.contactEmail}`}><MailIcon />{foundationStatus.contactEmail}</a>
         </div>
       </div>
       <div className="footer-bottom page-shell">

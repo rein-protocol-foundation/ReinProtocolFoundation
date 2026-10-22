@@ -19,7 +19,7 @@
 ```text
 Dear [Name],
 
-I’m reaching out because of your work on [specific research area or paper]. I’d like your help shaping the research agenda for Rein Protocol Foundation, an independent AI-native nonprofit NGO focused on public participation in AI Agent safety.
+I’m reaching out because of your work on [specific research area or paper]. I’d like your help shaping the research agenda for Rein Protocol Foundation, an independent AI-native nonprofit organization (NPO) focused on public participation in AI Agent safety.
 
 We plan free learning resources and university-based paper discussions and workshops that connect researchers with students and practitioners. Our approach is to use AI Agents to analyze and oversee AI Agents. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
 
@@ -43,7 +43,7 @@ Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as
 ```text
 Dear [Name],
 
-I’m reaching out because of your support for [specific public-interest initiative or relevant focus]. I’m helping build Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
+I’m reaching out because of your support for [specific public-interest initiative or relevant focus]. I’m helping build Rein Protocol Foundation, an independent AI-native nonprofit organization (NPO) focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
 
 We are building our initial community, with [verified founding-team headcount] people on the founding team and [verified community member count, as of date] community members. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
 
@@ -71,7 +71,7 @@ Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as
 ```text
 Hello [Name],
 
-I’m reaching out because of your work on [specific paper, benchmark or project]. I’m helping build Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
+I’m reaching out because of your work on [specific paper, benchmark or project]. I’m helping build Rein Protocol Foundation, an independent AI-native nonprofit organization (NPO) focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
 
 We would like to start with a focused research pilot on [specific Agent safety question], supported by open learning materials and small research discussions. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
 
@@ -95,7 +95,7 @@ Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as
 ```text
 Hello [Name],
 
-I’m reaching out because of [specific product or Agent use case] at [Company]. I’m helping build Rein Protocol Foundation, an independent AI-native NGO focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
+I’m reaching out because of [specific product or Agent use case] at [Company]. I’m helping build Rein Protocol Foundation, an independent AI-native nonprofit organization (NPO) focused on public participation in AI Agent safety. Our approach is to use AI Agents to analyze and oversee AI Agents, while making learning and research more accessible.
 
 We plan practical workshops at universities and business venues where participants can learn how Agents are built, evaluated and used safely. Our planned AI-native operating model delegates routine community coordination, event preparation and progress reporting to Agents within defined authority limits. People remain responsible for governance, resource allocation, in-person delivery and exceptions.
 
@@ -119,7 +119,7 @@ Rein Protocol Foundation was incorporated in Oct 2026 in the STATE OF WYOMING as
 ```text
 嗨 [Name]，
 
-想到你在 [相关领域／社群] 的人脉，我想请你帮忙引荐一位可能支持 AI 公益项目的伙伴。我正在参与建设 Rein Protocol Foundation，一个面向 Agent era 的独立 AI-native NGO，希望让更多公众参与 AI Agent Safety；我们的思路是用 AI Agents 来分析和监督 AI Agents。
+想到你在 [相关领域／社群] 的人脉，我想请你帮忙引荐一位可能支持 AI 公益项目的伙伴。我正在参与建设 Rein Protocol Foundation，一个面向 Agent era 的独立 AI-native 非营利组织（NPO），希望让更多公众参与 AI Agent Safety；我们的思路是用 AI Agents 来分析和监督 AI Agents。
 
 我们计划提供免费的 AI 学习资源，在高校和商业场景举办工作坊、论文讨论和交流活动，并支持 AI Agent Safety 研究。AI-native 运营模式会让 Agents 在明确权限内承担社群协调、活动筹备和进展整理，人类负责治理、资源分配、线下执行与异常处理。
 
