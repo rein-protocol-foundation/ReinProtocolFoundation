@@ -61,7 +61,7 @@ export function FooterNote({ label, children, interactive = false, align = 'star
       aria-haspopup={interactive ? 'dialog' : undefined}
       onFocus={() => setOpen(true)}
       onClick={() => { if (pinned.current) close(); else { pinned.current = true; setOpen(true) } }}>
-      {label}<span aria-hidden="true" className="footer-note__symbol">↗</span>
+      {label}<svg aria-hidden="true" className="footer-note__symbol" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" /><path d="M8 7v4" stroke="currentColor" strokeLinecap="round" /><circle cx="8" cy="4.75" r=".75" fill="currentColor" /></svg>
     </button>
     <span ref={panel} style={{ left: offset }} id={id} hidden={!open} role={interactive ? 'dialog' : 'tooltip'}
       aria-label={interactive ? label : undefined} className="footer-note__panel">
