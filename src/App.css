@@ -511,6 +511,34 @@
   line-height: 1.6;
 }
 
+.work-participation,
+.closing-invitation {
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.stewardship-heading + .accountability-line {
+  margin-top: 3rem;
+}
+
+.stewardship-support {
+  max-width: 48rem;
+  margin: 0;
+  color: oklch(78% 0.018 70);
+  line-height: 1.7;
+}
+
+.closing-section .closing-invitation {
+  margin-top: 2rem;
+  color: var(--ink);
+}
+
+.closing-section .primary-action {
+  background: var(--ink);
+}
+
 .text-link {
   display: flex;
   width: min(100%, 25rem);
@@ -1646,12 +1674,18 @@
 .site-footer :focus-visible { outline: 2px solid var(--paper-light); outline-offset: 4px; }
 .footer-note { position: relative; display: inline-flex; }
 .footer-note__trigger {
-  display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem;
+  display: inline-flex; align-items: center; gap: 0.4em; min-height: 2.75rem;
   padding: 0; border: 0; background: none; color: oklch(77% 0.016 70);
   font: inherit; font-size: 0.6875rem; cursor: pointer; text-align: left;
 }
 .footer-note__trigger:hover { color: var(--paper-light); }
-.footer-note__symbol { font-size: 0.75rem; }
+.footer-note__symbol {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  align-self: center;
+  opacity: 0.75;
+}
 .footer-note__panel {
   position: absolute; z-index: 10; bottom: 100%; left: 0;
   width: min(21rem, calc(100vw - 3rem)); padding: 1rem 1.125rem;
