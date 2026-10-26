@@ -1674,17 +1674,16 @@
 .site-footer :focus-visible { outline: 2px solid var(--paper-light); outline-offset: 4px; }
 .footer-note { position: relative; display: inline-flex; }
 .footer-note__trigger {
-  display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem;
+  display: inline-flex; align-items: center; gap: 0.4em; min-height: 2.75rem;
   padding: 0; border: 0; background: none; color: oklch(77% 0.016 70);
   font: inherit; font-size: 0.6875rem; cursor: pointer; text-align: left;
 }
 .footer-note__trigger:hover { color: var(--paper-light); }
 .footer-note__symbol {
-  width: 0.7rem;
-  height: 0.7rem;
+  width: 1em;
+  height: 1em;
   flex: none;
   align-self: center;
-  transform: translateY(-0.2em);
   opacity: 0.75;
 }
 .footer-note__panel {
