@@ -9,6 +9,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
  * package is only resolved by the Next.js bundler.
  */
 
+vi.mock('@/lib/identity/self-profile', () => ({ readLinkedSelfProfile: vi.fn().mockResolvedValue(null) }))
+import { readLinkedSelfProfile } from '@/lib/identity/self-profile'
+
 const db = vi.hoisted(() => ({
   row: null as unknown,
   selectError: null as unknown,
@@ -156,6 +159,7 @@ const discordCallerRow = {
 
 beforeEach(() => {
   vi.clearAllMocks()
+  vi.mocked(readLinkedSelfProfile).mockResolvedValue(null)
   db.row = null
   db.selectError = null
   db.rpcResult = null
@@ -257,6 +261,7 @@ describe('POST /api/identity/resolve', () => {
       contact_id: 'contact-1',
       is_active_contributor: true,
       is_director: false,
+      profile: null,
     })
   })
 
@@ -271,6 +276,8 @@ describe('POST /api/identity/resolve', () => {
     const body = (await response.json()) as Record<string, unknown>
     expect(body.status).toBe('identity_not_linked')
     expect(body.contact_id).toBeNull()
+    expect(body.profile).toBeNull()
+    expect(readLinkedSelfProfile).not.toHaveBeenCalled()
   })
 })
 
@@ -905,4 +912,16 @@ describe('POST /api/ingress/discord/interactions', () => {
     expect(response.status).toBe(403)
     await expect(response.json()).resolves.toEqual({ ok: false, reason: 'caller_revoked' })
   })
+})
+
+it('reads only the resolved caller profile, never a supplied contact, and tolerates profile outages', async () => {
+  vi.mocked(resolvePlatformIdentity).mockResolvedValue({ status: 'resolved', contactId: 'self-contact', isActiveContributor: false, isDirector: false })
+  const profile = { name: 'Synthetic', email: 'self@example.invalid', joinedAt: '2026-01-01T00:00:00Z' }
+  vi.mocked(readLinkedSelfProfile).mockResolvedValue(profile)
+  const response = await resolvePost(jsonRequest('https://example.test/api/identity/resolve', { proof }, credentialHeaders))
+  expect((await response.json()).profile).toEqual(profile)
+  expect(readLinkedSelfProfile).toHaveBeenCalledWith('self-contact')
+  vi.mocked(readLinkedSelfProfile).mockRejectedValue(new Error('offline'))
+  const unavailable = await resolvePost(jsonRequest('https://example.test/api/identity/resolve', { proof }, credentialHeaders))
+  expect((await unavailable.json()).profile).toBeNull()
 })

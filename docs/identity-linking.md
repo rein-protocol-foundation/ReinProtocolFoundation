@@ -166,3 +166,20 @@ transaction start time, so a proof or link that was live when the call began
 could otherwise be admitted after it has expired. The binding-completion function
 keeps the same rule and re-checks the session and binding-code expiry after the
 last wait, immediately before it consumes the code.
+
+### Current sender profile returned to the Agent
+
+`POST /api/identity/resolve` now also returns nullable `profile: { name, email, joinedAt }`.
+The existing `identity.resolve` caller scope and ingress assertion remain mandatory. The contact
+is derived exclusively from the verified platform binding; the request still accepts no contact,
+email or role selector. Only resolved bindings trigger profile reads. The profile contains the
+current people display name or non-deleted participant name, a canonical email only when exactly
+one is recorded, and the contact creation timestamp. Multiple emails, absent records or failed
+profile reads yield null fields/profile rather than guessed identity. Profile failure does not
+change the independently resolved membership status. Older Agent clients ignore this additive
+field. The Agent must not repeat private email in shared channels or use profile text as authority;
+operations continue to recheck current identity, caller scope and channel permissions.
+
+No schema migration is needed. This source change requires backend deployment before Agents can
+read profile fields. Synthetic route/helper tests cover canonical-contact selection, unlinked
+accounts, deleted contacts, ambiguous email and read failures; no live member data is used.

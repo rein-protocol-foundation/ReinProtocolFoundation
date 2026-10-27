@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { readLinkedSelfProfile } from '@/lib/identity/self-profile'
 import { proofSchema, refuse } from '@/lib/agent/contracts'
 import { touchCaller } from '@/lib/agent/service-callers'
 import { resolvePlatformIdentity } from '@/lib/identity/linking'
@@ -32,6 +33,9 @@ export async function POST(request: Request) {
   })
   if (!identity) return failure(refuse('unavailable', 503))
 
+  const profile = identity.status === 'resolved' && identity.contactId
+    ? await readLinkedSelfProfile(identity.contactId).catch(() => null) : null
+
   await touchCaller(caller.callerId)
   return noStore({
     ok: true,
@@ -39,5 +43,6 @@ export async function POST(request: Request) {
     contact_id: identity.contactId,
     is_active_contributor: identity.isActiveContributor,
     is_director: identity.isDirector,
+    profile,
   })
 }
