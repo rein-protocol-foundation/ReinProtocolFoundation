@@ -1,5 +1,7 @@
 # Community welcome email
 
+Review all email families together in [`email-templates.html`](./email-templates.html): community and Contributor welcomes, all outreach `.eml` files, community transactional messages, and Auth link/code variants. The gallery supports search, desktop/mobile widths, source and sample-variable details, and link inspection. It embeds its images for offline review; actions inside previews do not navigate or send email. Regenerate it from the canonical sources with `npm run preview:emails` (Node 24+ and Python 3), or verify it is current with `node scripts/generate-email-review.mjs --check`. The review shell lives in `scripts/email-review-shell.html`; do not edit the generated gallery directly.
+
 Community registrations send the canonical repository HTML through Resend. Copy changes take effect with the application deployment.
 
 - Canonical HTML: `lib/participant-welcome.ts`.

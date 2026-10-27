@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "oxlint .",
     "typecheck": "tsc --noEmit",
+    "preview:emails": "node scripts/generate-email-review.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
