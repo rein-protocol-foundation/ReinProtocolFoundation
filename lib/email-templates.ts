@@ -1,4 +1,5 @@
 import { participantWelcomeHtml } from './participant-welcome'
+import { contributorWelcomeHtml } from './contributor-welcome'
 
 function escapeHtml(value: string) {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;')
@@ -6,6 +7,20 @@ function escapeHtml(value: string) {
 
 export function participantConfirmationTemplate(name?: string) {
   return participantWelcomeHtml.replace('{{{USER_NAME}}}', () => escapeHtml(name?.trim() || 'there'))
+}
+
+// Call only after Contributor approval, with the URL returned by the invitation API.
+export function contributorWelcomeTemplate(name: string, slackInviteUrl: string) {
+  const invite = new URL(slackInviteUrl)
+  if (invite.protocol !== 'https:' || invite.username || invite.password || invite.port
+    || !(invite.hostname === 'slack.com' || invite.hostname.endsWith('.slack.com'))) {
+    throw new Error('A valid HTTPS Slack invitation URL is required.')
+  }
+  const values: Record<string, string> = {
+    USER_NAME: escapeHtml(name.trim() || 'there'),
+    SLACK_INVITE_URL: escapeHtml(invite.href),
+  }
+  return contributorWelcomeHtml.replace(/\{\{\{(USER_NAME|SLACK_INVITE_URL)\}\}\}/g, (_, key: string) => values[key])
 }
 
 export function contributorVerificationTemplate(name: string, verificationUrl: string) {

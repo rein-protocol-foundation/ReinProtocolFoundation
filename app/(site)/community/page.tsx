@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import communityConvergence from '@/src/assets/scenes/community-convergence.webp'
 import { CommunitySection } from '@/components/community-shell'
+import { DiscordInvitation } from '@/components/discord-invitation'
 import { ContributionPaths, getContributionIssueLinks } from '@/components/contribution-paths'
 import { ParticipantForm } from '@/components/forms/participant-form'
 import { ProfileCard } from '@/components/profile-card'
@@ -35,7 +36,7 @@ async function CommunityProgram() {
         <div><p className="article-kicker">01 / Meet in person</p><h3>In-person events.</h3><p>Meet people working with AI agents through local meetups, workshops, presentations, and discussions. Share a project, explore safety research, or help organize an event in your community.</p></div>
       </article>
       <article>
-        <div><p className="article-kicker">02 / Connect online</p><h3>Online community and learning.</h3><p>Continue the conversation in Slack and Discord, take part in online presentations and events, and exchange questions and ideas about AI agents.</p><p>Share learning materials, discuss research, and offer project feedback or career guidance to members preparing for AI agent roles. Bring your experience, whether you are new to the field or already working in it.</p></div>
+        <div><p className="article-kicker">02 / Connect online</p><h3>Online community and learning.</h3><p>Continue the conversation on Discord, take part in online presentations and events, and exchange questions and ideas about AI agents. Contributors also collaborate in our Slack workspace.</p><p>Share learning materials, discuss research, and offer project feedback or career guidance to members preparing for AI agent roles. Bring your experience, whether you are new to the field or already working in it.</p><DiscordInvitation /></div>
         {resources.length ? (
           <div className="resource-preview">
             <div className="resource-list resource-list--preview">

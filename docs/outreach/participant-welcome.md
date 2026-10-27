@@ -12,3 +12,23 @@ The Golden Gate Bridge appears as a compact, cropped background on the right sid
 Production sending always uses inline HTML and escapes the submitted name before substitution, with `there` when blank. The legacy `RESEND_WELCOME_TEMPLATE_ID` setting is ignored by this flow so an older hosted template cannot override the deployed copy.
 
 The optional Resend import retains the `USER_NAME` placeholder for manual template use; it does not control application delivery. Community registration does not include email verification.
+
+## Discord invitation
+
+The welcome email and Community page share the Discord URL and QR asset path in `lib/community-invites.json`. The PNG is served from this website, with a four-module quiet zone and a clickable invitation alongside it. It does not depend on an external QR service. The filename includes the invitation code so a replacement invitation does not reuse a cached email image.
+
+When changing the Discord invitation, update both fields in the JSON, run `python scripts/generate-discord-qr.py` in an environment with `qrcode[pil]==8.2`, and run `node scripts/preview-welcome-email.mjs`. Deploy the PNG alongside the website and email template changes. The current PNG has been decoded successfully at both source size and its 164px display size.
+
+## Contributor welcome email
+
+- Canonical HTML: `lib/contributor-welcome.ts`.
+- Renderer: `contributorWelcomeTemplate(name, slackInviteUrl)` in `lib/email-templates.ts`.
+- Preview: `contributor-welcome-preview.html`.
+- Resend import: `contributor-welcome-resend.html`.
+- Variables: `USER_NAME` and `SLACK_INVITE_URL` (both required by the import; the renderer uses `there` for an empty name).
+
+This is a separate welcome message for people who have formally become Contributors. Verification, application confirmation, and conversation invitation emails do not include Slack invitations. The renderer requires an HTTPS Slack URL, escapes dynamic values, and never substitutes a fixed or placeholder invitation in a production email.
+
+The Slack invitation API is not implemented in this repository yet. This change prepares the template and import, without adding a sender or sending an incomplete email from `createContributor`. When integrating that API, confirm the Contributor record is active, generate the recipient's invitation, and pass the returned URL to the renderer before using `sendTransactionalEmail` (subject `Welcome as a Rein Contributor`, category `contributor_welcome`, related type `contributor`, related ID equal to the Contributor ID). Keep API generation and delivery retryable so a failure does not undo Contributor approval or send duplicate welcomes. Never render the raw import placeholders for application delivery.
+
+`node scripts/preview-welcome-email.mjs` regenerates both welcome emails and preserves the variables in their preview/import files. The Slack link in the unfilled preview is a template variable, not a usable invitation.
