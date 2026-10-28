@@ -29,7 +29,7 @@ export const IDENTITY_SCOPES = [
   'ingress.relay',
 ] as const
 
-export const SERVICE_SCOPES = [...GOVERNANCE_SCOPES, ...IDENTITY_SCOPES, 'community.read'] as const
+export const SERVICE_SCOPES = [...GOVERNANCE_SCOPES, ...IDENTITY_SCOPES, 'community.read', 'deployment.write'] as const
 
 export type ServiceScope = (typeof SERVICE_SCOPES)[number]
 
