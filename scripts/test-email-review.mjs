@@ -17,9 +17,10 @@ test('the old shell address leads to the generated gallery, including a manual f
     const gallery = new JSDOM(readFileSync(destination, 'utf8'))
     try {
       const data = JSON.parse(gallery.window.document.getElementById('email-data').textContent)
-      assert.equal(data.catalog.length, 21)
+      assert.equal(data.catalog.length, 22)
       assert.ok(data.catalog.some(email => email.id === 'participant-welcome'))
       assert.ok(data.catalog.some(email => email.id === 'contributor-welcome'))
+      assert.equal(data.catalog.find(email => email.id === 'discord-community-launch')?.status, '草稿 · 未发送')
     } finally {
       gallery.window.close()
     }
@@ -28,7 +29,7 @@ test('the old shell address leads to the generated gallery, including a manual f
   }
 })
 
-test('opening the generated file initializes the directory and all 21 preview bodies', () => {
+test('opening the generated file initializes the directory and every preview body', () => {
   const errors = []
   const virtualConsole = new VirtualConsole()
   virtualConsole.on('jsdomError', error => errors.push(error.message))
@@ -44,10 +45,10 @@ test('opening the generated file initializes the directory and all 21 preview bo
   try {
     const { document, Event } = gallery.window
     const get = id => document.getElementById(id)
-    assert.equal(get('total').textContent, '21')
+    assert.equal(get('total').textContent, '22')
     assert.equal(get('template-title').textContent, 'Community Welcome')
     const buttons = [...document.querySelectorAll('.template-button')]
-    assert.equal(buttons.length, 21)
+    assert.equal(buttons.length, 22)
     for (const button of buttons) {
       button.click()
       assert.equal(get('template-title').textContent, button.textContent)

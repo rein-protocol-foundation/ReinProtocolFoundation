@@ -17,7 +17,7 @@
 </head>
 <body>
 <a href="#review" class="skip">跳到邮件预览</a>
-<header class="masthead"><div><p class="eyebrow">REIN PROTOCOL FOUNDATION / CORRESPONDENCE</p><h1>邮件模板审阅</h1><p>欢迎、联络、通知与账号安全，在这里一起查看。</p></div><div class="total"><strong id="total">—</strong><span>模板与变体 / 4 组</span></div></header>
+<header class="masthead"><div><p class="eyebrow">REIN PROTOCOL FOUNDATION / CORRESPONDENCE</p><h1>邮件模板审阅</h1><p>欢迎与社区动态、对外联络、业务通知及账号安全，在这里一起查看。</p></div><div class="total"><strong id="total">—</strong><span>模板与变体 / 4 组</span></div></header>
 <div class="workspace">
 <aside class="directory" aria-label="邮件模板目录">
 <label class="search-label" for="search">查找邮件</label><input class="search" id="search" type="search" placeholder="名称、用途或主题…" autocomplete="off"><p class="search-count" id="search-count" aria-live="polite"></p><nav id="navigation" aria-label="按用途浏览模板"></nav><p class="empty" id="empty" hidden>没有找到匹配的模板。试试 “Welcome” 或 “验证”。</p>
@@ -39,7 +39,7 @@
 <script>
 'use strict';
 const {catalog, assets} = JSON.parse(document.getElementById('email-data').textContent);
-const groups = [['welcome','欢迎邮件'],['outreach','Outreach · 对外联络'],['transactional','社区业务通知'],['auth','账号安全']];
+const groups = [['welcome','欢迎与社区动态'],['outreach','Outreach · 对外联络'],['transactional','社区业务通知'],['auth','账号安全']];
 const byId = (id) => document.getElementById(id);
 const frame = byId('preview');
 let selected = null;
@@ -81,7 +81,7 @@ function selectEmail(id){
   catch(error) { if(error.name!=='SecurityError')throw error; }
   document.querySelectorAll('.template-button').forEach(button=>{if(button.dataset.id===selected)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});
   byId('template-title').textContent=email.title;byId('description').textContent=email.description;byId('subject').textContent=email.subject;
-  byId('status').textContent=email.status;byId('status').classList.toggle('pending',email.id==='contributor-welcome');
+  byId('status').textContent=email.status;byId('status').classList.toggle('pending',email.id==='contributor-welcome'||email.status.includes('草稿'));
   byId('source').textContent='来源：'+email.source;
   byId('variables').replaceChildren();
   for(const [key,value] of Object.entries(email.variables))byId('variables').append(element('dt',key),element('dd',value));

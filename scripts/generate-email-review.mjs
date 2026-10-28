@@ -64,6 +64,9 @@ function applicationEmail(id, title, group, renderer, args, sender, description,
 }
 applicationEmail('participant-welcome', 'Community Welcome', 'welcome', 'participantConfirmationTemplate', [name], 'sendParticipantConfirmation',
   '社区用户登记后发送。包含 Discord 邀请、二维码，以及学习和参与入口。', { USER_NAME: name })
+applicationEmail('discord-community-launch', 'Discord 上线通知 · Nori Agent', 'welcome', 'discordCommunityLaunchTemplate', [name], null,
+  '面向所有已注册 Community Member 的社区公告草稿：Discord 已上线，邀请成员加入并与 Nori Agent 互动。仅供审阅，尚未接入发送。',
+  { USER_NAME: name }, { status: '草稿 · 未发送', subject: templates.discordCommunityLaunchSubject })
 applicationEmail('contributor-welcome', 'Contributor Welcome', 'welcome', 'contributorWelcomeTemplate', [name, 'https://join.slack.com/t/rein/shared_invite/preview-not-valid'], null,
   '仅供正式成为 Contributor 后使用。Slack 邀请由 API 生成；当前已备好模板，自动发送尚未接入。',
   { USER_NAME: name, SLACK_INVITE_URL: '演示邀请，不可使用' }, { status: '待 Slack API 接入', subject: 'Welcome as a Rein Contributor' })
@@ -146,8 +149,17 @@ for (const email of catalog) {
 }
 const payload = JSON.stringify({ catalog, assets }).replaceAll('<', '\\u003c').replaceAll('\u2028', '\\u2028').replaceAll('\u2029', '\\u2029')
 const html = read('scripts/email-review-shell.html.template').replace('__EMAIL_REVIEW_DATA__', () => payload)
-const output = new URL('docs/outreach/email-templates.html', root)
-if (process.argv.includes('--check')) {
-  if (readFileSync(output, 'utf8') !== html) throw new Error('Email review is stale. Run npm run preview:emails.')
-} else writeFileSync(output, html)
+const launchImport = templates.discordCommunityLaunchTemplate('{{{USER_NAME}}}')
+const launchPreview = launchImport.replaceAll('https://rein-protocol.org/images/', '../../public/images/')
+  .replaceAll('https://rein-protocol.org/brand/', '../../public/brand/')
+for (const [path, content] of [
+  ['docs/outreach/email-templates.html', html],
+  ['docs/outreach/discord-community-launch-preview.html', launchPreview],
+  ['docs/outreach/discord-community-launch-resend.html', launchImport],
+]) {
+  const output = new URL(path, root)
+  if (process.argv.includes('--check')) {
+    if (readFileSync(output, 'utf8') !== content) throw new Error(`${path} is stale. Run npm run preview:emails.`)
+  } else writeFileSync(output, content)
+}
 console.log(`${process.argv.includes('--check') ? 'Verified' : 'Generated'} ${catalog.length} email previews in docs/outreach/email-templates.html.`)

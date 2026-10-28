@@ -17,6 +17,12 @@ Contributor verification, application confirmation, conversation invitations, ap
 
 The optional Resend import retains the `USER_NAME` placeholder for manual template use; it does not control application delivery. Community registration does not include email verification.
 
+## Discord community launch announcement (draft)
+
+The announcement is for all existing registered Community Members, inviting them to the live Discord community and to interact with Nori Agent. Subject: **Rein’s Discord is live — come meet Nori Agent**.
+
+`discordCommunityLaunchTemplate(name)` in `lib/email-templates.ts` renders the draft in the shared Rein layout, using the supplied Discord-style QR image. It is listed under “欢迎与社区动态” in the review gallery as “草稿 · 未发送”. `npm run preview:emails` also produces `discord-community-launch-preview.html` and `discord-community-launch-resend.html`, preserving the `USER_NAME` variable. No recipient selection, campaign, scheduled job, or sending action is connected to this draft.
+
 ## Discord invitation
 
 The welcome email and Community page share the Discord URL and QR asset path in `lib/community-invites.json`. `public/images/discord-qrcode.png` is the user-supplied Discord-style artwork, copied without image modifications. The adjacent button and clickable image link directly to the configured Discord invitation. Scanning the artwork instead opens its encoded URL, `https://qrc-ai.com/Ax2Qx`, so the scan destination depends on that redirect service. On October 28, 2026, this URL returned a 302 redirect to the configured `https://discord.gg/m8qnWv9XX` invitation.
