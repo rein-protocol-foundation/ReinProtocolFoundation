@@ -17,9 +17,9 @@ The optional Resend import retains the `USER_NAME` placeholder for manual templa
 
 ## Discord invitation
 
-The welcome email and Community page share the Discord URL and QR asset path in `lib/community-invites.json`. The PNG is served from this website, with a four-module quiet zone and a clickable invitation alongside it. It does not depend on an external QR service. The filename includes the invitation code so a replacement invitation does not reuse a cached email image.
+The welcome email and Community page share the Discord URL and QR asset path in `lib/community-invites.json`. `public/images/discord-qrcode.png` is the user-supplied Discord-style artwork, copied without image modifications. The adjacent button and clickable image link directly to the configured Discord invitation. Scanning the artwork instead opens its encoded URL, `https://qrc-ai.com/Ax2Qx`, so the scan destination depends on that redirect service. On October 28, 2026, this URL returned a 302 redirect to the configured `https://discord.gg/m8qnWv9XX` invitation.
 
-When changing the Discord invitation, update both fields in the JSON, run `python scripts/generate-discord-qr.py` in an environment with `qrcode[pil]==8.2`, and run `node scripts/preview-welcome-email.mjs`. Deploy the PNG alongside the website and email template changes. The current PNG has been decoded successfully at both source size and its 164px display size.
+When replacing the artwork or invitation, verify the supplied image's scan destination and update the JSON as needed. Run `node scripts/preview-welcome-email.mjs` and `npm run preview:emails` to refresh the previews and imports. Deploy the PNG alongside the website and email template changes. The previous generated QR image and its Python generator have been removed. The supplied artwork decodes successfully at both its original 1024px size and its 164px display size.
 
 ## Contributor welcome email
 

@@ -14,7 +14,7 @@ describe('transactional email templates', () => {
   it('invites participants to Discord without exposing a Contributor Slack invitation', () => {
     const html = participantConfirmationTemplate('New member')
     expect(html).toContain('href="https://discord.gg/m8qnWv9XX"')
-    expect(html).toContain('src="https://rein-protocol.org/images/discord-invite-m8qnWv9XX.png"')
+    expect(html).toContain('src="https://rein-protocol.org/images/discord-qrcode.png"')
     expect(html).not.toContain('SLACK_INVITE_URL')
     expect(html).not.toContain('Join the Contributor Slack')
     for (const applicantHtml of [
