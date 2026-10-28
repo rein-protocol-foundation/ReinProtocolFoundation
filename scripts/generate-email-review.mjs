@@ -145,7 +145,7 @@ for (const email of catalog) {
   }
 }
 const payload = JSON.stringify({ catalog, assets }).replaceAll('<', '\\u003c').replaceAll('\u2028', '\\u2028').replaceAll('\u2029', '\\u2029')
-const html = read('scripts/email-review-shell.html').replace('__EMAIL_REVIEW_DATA__', () => payload)
+const html = read('scripts/email-review-shell.html.template').replace('__EMAIL_REVIEW_DATA__', () => payload)
 const output = new URL('docs/outreach/email-templates.html', root)
 if (process.argv.includes('--check')) {
   if (readFileSync(output, 'utf8') !== html) throw new Error('Email review is stale. Run npm run preview:emails.')
