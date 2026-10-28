@@ -13,6 +13,8 @@ The Golden Gate Bridge appears as a compact, cropped background on the right sid
 
 Production sending always uses inline HTML and escapes the submitted name before substitution, with `there` when blank. The legacy `RESEND_WELCOME_TEMPLATE_ID` setting is ignored by this flow so an older hosted template cannot override the deployed copy.
 
+Contributor verification, application confirmation, conversation invitations, application review results, and learning-resource review notifications use the shared `lib/email-layout.ts` wrapper. It matches the Welcome emails’ warm-paper palette, Rein logo and bridge header, serif heading, orange action buttons, and footer. Their bodies remain in `lib/email-templates.ts`, including the original review, verification, meeting, and resource-attribution information.
+
 The optional Resend import retains the `USER_NAME` placeholder for manual template use; it does not control application delivery. Community registration does not include email verification.
 
 ## Discord invitation

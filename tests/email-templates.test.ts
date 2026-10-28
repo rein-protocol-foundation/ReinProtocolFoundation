@@ -70,9 +70,22 @@ describe('transactional email templates', () => {
   })
 
   it('escapes user-controlled values', () => {
-    const html = contributorVerificationTemplate('<script>alert(1)</script>', 'https://example.org/?x="bad"')
+    const untrusted = '<script>alert(1)</script>'
+    const html = contributorVerificationTemplate(untrusted, 'https://example.org/?x="bad"')
     expect(html).not.toContain('<script>')
     expect(html).toContain('&lt;script&gt;')
     expect(html).toContain('&quot;bad&quot;')
+    for (const notification of [
+      applicationReceivedTemplate(untrusted),
+      conversationInvitationTemplate(untrusted, 'https://example.org/schedule?one=1&two=2'),
+      automaticRejectionTemplate(untrusted, 'review@example.org'),
+      resourceUpdateTemplate(untrusted, untrusted),
+    ]) {
+      const document = new DOMParser().parseFromString(notification, 'text/html')
+      expect(document.querySelectorAll('script')).toHaveLength(0)
+      expect(document.body.textContent).toContain(untrusted)
+    }
+    const invitation = new DOMParser().parseFromString(conversationInvitationTemplate('Person', 'https://example.org/schedule?one=1&two=2'), 'text/html')
+    expect(Array.from(invitation.querySelectorAll('a')).find((link) => link.textContent?.includes('Choose a time'))?.getAttribute('href')).toBe('https://example.org/schedule?one=1&two=2')
   })
 })

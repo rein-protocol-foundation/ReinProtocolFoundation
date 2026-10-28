@@ -1,9 +1,6 @@
 import { participantWelcomeHtml } from './participant-welcome'
 import { contributorWelcomeHtml } from './contributor-welcome'
-
-function escapeHtml(value: string) {
-  return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;')
-}
+import { emailActionButton, escapeEmailHtml as escapeHtml, reinEmailLayout } from './email-layout'
 
 export function participantConfirmationTemplate(name?: string) {
   return participantWelcomeHtml.replace('{{{USER_NAME}}}', () => escapeHtml(name?.trim() || 'there'))
@@ -24,7 +21,17 @@ export function contributorWelcomeTemplate(name: string, slackInviteUrl: string)
 }
 
 export function contributorVerificationTemplate(name: string, verificationUrl: string) {
-  return `<p>Hello ${escapeHtml(name)},</p><p>Confirm your email within 24 hours so your Contributor application can enter review.</p><p><a href="${escapeHtml(verificationUrl)}">Verify my email</a></p><p>Most public resources and events are open without becoming a Contributor. Applying is for people who want deeper participation, to organize activities, or to take responsibility for ongoing work.</p>`
+  return reinEmailLayout({
+    title: 'Verify your Rein Contributor application',
+    preheader: 'Confirm your email within 24 hours to move your Contributor application into review.',
+    kicker: 'CONTRIBUTOR APPLICATION',
+    heading: 'Verify your email.',
+    bodyHtml: `<p style="margin:0 0 16px;">Hello ${escapeHtml(name)},</p>
+<p style="margin:0 0 16px;">Confirm your email within 24 hours so your Contributor application can enter review.</p>
+${emailActionButton('Verify my email', verificationUrl)}
+<p style="margin:0 0 20px;">Most public resources and events are open without becoming a Contributor. Applying is for people who want deeper participation, to organize activities, or to take responsibility for ongoing work.</p>`,
+    footerNote: 'You received this email because a Contributor application was submitted with this address. Applying does not confer Contributor status or governance rights.',
+  })
 }
 
 export function identityLinkReceiptTemplate(receiptUrl: string) {
@@ -67,17 +74,54 @@ export function identityLinkReceiptTemplate(receiptUrl: string) {
 }
 
 export function applicationReceivedTemplate(name: string) {
-  return `<p>Hello ${escapeHtml(name)},</p><p>Your email is verified and your application is now in review. If we invite you to a 1v1, it will be a conversation—not a traditional interview—and will last no more than 30 minutes.</p><p>We welcome people across industries, educational backgrounds, and professional paths.</p>`
+  return reinEmailLayout({
+    title: 'Your Contributor application is in review',
+    preheader: 'Your email is verified. Your Contributor application is now in review.',
+    kicker: 'CONTRIBUTOR APPLICATION',
+    heading: 'Your application is in review.',
+    bodyHtml: `<p style="margin:0 0 16px;">Hello ${escapeHtml(name)},</p>
+<p style="margin:0 0 16px;">Your email is verified and your application is now in review. If we invite you to a 1v1, it will be a conversation—not a traditional interview—and will last no more than 30 minutes.</p>
+<p style="margin:0 0 20px;">We welcome people across industries, educational backgrounds, and professional paths.</p>`,
+    footerNote: 'You received this email because you verified your Contributor application. Applying does not confer Contributor status or governance rights.',
+  })
 }
 
 export function conversationInvitationTemplate(name: string, schedulingUrl: string) {
-  return `<p>Hello ${escapeHtml(name)},</p><p>We would like to invite you to a conversational 1v1 meeting. It is not a traditional interview. We will introduce Rein and the community, learn about your interests, discuss possible contribution paths, and answer questions. The conversation will not exceed 30 minutes.</p><p><a href="${escapeHtml(schedulingUrl)}">Choose a time</a></p><p>We do not record or automatically transcribe these conversations.</p>`
+  return reinEmailLayout({
+    title: 'Schedule a Rein Contributor conversation',
+    preheader: 'Choose a time for a conversation about Rein and your contribution interests.',
+    kicker: 'CONTRIBUTOR CONVERSATION',
+    heading: 'Let’s meet.',
+    bodyHtml: `<p style="margin:0 0 16px;">Hello ${escapeHtml(name)},</p>
+<p style="margin:0 0 16px;">We would like to invite you to a conversational 1v1 meeting. It is not a traditional interview. We will introduce Rein and the community, learn about your interests, discuss possible contribution paths, and answer questions. The conversation will not exceed 30 minutes.</p>
+${emailActionButton('Choose a time', schedulingUrl)}
+<p style="margin:0 0 20px;">We do not record or automatically transcribe these conversations.</p>`,
+    footerNote: 'You received this invitation in connection with your Contributor application. An invitation to a conversation does not confer Contributor status or governance rights.',
+  })
 }
 
 export function automaticRejectionTemplate(name: string, monitoredEmail: string) {
-  return `<p>Hello ${escapeHtml(name)},</p><p>We cannot move this application forward because its written content appears to conflict with our communication and safety standards.</p><p>If you believe this decision is incorrect, contact <a href="mailto:${escapeHtml(monitoredEmail)}">${escapeHtml(monitoredEmail)}</a>. A person can review and restore the application.</p>`
+  return reinEmailLayout({
+    title: 'Update on your Rein Contributor application',
+    preheader: 'An update on your Contributor application, with an option for human review.',
+    kicker: 'CONTRIBUTOR APPLICATION',
+    heading: 'An update on your application.',
+    bodyHtml: `<p style="margin:0 0 16px;">Hello ${escapeHtml(name)},</p>
+<p style="margin:0 0 16px;">We cannot move this application forward because its written content appears to conflict with our communication and safety standards.</p>
+<p style="margin:0 0 20px;">If you believe this decision is incorrect, contact <a href="mailto:${escapeHtml(monitoredEmail)}" style="color:#a83f22;text-decoration:underline;">${escapeHtml(monitoredEmail)}</a>. A person can review and restore the application.</p>`,
+    footerNote: 'You received this email about the review of your Contributor application.',
+  })
 }
 
 export function resourceUpdateTemplate(title: string, outcome: string) {
-  return `<p>Thank you for submitting <strong>${escapeHtml(title)}</strong>.</p><p>Review status: ${escapeHtml(outcome)}.</p><p>Publication, if approved, credits the resource’s factual author or publisher—not the submitter—and does not automatically create Contributor status.</p>`
+  return reinEmailLayout({
+    title: 'Update on your resource submission',
+    preheader: 'The review status of your learning resource submission has been updated.',
+    kicker: 'LEARNING RESOURCES',
+    heading: 'Your resource review update.',
+    bodyHtml: `<p style="margin:0 0 16px;">Thank you for submitting <strong>${escapeHtml(title)}</strong>.</p>
+<p style="margin:20px 0;padding:16px 18px;border:1px solid #d5c7b1;background-color:#eee1c9;">Review status: ${escapeHtml(outcome)}.</p>
+<p style="margin:0 0 20px;">Publication, if approved, credits the resource’s factual author or publisher—not the submitter—and does not automatically create Contributor status.</p>`,
+    footerNote: 'You received this email because you submitted a learning resource to Rein Protocol Foundation.',
+  })
 }
