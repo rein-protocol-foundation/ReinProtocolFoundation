@@ -252,6 +252,51 @@
   max-width: 48rem;
 }
 
+.discord-invitation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.discord-invitation__copy {
+  flex: 1 1 15rem;
+}
+
+.discord-invitation h4 {
+  margin: .65rem 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 430;
+  line-height: 1.2;
+}
+
+.discord-invitation .text-action {
+  margin-top: .75rem;
+}
+
+.discord-invitation__qr {
+  flex: 0 0 164px;
+  margin: 0;
+}
+
+.discord-invitation__qr img {
+  display: block;
+  width: 164px;
+  height: 164px;
+}
+
+.discord-invitation__qr figcaption {
+  margin-top: .5rem;
+  color: var(--ink-faint);
+  font-size: .7rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .article-kicker,
 .resource-card__meta,
 .event-card__meta {

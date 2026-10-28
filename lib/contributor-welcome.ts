@@ -1,0 +1,39 @@
+// For approved Contributors only. The invitation API supplies SLACK_INVITE_URL at send time.
+export const contributorWelcomeHtml = `<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Welcome as a Rein Contributor</title><style>@media only screen and (max-width:480px){.rein-brand{padding:16px 8px 16px 16px!important}.rein-logo-cell{width:48px!important}.rein-mark{width:48px!important;height:48px!important}.rein-wordmark{padding-left:10px!important;font-size:11px!important;letter-spacing:1px!important}.rein-bridge{height:80px!important;background-size:220px 110px!important}}</style></head>
+<body style="margin:0;padding:0;background-color:#e8ddc8;color:#302a25;">
+<div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">Welcome as a Rein Contributor. Join our Slack workspace to start collaborating.</div>
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#e8ddc8"><tr><td align="center" style="padding:24px 12px;">
+<!--[if mso]><table role="presentation" width="640" align="center"><tr><td><![endif]-->
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f5ead3" style="max-width:640px;border:1px solid #d0c3ad;font-family:Arial,sans-serif;">
+<tr><td style="border-bottom:1px solid #d5c7b1;">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
+<td class="rein-brand" width="65%" valign="middle" style="padding:24px;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
+<td class="rein-logo-cell" width="64" valign="middle"><a href="https://rein-protocol.org/"><img class="rein-mark" src="https://rein-protocol.org/brand/rein-mark-header.png" width="64" height="64" alt="Rein logo" style="display:block;border:0;width:64px;height:64px;"></a></td>
+<td class="rein-wordmark" valign="middle" style="padding-left:16px;color:#302a25;font-size:16px;font-weight:bold;letter-spacing:2px;line-height:1.5;">REIN PROTOCOL<br>FOUNDATION</td>
+</tr></table></td>
+<td class="rein-bridge" width="35%" height="112" aria-hidden="true" bgcolor="#f5ead3" style="height:112px;background-image:url('https://rein-protocol.org/images/welcome-golden-gate-cover.jpg');background-repeat:no-repeat;background-position:10% 58%;background-size:300px 150px;font-size:0;line-height:0;">&nbsp;</td>
+</tr></table></td></tr>
+<tr><td style="padding:28px 24px 20px;">
+<p style="margin:0 0 12px;color:#75695e;font-size:11px;letter-spacing:2px;line-height:1.5;">WELCOME, CONTRIBUTOR</p>
+<h1 style="margin:0;font-family:Georgia,serif;font-size:34px;font-weight:normal;line-height:1.18;color:#302a25;">Let’s build the community together.</h1>
+</td></tr>
+<tr><td style="padding:16px 24px 12px;font-size:15px;line-height:1.75;">
+<p style="margin:0 0 16px;">Hello {{{USER_NAME}}},</p>
+<p style="margin:0 0 16px;">Welcome as a Rein Protocol Foundation Contributor. Thank you for taking an active role in our community and helping move our shared work forward.</p>
+<h2 style="margin:26px 0 10px;font-family:Georgia,serif;font-size:25px;font-weight:normal;line-height:1.3;">Join the Contributor workspace.</h2>
+<p style="margin:0 0 18px;">We use Slack to coordinate projects, organize activities, and support each other. Use your invitation below to join, then introduce yourself and share what you would like to work on.</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td bgcolor="#a83f22" style="border:1px solid #a83f22;mso-padding-alt:13px 22px;"><a href="{{{SLACK_INVITE_URL}}}" style="display:inline-block;padding:13px 22px;color:#ffffff;font-size:14px;font-weight:bold;line-height:1.4;text-decoration:none;">Join the Contributor Slack →</a></td></tr></table>
+<p style="margin:18px 0 22px;color:#75695e;font-size:12px;line-height:1.6;">If the button does not work, <a href="{{{SLACK_INVITE_URL}}}" style="color:#a83f22;text-decoration:underline;">open your Slack invitation here</a>. If the invitation has expired, contact admin@rein-protocol.org for a new one.</p>
+<p style="margin:0 0 16px;">Start by connecting with the people involved in your contribution area and agreeing on a useful first step. You can explore <a href="https://rein-protocol.org/community/contribute" style="color:#a83f22;text-decoration:underline;">ways to contribute</a> and read our <a href="https://rein-protocol.org/community/code-of-conduct" style="color:#a83f22;text-decoration:underline;">Code of Conduct</a>.</p>
+<p style="margin:24px 0 18px;">Have a question or need a new invitation? Write to <a href="mailto:admin@rein-protocol.org" style="color:#a83f22;text-decoration:underline;">admin@rein-protocol.org</a>.</p>
+<p style="margin:0 0 20px;">Warmly,<br><strong>Rein Protocol Foundation</strong></p>
+</td></tr>
+<tr><td style="padding:20px 24px 24px;border-top:1px solid #d5c7b1;color:#75695e;font-size:11px;line-height:1.65;">
+<p style="margin:0 0 10px;">You received this email because you became a Rein Contributor. Contributor status does not confer legal membership, employment, governance, ownership, or token rights.</p>
+<p style="margin:0;"><a href="https://rein-protocol.org/" style="color:#75695e;">rein-protocol.org</a> · <a href="https://rein-protocol.org/privacy" style="color:#75695e;">Privacy</a></p>
+</td></tr></table>
+<!--[if mso]></td></tr></table><![endif]-->
+</td></tr></table></body></html>`
