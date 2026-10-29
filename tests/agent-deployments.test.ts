@@ -7,7 +7,7 @@ import { deploymentSchema } from '@/lib/agent/deployments'
 import { hashValue } from '@/lib/agent/credentials'
 
 const payload = {
-  deploymentId: 'dd3eb822-871e-4869-9440-c427da49513c', repository: 'tempest2023/rein-agent',
+  deploymentId: 'dd3eb822-871e-4869-9440-c427da49513c', repository: 'rein-protocol-foundation/nori-agent',
   environment: 'production', revision: 'a'.repeat(40), previousRevision: 'b'.repeat(40),
   deployedAt: '2026-10-28T00:00:00Z', host: 'test', workspaceId: 'T123', channelId: 'C123',
   pullRequests: [{ number: 22, title: 'Add reporting', summary: 'Successful deployments' }], commits: [],
@@ -54,4 +54,26 @@ it('rejects invalid revisions and arbitrary repositories', async () => {
   expect((await send({ ...payload, revision: 'HEAD' })).status).toBe(400)
   expect((await send({ ...payload, repository: 'other/repo' })).status).toBe(400)
   expect(mocks.client).not.toHaveBeenCalled()
+})
+
+it.each(['rein-protocol-foundation/nori-agent', 'tempest2023/rein-agent'])(
+  'preserves %s reports across retries and Slack receipt updates', async (repository) => {
+    const report = { ...payload, repository }
+    // Hash the original contract directly, without the current schema normalizing it.
+    const originalHash = hashValue(JSON.stringify(report))
+    row.payload_hash = originalHash
+    expect((await send(report)).status).toBe(200)
+    expect(query.upsert).toHaveBeenLastCalledWith(expect.objectContaining({
+      repository, deployment_id: report.deploymentId, payload_hash: originalHash,
+    }), { onConflict: 'deployment_id', ignoreDuplicates: true })
+    expect((await send({ ...report, slackTs: '123.456' })).status).toBe(200)
+    row.slack_ts = '123.456'
+    expect(await (await send(report)).json()).toMatchObject({ ok: true, slackTs: '123.456' })
+    expect((await send({ ...report, slackTs: '999.999' })).status).toBe(409)
+  },
+)
+it('does not reinterpret an existing legacy report as a new repository report', async () => {
+  row.payload_hash = hashValue(JSON.stringify({ ...payload, repository: 'tempest2023/rein-agent' }))
+  expect((await send()).status).toBe(409)
+  expect(query.update).not.toHaveBeenCalled()
 })

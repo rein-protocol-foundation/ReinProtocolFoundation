@@ -3,7 +3,8 @@ import { z } from 'zod'
 const sha = z.string().regex(/^[a-f0-9]{40}$/)
 export const deploymentSchema = z.object({
   deploymentId: z.uuid(),
-  repository: z.literal('tempest2023/rein-agent'),
+  // Preserve the submitted identity so queued legacy reports retain their payload hash.
+  repository: z.enum(['rein-protocol-foundation/nori-agent', 'tempest2023/rein-agent']),
   environment: z.literal('production'),
   revision: sha,
   previousRevision: sha,

@@ -17,7 +17,12 @@ or another caller's record return 409. A subsequent call with the identical repo
 `slackTs` records the Slack receipt. The client stores its queue outside application releases
 and retries delivery separately from compilation/restart.
 
-The route currently accepts only `tempest2023/rein-agent` production deployment reports.
+The route accepts production reports for `rein-protocol-foundation/nori-agent` and
+its legacy identity `tempest2023/rein-agent`. New reports should use the canonical
+identity. Legacy queued reports and existing records retain their original repository,
+UUID and payload hash: do not rewrite them during migration. Replays and Slack receipt
+updates must send the same immutable payload. Changing the repository of an existing
+deployment ID is still a conflict (409); unrelated repositories remain invalid.
 The database environment still follows the existing `DATABASE_ENVIRONMENT`/Vercel rules.
 Deployment records are operational data, not member or governance records.
 
