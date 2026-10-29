@@ -31,6 +31,7 @@ export async function isAllowedAdminEmail(email: string) {
   const normalized = email.toLowerCase()
   if (adminEmails().has(normalized)) return true
   const service = requireSecretClient()
-  const { data } = await service.from('admin_users').select('active').eq('email', normalized).maybeSingle()
+  const { data, error } = await service.from('admin_users').select('active').eq('email', normalized).maybeSingle()
+  if (error) throw new Error('admin_authorization_unavailable')
   return Boolean(data?.active)
 }

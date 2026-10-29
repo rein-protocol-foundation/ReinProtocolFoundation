@@ -71,7 +71,7 @@ vi.mock('@/lib/identity/linking', () => ({
   BINDING_CODE_TTL_MS: 600_000,
 }))
 
-vi.mock('@/lib/admin/auth', () => ({ requireAdmin: vi.fn() }))
+vi.mock('@/lib/admin/auth', () => ({ requireAdmin: vi.fn(), isAllowedAdminEmail: vi.fn().mockResolvedValue(false) }))
 
 import { refuse } from '@/lib/agent/contracts'
 import { hashValue } from '@/lib/agent/credentials'
@@ -93,7 +93,7 @@ import {
   resolvePlatformIdentity,
   revokePlatformLink,
 } from '@/lib/identity/linking'
-import { requireAdmin } from '@/lib/admin/auth'
+import { requireAdmin, isAllowedAdminEmail } from '@/lib/admin/auth'
 
 import { POST as resolvePost } from '@/app/api/identity/resolve/route'
 import { POST as linkStartPost } from '@/app/api/identity/link/start/route'
@@ -160,6 +160,7 @@ const discordCallerRow = {
 beforeEach(() => {
   vi.clearAllMocks()
   vi.mocked(readLinkedSelfProfile).mockResolvedValue(null)
+  vi.mocked(isAllowedAdminEmail).mockResolvedValue(false)
   db.row = null
   db.selectError = null
   db.rpcResult = null
@@ -262,6 +263,7 @@ describe('POST /api/identity/resolve', () => {
       is_active_contributor: true,
       is_director: false,
       profile: null,
+      is_administrator: false,
     })
   })
 
@@ -278,6 +280,40 @@ describe('POST /api/identity/resolve', () => {
     expect(body.contact_id).toBeNull()
     expect(body.profile).toBeNull()
     expect(readLinkedSelfProfile).not.toHaveBeenCalled()
+    expect(body.is_administrator).toBe(false)
+    expect(isAllowedAdminEmail).not.toHaveBeenCalled()
+  })
+
+  it('queries administrator authority only for the freshly resolved canonical email', async () => {
+    vi.mocked(resolvePlatformIdentity).mockResolvedValue({ status: 'resolved', contactId: 'contact-1', isActiveContributor: false, isDirector: false })
+    vi.mocked(readLinkedSelfProfile).mockResolvedValue({ name: 'Fixture', email: 'admin@example.invalid', joinedAt: null })
+    vi.mocked(isAllowedAdminEmail).mockResolvedValue(true)
+    const response = await resolvePost(jsonRequest(url, { proof }, credentialHeaders))
+    expect(response.status).toBe(200)
+    expect((await response.json()).is_administrator).toBe(true)
+    expect(isAllowedAdminEmail).toHaveBeenCalledExactlyOnceWith('admin@example.invalid')
+    // A subsequent revocation takes effect without relying on a cached profile role.
+    vi.mocked(isAllowedAdminEmail).mockResolvedValue(false)
+    const next = await resolvePost(jsonRequest(url, { proof }, credentialHeaders))
+    expect((await next.json()).is_administrator).toBe(false)
+  })
+
+  it('does not equate Director status or an ambiguous profile with administrator authority', async () => {
+    vi.mocked(resolvePlatformIdentity).mockResolvedValue({ status: 'resolved', contactId: 'contact-1', isActiveContributor: true, isDirector: true })
+    vi.mocked(readLinkedSelfProfile).mockResolvedValue({ name: 'admin@example.invalid', email: null, joinedAt: null })
+    const response = await resolvePost(jsonRequest(url, { proof }, credentialHeaders))
+    expect((await response.json()).is_administrator).toBe(false)
+    expect(isAllowedAdminEmail).not.toHaveBeenCalled()
+  })
+
+  it('refuses caller-supplied identity fields and fails closed on unavailable authorization', async () => {
+    expect((await resolvePost(jsonRequest(url, { proof, email: 'admin@example.invalid', is_administrator: true }, credentialHeaders))).status).toBe(400)
+    vi.mocked(resolvePlatformIdentity).mockResolvedValue({ status: 'resolved', contactId: 'contact-1', isActiveContributor: false, isDirector: false })
+    vi.mocked(readLinkedSelfProfile).mockResolvedValue({ name: null, email: 'admin@example.invalid', joinedAt: null })
+    vi.mocked(isAllowedAdminEmail).mockRejectedValue(new Error('PRIVATE_AUTH_CANARY'))
+    const response = await resolvePost(jsonRequest(url, { proof }, credentialHeaders))
+    expect(response.status).toBe(503)
+    await expect(response.json()).resolves.toEqual({ ok: false, reason: 'unavailable' })
   })
 })
 

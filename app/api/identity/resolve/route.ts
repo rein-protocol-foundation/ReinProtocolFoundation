@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { readLinkedSelfProfile } from '@/lib/identity/self-profile'
+import { isAllowedAdminEmail } from '@/lib/admin/auth'
 import { proofSchema, refuse } from '@/lib/agent/contracts'
 import { touchCaller } from '@/lib/agent/service-callers'
 import { resolvePlatformIdentity } from '@/lib/identity/linking'
@@ -35,6 +36,14 @@ export async function POST(request: Request) {
 
   const profile = identity.status === 'resolved' && identity.contactId
     ? await readLinkedSelfProfile(identity.contactId).catch(() => null) : null
+  // Only the freshly bound canonical identity can establish organizational admin
+  // authority. Platform display names, claimed emails and community/Board roles
+  // are not administrator grants. Ambiguous/missing profiles fail closed.
+  let isAdministrator = false
+  if (profile?.email) {
+    try { isAdministrator = await isAllowedAdminEmail(profile.email) }
+    catch { return failure(refuse('unavailable', 503)) }
+  }
 
   await touchCaller(caller.callerId)
   return noStore({
@@ -43,6 +52,7 @@ export async function POST(request: Request) {
     contact_id: identity.contactId,
     is_active_contributor: identity.isActiveContributor,
     is_director: identity.isDirector,
+    is_administrator: isAdministrator,
     profile,
   })
 }
