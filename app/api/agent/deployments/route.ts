@@ -41,13 +41,25 @@ export async function POST(request: Request) {
     .select('caller_id,payload_hash,slack_ts').eq('deployment_id', deployment.deploymentId).single()
   if (readError || !row) return fail('unavailable', 503)
   if (row.caller_id !== auth.caller.callerId || row.payload_hash !== fingerprint) return fail('deployment_conflict', 409)
-  if (slackTs) {
-    if (row.slack_ts && row.slack_ts !== slackTs) return fail('deployment_conflict', 409)
-    const { error: updateError } = await db.from('rein_deployments')
+  let receipt = row.slack_ts
+  if (slackTs && receipt && receipt !== slackTs) return fail('deployment_conflict', 409)
+  if (slackTs && !receipt) {
+    const { data: updated, error: updateError } = await db.from('rein_deployments')
       .update({ slack_ts: slackTs, notified_at: new Date().toISOString() })
       .eq('deployment_id', deployment.deploymentId).eq('caller_id', auth.caller.callerId)
-      .is('slack_ts', null)
+      .is('slack_ts', null).select('slack_ts').maybeSingle()
     if (updateError) return fail('unavailable', 503)
+    receipt = updated?.slack_ts
+    if (!updated) {
+      // Another request may have saved a receipt after our initial read.
+      const { data: stored, error: receiptError } = await db.from('rein_deployments')
+        .select('slack_ts').eq('deployment_id', deployment.deploymentId)
+        .eq('caller_id', auth.caller.callerId).eq('payload_hash', fingerprint).single()
+      if (receiptError || !stored) return fail('unavailable', 503)
+      receipt = stored.slack_ts
+    }
+    if (!receipt) return fail('unavailable', 503)
+    if (receipt !== slackTs) return fail('deployment_conflict', 409)
   }
-  return NextResponse.json({ ok: true, deploymentId: deployment.deploymentId, slackTs: slackTs ?? row.slack_ts })
+  return NextResponse.json({ ok: true, deploymentId: deployment.deploymentId, slackTs: receipt })
 }

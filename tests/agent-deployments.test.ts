@@ -19,10 +19,13 @@ beforeEach(() => {
   vi.clearAllMocks()
   mocks.auth.mockResolvedValue({ ok: true, caller: { callerId: 'reporter' } })
   row = { caller_id: 'reporter', payload_hash: hashValue(JSON.stringify(deploymentSchema.parse(payload))), slack_ts: null }
+  let pendingReceipt: string | undefined
   query = { upsert: vi.fn().mockResolvedValue({ error: null }), select: vi.fn(), eq: vi.fn(),
-    single: vi.fn().mockImplementation(async () => ({ data: row, error: null })), update: vi.fn(),
-    is: vi.fn().mockResolvedValue({ error: null }) }
-  for (const key of ['select', 'eq', 'update']) query[key].mockReturnValue(query)
+    single: vi.fn().mockImplementation(async () => ({ data: { ...row }, error: null })),
+    update: vi.fn().mockImplementation((values) => { pendingReceipt = values.slack_ts; return query }),
+    maybeSingle: vi.fn().mockImplementation(async () => ({ data: { slack_ts: pendingReceipt }, error: null })),
+    is: vi.fn() }
+  for (const key of ['select', 'eq', 'is']) query[key].mockReturnValue(query)
   mocks.client.mockReturnValue({ from: vi.fn().mockReturnValue(query) })
 })
 it('refuses a caller without the dedicated scope before writing', async () => {
@@ -47,8 +50,53 @@ it('rejects an attempt to rewrite an existing deployment', async () => {
   expect(query.update).not.toHaveBeenCalled()
 })
 it('records notification receipt separately from immutable deployment data', async () => {
-  expect((await send({ ...payload, slackTs: '123.456' })).status).toBe(200)
+  expect(await (await send({ ...payload, slackTs: '123.456' })).json()).toMatchObject({ ok: true, slackTs: '123.456' })
   expect(query.update).toHaveBeenCalledWith(expect.objectContaining({ slack_ts: '123.456' }))
+})
+it.each([
+  ['999.999', 409],
+  ['123.456', 200],
+])('handles concurrent receipt %s with status %s', async (secondReceipt, expectedStatus) => {
+  // Both requests observe no receipt; the first conditional update wins.
+  const initial = { ...row }
+  query.single.mockResolvedValueOnce({ data: initial, error: null })
+    .mockResolvedValueOnce({ data: initial, error: null })
+  row.slack_ts = '123.456'
+  query.maybeSingle.mockResolvedValueOnce({ data: { slack_ts: '123.456' }, error: null })
+    .mockResolvedValueOnce({ data: null, error: null })
+  const [first, second] = await Promise.all([
+    send({ ...payload, slackTs: '123.456' }),
+    send({ ...payload, slackTs: secondReceipt }),
+  ])
+  expect(first.status).toBe(200)
+  expect(await first.json()).toMatchObject({ ok: true, slackTs: '123.456' })
+  expect(second.status).toBe(expectedStatus)
+  expect(await second.json()).toMatchObject(expectedStatus === 200
+    ? { ok: true, slackTs: '123.456' }
+    : { ok: false, reason: 'deployment_conflict' })
+  expect(query.single).toHaveBeenCalledTimes(3)
+})
+it('acknowledges an identical stored receipt without rewriting it', async () => {
+  row.slack_ts = '123.456'
+  expect(await (await send({ ...payload, slackTs: '123.456' })).json()).toMatchObject({ ok: true, slackTs: '123.456' })
+  expect(query.update).not.toHaveBeenCalled()
+})
+it('does not acknowledge a failed receipt update', async () => {
+  query.maybeSingle.mockResolvedValue({ data: null, error: { message: 'unavailable' } })
+  const response = await send({ ...payload, slackTs: '123.456' })
+  expect(response.status).toBe(503)
+  expect(await response.json()).toMatchObject({ ok: false, reason: 'unavailable' })
+})
+it.each([
+  { data: null, error: { message: 'unavailable' } },
+  { data: null, error: null },
+  { data: { slack_ts: null }, error: null },
+])('does not acknowledge an unverified receipt: %j', async (reread) => {
+  query.single.mockResolvedValueOnce({ data: { ...row }, error: null }).mockResolvedValueOnce(reread)
+  query.maybeSingle.mockResolvedValue({ data: null, error: null })
+  const response = await send({ ...payload, slackTs: '123.456' })
+  expect(response.status).toBe(503)
+  expect(await response.json()).toMatchObject({ ok: false, reason: 'unavailable' })
 })
 it('rejects invalid revisions and arbitrary repositories', async () => {
   expect((await send({ ...payload, revision: 'HEAD' })).status).toBe(400)
