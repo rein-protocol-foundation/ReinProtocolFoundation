@@ -44,7 +44,7 @@ Rein 是一个 **AI-native 组织**。AI Agents 可以在明确政策范围内�
 | **Contributor（贡献者）** | 通过申请参与活动组织或承担项目责任。 |
 | **Core Contributor（核心贡献者）** | 因持续承担责任和公共事务而获得认可的现有 Contributor。 |
 
-你可以[私下申请成为 Contributor](https://rein-protocol.org/community/contribute/apply)、[通过 GitHub 提议活动、校园行动或技术贡献](https://rein-protocol.org/community/contribute)，也可以[分享免费学习资源](https://rein-protocol.org/community/contribute/resources/submit)。GitHub Issue 是公开的；个人资料请使用私密申请表。[浏览代码仓库和现有 Issue](https://github.com/tempest2023/ReinProtocolFoundation)。参与社区本身不产生治理权、所有权、Token 权利或慈善捐赠税务抵扣资格。
+你可以[私下申请成为 Contributor](https://rein-protocol.org/community/contribute/apply)、[通过 GitHub 提议活动、校园行动或技术贡献](https://rein-protocol.org/community/contribute)，也可以[分享免费学习资源](https://rein-protocol.org/community/contribute/resources/submit)。GitHub Issue 是公开的；个人资料请使用私密申请表。[浏览代码仓库和现有 Issue](https://github.com/rein-protocol-foundation/ReinProtocolFoundation)。参与社区本身不产生治理权、所有权、Token 权利或慈善捐赠税务抵扣资格。
 
 [访问社区](https://rein-protocol.org/community) · [阅读社区行为准则](https://rein-protocol.org/community/code-of-conduct)
 

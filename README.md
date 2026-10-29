@@ -46,13 +46,13 @@ The community is meant to be open by default. People can access public learning 
 | **Contributor** | Help organize activities or take responsibility for a project through the Contributor application. |
 | **Core Contributor** | An existing Contributor recognized for sustained responsibility and public stewardship. |
 
-There are several ways to help: [apply privately as a Contributor](https://rein-protocol.org/community/contribute/apply), [propose an event, campus activity, or technical contribution on GitHub](https://rein-protocol.org/community/contribute), or [share a free learning resource](https://rein-protocol.org/community/contribute/resources/submit). GitHub issues are public; use the private application for personal details. [Browse the repository and open issues](https://github.com/tempest2023/ReinProtocolFoundation). Participation alone does not confer governance rights, ownership, token rights, or a charitable tax deduction.
+There are several ways to help: [apply privately as a Contributor](https://rein-protocol.org/community/contribute/apply), [propose an event, campus activity, or technical contribution on GitHub](https://rein-protocol.org/community/contribute), or [share a free learning resource](https://rein-protocol.org/community/contribute/resources/submit). GitHub issues are public; use the private application for personal details. [Browse the repository and open issues](https://github.com/rein-protocol-foundation/ReinProtocolFoundation). Participation alone does not confer governance rights, ownership, token rights, or a charitable tax deduction.
 
 [Visit the community](https://rein-protocol.org/community) · [Read the Code of Conduct](https://rein-protocol.org/community/code-of-conduct)
 
 ## Current stage and source documents
 
-- Repository: https://github.com/tempest2023/ReinProtocolFoundation
+- Repository: https://github.com/rein-protocol-foundation/ReinProtocolFoundation
 - Website: https://rein-protocol.org/
 - Vercel project: `rein-protocol-foundation`
 - Brand assets and usage: [public/brand](./public/brand/README.md)

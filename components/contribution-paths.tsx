@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getPublicSiteSettings } from '@/lib/community/data'
 
 export async function getContributionIssueLinks() {
-  const defaultRepository = 'https://github.com/tempest2023/ReinProtocolFoundation'
+  const defaultRepository = 'https://github.com/rein-protocol-foundation/ReinProtocolFoundation'
   const settings = await getPublicSiteSettings(['github_repository_url', 'github_event_url', 'github_campus_url', 'github_technical_url'])
   const repository = settings.github_repository_url ?? defaultRepository
   return [
