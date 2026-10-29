@@ -3,7 +3,7 @@ const mocks = vi.hoisted(() => ({ eq: vi.fn(), maybeSingle: vi.fn(), allowlist: 
 vi.mock('@/lib/env', () => ({ adminEmails: () => mocks.allowlist }))
 vi.mock('@/lib/supabase/server', () => ({ createSupabaseServerClient: vi.fn() }))
 vi.mock('@/lib/supabase/secret', () => ({ requireSecretClient: () => ({ from: () => ({ select: () => ({ eq: mocks.eq }) }) }) }))
-import { isAllowedAdminUser } from '@/lib/admin/auth'
+import { isAllowedAdminUser, isAllowedAdminEmail } from '@/lib/admin/auth'
 
 describe('verified administrator identity', () => {
   beforeEach(() => { mocks.allowlist.clear(); mocks.eq.mockReset(); mocks.maybeSingle.mockReset(); mocks.eq.mockReturnValue({ maybeSingle: mocks.maybeSingle }) })
@@ -23,5 +23,16 @@ describe('verified administrator identity', () => {
   it('distinguishes unavailable authorization from an inactive user', async () => {
     mocks.maybeSingle.mockResolvedValue({ data: null, error: { message: 'database unavailable' } })
     await expect(isAllowedAdminUser({ id: 'verified-id', email: 'other@example.org' })).rejects.toThrow('admin_authorization_unavailable')
+  })
+  it('checks the canonical email against current admin grants and rejects database failures', async () => {
+    mocks.allowlist.add('admin@example.org')
+    expect(await isAllowedAdminEmail('ADMIN@example.org')).toBe(true)
+    mocks.maybeSingle.mockResolvedValue({ data: { active: true }, error: null })
+    expect(await isAllowedAdminEmail('linked@example.org')).toBe(true)
+    expect(mocks.eq).toHaveBeenCalledWith('email', 'linked@example.org')
+    mocks.maybeSingle.mockResolvedValue({ data: { active: false }, error: null })
+    expect(await isAllowedAdminEmail('linked@example.org')).toBe(false)
+    mocks.maybeSingle.mockResolvedValue({ data: { active: true }, error: { message: 'unavailable' } })
+    await expect(isAllowedAdminEmail('linked@example.org')).rejects.toThrow('admin_authorization_unavailable')
   })
 })

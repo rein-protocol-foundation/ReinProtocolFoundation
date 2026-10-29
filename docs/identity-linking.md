@@ -169,6 +169,16 @@ last wait, immediately before it consumes the code.
 
 ### Current sender profile returned to the Agent
 
+`POST /api/identity/resolve` also returns `is_administrator`. After validating the
+caller and signed ingress proof and resolving the current binding, the backend
+checks the one canonical email against the existing website administrator policy
+(`ADMIN_EMAILS` or an active `admin_users` record). Request-supplied emails, profile
+names, Contributor and Director status cannot grant this authority. Unlinked,
+revoked, deleted or ambiguous identities return false; an unavailable admin query
+returns `unavailable` instead of granting access. The answer is computed anew on
+each request with `no-store`. Nori uses it privately for restricted model routing;
+it does not grant arbitrary tool, Shell, GitHub or deployment permissions.
+
 `POST /api/identity/resolve` now also returns nullable `profile: { name, email, joinedAt }`.
 The existing `identity.resolve` caller scope and ingress assertion remain mandatory. The contact
 is derived exclusively from the verified platform binding; the request still accepts no contact,
