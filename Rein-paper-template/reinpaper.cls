@@ -213,8 +213,8 @@
   \fi}
 \newcommand{\reinwordmark}{%
   \ifreinanonymous\else
-    \reinlogo[44pt]\hspace{12pt}%
-    {\sffamily\bfseries\color{REINInk}\shortstack[l]{%
+    \raisebox{-.5\height}{\reinlogo[28pt]}\hspace{9pt}%
+    \raisebox{-.5\height}{\sffamily\bfseries\color{REINInk}\shortstack[l]{%
       \fontsize{17}{20}\selectfont REIN PROTOCOL\\[3pt]
       \fontsize{10}{12}\selectfont FOUNDATION}}%
   \fi}
