@@ -11,6 +11,15 @@ export function verificationOrigin() {
   return url.origin
 }
 
+export function isAllowedVerificationOrigin(origin: string) {
+  const configured = verificationOrigin()
+  if (origin === configured) return true
+  // Vercel redirects the apex domain to www. Both are first-party origins;
+  // do not infer trust from request/forwarded hosts or arbitrary subdomains.
+  const productionOrigins = ['https://rein-protocol.org', 'https://www.rein-protocol.org']
+  return productionOrigins.includes(configured) && productionOrigins.includes(origin)
+}
+
 export function csrfCookieName() {
   return verificationOrigin().startsWith('https:') ? '__Host-rein-auth-csrf' : 'rein-auth-csrf'
 }

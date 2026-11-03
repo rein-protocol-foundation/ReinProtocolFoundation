@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { classifyVerificationError, emailVerificationSchema, parseVerificationJson, verificationDestinations } from '@/lib/auth/email-verification'
-import { createCsrfNonce, csrfCookieName, csrfMaxAge, emailOtpLength, isFreshCsrfNonce, matchesCsrfNonce, readVerificationBody, verificationOrigin } from '@/lib/auth/verification-server'
+import { createCsrfNonce, csrfCookieName, csrfMaxAge, emailOtpLength, isAllowedVerificationOrigin, isFreshCsrfNonce, matchesCsrfNonce, readVerificationBody, verificationOrigin } from '@/lib/auth/verification-server'
 import { createSupabaseRouteClient } from '@/lib/supabase/route'
 import { isAllowedAdminUser } from '@/lib/admin/auth'
 import { consumeAuthRateLimits, RateLimitError } from '@/lib/rate-limit'
@@ -19,7 +19,7 @@ function response(body: Record<string, string>, status = 200, retryAfter?: numbe
 export async function GET(request: NextRequest) {
   try {
     const origin = request.headers.get('origin')
-    if ((origin && origin !== verificationOrigin()) || request.headers.get('sec-fetch-site') === 'cross-site') return response({ status: 'request_rejected' }, 403)
+    if ((origin && !isAllowedVerificationOrigin(origin)) || request.headers.get('sec-fetch-site') === 'cross-site') return response({ status: 'request_rejected' }, 403)
     if (request.nextUrl.search) return response({ status: 'invalid_request' }, 400)
     const name = csrfCookieName()
     const existing = request.cookies.get(name)?.value
@@ -38,7 +38,8 @@ export function HEAD() {
 
 export async function POST(request: NextRequest) {
   try {
-    if (request.headers.get('origin') !== verificationOrigin()) return response({ status: 'request_rejected' }, 403)
+    const origin = request.headers.get('origin')
+    if (!origin || !isAllowedVerificationOrigin(origin) || request.headers.get('sec-fetch-site') === 'cross-site') return response({ status: 'request_rejected' }, 403)
     if (request.nextUrl.search || !/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(request.headers.get('content-type') ?? '')) return response({ status: 'invalid_request' }, 400)
     let input
     const schema = emailVerificationSchema(emailOtpLength())

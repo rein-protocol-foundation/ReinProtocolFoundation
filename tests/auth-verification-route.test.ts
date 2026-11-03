@@ -11,6 +11,7 @@ vi.mock('@/lib/supabase/server', () => ({ createSupabaseServerClient: async () =
 import { GET, HEAD, POST } from '@/app/api/auth/verify/route'
 import { GET as callback } from '@/app/auth/callback/route'
 import { RateLimitError } from '@/lib/rate-limit'
+import { publicEnv } from '@/lib/env'
 
 function verificationRequest(overrides: Record<string, unknown> = {}, options: { origin?: string | null; csrfCookie?: string; body?: string; contentType?: string; query?: string } = {}) {
   const nonce = createCsrfNonce()
@@ -77,6 +78,44 @@ describe('email verification Route Handler', () => {
     expect(mocks.allowed).toHaveBeenCalledWith(user)
     expect(result.cookies.getAll().map((cookie) => cookie.name)).toEqual(['sb-test-auth-token.0', 'sb-test-auth-token.1', 'sb-test-auth-token.2'])
     expect(result.headers.get('set-cookie')).toContain('Max-Age=0')
+  })
+
+  it.each(['https://rein-protocol.org', 'https://www.rein-protocol.org'])('accepts the production www redirect with %s configured', async (configured) => {
+    const previous = publicEnv.siteUrl
+    publicEnv.siteUrl = configured
+    try {
+      const origin = 'https://www.rein-protocol.org'
+      const get = await GET(new NextRequest(`${origin}/api/auth/verify`, { headers: { Origin: origin, 'Sec-Fetch-Site': 'same-origin' } }))
+      expect(get.status).toBe(200)
+      const { csrf } = await get.json()
+      expect(get.cookies.get('__Host-rein-auth-csrf')?.value).toBe(csrf)
+      const result = await POST(new NextRequest(`${origin}/api/auth/verify`, {
+        method: 'POST', headers: { Origin: origin, 'Sec-Fetch-Site': 'same-origin', 'Content-Type': 'application/json', Cookie: `__Host-rein-auth-csrf=${csrf}` },
+        body: JSON.stringify({ mode: 'link', flow: 'admin-signin', token_hash: 'test-token', csrf }),
+      }))
+      expect(await result.json()).toEqual({ status: 'verified', destination: '/admin' })
+      expect(mocks.verifyOtp).toHaveBeenCalledExactlyOnceWith({ token_hash: 'test-token', type: 'email' })
+    } finally { publicEnv.siteUrl = previous }
+  })
+
+  it('rejects untrusted origins and cross-site requests even with trusted forwarded headers', async () => {
+    const previous = publicEnv.siteUrl
+    publicEnv.siteUrl = 'https://rein-protocol.org'
+    try {
+      for (const origin of ['https://evil.test', 'https://other.rein-protocol.org', 'https://www.rein-protocol.org.evil.test', 'http://www.rein-protocol.org', 'https://www.rein-protocol.org:444']) {
+        const request = verificationRequest({}, { origin })
+        request.headers.set('x-forwarded-host', 'www.rein-protocol.org')
+        expect((await POST(request)).status).toBe(403)
+        expect((await GET(new NextRequest('https://www.rein-protocol.org/api/auth/verify', { headers: request.headers }))).status).toBe(403)
+      }
+      const crossSite = verificationRequest({}, { origin: 'https://www.rein-protocol.org' })
+      crossSite.headers.set('sec-fetch-site', 'cross-site')
+      expect((await POST(crossSite)).status).toBe(403)
+      expect((await GET(crossSite)).status).toBe(403)
+      const missingCsrf = verificationRequest({}, { origin: 'https://www.rein-protocol.org', csrfCookie: 'missing' })
+      expect((await POST(missingCsrf)).status).toBe(403)
+      expect(mocks.verifyOtp).not.toHaveBeenCalled()
+    } finally { publicEnv.siteUrl = previous }
   })
 
   it('verifies an email and numeric OTP as separate parameters without granting admin permission', async () => {
