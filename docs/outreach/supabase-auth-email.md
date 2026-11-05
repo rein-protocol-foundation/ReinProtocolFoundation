@@ -147,3 +147,26 @@ It covers desktop and mobile Chromium. Auth traces are disabled to avoid saving 
 credentials. Mailpit messages remain local. Repeated runs share fixed-window IP counters;
 wait for the window to expire if the local test bucket reaches its limit. This test does
 not establish hosted SMTP delivery or Safe Links compatibility.
+
+## Canonical production domain (2026-11)
+
+The canonical website and hosted Auth Site URL are `https://www.rein-protocol.org`.
+Vercel `NEXT_PUBLIC_SITE_URL` must use that origin in Production and shared Preview.
+The apex domain keeps its 308 redirect to www. Preserve the exact apex Auth callbacks
+for compatibility, and include both origins for `/auth/callback`,
+`/auth/callback?next=/admin`, `/auth/confirm` and `/auth/code` in hosted Redirect URLs.
+Do not remove the existing local development callbacks.
+
+Generated hosted confirmation/magic-link templates recognize the exact `/auth/confirm`
+and `/auth/code` URLs on both production origins independently of Site URL. This keeps
+link-only and code-only email selection correct while either old or new deployments
+are serving requests. Local templates still recognize only their configured callbacks
+plus their own Site URL. The verification API trusts the two exact production origins
+and retains host-only Secure/HttpOnly CSRF and session cookies.
+
+Rollout order: back up hosted Auth configuration; install the compatible generated
+email templates and append www callbacks; update Vercel `NEXT_PUBLIC_SITE_URL` and
+deploy the website; then switch hosted Auth Site URL to www and read back the settings.
+Preserve SMTP credentials, expiry, rate limits and security notification settings.
+For rollback, restore the prior Vercel value and production deployment, then restore
+only the changed Auth configuration fields from the local protected backup.

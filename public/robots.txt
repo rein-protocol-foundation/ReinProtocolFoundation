@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rein-protocol.org/sitemap.xml
+Sitemap: https://www.rein-protocol.org/sitemap.xml

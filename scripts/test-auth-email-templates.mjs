@@ -18,8 +18,14 @@ for (const name of ['confirmation', 'magic_link']) {
   for (const callback of callbacks.filter(value => /\/auth\/(code|confirm)$/.test(value))) {
     cases.push({ email: local, site: localSite, callback, method: callback.endsWith('/code') ? 'code' : 'link' })
   }
-  for (const path of ['/auth/code', '/auth/confirm']) {
-    cases.push({ email: hosted, site: 'https://rein-protocol.org', callback: `https://rein-protocol.org${path}`, method: path.endsWith('/code') ? 'code' : 'link' })
+  // Old deployments can still request apex callbacks while Site URL is www,
+  // and new deployments can request www before Site URL is switched.
+  for (const site of ['https://www.rein-protocol.org', 'https://rein-protocol.org']) {
+    for (const origin of ['https://www.rein-protocol.org', 'https://rein-protocol.org']) {
+      for (const path of ['/auth/code', '/auth/confirm']) {
+        cases.push({ email: hosted, site, callback: `${origin}${path}`, method: path.endsWith('/code') ? 'code' : 'link' })
+      }
+    }
   }
   // Similar paths, query/fragment additions and unlisted origins must not select
   // an administrator variant or receive a verification credential.
@@ -27,7 +33,7 @@ for (const name of ['confirmation', 'magic_link']) {
     cases.push({ email: local, site: localSite, callback, method: 'fallback', name })
   }
   // Local callbacks must never appear in or select the hosted-only template.
-  cases.push({ email: hosted, site: 'https://rein-protocol.org', callback: 'http://127.0.0.1:3108/auth/code', method: 'fallback', name })
+  cases.push({ email: hosted, site: 'https://www.rein-protocol.org', callback: 'http://127.0.0.1:3108/auth/code', method: 'fallback', name })
 }
 const inputs = cases.map(({ email, site, callback }) => ({ Subject: email.subject, HTML: email.html, Data: { ...fixture, SiteURL: site, RedirectTo: callback } }))
 const rendered = JSON.parse(execFileSync('go', ['run', 'tests/fixtures/render-auth-email.go'], { input: JSON.stringify(inputs), encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }))

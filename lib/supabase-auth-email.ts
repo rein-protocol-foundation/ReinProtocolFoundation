@@ -88,10 +88,10 @@ function renderAuthEmail(email: AuthEmail, codeOnly = false, useRedirect = false
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
 <td class="rein-brand" width="65%" valign="middle" style="padding:24px;">
 <table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
-<td class="rein-logo-cell" width="64" valign="middle"><a href="https://rein-protocol.org/"><img class="rein-mark" src="https://rein-protocol.org/brand/rein-mark-header.png" width="64" height="64" alt="Rein logo" style="display:block;border:0;width:64px;height:64px;"></a></td>
+<td class="rein-logo-cell" width="64" valign="middle"><a href="https://www.rein-protocol.org/"><img class="rein-mark" src="https://www.rein-protocol.org/brand/rein-mark-header.png" width="64" height="64" alt="Rein logo" style="display:block;border:0;width:64px;height:64px;"></a></td>
 <td class="rein-wordmark" valign="middle" style="padding-left:16px;color:#302a25;font-size:16px;font-weight:bold;letter-spacing:2px;line-height:1.5;">REIN PROTOCOL<br>FOUNDATION</td>
 </tr></table></td>
-<td class="rein-bridge" width="35%" height="112" aria-hidden="true" bgcolor="#f5ead3" style="height:112px;background-image:url('https://rein-protocol.org/images/welcome-golden-gate-cover.jpg');background-repeat:no-repeat;background-position:10% 58%;background-size:300px 150px;font-size:0;line-height:0;">&nbsp;</td>
+<td class="rein-bridge" width="35%" height="112" aria-hidden="true" bgcolor="#f5ead3" style="height:112px;background-image:url('https://www.rein-protocol.org/images/welcome-golden-gate-cover.jpg');background-repeat:no-repeat;background-position:10% 58%;background-size:300px 150px;font-size:0;line-height:0;">&nbsp;</td>
 </tr></table></td></tr>
 <tr><td style="padding:28px 24px 20px;">
 <p style="margin:0 0 12px;color:#75695e;font-size:11px;letter-spacing:2px;line-height:1.5;">ACCOUNT SECURITY</p>
@@ -107,7 +107,7 @@ ${actionHtml}
 </td></tr>
 <tr><td style="padding:20px 24px 24px;border-top:1px solid #d5c7b1;color:#75695e;font-size:11px;line-height:1.65;">
 <p style="margin:0 0 10px;">You received this security email because an account action was requested for this address.</p>
-<p style="margin:0;"><a href="https://rein-protocol.org/" style="color:#75695e;">rein-protocol.org</a> · <a href="https://rein-protocol.org/privacy" style="color:#75695e;">Privacy</a> · <a href="mailto:admin@rein-protocol.org" style="color:#75695e;">Contact</a></p>
+<p style="margin:0;"><a href="https://www.rein-protocol.org/" style="color:#75695e;">rein-protocol.org</a> · <a href="https://www.rein-protocol.org/privacy" style="color:#75695e;">Privacy</a> · <a href="mailto:admin@rein-protocol.org" style="color:#75695e;">Contact</a></p>
 </td></tr></table>
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr></table></body></html>`
@@ -120,7 +120,12 @@ const codeEmail: AuthEmail = {
   introduction: 'Enter this 8-digit code on the Rein sign-in page. It is valid for 2 hours.', action: undefined,
   securityNote: 'If you did not request this sign-in code, you can safely ignore this message. Never share this code with anyone.',
 }
-export function createSupabaseAuthEmailTemplates(allowedRedirectUrls: string[] = []) {
+// Accept both production origins during and after canonical-domain migration.
+// Existing deployments and previously issued links must remain usable.
+const productionCallbacks = ['https://www.rein-protocol.org', 'https://rein-protocol.org']
+  .flatMap((origin) => ['/auth/confirm', '/auth/code'].map((path) => `${origin}${path}`))
+
+export function createSupabaseAuthEmailTemplates(allowedRedirectUrls: string[] = productionCallbacks) {
   const matchesCallback = (path: string) => {
     const callbacks = [...new Set(allowedRedirectUrls)].filter((value) => {
       const url = new URL(value)

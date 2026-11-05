@@ -19,7 +19,7 @@ export function discordCommunityLaunchTemplate(name?: string) {
 <p style="margin:0 0 16px;">You’ll also find Nori Agent, Rein’s community AI agent, on Discord. Introduce yourself and start a conversation about your interests, questions, or projects.</p>
 <p style="margin:0 0 20px;">Not sure where to start? Try: “Hi Nori! I’m new here, and I’m interested in learning more about AI agents. How can I get involved?”</p>
 ${emailActionButton('Join the Rein Discord community', communityInvites.discordInviteUrl)}
-<p style="margin:18px 0 8px;"><a href="${communityInvites.discordInviteUrl}"><img src="https://rein-protocol.org${communityInvites.discordQrCodePath}" width="164" height="164" alt="QR code to join the Rein Discord server" style="display:block;border:0;width:164px;height:164px;"></a></p>
+<p style="margin:18px 0 8px;"><a href="${communityInvites.discordInviteUrl}"><img src="https://www.rein-protocol.org${communityInvites.discordQrCodePath}" width="164" height="164" alt="QR code to join the Rein Discord server" style="display:block;border:0;width:164px;height:164px;"></a></p>
 <p style="margin:0 0 22px;color:#75695e;font-size:12px;line-height:1.6;">Scan to join on your phone, or open <a href="${communityInvites.discordInviteUrl}" style="color:#a83f22;text-decoration:underline;">${communityInvites.discordInviteUrl}</a>.</p>
 <p style="margin:0 0 16px;">Already on the server? Drop by and say hello—we’d love to hear what you’ve been working on.</p>
 <p style="margin:0 0 20px;">We look forward to seeing you there.</p>`,
@@ -73,10 +73,10 @@ export function identityLinkReceiptTemplate(receiptUrl: string) {
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
 <td class="rein-brand" width="65%" valign="middle" style="padding:24px;">
 <table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
-<td class="rein-logo-cell" width="64" valign="middle"><a href="https://rein-protocol.org/"><img class="rein-mark" src="https://rein-protocol.org/brand/rein-mark-header.png" width="64" height="64" alt="Rein logo" style="display:block;border:0;width:64px;height:64px;"></a></td>
+<td class="rein-logo-cell" width="64" valign="middle"><a href="https://www.rein-protocol.org/"><img class="rein-mark" src="https://www.rein-protocol.org/brand/rein-mark-header.png" width="64" height="64" alt="Rein logo" style="display:block;border:0;width:64px;height:64px;"></a></td>
 <td class="rein-wordmark" valign="middle" style="padding-left:16px;color:#302a25;font-size:16px;font-weight:bold;letter-spacing:2px;line-height:1.5;">REIN PROTOCOL<br>FOUNDATION</td>
 </tr></table></td>
-<td class="rein-bridge" width="35%" height="112" aria-hidden="true" bgcolor="#f5ead3" style="height:112px;background-image:url('https://rein-protocol.org/images/welcome-golden-gate-cover.jpg');background-repeat:no-repeat;background-position:10% 58%;background-size:300px 150px;font-size:0;line-height:0;">&nbsp;</td>
+<td class="rein-bridge" width="35%" height="112" aria-hidden="true" bgcolor="#f5ead3" style="height:112px;background-image:url('https://www.rein-protocol.org/images/welcome-golden-gate-cover.jpg');background-repeat:no-repeat;background-position:10% 58%;background-size:300px 150px;font-size:0;line-height:0;">&nbsp;</td>
 </tr></table></td></tr>
 <tr><td style="padding:28px 24px 20px;">
 <p style="margin:0 0 12px;color:#75695e;font-size:11px;letter-spacing:2px;line-height:1.5;">ACCOUNT SECURITY</p>
@@ -92,7 +92,7 @@ export function identityLinkReceiptTemplate(receiptUrl: string) {
 </td></tr>
 <tr><td style="padding:20px 24px 24px;border-top:1px solid #d5c7b1;color:#75695e;font-size:11px;line-height:1.65;">
 <p style="margin:0 0 10px;">You received this security email because someone entered this address in Rein’s account-linking flow.</p>
-<p style="margin:0;"><a href="https://rein-protocol.org/" style="color:#75695e;">rein-protocol.org</a> · <a href="https://rein-protocol.org/privacy" style="color:#75695e;">Privacy</a></p>
+<p style="margin:0;"><a href="https://www.rein-protocol.org/" style="color:#75695e;">rein-protocol.org</a> · <a href="https://www.rein-protocol.org/privacy" style="color:#75695e;">Privacy</a></p>
 </td></tr></table>
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr></table></body></html>`

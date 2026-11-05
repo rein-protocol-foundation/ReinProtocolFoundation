@@ -125,7 +125,7 @@ const authMetadata = {
 }
 for (const email of supabaseAuthEmailPreviews) {
   const [title, description] = authMetadata[email.name] ?? [email.name, '账号安全邮件。']
-  const html = email.html.replaceAll('{{ .SiteURL }}', 'https://rein-protocol.org')
+  const html = email.html.replaceAll('{{ .SiteURL }}', 'https://www.rein-protocol.org')
     .replaceAll('{{ .TokenHash }}', 'preview-token-not-valid').replaceAll('{{ .Token }}', '12345678')
     .replaceAll('{{ .ConfirmationURL }}', 'https://example.invalid/auth/verify')
     .replaceAll('{{ .NewEmail }}', 'alex@example.invalid')
@@ -138,7 +138,7 @@ for (const email of supabaseAuthEmailPreviews) {
 // Embed each image once so the generated HTML is portable and works offline.
 const assets = {}
 for (const email of catalog) {
-  for (const match of email.html.matchAll(/https:\/\/rein-protocol\.org\/(?:brand|images)\/[^\s'"<>;)]+/g)) {
+  for (const match of email.html.matchAll(/https:\/\/(?:www\.)?rein-protocol\.org\/(?:brand|images)\/[^\s'"<>;)]+/g)) {
     const url = match[0]
     if (assets[url]) continue
     const path = new URL(url).pathname.slice(1)
@@ -150,8 +150,8 @@ for (const email of catalog) {
 const payload = JSON.stringify({ catalog, assets }).replaceAll('<', '\\u003c').replaceAll('\u2028', '\\u2028').replaceAll('\u2029', '\\u2029')
 const html = read('scripts/email-review-shell.html.template').replace('__EMAIL_REVIEW_DATA__', () => payload)
 const launchImport = templates.discordCommunityLaunchTemplate('{{{USER_NAME}}}')
-const launchPreview = launchImport.replaceAll('https://rein-protocol.org/images/', '../../public/images/')
-  .replaceAll('https://rein-protocol.org/brand/', '../../public/brand/')
+const launchPreview = launchImport.replaceAll('https://www.rein-protocol.org/images/', '../../public/images/')
+  .replaceAll('https://www.rein-protocol.org/brand/', '../../public/brand/')
 for (const [path, content] of [
   ['docs/outreach/email-templates.html', html],
   ['docs/outreach/discord-community-launch-preview.html', launchPreview],

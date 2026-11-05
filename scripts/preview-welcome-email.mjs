@@ -11,8 +11,8 @@ for (const [file, exportName] of [
   const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText
   const module = await import(`data:text/javascript;base64,${Buffer.from(js).toString('base64')}`)
   const html = module[exportName]
-  const preview = html.replaceAll('https://rein-protocol.org/images/', '../../public/images/')
-    .replaceAll('https://rein-protocol.org/brand/', '../../public/brand/')
+  const preview = html.replaceAll('https://www.rein-protocol.org/images/', '../../public/images/')
+    .replaceAll('https://www.rein-protocol.org/brand/', '../../public/brand/')
   writeFileSync(new URL(`../docs/outreach/${file}-preview.html`, import.meta.url), preview)
   writeFileSync(new URL(`../docs/outreach/${file}-resend.html`, import.meta.url), html)
 }

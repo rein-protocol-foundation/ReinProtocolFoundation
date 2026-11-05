@@ -84,6 +84,7 @@ describe('administrator login', () => {
   })
 
   it.each([
+    ['production', 'https://www.rein-protocol.org'],
     ['production', 'https://rein-protocol.org'],
     ['development', 'http://localhost:3000'],
     ['development', 'http://127.0.0.1:3000'],
