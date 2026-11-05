@@ -476,6 +476,36 @@ describe('POST /api/identity/link/complete', () => {
     expect(call.args.p_platform_user_id).toBe('U1')
   })
 
+  it.each(['slack', 'discord'])('redeems an emailed code for %s while the session awaits email proof', async (platform) => {
+    const workspaceId = platform === 'discord' ? 'G1' : 'T1'
+    vi.mocked(validateIngressAssertion).mockResolvedValue({ ok: true, assertion: { ...baseAssertion, platform, workspaceId } })
+    db.row = { session_token_hash: 'emailed-session', platform, platform_workspace_id: workspaceId,
+      platform_user_id: 'U1', state: 'awaiting_email' }
+    db.rpcResult = [{ ok: true, reason: 'linked', link_id: 'link-email', contact_id: 'contact-email',
+      platform, platform_workspace_id: workspaceId, platform_user_id: 'U1' }]
+    const response = await linkCompletePost(jsonRequest(url, { binding_code: 'rein-email', proof }, credentialHeaders))
+    expect(response.status).toBe(200)
+    expect(db.rpcCalls[0].args).toMatchObject({ p_platform: platform, p_workspace_id: workspaceId,
+      p_platform_user_id: 'U1', p_session_token_hash: 'emailed-session', p_binding_code_hash: hashValue('rein-email') })
+    const body = await response.json()
+    expect(body.platform).toBe(platform)
+    expect(JSON.stringify(body)).not.toContain('rein-email')
+  })
+
+  it.each([
+    ['contact_not_registered', 403, 'binding_not_verified'],
+    ['contact_ambiguous', 409, 'contact_conflict'],
+    ['binding_expired', 410, 'binding_expired'],
+    ['binding_already_completed', 409, 'invalid_request'],
+  ])('maps email-code completion failure %s without private details', async (reason, status, publicReason) => {
+    db.row = { session_token_hash: 'emailed-session', platform: 'slack', platform_workspace_id: 'T1',
+      platform_user_id: 'U1', state: 'awaiting_email' }
+    db.rpcResult = [{ ok: false, reason, email_masked: 'private@example.test', contact_id: 'private-contact' }]
+    const response = await linkCompletePost(jsonRequest(url, { binding_code: 'rein-email', proof }, credentialHeaders))
+    expect(response.status).toBe(status)
+    expect(await response.json()).toEqual({ ok: false, reason: publicReason })
+  })
+
   it('maps a revoked tuple to identity_revoked', async () => {
     db.row = {
       session_token_hash: 'hash-of-session',

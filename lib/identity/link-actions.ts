@@ -1,7 +1,7 @@
 'use server'
 import { headers } from 'next/headers'
 import { hashedRateIdentifier, isPlausibleEmail } from '@/lib/security'
-import { identityLinkReceiptTemplate } from '@/lib/email-templates'
+import { identityLinkCodeTemplate } from '@/lib/email-templates'
 import { sendTransactionalEmail } from '@/lib/email'
 import {
   confirmLinkEmail as confirmLinkEmailDomain,
@@ -17,19 +17,10 @@ export type LinkFormState = {
 }
 
 const GENERIC_SENT =
-  'If that address belongs to a Rein Protocol record, a confirmation message is on its way. Open it and follow the link inside.'
+  'If that address belongs to a Rein Protocol record, a binding code is on its way. Copy the code from the email and send it to Nori in the same Discord or Slack account that started this request.'
 
 const INVALID_SESSION =
   'This page is no longer valid. Ask the Rein Agent in your chat platform for a new link and start again.'
-
-const IDENTITY_LINK_PUBLIC_ORIGIN = 'https://www.rein-protocol.org'
-
-function identityLinkReceiptUrl(receiptToken: string, sessionToken: string): string {
-  const url = new URL('/community/link/confirm', IDENTITY_LINK_PUBLIC_ORIGIN)
-  url.searchParams.set('receipt', receiptToken)
-  url.searchParams.set('session', sessionToken)
-  return url.toString()
-}
 
 async function requestIpHash(): Promise<string | null> {
   const requestHeaders = await headers()
@@ -74,18 +65,17 @@ export async function requestLinkEmail(
     return { status: 'error', message: INVALID_SESSION }
   }
 
-  const receiptUrl = identityLinkReceiptUrl(challenge.receiptToken, sessionToken)
   try {
     await sendTransactionalEmail({
       to: email,
-      subject: 'Confirm your Rein Protocol community identity link',
-      html: identityLinkReceiptTemplate(receiptUrl),
-      category: 'identity_link_receipt',
+      subject: 'Your Rein Protocol account binding code',
+      html: identityLinkCodeTemplate(challenge.code),
+      category: 'identity_link_code',
     })
   } catch {
     return {
       status: 'error',
-      message: 'We could not send the confirmation message just now. Please try again shortly.',
+      message: 'We could not send the binding code just now. Please try again shortly.',
     }
   }
 

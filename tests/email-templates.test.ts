@@ -1,3 +1,4 @@
+import { identityLinkCodeTemplate } from '@/lib/email-templates'
 import { describe, expect, it } from 'vitest'
 import {
   automaticRejectionTemplate,
@@ -88,4 +89,13 @@ describe('transactional email templates', () => {
     const invitation = new DOMParser().parseFromString(conversationInvitationTemplate('Person', 'https://example.org/schedule?one=1&two=2'), 'text/html')
     expect(Array.from(invitation.querySelectorAll('a')).find((link) => link.textContent?.includes('Choose a time'))?.getAttribute('href')).toBe('https://example.org/schedule?one=1&two=2')
   })
+})
+
+it('delivers an escaped binding code with no confirmation link', () => {
+  const html = identityLinkCodeTemplate('rein-<secret>')
+  expect(html).toContain('rein-&lt;secret&gt;')
+  expect(html).not.toContain('/community/link/confirm')
+  expect(html).toContain('ten minutes')
+  expect(html).toContain('same chat account')
+  expect(html).toContain('do not need to open a website')
 })

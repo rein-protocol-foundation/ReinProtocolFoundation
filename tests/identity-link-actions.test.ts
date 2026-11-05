@@ -4,9 +4,8 @@ import { describe, expect, it, vi } from 'vitest'
  * Server-action coverage for the website side of account linking.
  *
  * The domain layer is mocked so the test proves the form contract and the
- * action's own decisions: which fields it reads, that a receipt link is never
- * consumed by rendering, and that a confirmed address returns the channel
- * binding code to the browser.
+ * action's own decisions: which fields it reads, that a new code is delivered only by mail, with no second website step. Legacy
+ * receipts continue to work for requests issued before deployment.
  */
 
 const domain = vi.hoisted(() => ({
@@ -43,11 +42,12 @@ function form(entries: Record<string, string>): FormData {
 }
 
 describe('requestLinkEmail', () => {
-  it('sends a receipt without ever returning it', async () => {
+  it.each(['slack', 'discord'])('emails the %s binding code without returning a secret or confirmation URL to the browser', async (platform) => {
+    vi.mocked(sendTransactionalEmail).mockClear()
     domain.lookupLinkSession.mockResolvedValue({
       id: 's-1',
       state: 'awaiting_email',
-      platform: 'slack',
+      platform,
       workspaceId: 'T0TEST',
       platformUserId: 'U0MEMBER',
       channelId: 'C0PROPOSALS',
@@ -74,10 +74,20 @@ describe('requestLinkEmail', () => {
     expect(vi.mocked(sendTransactionalEmail)).toHaveBeenCalledTimes(1)
     const sent = vi.mocked(sendTransactionalEmail).mock.calls[0][0] as { to: string; html: string }
     expect(sent.to).toBe('member@example.test')
-    expect(sent.html).toContain('rle_secret_receipt')
-    expect(sent.html).toContain('https://www.rein-protocol.org/community/link/confirm?receipt=rle_secret_receipt&amp;session=rls_session')
+    expect(sent.html).not.toContain('rle_secret_receipt')
+    expect(sent.html).toContain('123456')
+    expect(sent.html).not.toContain('/community/link/confirm')
+    expect(sent.html).toContain('same chat account')
     expect(sent.html).not.toContain('localhost')
     expect(sent.html).not.toContain('127.0.0.1')
+  })
+
+  it('reports mail delivery failure and allows retry without exposing the code', async () => {
+    vi.mocked(sendTransactionalEmail).mockRejectedValueOnce(new Error('provider unavailable'))
+    const state = await requestLinkEmail(IDLE, form({ session_token: 'rls_session', email: 'member@example.test' }))
+    expect(state.status).toBe('error')
+    expect(state.message).toContain('try again')
+    expect(JSON.stringify(state)).not.toContain('123456')
   })
 
   it('answers a malformed address without a lookup or a send', async () => {

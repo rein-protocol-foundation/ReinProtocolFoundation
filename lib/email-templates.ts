@@ -59,6 +59,23 @@ ${emailActionButton('Verify my email', verificationUrl)}
   })
 }
 
+/** Direct email delivery; the raw code must never be returned by the website action. */
+export function identityLinkCodeTemplate(code: string) {
+  return reinEmailLayout({
+    title: 'Your account binding code',
+    preheader: 'Copy this code and send it to Nori in your original Discord or Slack chat.',
+    kicker: 'ACCOUNT SECURITY',
+    heading: 'Finish linking your account.',
+    bodyHtml: `<p>A request was made to link a Discord or Slack account to the Rein community identity registered with this email address.</p>
+<p>Copy this one-time code and send it to Nori using the same chat account that started the request:</p>
+<p style="padding:18px;background:#e8ddc8;font-family:monospace;font-size:24px;font-weight:bold;letter-spacing:1px;">${escapeHtml(code)}</p>
+<p>The code expires in ten minutes and works once. You do not need to open a website or enter your email again.</p>
+<p>If you did not start this request, ignore this email and do not share the code. Nothing is linked until the requesting chat account returns the code.</p>
+<p>Linking an account does not grant Contributor status or governance rights.</p>`,
+    footerNote: 'You received this security email because someone entered this address in Rein’s account-linking flow.',
+  })
+}
+
 export function identityLinkReceiptTemplate(receiptUrl: string) {
   const safeReceiptUrl = escapeHtml(receiptUrl)
   return `<!doctype html>

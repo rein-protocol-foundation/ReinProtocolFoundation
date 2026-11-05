@@ -382,7 +382,8 @@ function runSuiteFile(file, label) {
 function runSuites() {
   const linkingOk = runSuiteFile(testFile, 'supabase/tests/identity_linking.sql');
   const guardedOk = runSuiteFile(guardedWriteFile, 'supabase/tests/guarded_write.sql');
-  return linkingOk && guardedOk;
+  const emailCodesOk = runSuiteFile(join(repoRoot, 'supabase', 'tests', 'email_binding_codes.sql'), 'supabase/tests/email_binding_codes.sql');
+  return linkingOk && guardedOk && emailCodesOk;
 }
 
 async function main() {

@@ -80,8 +80,8 @@ applicationEmail('application-rejection', '申请审核结果', 'transactional',
   '申请内容触及沟通与安全标准时通知申请人，并提供人工复核入口。', { name, monitoredEmail: 'admin@rein-protocol.org（示例）' })
 applicationEmail('resource-update', '学习资源审核通知', 'transactional', 'resourceUpdateTemplate', [sampleTitle, 'approved'], 'sendResourceUpdate',
   '通知资源提交人审核结果。此处展示 approved 样例，实际结果由发送端传入。', { title: sampleTitle, outcome: 'approved' })
-applicationEmail('identity-link', '社区身份关联确认', 'transactional', 'identityLinkReceiptTemplate', ['https://example.invalid/community/link/confirm?receipt=preview-not-valid&session=preview-not-valid'], null,
-  '关联聊天账号时确认邮箱归属。一次性绑定码在网站确认后显示，不在邮件内发送。', { receiptUrl: '演示确认链接' },
+applicationEmail('identity-link', '社区身份关联确认', 'transactional', 'identityLinkCodeTemplate', ['rein-preview-only'], null,
+  '关联聊天账号时直接发送一次性绑定码。用户回到原 Discord 或 Slack 账号发送给 Nori，无需再次打开网页或输入邮箱。', { code: '演示绑定码，不可使用' },
   { subject: senderSubject('lib/identity/link-actions.ts', 'requestLinkEmail') })
 
 const outreachMetadata = {

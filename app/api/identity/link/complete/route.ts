@@ -11,8 +11,7 @@ export const runtime = 'nodejs'
 /**
  * POST /api/identity/link/complete
  *
- * Finish a binding once the person has typed the short-lived code their browser
- * showed them back into the chat platform. The request carries the code and the
+ * Finish a binding once the person has typed the short-lived code delivered by email (or a legacy confirmation page) back into the chat platform. The request carries the code and the
  * agent's proof and nothing else: the session is inferred on the server from the
  * code digest, and the guarded database function re-validates the session's
  * tuple against the proof tuple inside its own transaction.
@@ -44,6 +43,9 @@ function completeRefusal(reason: string): MachineRefusal {
       return refuse('binding_not_verified', 403)
     case 'identity_revoked':
       return refuse('identity_revoked', 403)
+    case 'contact_not_registered':
+      return refuse('binding_not_verified', 403)
+    case 'contact_ambiguous':
     case 'contact_conflict':
       return refuse('contact_conflict', 409)
     case 'binding_already_completed':
