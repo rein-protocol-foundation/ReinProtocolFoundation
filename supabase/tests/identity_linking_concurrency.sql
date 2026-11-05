@@ -33,9 +33,8 @@ create table if not exists public.rein_concurrency_queue (
   created_at timestamptz not null default now()
 );
 
--- Fixtures. Every session is `email_verified` with a live binding code, which
--- is the state the website leaves behind after a confirmed address; the tests
--- then race the completion itself.
+-- Fixtures use both a direct emailed code in awaiting_email and legacy
+-- email_verified sessions. The tests race the atomic completion itself.
 insert into public.dev_community_contacts(id, first_source)
 values
   ('00000000-0000-4000-8000-00000000c001', 'manual'),
@@ -61,7 +60,7 @@ insert into public.dev_rein_link_sessions(
   binding_code_hash, binding_code_expires_at, expires_at)
 values
   ('00000000-0000-4000-8000-00000000d001', 'slack', 'W-RACE', 'U-RACE-1', 'chan-race',
-   'email_verified', 'race-tok-shared', '00000000-0000-4000-8000-00000000c001', now(),
+   'awaiting_email', 'race-tok-shared', null, null,
    'race-binding-code', now() + interval '10 minutes', now() + interval '1 hour'),
   -- Two sessions on the SAME platform tuple, each already bound to a different
   -- contact, so both are fully qualified and only the tuple lock can separate them.
@@ -147,5 +146,11 @@ values
   ('slack', 'W-RACE', 'U-RACE-4', 'chan-race', '00000000-0000-4000-8000-00000000c005',
    'verified', now() + interval '10 years', now(), 'concurrency-fixture')
 on conflict do nothing;
+
+-- Shared-code race now covers email verification and binding in the same transaction.
+select * from public.dev_rein_issue_link_email_binding_code(
+  'race-tok-shared', 'concurrent-a@example.test',
+  encode(digest('concurrent-a@example.test','sha256'),'hex'), 'c***@example.test',
+  'race-email-receipt', 'race-binding-code', clock_timestamp() + interval '10 minutes', null, 5, 20);
 
 commit;

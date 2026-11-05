@@ -7,8 +7,8 @@ export function LinkAccountView({ session, status }: { session?: string; status?
   }
 
   if (status === 'sent') {
-    return <main id="main-content" className="community-shell"><div className="page-shell form-page"><section className="empty-state"><p className="eyebrow">Community / Link account</p><h1>Check your email.</h1><div className="empty-state__copy"><p>If that address is registered with Rein Protocol, we have sent a message with the next step to finish linking.</p></div><div className="empty-state__actions"><Link href="/community" className="primary-action">Return to Community</Link></div></section></div></main>
+    return <main id="main-content" className="community-shell"><div className="page-shell form-page"><section className="empty-state"><p className="eyebrow">Community / Link account</p><h1>Check your email.</h1><div className="empty-state__copy"><p>If that address is registered with Rein Protocol, a binding code is on its way. Send the code from the email to Nori in your original Discord or Slack chat.</p></div><div className="empty-state__actions"><Link href="/community" className="primary-action">Return to Community</Link></div></section></div></main>
   }
 
-  return <main id="main-content" className="community-shell"><div className="page-shell form-page"><div className="form-layout"><aside className="form-intro"><p className="eyebrow">Community / Link account</p><h1>Link your account.</h1><p className="form-intro__lead">Enter the email address already registered with Rein Protocol. We will send a message that confirms the address is yours.</p></aside><LinkRequestForm session={session} /></div></div></main>
+  return <main id="main-content" className="community-shell"><div className="page-shell form-page"><div className="form-layout"><aside className="form-intro"><p className="eyebrow">Community / Link account</p><h1>Link your account.</h1><p className="form-intro__lead">Enter the email address already registered with Rein Protocol. We will email you a one-time binding code. Send it to Nori in your original Discord or Slack chat to finish linking.</p></aside><LinkRequestForm session={session} /></div></div></main>
 }

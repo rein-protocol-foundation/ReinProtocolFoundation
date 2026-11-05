@@ -3,7 +3,6 @@ import { getSecretClient } from '@/lib/supabase/secret'
 import {
   generateBindingCode,
   generateEmailReceiptToken,
-  generateNumericCode,
   generateSessionToken,
   hashValue,
   maskEmail,
@@ -15,10 +14,9 @@ import { normalizeEmail } from '@/lib/security'
  *
  * The binding has two independent proofs, and neither one is a chat claim:
  *
- *   1. address control, proven by a receipt link the website emails to an
- *      address already registered with the organization, and
- *   2. account control, proven by a separate short-lived code that is shown
- *      only in the browser after step 1 and typed back in the chat platform.
+ *   1. address control, proven by a one-time code delivered only by email, and
+ *   2. account control, proven by returning that code from the same platform
+ *      account that started the session. Issuing mail does not verify an address.
  *
  * Only the database decides the outcome. Every state change here calls one
  * guarded function that holds the row locks it needs, so a concurrent
@@ -27,7 +25,7 @@ import { normalizeEmail } from '@/lib/security'
 
 /** Provisional, pending owner confirmation: a finished binding lasts ten years. */
 export const BINDING_VALIDITY = '10 years'
-/** Provisional, pending owner confirmation: the emailed receipt is good for ten minutes. */
+/** Provisional, pending owner confirmation: the emailed binding code is good for ten minutes. */
 export const EMAIL_CODE_TTL_MS = 10 * 60 * 1000
 /** The website page itself is not a credential, so it expires quickly. */
 export const LINK_SESSION_TTL_MS = 30 * 60 * 1000
@@ -119,7 +117,6 @@ export async function lookupLinkSession(sessionToken: string): Promise<SessionVi
 
 export interface IssuedEmailChallenge {
   ok: true
-  receiptToken: string
   code: string
   emailMasked: string
   expiresAt: string
@@ -128,7 +125,7 @@ export interface IssuedEmailChallenge {
 /**
  * Record one email challenge for a session and return the values the caller
  * emails to the person. The caller must not return them in any HTTP response:
- * the receipt link is the proof, so publishing it would defeat the flow.
+ * the emailed code is the proof, so publishing it would defeat the flow.
  */
 export async function issueEmailChallenge(input: {
   sessionToken: string
@@ -139,11 +136,12 @@ export async function issueEmailChallenge(input: {
   if (!client) return { ok: false, reason: 'not_configured' }
 
   const email = normalizeEmail(input.email)
+  // Retain an unexposed random receipt digest for the legacy non-null schema.
   const receiptToken = generateEmailReceiptToken()
-  const code = generateNumericCode()
+  const code = generateBindingCode()
   const codeExpiresAt = new Date(Date.now() + EMAIL_CODE_TTL_MS).toISOString()
 
-  const { data, error } = await client.rpc('rein_issue_link_email_challenge', {
+  const { data, error } = await client.rpc('rein_issue_link_email_binding_code', {
     p_session_token_hash: hashValue(input.sessionToken),
     p_email: email,
     p_email_hash: hashValue(email),
@@ -160,7 +158,7 @@ export async function issueEmailChallenge(input: {
   if (!row || row.ok !== true) {
     return { ok: false, reason: typeof row?.reason === 'string' ? row.reason : 'unavailable' }
   }
-  return { ok: true, receiptToken, code, emailMasked: maskEmail(email), expiresAt: codeExpiresAt }
+  return { ok: true, code, emailMasked: maskEmail(email), expiresAt: codeExpiresAt }
 }
 
 export interface ConfirmedEmail {

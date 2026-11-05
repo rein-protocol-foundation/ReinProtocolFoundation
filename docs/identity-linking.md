@@ -2,50 +2,51 @@
 
 This document describes how Rein Protocol links a chat-platform account to an organizational
 identity, what the linked record proves, and which parts of the flow are implemented in this
-repository today. It covers the design contract, the two website pages that carry a person through
-the email step, and the limits of the current implementation.
+repository today. It covers the design contract, the website email-entry page and legacy confirmation page, and the limits of the current implementation.
 
-## Two proofs
+## Direct email code flow
 
-A link is established by two independent proofs, and neither one is sufficient alone.
+New requests use one website visit:
 
-1. **Email receipt proves control of an address.** The person asks for a link from
-   `/community/link/[session]`, and a message with a one-time receipt link is sent to the address they typed.
-   The message uses Rein's branded organization template and its action always points to
-   `https://rein-protocol.org/community/link/confirm`, even when a development backend initiated the
-   request. Opening that link returns the receipt to the server, which shows that
-   whoever holds the link can also receive mail at that address. The receipt is a possession proof:
-   the emailed link is the only place the raw value appears, and no API response or rendered page
-   returns it.
-2. **A short-lived binding code typed back in chat proves control of the platform account.** After a
-   successful confirmation, the browser is shown a one-time binding code. The person gives that code
-   to the Agent in the chat platform they want to link. The Agent submits the code from a request
-   that carries the platform account, so the same person has now demonstrated control of both the
-   address and the account.
+1. Nori starts a session from the authenticated Discord or Slack sender and supplies
+   `/community/link/[session]`.
+2. The person enters their registered community email once. The website emails a
+   short-lived `rein-…` binding code and returns a generic acknowledgement with no secret.
+3. The person sends that code to Nori from the same platform, workspace and user account.
+   The backend checks the emailed code and trusted sender together, then verifies the
+   mailbox and completes the binding in one locked transaction.
 
-Neither proof is accepted as standalone authority, and neither one is a credential that can be
-replayed later: the receipt works once, and the binding code expires quickly (see the provisional
-defaults below).
+Sending a message does **not** verify an address, create a community contact, or grant a role.
+Registration is re-derived only when the code is redeemed. Unknown or deleted contacts
+cannot bind. Their original account can check `registration_required` using session status.
+The browser and initial request responses never contain the raw code or a receipt URL.
 
-## The website pages
+Codes expire in ten minutes and work once. Resending replaces the previous code. Existing
+per-session/IP email limits remain; five failed code attempts inside the guarded completion
+function exhaust the challenge. Codes retain the existing random `rein-…` format (not a
+six-digit numeric login OTP). Only digests are stored. The completion API accepts only a
+code and authenticated ingress proof; it never accepts an email or claimed contact selector.
 
-| Path | Purpose |
-| --- | --- |
-| `/community/link/[session]` | Accepts an address and requests the receipt link. Shows a generic sentence after submission. The opaque session is a path segment so chat-runtime query-parameter redaction cannot corrupt the link. |
-| `/community/link` | Backward-compatible query entry and invalid-link fallback; new binding responses use the path form above. |
-| `/community/link/confirm` | Takes the opaque session and receipt values from the URL, asks for the same address, and confirms it. Displays the binding code on success. The email itself never contains the code. |
+The single-Slack-account rule applies only to Slack. The same community identity can also
+bind Discord; platform or workspace permissions do not transfer with that association.
 
-Both pages are excluded from search indexing and are reachable only through a session or receipt
-value handed to the person by the Agent. The initial request always receives the same response, so
-it cannot be used to test whether an address exists. Only after the person proves mailbox control by
-opening the one-time receipt may the confirmation explain that the address is not registered and
-that an administrator must register it before linking.
+## Legacy requests and deployment
 
-The pages collect the email address in both steps: first to request the message, then to confirm that
-the receipt is being used for the same address. No binding code is entered on the website. After a
-successful confirmation, the page displays the short-lived binding code that must be returned in
-the original chat. No internal identifier, hash, table name, or raw receipt token is displayed as
-page content.
+`/community/link/confirm` and the receipt template remain solely for already-issued links.
+New emails contain the binding code and never direct users to that page. Existing legacy
+email-confirmation sessions continue to complete through the same API.
+
+Apply the `rein_email_binding_codes` migration before deploying the website/backend change.
+It adds a challenge delivery-method marker, the service-only email-code issuer, and atomic
+redemption in the existing completion function for both `dev_` and `prod_` tables. The
+existing issuer and legacy confirmation contract remain intact for rolling deployment.
+Deploy Nori's updated tool descriptions and discovery guidance with the website change so
+it asks for the emailed binding code, rather than a code displayed on a second webpage.
+
+Local verification uses synthetic data only. Run the website unit tests and
+`node scripts/run-identity-db-tests.mjs` for SQL and concurrency checks. The database runner
+includes `supabase/tests/email_binding_codes.sql` for both platforms and both table prefixes.
+Passing these checks does not establish live mail delivery or a deployed Discord/Slack run.
 
 ## The binding record
 
@@ -91,7 +92,7 @@ it is separate from the public linking flow and is never available to the Agent 
   near-term expiry and has to be re-established for later operations.
 - Chat text that claims an email address or role is untrusted. Neither the Agent nor these APIs accept
   a target email, Rein identity ID (`contact_id`), role, platform user id, or workspace id from a model-authored binding
-  request. The email is entered only on the website and proved by its one-time receipt.
+  request. The email is entered only on the website and proved by returning its one-time binding code from the authenticated chat account.
 
 ## Ingress and relay
 
@@ -118,7 +119,7 @@ change:
 
 ## Current integration boundary
 
-- Discord binding and multiple-Slack-account migration are not part of P0.
+- The binding implementation supports Discord and Slack; multiple-Slack-account migration remains outside P0.
 - Automated tests mock email delivery; live sandbox tests require separately configured email and
   platform infrastructure and must use synthetic accounts.
 - This repository contains the identity-linking domain logic (`lib/identity/linking.ts`), the

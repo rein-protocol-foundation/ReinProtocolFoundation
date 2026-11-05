@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useActionState } from 'react'
+import { useActionState, useState } from 'react'
 import { confirmLinkEmail, requestLinkEmail, type LinkFormState } from '@/lib/identity/link-actions'
 import { SubmitButton } from '@/components/forms/form-controls'
 
@@ -10,22 +10,24 @@ const initialLinkState: LinkFormState = { status: 'idle', message: '' }
 function LinkStatus({ state }: { state: LinkFormState }) {
   if (state.status !== 'error' && state.status !== 'success') return null
   return <div className="form-status" data-kind={state.status === 'error' ? 'error' : 'status'} role={state.status === 'error' ? 'alert' : 'status'} aria-live="polite">
-    <strong>{state.status === 'error' ? 'Please check the form' : 'Received'}</strong>
+    <strong>{state.status === 'error' ? 'Please check the form' : 'Check your email'}</strong>
     {state.message ? <p>{state.message}</p> : null}
   </div>
 }
 
 export function LinkRequestForm({ session }: { session: string }) {
   const [state, action] = useActionState(requestLinkEmail, initialLinkState)
+  const [email, setEmail] = useState('')
   return <form className="community-form" action={action} noValidate>
     <LinkStatus state={state} />
     <fieldset className="form-content">
       <legend className="visually-hidden">Account linking fields</legend>
       <input type="hidden" name="session_token" value={session} />
-      <div className="field-grid">
-        <label className="field-group field-group--full"><span className="field-label">Email address <span aria-hidden="true">*</span></span><input type="email" name="email" autoComplete="email" maxLength={320} required /><span className="field-hint">Use the address already registered with Rein Protocol.</span>{state.fieldErrors?.email ? <span className="field-error">{state.fieldErrors.email}</span> : null}</label>
-      </div>
-      <div className="form-actions"><SubmitButton>Send confirmation email</SubmitButton><Link href="/community" className="quiet-action">Return to Community</Link></div>
+      {state.status === 'success' ? <input type="hidden" name="email" value={email} /> : <div className="field-grid">
+        <label className="field-group field-group--full"><span className="field-label">Email address <span aria-hidden="true">*</span></span><input type="email" name="email" autoComplete="email" maxLength={320} required value={email} onChange={(event) => setEmail(event.target.value)} /><span className="field-hint">Use the address already registered with Rein Protocol.</span>{state.fieldErrors?.email ? <span className="field-error">{state.fieldErrors.email}</span> : null}</label>
+      </div>}
+      {state.status === 'success' ? <p>Each new code replaces the previous one. Use the most recent email.</p> : null}
+      <div className="form-actions"><SubmitButton>{state.status === 'success' ? 'Send another code' : 'Email me a binding code'}</SubmitButton>{state.status === 'success' ? <Link href={`/community/link/${encodeURIComponent(session)}`} className="quiet-action">Use a different email</Link> : <Link href="/community" className="quiet-action">Return to Community</Link>}</div>
     </fieldset>
   </form>
 }
