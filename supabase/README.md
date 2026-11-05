@@ -19,9 +19,9 @@ Keep the application URL and the shared hosted project's **Authentication > URL 
 
 | Setting | Production | Local development |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | `https://rein-protocol.org` | `http://localhost:3000` (or `http://127.0.0.1:3000`) |
-| Hosted Supabase Site URL | `https://rein-protocol.org` | Keep the shared project's production default |
-| Hosted Supabase Redirect URLs | `https://rein-protocol.org/auth/callback?next=/admin` | `http://localhost:3000/auth/callback?next=/admin` and `http://127.0.0.1:3000/auth/callback?next=/admin` |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.rein-protocol.org` | `http://localhost:3000` (or `http://127.0.0.1:3000`) |
+| Hosted Supabase Site URL | `https://www.rein-protocol.org` | Keep the shared project's production default |
+| Hosted Supabase Redirect URLs | `https://www.rein-protocol.org/auth/callback?next=/admin`, `/auth/confirm`, `/auth/code` on the same origin | `http://localhost:3000/auth/callback?next=/admin` and `http://127.0.0.1:3000/auth/callback?next=/admin` |
 
 Keep the corresponding `/auth/callback` URLs without the query string allowed as well.
 Use explicit callback URLs rather than a production-wide wildcard. Supabase falls back to

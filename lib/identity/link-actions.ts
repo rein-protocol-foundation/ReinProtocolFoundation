@@ -22,7 +22,7 @@ const GENERIC_SENT =
 const INVALID_SESSION =
   'This page is no longer valid. Ask the Rein Agent in your chat platform for a new link and start again.'
 
-const IDENTITY_LINK_PUBLIC_ORIGIN = 'https://rein-protocol.org'
+const IDENTITY_LINK_PUBLIC_ORIGIN = 'https://www.rein-protocol.org'
 
 function identityLinkReceiptUrl(receiptToken: string, sessionToken: string): string {
   const url = new URL('/community/link/confirm', IDENTITY_LINK_PUBLIC_ORIGIN)
