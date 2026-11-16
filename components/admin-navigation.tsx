@@ -30,6 +30,7 @@ const groups = [
     links: [
       ['/admin/guide/contributor-conversation', 'Guide'],
       ['/admin/settings', 'Settings'],
+      ['/admin/organization-email', 'Organization email'],
       ['/admin/audit-log', 'Audit'],
     ],
   },
