@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getPublicSiteSettings } from '@/lib/community/data'
 
-export const metadata: Metadata = { title: 'Privacy Policy', description: 'How Rein Protocol Foundation handles community and contribution information.' }
+export const metadata: Metadata = { alternates: { canonical: '/privacy' }, title: 'Privacy Policy', description: 'How Rein Protocol Foundation handles community and contribution information.' }
 
 export default async function PrivacyPage() {
   const settings = await getPublicSiteSettings(['email_identity'])

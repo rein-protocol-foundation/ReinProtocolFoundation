@@ -1,0 +1,42 @@
+name: Notify search engines of public content changes
+
+on:
+  deployment_status:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 9 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow-production
+  cancel-in-progress: false
+
+jobs:
+  indexnow:
+    if: >-
+      github.event_name != 'deployment_status' ||
+      (github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/cache/restore@v4
+        with:
+          path: .cache/indexnow.json
+          key: indexnow-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: indexnow-v1-
+      - run: node --test scripts/submit-indexnow.test.mjs
+      - run: node scripts/submit-indexnow.mjs
+      - uses: actions/cache/save@v4
+        with:
+          path: .cache/indexnow.json
+          key: indexnow-v1-${{ github.run_id }}-${{ github.run_attempt }}

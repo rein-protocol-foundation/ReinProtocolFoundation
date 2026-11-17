@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { CommunityPageHero, CommunitySection } from '@/components/community-shell'
 import { getPublishedEvent } from '@/lib/community/data'
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { const { slug } = await params; const event = await getPublishedEvent(slug); return event ? { title: event.title, description: event.summary } : { title: 'Event not found' } }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { const { slug } = await params; const event = await getPublishedEvent(slug); return event ? { title: event.title, description: event.summary, alternates: { canonical: `/community/gather/${encodeURIComponent(slug)}` } } : { title: 'Event not found' } }
 
 export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

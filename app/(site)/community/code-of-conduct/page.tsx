@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPublicSiteSettings } from '@/lib/community/data'
 
-export const metadata: Metadata = { title: 'Community Code of Conduct', description: 'The communication and safety standards for the Rein community.' }
+export const metadata: Metadata = { alternates: { canonical: '/community/code-of-conduct' }, title: 'Community Code of Conduct', description: 'The communication and safety standards for the Rein community.' }
 
 export default async function CodeOfConductPage() {
   const settings = await getPublicSiteSettings(['email_identity'])

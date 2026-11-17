@@ -6,13 +6,20 @@ import { Arrow } from '@/components/icons'
 import { ResourceCard } from '@/components/resource-card'
 import { getPublishedResources } from '@/lib/community/data'
 
-export const metadata: Metadata = {
-  title: 'Learning Resources',
-  description: 'Explore free public courses, tutorials, research discussions, and practical guides for learning about AI agents.',
-}
-
 const PAGE_SIZE = 12
 type LearnSearchParams = Promise<{ page?: string | string[] }>
+
+export async function generateMetadata({ searchParams }: { searchParams: LearnSearchParams }): Promise<Metadata> {
+  const value = (await searchParams).page
+  const page = typeof value === 'string' && /^[1-9]\d*$/.test(value) ? Number(value) : 1
+  const canonical = Number.isSafeInteger(page) && page > 1 && page <= Math.floor(Number.MAX_SAFE_INTEGER / PAGE_SIZE)
+    ? `/community/learn?page=${page}` : '/community/learn'
+  return {
+    title: 'Learning Resources',
+    description: 'Explore free public courses, tutorials, research discussions, and practical guides for learning about AI agents.',
+    alternates: { canonical },
+  }
+}
 
 async function ResourceCatalog({ searchParams }: { searchParams: LearnSearchParams }) {
   const value = (await searchParams).page
