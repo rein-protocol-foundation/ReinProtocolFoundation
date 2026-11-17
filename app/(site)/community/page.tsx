@@ -11,7 +11,7 @@ import { ResourceCard } from '@/components/resource-card'
 import { getPublishedEvents, getPublishedResources, getPublicMemberMetrics, getPublicPeople } from '@/lib/community/data'
 import { publicCommunityAudience } from '@/lib/community/presentation'
 
-export const metadata: Metadata = { title: 'Community', description: 'Join in-person events and online conversations, share learning materials, and find peer guidance for a career working with AI agents.' }
+export const metadata: Metadata = { alternates: { canonical: '/community' }, title: 'Community', description: 'Join in-person events and online conversations, share learning materials, and find peer guidance for a career working with AI agents.' }
 export const maxDuration = 60
 
 function firstStart(event: Awaited<ReturnType<typeof getPublishedEvents>>[number]) {

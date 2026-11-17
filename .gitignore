@@ -38,3 +38,7 @@ playwright-report
 *.njsproj
 *.sln
 *.sw?
+
+# Local SEO evidence and IndexNow comparison state
+/output/
+/.cache/
