@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test'
 test('footer notes work without expanding the layout', async ({ page, isMobile }) => {
   await page.goto('/giving')
   const footer = page.locator('.site-footer')
+  await expect(footer.getByRole('link', { name: 'GitHub', exact: true })).toHaveAttribute('href', 'https://github.com/rein-protocol-foundation')
   await footer.scrollIntoViewIfNeeded()
   await expect(page.locator('#foundation-status')).toHaveCount(0)
   await expect(footer.locator('details')).toHaveCount(0)

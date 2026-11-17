@@ -1,12 +1,17 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import ts from 'typescript'
 
+const githubSource = readFileSync(new URL('../lib/github.ts', import.meta.url), 'utf8')
+const githubJs = ts.transpileModule(githubSource, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText
+const githubModule = `data:text/javascript;base64,${Buffer.from(githubJs).toString('base64')}`
+
 // Render the same source used by the application; no separately maintained HTML.
 for (const [file, exportName] of [
   ['participant-welcome', 'participantWelcomeHtml'],
   ['contributor-welcome', 'contributorWelcomeHtml'],
 ]) {
   const source = readFileSync(new URL(`../lib/${file}.ts`, import.meta.url), 'utf8')
+    .replace("'./github'", JSON.stringify(githubModule))
     .replace('./community-invites.json', new URL('../lib/community-invites.json', import.meta.url).href)
   const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText
   const module = await import(`data:text/javascript;base64,${Buffer.from(js).toString('base64')}`)

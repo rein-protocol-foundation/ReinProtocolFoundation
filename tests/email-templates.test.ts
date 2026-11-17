@@ -1,6 +1,7 @@
 import { identityLinkCodeTemplate } from '@/lib/email-templates'
 import { describe, expect, it } from 'vitest'
 import {
+  githubOrganizationLaunchTemplate,
   automaticRejectionTemplate,
   applicationReceivedTemplate,
   contributorVerificationTemplate,
@@ -12,6 +13,23 @@ import {
 } from '@/lib/email-templates'
 
 describe('transactional email templates', () => {
+  it('includes an accessible GitHub icon link in announcement and welcome footers', () => {
+    for (const html of [githubOrganizationLaunchTemplate('<Alex>'), participantConfirmationTemplate(),
+      contributorWelcomeTemplate('Alex', 'https://join.slack.com/t/rein/shared_invite/test')]) {
+      const document = new DOMParser().parseFromString(html, 'text/html')
+      const footer = document.querySelector('td[style*="border-top"]')!
+      const link = footer.querySelector('a[href="https://github.com/rein-protocol-foundation"]')!
+      expect(link.textContent).toBe('GitHub')
+      expect(link.querySelector('img')?.getAttribute('src')).toBe('https://www.rein-protocol.org/brand/github-mark.png')
+    }
+    const announcement = githubOrganizationLaunchTemplate('<Alex>')
+    expect(announcement).toContain('Hello &lt;Alex&gt;')
+    for (const repository of ['rein-paper-template', 'nori-agent', 'ReinProtocolFoundation']) {
+      expect(announcement).toContain(`href="https://github.com/rein-protocol-foundation/${repository}"`)
+    }
+    expect(announcement).not.toContain('SLACK_INVITE_URL')
+  })
+
   it('invites participants to Discord without exposing a Contributor Slack invitation', () => {
     const html = participantConfirmationTemplate('New member')
     expect(html).toContain('href="https://discord.gg/m8qnWv9XX"')

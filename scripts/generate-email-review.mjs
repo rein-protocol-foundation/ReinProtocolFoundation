@@ -67,6 +67,9 @@ applicationEmail('participant-welcome', 'Community Welcome', 'welcome', 'partici
 applicationEmail('discord-community-launch', 'Discord 上线通知 · Nori Agent', 'welcome', 'discordCommunityLaunchTemplate', [name], null,
   '面向所有已注册 Community Member 的社区公告草稿：Discord 已上线，邀请成员加入并与 Nori Agent 互动。仅供审阅，尚未接入发送。',
   { USER_NAME: name }, { status: '草稿 · 未发送', subject: templates.discordCommunityLaunchSubject })
+applicationEmail('github-organization-launch', 'GitHub 组织成立公告', 'welcome', 'githubOrganizationLaunchTemplate', [name], null,
+  'GitHub 组织公告，介绍论文模板、Nori 和官网项目。2026-10-29 经用户授权，通过 Resend 提交给 10 位成员；跳过 1 个退信拦截邮箱。',
+  { USER_NAME: name }, { status: '已提交发送 · 2026-10-29', subject: templates.githubOrganizationLaunchSubject })
 applicationEmail('contributor-welcome', 'Contributor Welcome', 'welcome', 'contributorWelcomeTemplate', [name, 'https://join.slack.com/t/rein/shared_invite/preview-not-valid'], null,
   '仅供正式成为 Contributor 后使用。Slack 邀请由 API 生成；当前已备好模板，自动发送尚未接入。',
   { USER_NAME: name, SLACK_INVITE_URL: '演示邀请，不可使用' }, { status: '待 Slack API 接入', subject: 'Welcome as a Rein Contributor' })
@@ -149,11 +152,16 @@ for (const email of catalog) {
 }
 const payload = JSON.stringify({ catalog, assets }).replaceAll('<', '\\u003c').replaceAll('\u2028', '\\u2028').replaceAll('\u2029', '\\u2029')
 const html = read('scripts/email-review-shell.html.template').replace('__EMAIL_REVIEW_DATA__', () => payload)
+const githubImport = templates.githubOrganizationLaunchTemplate('{{{USER_NAME}}}')
+const githubPreview = githubImport.replaceAll('https://www.rein-protocol.org/images/', '../../public/images/')
+  .replaceAll('https://www.rein-protocol.org/brand/', '../../public/brand/')
 const launchImport = templates.discordCommunityLaunchTemplate('{{{USER_NAME}}}')
 const launchPreview = launchImport.replaceAll('https://www.rein-protocol.org/images/', '../../public/images/')
   .replaceAll('https://www.rein-protocol.org/brand/', '../../public/brand/')
 for (const [path, content] of [
   ['docs/outreach/email-templates.html', html],
+  ['docs/outreach/github-organization-launch-preview.html', githubPreview],
+  ['docs/outreach/github-organization-launch-resend.html', githubImport],
   ['docs/outreach/discord-community-launch-preview.html', launchPreview],
   ['docs/outreach/discord-community-launch-resend.html', launchImport],
 ]) {

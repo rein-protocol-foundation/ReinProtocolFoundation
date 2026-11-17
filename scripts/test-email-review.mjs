@@ -17,10 +17,11 @@ test('the old shell address leads to the generated gallery, including a manual f
     const gallery = new JSDOM(readFileSync(destination, 'utf8'))
     try {
       const data = JSON.parse(gallery.window.document.getElementById('email-data').textContent)
-      assert.equal(data.catalog.length, 22)
+      assert.equal(data.catalog.length, 23)
       assert.ok(data.catalog.some(email => email.id === 'participant-welcome'))
       assert.ok(data.catalog.some(email => email.id === 'contributor-welcome'))
       assert.equal(data.catalog.find(email => email.id === 'discord-community-launch')?.status, '草稿 · 未发送')
+      assert.equal(data.catalog.find(email => email.id === 'github-organization-launch')?.status, '已提交发送 · 2026-10-29')
     } finally {
       gallery.window.close()
     }
@@ -45,10 +46,10 @@ test('opening the generated file initializes the directory and every preview bod
   try {
     const { document, Event } = gallery.window
     const get = id => document.getElementById(id)
-    assert.equal(get('total').textContent, '22')
+    assert.equal(get('total').textContent, '23')
     assert.equal(get('template-title').textContent, 'Community Welcome')
     const buttons = [...document.querySelectorAll('.template-button')]
-    assert.equal(buttons.length, 22)
+    assert.equal(buttons.length, 23)
     for (const button of buttons) {
       button.click()
       assert.equal(get('template-title').textContent, button.textContent)

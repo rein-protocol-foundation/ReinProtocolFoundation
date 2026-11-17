@@ -1,3 +1,4 @@
+import { githubOrganizationUrl } from './github'
 import { participantWelcomeHtml } from './participant-welcome'
 import { contributorWelcomeHtml } from './contributor-welcome'
 import { emailActionButton, escapeEmailHtml as escapeHtml, reinEmailLayout } from './email-layout'
@@ -165,5 +166,30 @@ export function resourceUpdateTemplate(title: string, outcome: string) {
 <p style="margin:20px 0;padding:16px 18px;border:1px solid #d5c7b1;background-color:#eee1c9;">Review status: ${escapeHtml(outcome)}.</p>
 <p style="margin:0 0 20px;">Publication, if approved, credits the resource’s factual author or publisher—not the submitter—and does not automatically create Contributor status.</p>`,
     footerNote: 'You received this email because you submitted a learning resource to Rein Protocol Foundation.',
+  })
+}
+
+export const githubOrganizationLaunchSubject = 'Rein is now on GitHub — explore, build, and contribute'
+
+// Community announcement draft only; deliberately not connected to a sender.
+export function githubOrganizationLaunchTemplate(name?: string) {
+  return reinEmailLayout({
+    title: githubOrganizationLaunchSubject,
+    preheader: 'One home for Rein’s open-source projects, paper templates, and research resources.',
+    kicker: 'A COMMUNITY UPDATE',
+    heading: 'A shared home for our open work.',
+    bodyHtml: `<p style="margin:0 0 16px;">Hello ${escapeHtml(name?.trim() || 'there')},</p>
+<p style="margin:0 0 16px;">Our GitHub organization is now live. <strong>Rein Protocol Foundation</strong> has a shared home for the code, paper templates, and research resources we build with our community.</p>
+<p style="margin:0 0 16px;">This is another way to take part in our work toward safer AI agents: explore a project, learn from its implementation, or help improve it.</p>
+${emailActionButton('Explore Rein on GitHub', githubOrganizationUrl)}
+<h2 style="margin:26px 0 10px;font-family:Georgia,serif;font-size:25px;font-weight:normal;line-height:1.3;">Start with a project.</h2>
+<p style="margin:0 0 18px;"><a href="${githubOrganizationUrl}/rein-paper-template" style="color:#a83f22;"><strong>Paper templates</strong></a><br>English LaTeX templates for preprints, technical reports, and author accepted manuscripts, with single-column and double-column layouts.</p>
+<p style="margin:0 0 18px;"><a href="${githubOrganizationUrl}/nori-agent" style="color:#a83f22;"><strong>Nori Agent</strong></a><br>Explore the agent project supporting Rein’s community and operations.</p>
+<p style="margin:0 0 18px;"><a href="${githubOrganizationUrl}/ReinProtocolFoundation" style="color:#a83f22;"><strong>Foundation website</strong></a><br>Browse the code behind our website and community platform.</p>
+<h2 style="margin:26px 0 10px;font-family:Georgia,serif;font-size:25px;font-weight:normal;line-height:1.3;">You don’t have to start with code.</h2>
+<p style="margin:0 0 16px;">Clearer documentation, reproducible examples, and thoughtful bug reports all help. Read a project’s README, contribution guidance, and license before opening an issue or pull request. GitHub issues are public, so keep personal information and credentials out of them.</p>
+<p style="margin:0 0 16px;">You can browse public projects without joining the organization. Follow a repository you care about, or share an idea through our <a href="https://www.rein-protocol.org/community/contribute" style="color:#a83f22;">community contribution page</a>.</p>
+<p style="margin:0 0 20px;">We look forward to building with you.</p>`,
+    footerNote: 'A community update for registered Rein participants. Questions? Contact admin@rein-protocol.org.',
   })
 }

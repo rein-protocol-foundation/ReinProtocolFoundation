@@ -52,6 +52,8 @@ There are several ways to help: [apply privately as a Contributor](https://rein-
 
 ## Current stage and source documents
 
+- Operations record: [GitHub organization creation, repository migration, and troubleshooting (中文)](./docs/github-organization-migration-2026-10.md)
+
 - Repository: https://github.com/rein-protocol-foundation/ReinProtocolFoundation
 - Website: https://rein-protocol.org/
 - Vercel project: `rein-protocol-foundation`

@@ -50,6 +50,8 @@ Rein 是一个 **AI-native 组织**。AI Agents 可以在明确政策范围内�
 
 ## 当前阶段与参考文档
 
+- [GitHub 组织创建、项目迁移与故障排查记录](./docs/github-organization-migration-2026-10.md)
+
 [创始章程与运营蓝图](./PROJECT.md)仍包含草案和历史筹备记录。基金会的法人设立与 EIN 已完成；募款安排和部分治理机制仍待审核或采纳。计划中的课程、活动、资助及自动化运营应分别以实际发布的信息为准。
 
 [Agent 社区运营产品需求](./docs/PRD-agent-community-operations-zh.md)（[English](./docs/PRD-agent-community-operations.md)）描述未来拟议的工作流程，而非现有功能。参与网站和应用开发请参阅[开发指南](./DEVELOPMENT-zh.md)；品牌素材及使用说明位于 [public/brand](./public/brand/README.md)。
