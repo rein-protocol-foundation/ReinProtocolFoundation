@@ -1,5 +1,6 @@
+import { githubOrganizationUrl } from '@/lib/github'
 import Link from 'next/link'
-import { FoundationMark, MailIcon } from '@/components/icons'
+import { FoundationMark, MailIcon, GitHubIcon } from '@/components/icons'
 import { FooterNote } from '@/components/footer-note'
 import { foundationStatus } from '@/lib/foundation-status'
 
@@ -29,6 +30,7 @@ export function SiteFooter() {
             <Link href="/community">Community</Link>
             <Link href="/giving">Giving</Link>
           </nav>
+          <a className="footer-contact" href={githubOrganizationUrl}><GitHubIcon />GitHub</a>
           <a className="footer-contact" href={`mailto:${foundationStatus.contactEmail}`}><MailIcon />{foundationStatus.contactEmail}</a>
         </div>
       </div>

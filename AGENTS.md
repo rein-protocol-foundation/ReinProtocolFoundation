@@ -18,3 +18,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   transactional mail). Inbound mail forwards through Cloudflare Email Routing.
 - Resend account and configuration are present for programmatic outbound mail.
 - Credential locators for these services live in the untracked `SECRETs.md`.
+- Default contact and incorporator information supplied by the user is stored locally in
+  `.private/registration-contact.json`. Read it when needed for authorized organization
+  registration work. Keep its contents out of tracked files, commits, and remote uploads.
+
+## GitHub organization and migration history
+
+- Canonical GitHub organization: `rein-protocol-foundation`. Website repository:
+  `rein-protocol-foundation/ReinProtocolFoundation`; Nori: `rein-protocol-foundation/nori-agent`.
+- Before troubleshooting repository identity, Vercel linkage, Nori deployment reports, or source-snapshot CI failures,
+  read [the migration record](docs/github-organization-migration-2026-10.md). It distinguishes historical observations
+  from pending production verification; recheck live state rather than assuming completion.

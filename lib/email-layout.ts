@@ -1,3 +1,4 @@
+import { githubEmailFooter } from './github'
 // The same paper palette, brand header, typography and table layout as the Welcome emails.
 // bodyHtml is trusted template markup; escape all dynamic values before passing it in.
 type ReinEmailLayout = {
@@ -45,7 +46,7 @@ ${bodyHtml}
 </td></tr>
 <tr><td style="padding:20px 24px 24px;border-top:1px solid #d5c7b1;color:#75695e;font-size:11px;line-height:1.65;">
 <p style="margin:0 0 10px;">${escapeEmailHtml(footerNote)}</p>
-<p style="margin:0;"><a href="https://www.rein-protocol.org/" style="color:#75695e;">rein-protocol.org</a> · <a href="https://www.rein-protocol.org/privacy" style="color:#75695e;">Privacy</a></p>
+<p style="margin:0;"><a href="https://www.rein-protocol.org/" style="color:#75695e;">rein-protocol.org</a> · <a href="https://www.rein-protocol.org/privacy" style="color:#75695e;">Privacy</a> · ${githubEmailFooter}</p>
 </td></tr></table>
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr></table></body></html>`

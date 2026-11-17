@@ -28,6 +28,9 @@ playwright-report
 # Local secrets inventory (never commit)
 /SECRETs.md
 
+# Private local organization contact and registration records (never commit)
+/.private/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
