@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test'
 
 const institutionalRoutes = [
-  { path: '/', heading: 'Making AI agents safe for people and society.', title: 'Rein Protocol Foundation' },
-  { path: '/mission', heading: 'Making AI agents safe for people and society.', title: 'Mission' },
-  { path: '/programs', heading: 'Meet in person. Keep learning together online.', title: 'Programs and Public Work' },
+  { path: '/', heading: 'Making AI agents safe for people and society.', title: 'AI Agent Safety — Rein Protocol Foundation' },
+  { path: '/mission', heading: 'AI agent safety, with people accountable.', title: 'Our Mission: AI Agent Safety' },
+  { path: '/programs', heading: 'Learn, meet, and build safer AI agents.', title: 'AI Agent Community Programs' },
   { path: '/governance', heading: 'AI agents help run Rein. People remain responsible.', title: 'Governance and Stewardship' },
   { path: '/giving', heading: 'Support AI agent safety.', title: 'Giving' },
 ] as const
@@ -64,7 +64,9 @@ test.describe('institutional site', () => {
 
   test('home remains Mission-first while exposing Community', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('main a')).toHaveCount(1)
+    for (const path of ['/mission', '/programs', '/community/learn', '/community']) {
+      await expect(page.locator(`main a[href="${path}"]`)).toBeVisible()
+    }
     await expect(page.locator('.work-list')).toContainText('Local meetups, workshops, presentations, and discussions')
     await expect(page.getByRole('heading', { name: /A public network of/ })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Explore the community' })).toHaveAttribute('href', '/community')

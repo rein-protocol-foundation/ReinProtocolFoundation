@@ -11,7 +11,7 @@ import { ResourceCard } from '@/components/resource-card'
 import { getPublishedEvents, getPublishedResources, getPublicMemberMetrics, getPublicPeople } from '@/lib/community/data'
 import { publicCommunityAudience } from '@/lib/community/presentation'
 
-export const metadata: Metadata = { alternates: { canonical: '/community' }, title: 'Community', description: 'Join in-person events and online conversations, share learning materials, and find peer guidance for a career working with AI agents.' }
+export const metadata: Metadata = { alternates: { canonical: '/community' }, title: 'AI Agent Community', description: 'Join in-person events and online conversations, share learning materials, and find peer guidance for a career working with AI agents.' }
 export const maxDuration = 60
 
 function firstStart(event: Awaited<ReturnType<typeof getPublishedEvents>>[number]) {
@@ -115,6 +115,7 @@ export default function CommunityPage() {
     </header>
 
     <CommunitySection eyebrow="01 / Our early programs" title="Meet in person. Stay connected online." lead="Two connected priorities: local events and an online community for conversations, presentations, shared learning, and career guidance." id="program" tone="soft">
+      <p className="community-contribution-context"><Link href="/community/learn">Browse AI agent learning resources</Link> for free courses, tutorials, and research discussions.</p>
       <Suspense fallback={<ProgramFallback />}><CommunityProgram /></Suspense>
     </CommunitySection>
 
@@ -127,7 +128,7 @@ export default function CommunityPage() {
     </CommunitySection>
 
     <CommunitySection eyebrow="04 / Contribute" title="Choose how you want to contribute." lead="Organize an event, give a presentation, share learning materials, or help another member prepare for work with AI agents." id="contribute">
-      <p className="community-contribution-context">You can participate in public activities without applying. Registering for updates makes you a Community Participant. Apply as a Contributor when you want to organize or take responsibility for ongoing work; Core Contributors are recognized for sustained responsibility.</p>
+      <p className="community-contribution-context">You can participate in public activities without applying. Registering for updates makes you a Community Participant. Apply as a Contributor when you want to organize or take responsibility for ongoing work; Core Contributors are recognized for sustained responsibility. <Link href="/community/contribute">Explore ways to contribute</Link>.</p>
       <Suspense fallback={<ContributeFallback />}><CommunityContribute /></Suspense>
     </CommunitySection>
   </main>
