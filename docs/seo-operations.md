@@ -32,4 +32,16 @@ The local comparison state is `.cache/indexnow.json` (ignored by Git). The scrip
 
 Use Search Console Performance and Pages for Google search queries, clicks, impressions, indexing, and canonical selection. Use Bing Search Performance and AI Performance for Bing search and supported AI citations. Newly verified properties need time to process data; zero data immediately after setup is not proof of zero traffic.
 
-The initial Google inspection showed that the www homepage was treated as a duplicate of the apex in an older crawl. The live apex-to-www redirect is already permanent. Keep canonical URLs and sitemap entries consistent and monitor Google's selected canonical after recrawling.
+The initial Google inspection showed the www homepage as a duplicate of the apex. A read-only URL Inspection check on 2026-11-17 confirmed the homepage is now indexed with Google's selected canonical matching `https://www.rein-protocol.org/`. Keep the permanent apex-to-www redirect, canonical URLs, and sitemap entries consistent. This is a dated observation, not a guarantee of future indexing.
+
+## Core-page content and discovery
+
+The homepage identifies the AI agent safety focus in its title and publishes Organization JSON-LD using the shared legal name, public contact email, approved logo, and official GitHub organization. Keep these facts aligned with visible public information; do not add unverified accreditation, tax status, or organization profiles.
+
+The homepage links within its main content to the mission, programs, learning catalog, and community. The mission and programs pages also link to learning resources. Community links to the learning catalog independently of whether resource data is available, and to the dedicated contribution page. These links supplement the global navigation and sitemap.
+
+The learning catalog retains self-referencing pagination canonicals and distinguishes later pages in its title. Preserve those URLs when editing metadata.
+
+After publishing, check the rendered titles, canonical links, Organization JSON-LD, and the existing IndexNow workflow. In Search Console, monitor indexing of `/mission`, `/programs`, `/community`, `/community/learn`, and `/community/contribute`. Compare final performance data over meaningful periods; initial impressions and incomplete recent data are not enough to establish a ranking or click-through-rate improvement.
+
+Implementation references: [Google title links](https://developers.google.com/search/docs/appearance/title-link), [crawlable internal links](https://developers.google.com/search/docs/crawling-indexing/links-crawlable), and [Organization structured data](https://developers.google.com/search/docs/appearance/structured-data/organization).

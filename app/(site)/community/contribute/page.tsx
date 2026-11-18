@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { CommunityPageHero, CommunitySection } from '@/components/community-shell'
 import { ContributionPaths, getContributionIssueLinks } from '@/components/contribution-paths'
 
-export const metadata: Metadata = { alternates: { canonical: '/community/contribute' }, title: 'Contribute', description: 'Help organize events, share presentations and learning materials, or offer peer guidance in the Rein AI agent community.' }
+export const metadata: Metadata = { alternates: { canonical: '/community/contribute' }, title: 'Contribute to the AI Agent Community', description: 'Help organize events, share presentations and learning materials, or offer peer guidance in the Rein AI agent community.' }
 
 export default async function ContributePage() {
   const issueLinks = await getContributionIssueLinks()

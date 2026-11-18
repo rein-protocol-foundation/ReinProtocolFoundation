@@ -15,7 +15,7 @@ export async function generateMetadata({ searchParams }: { searchParams: LearnSe
   const canonical = Number.isSafeInteger(page) && page > 1 && page <= Math.floor(Number.MAX_SAFE_INTEGER / PAGE_SIZE)
     ? `/community/learn?page=${page}` : '/community/learn'
   return {
-    title: 'Learning Resources',
+    title: canonical.includes('?') ? `AI Agent Learning Resources — Page ${page}` : 'AI Agent Learning Resources',
     description: 'Explore free public courses, tutorials, research discussions, and practical guides for learning about AI agents.',
     alternates: { canonical },
   }
@@ -58,9 +58,10 @@ function CatalogFallback() {
 export default function LearnPage({ searchParams }: { searchParams: LearnSearchParams }) {
   return (
     <main id="main-content" className="community-shell">
-      <CommunityPageHero eyebrow="Community / Learn" title="Learning resources." lead="Free courses, tutorials, research discussions, and practical guides to help you learn about AI agents, at your own pace." />
+      <CommunityPageHero eyebrow="Community / Learn" title="AI agent learning resources." lead="Free courses, tutorials, research discussions, and practical guides to help you learn about AI agents, at your own pace." />
       <section className="page-shell learning-catalog" aria-labelledby="resource-catalog-title">
         <h2 id="resource-catalog-title" className="visually-hidden">All learning resources</h2>
+        <p className="community-contribution-context">Start with a course or tutorial that matches your experience. When exploring an agent, ask what it can do, what permissions it needs, and how a person can review its actions. Learn about <Link href="/mission">Rein’s approach to AI agent safety</Link>, or <Link href="/community/contribute">help others learn by contributing</Link>.</p>
         <div className="learning-catalog__actions">
           <Link href="/community#program" className="text-action"><span className="resource-pagination__back"><Arrow /></span>Back to community</Link>
           <Link href="/community/contribute/resources/submit" className="quiet-action">Submit a learning resource <Arrow /></Link>

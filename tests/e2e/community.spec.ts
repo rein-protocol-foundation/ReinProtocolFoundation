@@ -77,14 +77,14 @@ test.describe('Community learning resources', () => {
       await expect(showMore).toHaveAttribute('href', '/community/learn')
       await showMore.click()
       await expect(page).toHaveURL(/\/community\/learn$/)
-      await expect(page.getByRole('heading', { level: 1, name: 'Learning resources.' })).toBeVisible()
+      await expect(page.getByRole('heading', { level: 1, name: 'AI agent learning resources.' })).toBeVisible()
     }
   })
 
   test('catalog provides bounded pages and navigation back to the community', async ({ page }) => {
     await page.goto('/community/learn')
     await expect(page).toHaveURL(/\/community\/learn$/)
-    await expect(page.getByRole('heading', { level: 1, name: 'Learning resources.' })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1, name: 'AI agent learning resources.' })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Submit a learning resource' })).toHaveAttribute('href', '/community/contribute/resources/submit')
     await expect(page.getByRole('link', { name: 'Back to community', exact: true })).toHaveAttribute('href', '/community#program')
     await expect(page.getByLabel('Loading learning resources', { exact: true })).toHaveCount(0)
@@ -127,7 +127,7 @@ test.describe('Community contribution and policies', () => {
     await expect(page.getByRole('link', { name: 'Submit a resource', exact: true })).toHaveCount(1)
     await expect(page.getByRole('link', { name: 'Event proposal', exact: true })).toHaveCount(1)
     await expect(page.getByRole('link', { name: 'Apply privately', exact: true })).toHaveCount(1)
-    await expect(page.locator('.community-contribution-context')).toContainText('without applying')
+    await expect(page.locator('#contribute + .community-contribution-context')).toContainText('without applying')
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
   })
 
