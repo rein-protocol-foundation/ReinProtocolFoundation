@@ -14,11 +14,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  indexnow:
+  dispatch-production:
     if: >-
-      github.event_name != 'deployment_status' ||
-      (github.event.deployment_status.state == 'success' &&
-      github.event.deployment.environment == 'Production')
+      github.event_name == 'deployment_status' &&
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      actions: write
+    steps:
+      # deployment_status has no branch ref, so actions/cache cannot restore or save.
+      # Dispatch on main to share the same cache as scheduled and manual runs.
+      - name: Queue production comparison on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run indexnow.yml --repo "$GITHUB_REPOSITORY" --ref main
+
+  indexnow:
+    if: github.event_name != 'deployment_status' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

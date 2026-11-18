@@ -20,6 +20,14 @@ test('ignore hydration and markup churn but detect content and metadata changes'
   assert.throws(() => pageFingerprint('<html>Challenge page</html>'), /main content/)
 })
 
+test('detect JSON-LD updates while ignoring JSON formatting and hydration changes', () => {
+  const page = '<main>Rein</main><script type="application/ld+json">{"@type":"Organization","name":"Rein"}</script><script>build=1</script>'
+  assert.equal(pageFingerprint(page), pageFingerprint(page.replace('{"@type"', '{ "@type"').replace('build=1', 'build=2')))
+  assert.notEqual(pageFingerprint(page), pageFingerprint(page.replace('"name":"Rein"', '"name":"Rein Protocol Foundation"')))
+  assert.notEqual(pageFingerprint(page), pageFingerprint('<main>Rein</main>'))
+  assert.throws(() => pageFingerprint(page.replace('{"@type"', '{invalid "@type"')), SyntaxError)
+})
+
 test('submit changes once, retain state on API failure, and report confirmed removal', async (t) => {
   const directory = await mkdtemp(join(tmpdir(), 'rein-indexnow-test-'))
   t.after(() => rm(directory, { recursive: true, force: true }))

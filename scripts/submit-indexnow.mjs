@@ -17,6 +17,9 @@ export function sitemapUrls(xml, siteUrl) {
 }
 
 export function pageFingerprint(html) {
+  // JSON-LD is searchable metadata, even though hydration scripts are ignored.
+  const structuredData = [...html.matchAll(/<script\b[^>]*\btype\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
+    .map(match => JSON.parse(match[1]))
   // Ignore deployment IDs and hydration scripts; compare searchable content and metadata.
   const clean = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
   const main = clean.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1]
@@ -24,7 +27,7 @@ export function pageFingerprint(html) {
   const text = main.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
   const linksAndImages = (main.match(/<(?:a|img)\b[^>]*>/gi) ?? []).map(tag => tag.match(/\b(?:href|src|alt)="[^"]*"/gi) ?? [])
   const metadata = clean.match(/<title[^>]*>[\s\S]*?<\/title>|<meta\b[^>]*>|<link\b[^>]*rel="canonical"[^>]*>/gi) ?? []
-  return createHash('sha256').update(JSON.stringify({ text, linksAndImages, metadata })).digest('hex')
+  return createHash('sha256').update(JSON.stringify({ text, linksAndImages, metadata, ...(structuredData.length ? { structuredData } : {}) })).digest('hex')
 }
 
 async function request(url, options = {}) {
