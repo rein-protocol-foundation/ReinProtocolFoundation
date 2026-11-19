@@ -84,7 +84,7 @@ Do not seed fabricated courses, events, people, projects, or member records. Pub
 
 ## Related references
 
-- [Chinese local backend setup](./配置后端.md)
+- [Chinese local backend setup](./docs/backend-setup-zh.md)
 - [Database setup](./supabase/README.md)
 - [End-to-end tests](./tests/e2e/README.md)
 - [Brand assets and usage](./public/brand/README.md)

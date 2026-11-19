@@ -27,5 +27,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Canonical GitHub organization: `rein-protocol-foundation`. Website repository:
   `rein-protocol-foundation/ReinProtocolFoundation`; Nori: `rein-protocol-foundation/nori-agent`.
 - Before troubleshooting repository identity, Vercel linkage, Nori deployment reports, or source-snapshot CI failures,
-  read [the migration record](docs/github-organization-migration-2026-10.md). It distinguishes historical observations
+  read [the migration record](docs/github-organization-migration-2026-10-zh.md). It distinguishes historical observations
   from pending production verification; recheck live state rather than assuming completion.

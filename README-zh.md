@@ -50,7 +50,7 @@ Rein 是一个 **AI-native 组织**。AI Agents 可以在明确政策范围内�
 
 ## 当前阶段与参考文档
 
-- [GitHub 组织创建、项目迁移与故障排查记录](./docs/github-organization-migration-2026-10.md)
+- [GitHub 组织创建、项目迁移与故障排查记录](./docs/github-organization-migration-2026-10-zh.md)
 
 [创始章程与运营蓝图](./PROJECT.md)仍包含草案和历史筹备记录。基金会的法人设立与 EIN 已完成；募款安排和部分治理机制仍待审核或采纳。计划中的课程、活动、资助及自动化运营应分别以实际发布的信息为准。
 
