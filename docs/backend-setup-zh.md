@@ -42,7 +42,7 @@ OPENAI_API_KEY=
 
 ## 2. 配置 Supabase
 
-使用项目统一的 Supabase project，然后按文件名顺序执行 [`supabase/migrations`](./supabase/migrations) 中的 SQL 文件。最简单的方式是逐个复制到 Supabase SQL Editor 执行。
+使用项目统一的 Supabase project，然后按文件名顺序执行 [`supabase/migrations`](../supabase/migrations) 中的 SQL 文件。最简单的方式是逐个复制到 Supabase SQL Editor 执行。
 
 迁移会创建数据库表、RLS、Storage bucket、服务端事务函数和 retention maintenance。同一个 Supabase project 内，本地开发和测试统一使用 `dev_*` 表，生产部署统一使用 `prod_*` 表；以后每个 migration 都必须在同一事务中维护两套表。公开表单提交时，系统会保存原始 IP 地址用于限流，并在七天内由 Supabase Cron 删除。Privacy Policy 已说明这项收集和保留规则。
 

@@ -2,7 +2,7 @@
 
 The organization curates first-party, freely accessible learning resources. The initial Agent collection was checked on **2026-10-15** and contains 16 resources: 15 additions and an enrichment of the previously published Hugging Face Agents Course. Production is the live catalog; development receives the same schema, without automatically copying production content.
 
-The reviewed source dataset is [ai-agents-2026-10-15.json](../data/learning-resources/ai-agents-2026-10-15.json). Anonymous link checks are recorded in [the verification manifest](../data/learning-resources/ai-agents-2026-10-15-verification.json). The [Chinese research report](research/ai-agent-learning-resources-2026-10-15.md) provides a readable resource map.
+The reviewed source dataset is [ai-agents-2026-10-15.json](../data/learning-resources/ai-agents-2026-10-15.json). Anonymous link checks are recorded in [the verification manifest](../data/learning-resources/ai-agents-2026-10-15-verification.json). The [Chinese research report](research/ai-agent-learning-resources-2026-10-15-zh.md) provides a readable resource map.
 
 ## Inclusion and rights
 

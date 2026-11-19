@@ -82,7 +82,7 @@ Contributor 审核只向 OpenAI 发送申请理由、贡献兴趣、相关“其
 
 ## 相关资料
 
-- [本地后端配置](./配置后端.md)
+- [本地后端配置](./docs/backend-setup-zh.md)
 - [数据库环境说明](./supabase/README.md)
 - [端到端测试说明](./tests/e2e/README.md)
 - [品牌素材及使用说明](./public/brand/README.md)
