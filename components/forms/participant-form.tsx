@@ -1,6 +1,7 @@
 'use client'
 
 import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from 'react'
+import { DiscordInvitation } from '@/components/discord-invitation'
 import Link from 'next/link'
 import { registerParticipant } from '@/lib/community/actions'
 import { INDUSTRIES } from '@/lib/community/constants'
@@ -26,7 +27,7 @@ export function ParticipantForm() {
 
   return (
     <form ref={formRef} className="community-form community-form--participant" action={action} onSubmit={handleSubmit} noValidate>
-      <FormStatus state={state} />
+      <FormStatus state={state} successAction={<DiscordInvitation />} />
       <fieldset className="form-content">
       <legend className="visually-hidden">Community registration fields</legend>
       <div className="field-grid">

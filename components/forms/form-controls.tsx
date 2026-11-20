@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { useFormStatus } from 'react-dom'
 import Image from 'next/image'
 import { COUNTRIES, US_STATES } from '@/lib/community/constants'
@@ -12,7 +12,7 @@ export function FieldError({ state, name }: { state: ActionState; name: string }
   return <span className="field-error" id={`${name}-error`}>{errors[0]}</span>
 }
 
-export function FormStatus({ state }: { state: ActionState }) {
+export function FormStatus({ state, successAction }: { state: ActionState; successAction?: ReactNode }) {
   const statusRef = useRef<HTMLDivElement>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const dialogTitleId = useId()
@@ -56,7 +56,8 @@ export function FormStatus({ state }: { state: ActionState }) {
               <p className="article-kicker">{dialogKicker}</p>
               <h2 id={dialogTitleId}>{dialogTitle}</h2>
               <p id={dialogMessageId}>{state.message}</p>
-              <button className="primary-action" type="button" onClick={closeDialog}>Done</button>
+              {successAction}
+              <button className={successAction ? 'dialog-dismiss' : 'primary-action'} type="button" onClick={closeDialog}>Done</button>
             </div>
           </div>
         ) : (

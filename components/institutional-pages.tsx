@@ -1,3 +1,6 @@
+import { CommunitySection } from '@/components/community-shell'
+import { ParticipantForm } from '@/components/forms/participant-form'
+import { githubOrganizationUrl } from '@/lib/github'
 import { PeopleDirectory } from '@/components/people-directory'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -57,7 +60,9 @@ export function InstitutionalHomePage() {
           <p className="eyebrow hero-enter hero-enter--1">A NONPROFIT ORGANIZATION FOR AI AGENT SAFETY</p>
           <h1 id="home-title">Making AI agents <span className="home-hero__accent">safe</span> <em>for <span className="home-hero__accent">people</span> and <span className="home-hero__accent">society</span>.</em></h1>
           <p className="home-hero__mission hero-enter hero-enter--3">We bring people together and support open-source projects and research to make AI agents safe, with a focus on transparency, observability, and policy controls.</p>
-
+          <div className="home-hero__actions">
+            <a className="primary-action" href="#register">Register for community updates</a>
+          </div>
         </div>
         <div className="home-hero__principles page-shell hero-enter hero-enter--5" aria-label="Founding principles"><span>Open participation</span><span>AI-native operations</span><span>Human accountable</span></div>
       </section>
@@ -77,9 +82,19 @@ export function InstitutionalHomePage() {
       <section className="work-section" id="programs" aria-labelledby="work-title">
         <div className="work-visual" aria-hidden="true" data-reveal><img className="deferred-image is-loaded" src={stanford.src} width="972" height="1619" alt="" loading="lazy" /><span>Knowledge bears duty</span></div>
         <div className="work-content" data-reveal>
-          <p className="section-index">02 / Our early programs</p><h2 id="work-title">Meet in person. Keep learning together online.</h2>
-          <ol className="work-list">{programs.map((program) => <li key={program.number}><span>{program.number}</span><div><strong>{program.title}</strong><p>{program.detail}</p></div></li>)}</ol>
-          <p className="work-participation">Public learning resources and events are open without registration. Bring a question, a project, or experience to share.</p><TextLink href="/programs">Explore our community programs</TextLink>
+          <h2 id="work-title">Open source and research.</h2>
+          <div className="home-projects">
+            <article>
+              <h3><a href="https://nori.rein-protocol.org/">Nori</a></h3>
+              <p>Rein’s open-source community agent answers questions on Discord and helps members find resources.</p>
+            </article>
+            <article>
+              <h3><a href="https://arxiv.org/pdf/2611.18064">A³: Adaptive Audio Agent Framework for Collaborative Edge Computing</a></h3>
+              <p>November 2026 preprint by Zexin Li, Xueyi Zhang, Tao Ren, and Yiming Chen. The authors study how an audio agent can keep answering on-device when it loses its server connection.</p>
+            </article>
+          </div>
+          <p><a className="text-action" href={githubOrganizationUrl}>Browse Rein’s repositories on GitHub</a></p>
+          <TextLink href="/programs">Explore our community programs</TextLink>
         </div>
       </section>
 
@@ -95,13 +110,16 @@ export function InstitutionalHomePage() {
       <section className="community-section community-section--soft" aria-labelledby="home-community-title">
         <div className="page-shell">
           <div className="community-heading"><p className="section-index">04 / Community</p><div><h2 id="home-community-title">A public network of <Suspense fallback={<span className="audience-pending">many active participants</span>}><HomeAudience /></Suspense>.</h2><p>Meet people working with AI agents, join local and online events, share learning materials, and help each other prepare for AI agent roles.</p><TextLink href="/community/learn">Browse AI agent learning resources</TextLink></div></div>
+          <Link href="/community" className="text-action">Explore the community</Link>
           <Suspense fallback={null}>
             <PeopleDirectory featured />
           </Suspense>
         </div>
       </section>
 
-      <section className="closing-section" aria-labelledby="closing-title"><div className="page-shell" data-reveal><p className="eyebrow">Take part</p><h2 id="closing-title">Help make AI agents safe for people and society.</h2><p className="closing-invitation">Explore events and learning materials, register for updates, or bring your experience to a community project.</p><Link href="/community" className="primary-action">Explore the community</Link></div></section>
+      <CommunitySection id="register" title="Register for community updates." eyebrow="Stay connected" lead="Get news about Rein’s research, learning resources, and community activities by email.">
+        <ParticipantForm />
+      </CommunitySection>
     </main>
   )
 }

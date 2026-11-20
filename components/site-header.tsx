@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { Arrow, FoundationMark } from '@/components/icons'
+import { FoundationMark } from '@/components/icons'
 
 const links = [
   ['/', 'Home'],
@@ -11,6 +11,7 @@ const links = [
   ['/programs', 'Programs'],
   ['/governance', 'Governance'],
   ['/community', 'Community'],
+  ['/giving', 'Giving'],
 ] as const
 
 const communityLinks = [
@@ -23,6 +24,7 @@ const communityLinks = [
 
 export function SiteHeader() {
   const pathname = usePathname()
+  const toggleRef = useRef<HTMLButtonElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [communityHash, setCommunityHash] = useState('')
   const communityNavigationRef = useRef<HTMLElement>(null)
@@ -70,11 +72,14 @@ export function SiteHeader() {
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMenuOpen(false)
+      if (event.key === 'Escape' && menuOpen) {
+        setMenuOpen(false)
+        toggleRef.current?.focus()
+      }
     }
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)
-  }, [])
+  }, [menuOpen])
 
   useEffect(() => {
     if (pathname === '/community' && communityHash) {
@@ -106,6 +111,7 @@ export function SiteHeader() {
           <span>Rein Protocol<small>Foundation</small></span>
         </Link>
         <button
+          ref={toggleRef}
           className="menu-toggle"
           type="button"
           aria-expanded={menuOpen}
@@ -120,11 +126,8 @@ export function SiteHeader() {
           {links.map(([href, label]) => {
             const current = href === '/' ? pathname === '/' : pathname.startsWith(href)
             const exact = pathname === href
-            return <Link key={href} href={href} className={current ? 'is-active' : undefined} aria-current={exact ? 'page' : current ? 'location' : undefined}>{label}</Link>
+            return <Link key={href} href={href} onClick={() => setMenuOpen(false)} className={current ? 'is-active' : undefined} aria-current={exact ? 'page' : current ? 'location' : undefined}>{label}</Link>
           })}
-          <Link href="/giving" className={`nav-action ${pathname === '/giving' ? 'is-active' : ''}`} aria-current={pathname === '/giving' ? 'page' : undefined}>
-            Giving <Arrow />
-          </Link>
         </nav>
       </div>
       {inCommunity ? (
