@@ -12,8 +12,9 @@ type Profile = Pick<PublicPerson, 'slug' | 'display_name' | 'role' | 'photo_url'
 const boardProfiles: Profile[] = [
   {
     slug: 'tempest-ren',
+    website_url: 'https://tempest.fun/',
     display_name: 'Tempest Ren',
-    role: 'Founder & Board Director',
+    role: 'Founder & Board Chair',
     profession: 'AI Agent Builder & Researcher · ex-TikTok engineer',
     photo_url: '/people/tempest-ren.webp',
     photo_alt: 'Portrait of Tempest Ren',
