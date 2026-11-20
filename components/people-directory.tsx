@@ -13,10 +13,10 @@ const founder: Profile = {
   slug: 'tempest-ren',
   display_name: 'Tempest Ren',
   role: 'Founder & Board Director',
-  profession: 'AI Agent Builder, AI Researcher',
+  profession: 'AI Agent Builder & Researcher · ex-TikTok engineer',
   photo_url: '/people/tempest-ren.webp',
   photo_alt: 'Portrait of Tempest Ren',
-  biography: "I'm AI Agent Builder, AI Researcher, Ex-Tiktok Engineer. I build super agent for real work in organization and business.",
+  biography: 'I build super agents and founded Rein to bring builders and researchers together to make AI agents safer. As a board director, I help set Rein’s direction and keep people accountable for the decisions we entrust to agents.',
 }
 
 function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
