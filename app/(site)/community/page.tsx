@@ -6,9 +6,9 @@ import { CommunitySection } from '@/components/community-shell'
 import { DiscordInvitation } from '@/components/discord-invitation'
 import { ContributionPaths, getContributionIssueLinks } from '@/components/contribution-paths'
 import { ParticipantForm } from '@/components/forms/participant-form'
-import { ProfileCard } from '@/components/profile-card'
+import { PeopleDirectory } from '@/components/people-directory'
 import { ResourceCard } from '@/components/resource-card'
-import { getPublishedEvents, getPublishedResources, getPublicMemberMetrics, getPublicPeople } from '@/lib/community/data'
+import { getPublishedEvents, getPublishedResources, getPublicMemberMetrics } from '@/lib/community/data'
 import { publicCommunityAudience } from '@/lib/community/presentation'
 
 export const metadata: Metadata = { alternates: { canonical: '/community' }, title: 'AI Agent Community', description: 'Join in-person events and online conversations, share learning materials, and find peer guidance for a career working with AI agents.' }
@@ -51,12 +51,6 @@ async function CommunityProgram() {
   )
 }
 
-async function CommunityPeople() {
-  const people = await getPublicPeople({ featured: true })
-  if (!people.length) return null
-  return <div className="profile-grid">{people.map((person) => <ProfileCard person={person} key={person.id} />)}</div>
-}
-
 async function CommunityContribute() {
   const contributionIssueLinks = await getContributionIssueLinks()
   return <ContributionPaths issueLinks={contributionIssueLinks} />
@@ -68,19 +62,6 @@ function ProgramFallback() {
       {[0, 1].map((index) => (
         <article key={index}>
           <div><span className="skeleton-line skeleton-line--kicker" /><span className="skeleton-line skeleton-line--title" /><span className="skeleton-line skeleton-line--bio skeleton-line--short" /></div>
-        </article>
-      ))}
-    </div>
-  )
-}
-
-function PeopleFallback() {
-  return (
-    <div className="profile-grid" aria-hidden="true">
-      {[0, 1].map((index) => (
-        <article className="profile-card" key={index}>
-          <div className="profile-card__placeholder" />
-          <div><span className="skeleton-line skeleton-line--role" /><span className="skeleton-line skeleton-line--name" /><span className="skeleton-line skeleton-line--bio" /><span className="skeleton-line skeleton-line--bio skeleton-line--short" /></div>
         </article>
       ))}
     </div>
@@ -119,8 +100,8 @@ export default function CommunityPage() {
       <Suspense fallback={<ProgramFallback />}><CommunityProgram /></Suspense>
     </CommunitySection>
 
-    <CommunitySection eyebrow="02 / People" title="People behind the work." lead="Directors and Core Contributors from across the community." id="people">
-      <Suspense fallback={<PeopleFallback />}><CommunityPeople /></Suspense>
+    <CommunitySection eyebrow="02 / People" title="People behind the work." id="people">
+      <Suspense fallback={null}><PeopleDirectory /></Suspense>
     </CommunitySection>
 
     <CommunitySection eyebrow="03 / Stay connected" title="Register for community updates." lead="Hear about local events, online presentations, learning materials, and ways to contribute, with updates relevant to your field and region." id="register" tone="soft">

@@ -164,7 +164,7 @@
 .community-role-list h3,
 .community-program-list h3,
 .contribution-list h3,
-.profile-card h2 {
+.profile-card h4 {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.55rem, 3vw, 2.15rem);
@@ -415,35 +415,42 @@
   gap: 0 clamp(2rem, 5vw, 5rem);
 }
 
-.profile-card {
+.people-directory {
   display: grid;
-  grid-template-columns: minmax(7rem, .65fr) minmax(0, 1.35fr);
-  gap: 1.5rem;
-  padding-block: 2rem;
+  gap: 3rem;
+}
+
+.people-directory .article-kicker {
+  margin: 0 0 1rem;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3.5rem);
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
   border-top: 1px solid var(--line);
 }
 
-.profile-card__portrait,
-.profile-card__placeholder {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  background: var(--paper-deep);
-}
-
 .profile-card__portrait {
+  flex: none;
+  width: clamp(8rem, 18vw, 14rem);
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  filter: saturate(.75);
+  object-position: center 35%;
 }
 
-.profile-card__placeholder {
-  display: grid;
-  place-items: center;
-  color: var(--ink-faint);
-  font: 430 2.5rem var(--font-display);
+.profile-card--member {
+  gap: 1rem;
 }
 
-.profile-card__role {
-  margin: 0 0 .5rem;
+.profile-card--member .profile-card__portrait {
+  width: 4rem;
+  aspect-ratio: 1;
+}
+
+.profile-card .profile-card__role {
+  margin-bottom: .6rem;
   color: var(--accent-dark);
   font-size: .72rem;
   font-weight: 750;
@@ -451,8 +458,14 @@
   text-transform: uppercase;
 }
 
-.profile-card__bio {
-  margin-top: .75rem !important;
+.profile-card .profile-card__profession {
+  margin-top: .5rem;
+  font-weight: 600;
+}
+
+.profile-card .profile-card__bio {
+  max-width: 52ch;
+  margin-top: 1rem;
 }
 
 .audience-pending {
@@ -1173,8 +1186,9 @@
     grid-template-columns: 1fr;
   }
 
-  .profile-card {
-    grid-template-columns: minmax(6rem, .55fr) minmax(0, 1.45fr);
+  .profile-card--board {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .field-grid,
