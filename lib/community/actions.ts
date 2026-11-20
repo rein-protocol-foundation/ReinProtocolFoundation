@@ -45,7 +45,7 @@ export async function registerParticipant(_previous: ActionState, formData: Form
     after(async () => { try { await sendParticipantConfirmation(data.email, data.name, participantId) } catch { /* administrator can inspect provider configuration */ } })
     return {
       status: 'success', presentation: 'dialog', dialogKicker: 'Registration complete', dialogTitle: 'You’re registered.',
-      message: 'We will use your information only for community communication and administration.',
+      message: 'You’ll receive community updates by email. Join us on Discord to introduce yourself or ask Nori a question.',
     }
   } catch (error) {
     return submissionError(error as Error)

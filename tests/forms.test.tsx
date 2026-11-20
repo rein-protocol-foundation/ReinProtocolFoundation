@@ -122,6 +122,7 @@ describe('public community forms', () => {
     fireEvent.submit(container.querySelector('form')!)
     await screen.findByRole('dialog')
 
+    expect(screen.getByRole('link', { name: 'Join our Discord server' })).toHaveAttribute('href', 'https://discord.gg/m8qnWv9XX')
     await waitFor(() => {
       expect(screen.getByRole('textbox', { name: /^Email/ })).toHaveValue('')
       expect(screen.getByRole('combobox', { name: /^Field or industry/ })).toHaveValue('')

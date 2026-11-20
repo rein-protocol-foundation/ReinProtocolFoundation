@@ -67,7 +67,9 @@ test.describe('institutional site', () => {
     for (const path of ['/mission', '/programs', '/community/learn', '/community']) {
       await expect(page.locator(`main a[href="${path}"]`)).toBeVisible()
     }
-    await expect(page.locator('.work-list')).toContainText('Local meetups, workshops, presentations, and discussions')
+    await expect(page.getByRole('link', { name: 'Nori', exact: true })).toHaveAttribute('href', 'https://nori.rein-protocol.org/')
+    await page.getByRole('link', { name: 'Register for community updates' }).click()
+    await expect(page.getByRole('textbox', { name: /^Email/ })).toBeVisible()
     await expect(page.getByRole('heading', { name: /A public network of/ })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Explore the community' })).toHaveAttribute('href', '/community')
     await expect(page.locator('.stewardship-support')).toContainText('Giving channels remain subject to legal and operational approval.')
@@ -84,7 +86,11 @@ test.describe('institutional site', () => {
     await expect(page.getByLabel('Primary navigation').getByRole('link', { name: 'Community', exact: true })).toBeVisible()
     await expect(toggle).toHaveAttribute('aria-expanded', 'true')
 
+    await page.keyboard.press('Tab')
     await page.keyboard.press('Escape')
+    await expect(toggle).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(page.getByRole('link', { name: 'Register for community updates' })).toBeFocused()
     await expect(toggle).toHaveAttribute('aria-expanded', 'false')
   })
 
