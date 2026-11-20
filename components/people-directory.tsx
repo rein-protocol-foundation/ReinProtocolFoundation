@@ -26,7 +26,7 @@ const boardProfiles: Profile[] = [
     profession: 'Postdoctoral Research Fellow, Nanyang Technological University',
     photo_url: '/people/zexin-li.webp',
     photo_alt: 'Illustrated portrait of Zexin Li',
-    biography: 'My research interests lie in interdisciplinary fields of real-time embedded systems and on-device machine learning.',
+    biography: 'Zexin studies how machine learning models can run reliably on devices with limited computing power. His research spans real-time embedded systems and on-device learning.',
     website_url: 'https://zexinli.com/',
   },
 ]
