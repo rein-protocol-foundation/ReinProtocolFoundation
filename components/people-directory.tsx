@@ -9,15 +9,27 @@ type Profile = Pick<PublicPerson, 'slug' | 'display_name' | 'role' | 'photo_url'
   linkedin_url?: string | null
 }
 
-const founder: Profile = {
-  slug: 'tempest-ren',
-  display_name: 'Tempest Ren',
-  role: 'Founder & Board Director',
-  profession: 'AI Agent Builder & Researcher · ex-TikTok engineer',
-  photo_url: '/people/tempest-ren.webp',
-  photo_alt: 'Portrait of Tempest Ren',
-  biography: 'I build super agents and founded Rein to bring builders and researchers together to make AI agents safer. As a board director, I help set Rein’s direction and keep people accountable for the decisions we entrust to agents.',
-}
+const boardProfiles: Profile[] = [
+  {
+    slug: 'tempest-ren',
+    display_name: 'Tempest Ren',
+    role: 'Founder & Board Director',
+    profession: 'AI Agent Builder & Researcher · ex-TikTok engineer',
+    photo_url: '/people/tempest-ren.webp',
+    photo_alt: 'Portrait of Tempest Ren',
+    biography: 'I build super agents and founded Rein to bring builders and researchers together to make AI agents safer. As a board director, I help set Rein’s direction and keep people accountable for the decisions we entrust to agents.',
+  },
+  {
+    slug: 'zexin-li',
+    display_name: 'Zexin Li',
+    role: 'Board Director',
+    profession: 'Postdoctoral Research Fellow, Nanyang Technological University',
+    photo_url: '/people/zexin-li.webp',
+    photo_alt: 'Illustrated portrait of Zexin Li',
+    biography: 'My research interests lie in interdisciplinary fields of real-time embedded systems and on-device machine learning.',
+    website_url: 'https://zexinli.com/',
+  },
+]
 
 function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
   const profession = board ? person.profession : person.role
@@ -41,12 +53,16 @@ function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
 
 export async function PeopleDirectory({ featured = false }: { featured?: boolean }) {
   const people = await getPublicPeople({ featured })
-  const publishedFounder = people.find((person) => person.slug === founder.slug)
-  const directors: Profile[] = [
-    { ...publishedFounder, ...founder },
-    ...people.filter((person) => person.person_type === 'director' && person.slug !== founder.slug),
+  const boardSlugs = new Set(boardProfiles.map((profile) => profile.slug))
+  const remaining = people.filter((person) => !boardSlugs.has(person.slug))
+  const directors = [
+    ...boardProfiles.map((profile) => ({
+      ...people.find((person) => person.slug === profile.slug),
+      ...profile,
+    })),
+    ...remaining.filter((person) => person.person_type === 'director'),
   ]
-  const members = people.filter((person) => person.person_type !== 'director' && person.slug !== founder.slug)
+  const members = remaining.filter((person) => person.person_type !== 'director')
 
   return (
     <div className="people-directory">
