@@ -496,10 +496,12 @@
   margin: .6rem 0 0;
 }
 
-@media (max-width: 23rem) {
+@media (max-width: 30rem) {
+  html:has(.community-navigation) { scroll-padding-top: 11rem; }
   .community-navigation__inner {
-    justify-content: space-between;
-    gap: .25rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 .5rem;
   }
 }
 

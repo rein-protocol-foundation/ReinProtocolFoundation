@@ -20,14 +20,14 @@ test.describe('Community overview and navigation', () => {
     await expect(page.locator('.member-measure')).toHaveCount(0)
   })
 
-  test('header submenu uses the five single-word labels', async ({ page }) => {
+  test('header submenu links directly to community tasks', async ({ page }) => {
     await page.goto('/community/contribute/apply')
     const navigation = communityNavigation(page)
 
     for (const label of communityNavigationLabels) {
       await expect(navigation.getByRole('link', { name: label, exact: true })).toBeVisible()
     }
-    for (const retiredLabel of ['Learn', 'Gather', 'Apply', 'Submit resource', 'Code of Conduct']) {
+    for (const retiredLabel of ['Gather', 'Apply', 'Submit resource', 'Code of Conduct']) {
       await expect(navigation.getByRole('link', { name: retiredLabel, exact: true })).toHaveCount(0)
     }
     await expect(navigation.getByRole('link', { name: 'Contribute' })).toHaveAttribute('aria-current', 'location')
@@ -36,7 +36,7 @@ test.describe('Community overview and navigation', () => {
   for (const item of [
     { label: 'Program', hash: '#program', heading: 'Meet in person. Stay connected online.' },
     { label: 'People', hash: '#people', heading: 'People behind the work.' },
-    { label: 'Connect', hash: '#register', heading: 'Register for community updates.' },
+    { label: 'Email updates', hash: '#register', heading: 'Register for community updates.' },
     { label: 'Contribute', hash: '#contribute', heading: 'Choose how you want to contribute.' },
   ] as const) {
     test(`${item.label} selects its section without hiding the heading`, async ({ page }) => {
@@ -123,7 +123,7 @@ test.describe('Community learning resources', () => {
 test.describe('Community contribution and policies', () => {
   test('contribution actions appear once, after the community introduction', async ({ page }) => {
     await page.goto('/community')
-    await expect(page.locator('.community-hero a')).toHaveCount(0)
+    await expect(page.locator('.community-hero a')).toHaveText(/Join our Discord server/)
     await expect(page.getByRole('link', { name: 'Submit a resource', exact: true })).toHaveCount(1)
     await expect(page.getByRole('link', { name: 'Event proposal', exact: true })).toHaveCount(1)
     await expect(page.getByRole('link', { name: 'Apply privately', exact: true })).toHaveCount(1)

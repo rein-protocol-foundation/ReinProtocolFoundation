@@ -28,15 +28,14 @@ test.describe('Community Participant registration', () => {
 
   test('switches between US and international location fields', async ({ page }) => {
     const form = page.locator('.community-form--participant')
-    await expect(form.getByRole('switch', { name: 'Outside the United States' })).toHaveAttribute('aria-checked', 'false')
+    await expect(form.getByLabel(/^Country/)).toHaveCount(0)
     await selectInternationalLocation(form)
-    await expect(form.getByRole('switch', { name: 'Outside the United States' })).toHaveAttribute('aria-checked', 'true')
     await expect(form.getByLabel(/^Country/)).toHaveValue('Canada')
     await expect(form.getByLabel(/^State/)).toHaveCount(0)
 
     await selectUnitedStatesLocation(form)
     await expect(form.getByLabel(/^State/)).toHaveValue('CA')
-    await expect(form.getByLabel(/^Country/)).toHaveCount(0)
+    await expect(form.getByLabel(/^Country/)).toHaveValue('United States')
   })
 
   test('reveals a field when industry is Other', async ({ page }) => {

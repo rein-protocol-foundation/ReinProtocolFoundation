@@ -25,6 +25,8 @@ export type PublicPerson = {
 }
 
 export type PublicResource = {
+  background?: string | null
+  languages?: { code: string; url: string }[]
   id: string
   slug: string
   title: string

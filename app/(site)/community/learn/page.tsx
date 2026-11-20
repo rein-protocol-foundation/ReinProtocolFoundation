@@ -7,7 +7,7 @@ import { ResourceCard } from '@/components/resource-card'
 import { getPublishedResources } from '@/lib/community/data'
 
 const PAGE_SIZE = 12
-type LearnSearchParams = Promise<{ page?: string | string[] }>
+type LearnSearchParams = Promise<{ page?: string | string[]; language?: string; coding?: string }>
 
 export async function generateMetadata({ searchParams }: { searchParams: LearnSearchParams }): Promise<Metadata> {
   const value = (await searchParams).page
@@ -21,30 +21,48 @@ export async function generateMetadata({ searchParams }: { searchParams: LearnSe
   }
 }
 
+const languages = { en: 'English', 'zh-CN': '简体中文', es: 'Español', fr: 'Français', ko: '한국어', 'ru-RU': 'Русский', vi: 'Tiếng Việt' }
+const codingOptions = { none: 'No coding', optional: 'Coding optional', required_for_exercises: 'Coding required for exercises' }
+
 async function ResourceCatalog({ searchParams }: { searchParams: LearnSearchParams }) {
-  const value = (await searchParams).page
+  const params = await searchParams
+  const language = typeof params.language === 'string' && Object.hasOwn(languages, params.language) ? params.language : ''
+  const coding = typeof params.coding === 'string' && Object.hasOwn(codingOptions, params.coding) ? params.coding : ''
+  function pageUrl(number: number) {
+    const query = new URLSearchParams()
+    if (language) query.set('language', language)
+    if (coding) query.set('coding', coding)
+    if (number > 1) query.set('page', String(number))
+    return '/community/learn' + (query.size ? '?' + query : '')
+  }
+  const value = params.page
   const requestedPage = typeof value === 'string' && /^[1-9]\d*$/.test(value) ? Number(value) : 1
   const page = Number.isSafeInteger(requestedPage) && requestedPage <= Math.floor(Number.MAX_SAFE_INTEGER / PAGE_SIZE) ? requestedPage : 1
-  const { resources, hasMore } = await getPublishedResources({ limit: PAGE_SIZE, offset: (page - 1) * PAGE_SIZE })
+  const { resources, hasMore, unavailable } = await getPublishedResources({ language, coding, limit: PAGE_SIZE, offset: (page - 1) * PAGE_SIZE })
 
   return (
     <>
-      {resources.length ? (
+      <form method="get" className="catalog-filters">
+        <label>Language<select name="language" defaultValue={language}><option value="">All languages</option>{Object.entries(languages).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
+        <label>Coding experience<select name="coding" defaultValue={coding}><option value="">Any background</option>{Object.entries(codingOptions).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
+        <button type="submit" className="primary-action">Apply filters</button>
+      </form>
+      {unavailable ? <p>Learning resources are temporarily unavailable. Please reload to try again.</p> : resources.length ? (
         <div className="resource-list">
-          {resources.map((resource) => <ResourceCard resource={resource} key={resource.id} />)}
+          {resources.map((resource) => <ResourceCard resource={resource} language={language} key={resource.id} />)}
         </div>
       ) : (
         <div className="empty-state">
-          <h2>{page > 1 ? 'No resources on this page.' : 'Help build the resource library.'}</h2>
-          <p className="empty-state__copy">{page > 1 ? 'Return to the first page to explore the available learning resources.' : 'Recommend a free course, tutorial, or guide for the community to review.'}</p>
-          {page > 1 ? <Link href="/community/learn" className="text-action">View first page <Arrow /></Link> : null}
+          <h2>{page > 1 ? 'No resources on this page.' : 'No resources match this selection.'}</h2>
+          <p className="empty-state__copy">{page > 1 ? 'Return to the first page to explore the available learning resources.' : 'Try another language or coding background.'}</p>
+          {page > 1 ? <Link href={pageUrl(1)} className="text-action">View first page <Arrow /></Link> : null}
         </div>
       )}
-      {resources.length && (page > 1 || hasMore) ? (
+      {resources.length > 0 && (page > 1 || hasMore) ? (
         <nav className="resource-pagination" aria-label="Learning resource pages">
-          {page > 1 ? <Link href={page === 2 ? '/community/learn' : `/community/learn?page=${page - 1}`} className="text-action"><span className="resource-pagination__back"><Arrow /></span>Previous page</Link> : <span />}
+          {page > 1 ? <Link href={pageUrl(page - 1)} className="text-action"><span className="resource-pagination__back"><Arrow /></span>Previous page</Link> : <span />}
           <p>Page {page}</p>
-          {hasMore ? <Link href={`/community/learn?page=${page + 1}`} className="text-action resource-pagination__next">Next page <Arrow /></Link> : <span />}
+          {hasMore ? <Link href={pageUrl(page + 1)} className="text-action resource-pagination__next">Next page <Arrow /></Link> : <span />}
         </nav>
       ) : null}
     </>

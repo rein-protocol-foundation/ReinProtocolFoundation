@@ -46,13 +46,15 @@ export function isPublicHttpUrl(value: string) {
 export const participantSchema = z.object({
   email,
   name: optionalText(120),
-  industry: z.enum(INDUSTRIES),
+  industry: z.preprocess(value => value === '' ? undefined : value, z.enum(INDUSTRIES).optional()),
   industry_other: optionalText(120),
   ...locationFields,
+  location_scope: locationFields.location_scope.optional(),
+  city_region: optionalText(120),
   communications_consent: z.literal('on', { message: 'Consent is required to register.' }),
   privacy_consent: z.literal('on', { message: 'Please acknowledge the Privacy Policy.' }),
 }).superRefine((data, context) => {
-  validateLocation(data, context)
+  if (data.location_scope) validateLocation({ ...data, location_scope: data.location_scope }, context)
   if (data.industry === 'Other' && !data.industry_other) context.addIssue({ code: 'custom', path: ['industry_other'], message: 'Describe your field or industry.' })
 })
 
