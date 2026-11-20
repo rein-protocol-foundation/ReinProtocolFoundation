@@ -5,6 +5,7 @@ export type MemberMetrics = {
 }
 
 export type PublicPerson = {
+  person_type: 'director' | 'core_contributor'
   id: string
   slug: string
   display_name: string
