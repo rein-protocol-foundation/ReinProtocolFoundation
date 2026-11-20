@@ -18,7 +18,7 @@ const boardProfiles: Profile[] = [
     profession: 'AI Agent Builder & Researcher · ex-TikTok engineer',
     photo_url: '/people/tempest-ren.webp',
     photo_alt: 'Portrait of Tempest Ren',
-    biography: 'Tempest builds super agents and founded Rein to bring builders and researchers together to make AI agents safer. As a board director, Tempest helps set Rein’s direction and keep people accountable for the decisions they entrust to agents.',
+    biography: 'Tempest builds super agents and studies how people can evaluate and oversee their work. As founder and board chair, he sets Rein’s research and community priorities to advance AI agent safety.',
   },
   {
     slug: 'zexin-li',
