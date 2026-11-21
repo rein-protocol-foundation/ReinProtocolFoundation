@@ -153,7 +153,8 @@ export function ProgramsPage() {
             </section>
             <section id="research" data-reveal>
               <h2>Research</h2>
-              <p>Rein has an in-house research team and a sponsorship program for researchers, including PhD students working on AI. One question our team studies is how an agent can keep working when its connection to a server fails.</p>
+              <p>Rein’s in-house research team collaborates with researchers at Nanyang Technological University (NTU), UC Riverside (UCR), UC Irvine (UCI), and UCLA. We also work with research teams at ByteDance and Tencent.</p>
+              <p>Through our research sponsorship program, we support AI researchers, including PhD students.</p>
               <p>In the preprint <a href={audioAgentPaper.url}>{audioAgentPaper.title}</a>, Zexin Li, Xueyi Zhang, Tao Ren, and Yiming Chen describe and test an audio agent that can continue answering on the device during an outage.</p>
             </section>
             <section id="open-source" data-reveal>
