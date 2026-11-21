@@ -37,9 +37,6 @@ export function SiteFooter() {
       <div className="footer-bottom page-shell">
         <div className="footer-copyright">
           <span>© 2026 Rein Protocol Foundation</span>
-          <FooterNote label="Wyoming nonprofit">
-            Incorporated in Oct 2026 in the State of Wyoming. IRS Employer Identification Number (EIN) obtained.
-          </FooterNote>
         </div>
         <div className="footer-policies">
           <Link href="/privacy">Privacy</Link>

@@ -22,11 +22,7 @@ test('footer notes work without expanding the layout', async ({ page, isMobile }
   expect((await footer.boundingBox())!.height).toBe(height)
   await page.keyboard.press('Escape')
   await expect(tooltip).toBeHidden()
-  const status = footer.getByRole('button', { name: 'Wyoming nonprofit' })
-  await status.focus()
-  await expect(footer.getByRole('tooltip')).toContainText('Oct 2026')
-  await page.keyboard.press('Escape')
-  await expect(footer.getByRole('tooltip')).toBeHidden()
+  await expect(footer).not.toContainText('Wyoming nonprofit')
   const credits = footer.getByRole('button', { name: 'Image credits' })
   await credits.click()
   const panel = footer.getByRole('dialog', { name: 'Image credits' })
@@ -45,7 +41,7 @@ test('notes stay inside a narrow viewport and dismiss on outside taps', async ({
   await page.goto('/giving')
   const footer = page.locator('.site-footer')
   await footer.scrollIntoViewIfNeeded()
-  for (const name of ['Our name', 'Wyoming nonprofit', 'Image credits']) {
+  for (const name of ['Our name', 'Image credits']) {
     await footer.getByRole('button', { name }).click()
     const panel = footer.locator('.footer-note__panel:not([hidden])')
     await expect(panel).toBeVisible()
