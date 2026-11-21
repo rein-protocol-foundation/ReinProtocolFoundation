@@ -89,7 +89,7 @@ export function InstitutionalHomePage() {
               <p>Rein’s open-source community agent answers questions on Discord and helps members find resources.</p>
             </article>
             <article>
-              <h3><a href="https://arxiv.org/pdf/2611.18064">A³: Adaptive Audio Agent Framework for Collaborative Edge Computing</a></h3>
+              <h3><a href="https://arxiv.org/abs/2611.18064">A³: Adaptive Audio Agent Framework for Collaborative Edge Computing</a></h3>
               <p>November 2026 preprint by Zexin Li, Xueyi Zhang, Tao Ren, and Yiming Chen. The authors study how an audio agent can keep answering on-device when it loses its server connection.</p>
             </article>
           </div>
