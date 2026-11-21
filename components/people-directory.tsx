@@ -32,6 +32,18 @@ const boardProfiles: Profile[] = [
   },
 ]
 
+const communityProfiles: Profile[] = [
+  {
+    slug: 'yiming-zeng',
+    display_name: 'Yiming Zeng',
+    role: 'Researcher Scientist Intern at ByteDance, Seed Team',
+    website_url: 'https://yiming-zeng.github.io/',
+    photo_url: '/people/yiming-zeng.webp',
+    photo_alt: 'Illustrated portrait of Yiming Zeng',
+    biography: null,
+  },
+]
+
 function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
   const profession = board ? person.profession : person.role
   const links = [
@@ -63,7 +75,11 @@ export async function PeopleDirectory({ featured = false }: { featured?: boolean
     })),
     ...remaining.filter((person) => person.person_type === 'director'),
   ]
-  const members = remaining.filter((person) => person.person_type !== 'director')
+  const communitySlugs = new Set(communityProfiles.map((profile) => profile.slug))
+  const members = [
+    ...communityProfiles,
+    ...remaining.filter((person) => person.person_type !== 'director' && !communitySlugs.has(person.slug)),
+  ]
 
   return (
     <div className="people-directory">
