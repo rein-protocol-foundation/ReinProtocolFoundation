@@ -36,7 +36,8 @@ const communityProfiles: Profile[] = [
   {
     slug: 'dwan-zhang',
     display_name: 'Dwan Zhang',
-    role: 'Senior Researcher at ByteDance, Seed Team',
+    role: 'Core Contributor',
+    profession: 'Senior Researcher at ByteDance, Seed Team',
     linkedin_url: 'https://www.linkedin.com/in/dwan-zhang-b6a852295/',
     photo_url: '/people/dwan-zhang.webp',
     photo_alt: 'Illustrated portrait of Dwan Zhang',
@@ -54,7 +55,8 @@ const communityProfiles: Profile[] = [
 ]
 
 function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
-  const profession = board ? person.profession : person.role
+  const organizationRole = board || person.profession ? person.role : undefined
+  const profession = person.profession ?? (board ? undefined : person.role)
   const links = [
     ['Website', person.website_url], ['GitHub', person.github_url], ['Google Scholar', person.scholar_url], ['LinkedIn', person.linkedin_url],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]))
@@ -63,7 +65,7 @@ function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
     <article className={`profile-card ${board ? 'profile-card--board' : 'profile-card--member'}`}>
       {person.photo_url && <img className="profile-card__portrait" src={person.photo_url} alt={person.photo_alt ?? ''} loading="lazy" />}
       <div>
-        {board && <p className="profile-card__role">{person.role}</p>}
+        {organizationRole && <p className="profile-card__role">{organizationRole}</p>}
         <h4>{person.display_name}</h4>
         {profession && <p className="profile-card__profession">{profession}</p>}
         {person.biography && <p className="profile-card__bio">{person.biography}</p>}
