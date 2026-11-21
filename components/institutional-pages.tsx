@@ -78,7 +78,7 @@ export function InstitutionalHomePage() {
           <div className="home-projects">
             <article>
               <h3><a href="https://nori.rein-protocol.org/">Nori</a></h3>
-              <p>Rein’s open-source community agent answers questions on Discord and helps members find resources.</p>
+              <p>Nori is the open-source Super Agent that autonomously runs operations across Rein Protocol Foundation.</p>
             </article>
             <article>
               <h3><a href={audioAgentPaper.url}>{audioAgentPaper.title}</a></h3>
@@ -160,7 +160,7 @@ export function ProgramsPage() {
             <section id="open-source" data-reveal>
               <h2>Open source</h2>
               <p>Rein’s open-source program sponsors independent open-source communities and incubates projects within the Foundation.</p>
-              <p>One of those projects is <a href="https://nori.rein-protocol.org/">Nori</a>, the community agent that answers questions on Discord and helps members find learning resources. Its code is public alongside the Foundation’s other projects.</p>
+              <p>Rein incubated <a href="https://nori.rein-protocol.org/">Nori</a>, an open-source Super Agent that runs the Foundation’s day-to-day operations autonomously. It connects the people, tools, and work of the entire organization.</p>
               <TextLink href={githubOrganizationUrl}>Explore Rein’s projects on GitHub</TextLink>
             </section>
           </article>
