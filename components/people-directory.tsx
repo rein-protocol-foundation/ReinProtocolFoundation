@@ -40,7 +40,7 @@ const communityProfiles: Profile[] = [
     linkedin_url: 'https://www.linkedin.com/in/dwan-zhang-b6a852295/',
     photo_url: '/people/dwan-zhang.webp',
     photo_alt: 'Illustrated portrait of Dwan Zhang',
-    biography: 'Working on LLM Evaluation, Data',
+    biography: 'Dwan studies how to evaluate large language models, with a focus on the data used to test them. The choice of test examples shapes what an evaluation can tell us about a model’s strengths and where its answers fall short.',
   },
   {
     slug: 'yiming-zeng',
