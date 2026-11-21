@@ -35,7 +35,7 @@ test.describe('Community Participant registration', () => {
 
     await selectUnitedStatesLocation(form)
     await expect(form.getByLabel(/^State/)).toHaveValue('CA')
-    await expect(form.getByLabel(/^Country/)).toHaveValue('United States')
+    await expect(form.getByLabel(/^Country/)).toHaveCount(0)
   })
 
   test('reveals a field when industry is Other', async ({ page }) => {

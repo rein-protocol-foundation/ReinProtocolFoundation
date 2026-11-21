@@ -15,6 +15,8 @@ describe('community participant validation', () => {
     const base = { email: 'person@example.org', industry: 'Student', city_region: 'Somewhere', communications_consent: 'on', privacy_consent: 'on' }
     expect(participantSchema.safeParse({ ...base, location_scope: 'united_states', us_state: 'XX' }).success).toBe(false)
     expect(participantSchema.safeParse({ ...base, location_scope: 'international', country: 'Invented Place' }).success).toBe(false)
+    expect(participantSchema.safeParse({ ...base, location_scope: 'united_states', us_state: 'CA', city_region: ' ' }).success).toBe(false)
+    expect(participantSchema.safeParse({ ...base, location_scope: 'international', country: 'Japan', city_region: '' }).success).toBe(false)
     expect(participantSchema.safeParse({ ...base, location_scope: 'international', country: 'Japan' }).success).toBe(true)
   })
 })

@@ -68,7 +68,7 @@ describe('public community forms', () => {
     expect(screen.queryByText('An approved pseudonym is welcome.')).not.toBeInTheDocument()
     expect(screen.queryByText('Do not enter a street address.')).not.toBeInTheDocument()
     expect(screen.queryByLabelText(/^Country/)).toBeNull()
-    fireEvent.click(screen.getByLabelText(/events near me/))
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Outside the United States' }))
     fireEvent.change(screen.getByLabelText(/^Country/), { target: { value: 'Canada' } })
     expect(container.querySelector('input[name="location_scope"]')).toHaveValue('international')
     expect(screen.queryByLabelText(/^State/)).toBeNull()
@@ -85,8 +85,6 @@ describe('public community forms', () => {
     const { container } = render(<ParticipantForm />)
     fireEvent.change(screen.getByRole('textbox', { name: /^Email/ }), { target: { value: 'person@example.org' } })
     fireEvent.change(screen.getByRole('combobox', { name: /^Field or industry/ }), { target: { value: 'Education' } })
-    fireEvent.click(screen.getByLabelText(/events near me/))
-    fireEvent.change(screen.getByLabelText(/^Country/), { target: { value: 'United States' } })
     fireEvent.change(screen.getByRole('combobox', { name: /^State/ }), { target: { value: 'CA' } })
     fireEvent.change(screen.getByRole('textbox', { name: /^City/ }), { target: { value: 'Oakland' } })
     fireEvent.click(screen.getByRole('checkbox', { name: /community and activity messages/ }))
@@ -113,8 +111,6 @@ describe('public community forms', () => {
     const { container } = render(<ParticipantForm />)
     fireEvent.change(screen.getByRole('textbox', { name: /^Email/ }), { target: { value: 'person@example.org' } })
     fireEvent.change(screen.getByRole('combobox', { name: /^Field or industry/ }), { target: { value: 'Education' } })
-    fireEvent.click(screen.getByLabelText(/events near me/))
-    fireEvent.change(screen.getByLabelText(/^Country/), { target: { value: 'United States' } })
     fireEvent.change(screen.getByRole('combobox', { name: /^State/ }), { target: { value: 'CA' } })
     fireEvent.change(screen.getByRole('textbox', { name: /^City/ }), { target: { value: 'Oakland' } })
 
@@ -125,8 +121,8 @@ describe('public community forms', () => {
     await waitFor(() => {
       expect(screen.getByRole('textbox', { name: /^Email/ })).toHaveValue('')
       expect(screen.getByRole('combobox', { name: /^Field or industry/ })).toHaveValue('')
-      expect(screen.queryByLabelText(/^State/)).toBeNull()
-      expect(screen.queryByLabelText(/^City/)).toBeNull()
+      expect(screen.getByLabelText(/^State/)).toHaveValue('')
+      expect(screen.getByLabelText(/^City/)).toHaveValue('')
     })
   })
 

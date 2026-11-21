@@ -5,6 +5,8 @@ test('register with email, reach Discord, and dismiss the dialog by keyboard', a
   await page.getByRole('link', { name: 'Register for community updates' }).click()
   const form = page.locator('.community-form--participant')
   await form.getByLabel(/^Email/).fill('member@example.invalid')
+  await form.getByLabel(/^State/).selectOption('CA')
+  await form.getByLabel(/^City/).fill('Oakland')
   await form.getByLabel(/community and activity messages/).check()
   await form.getByLabel(/Privacy Policy/).check()
   const submit = form.getByRole('button', { name: 'Register for community updates' })

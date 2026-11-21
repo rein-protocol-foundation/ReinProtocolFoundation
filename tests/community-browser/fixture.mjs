@@ -8,7 +8,7 @@ createServer(async (request, response) => {
     let body = ''
     for await (const chunk of request) body += chunk
     const data = JSON.parse(body)
-    if (data.p_email !== 'member@example.invalid' || data.p_location_scope !== null || data.p_industry !== null) {
+    if (data.p_email !== 'member@example.invalid' || data.p_location_scope !== 'united_states' || data.p_country !== 'United States' || data.p_us_state !== 'CA' || data.p_city_region !== 'Oakland' || data.p_industry !== null) {
       response.statusCode = 400
     }
     result = [{ participant_id: '00000000-0000-4000-8000-000000000001' }]
