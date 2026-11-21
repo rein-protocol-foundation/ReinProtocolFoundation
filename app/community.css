@@ -420,12 +420,31 @@
 }
 
 .profile-card--member {
+  min-width: 0;
+  align-items: flex-start;
   gap: 1rem;
 }
 
+.profile-card--member > div {
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
 .profile-card--member .profile-card__portrait {
-  width: 4rem;
-  aspect-ratio: 1;
+  width: clamp(5rem, 10vw, 7rem);
+  aspect-ratio: 4 / 5;
+}
+
+.profile-card--member h4 {
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.profile-card--member p {
+  font-size: .9rem;
+  line-height: 1.5;
+  white-space: normal;
 }
 
 .profile-card .profile-card__role {
