@@ -34,6 +34,15 @@ const boardProfiles: Profile[] = [
 
 const communityProfiles: Profile[] = [
   {
+    slug: 'dwan-zhang',
+    display_name: 'Dwan Zhang',
+    role: 'Senior Researcher',
+    linkedin_url: 'https://www.linkedin.com/in/dwan-zhang-b6a852295/',
+    photo_url: '/people/dwan-zhang.webp',
+    photo_alt: 'Illustrated portrait of Dwan Zhang',
+    biography: 'Working on LLM Evaluation, Data',
+  },
+  {
     slug: 'yiming-zeng',
     display_name: 'Yiming Zeng',
     role: 'Researcher Scientist Intern at ByteDance, Seed Team',
@@ -57,7 +66,7 @@ function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
         {board && <p className="profile-card__role">{person.role}</p>}
         <h4>{person.display_name}</h4>
         {profession && <p className="profile-card__profession">{profession}</p>}
-        {board && person.biography && <p className="profile-card__bio">{person.biography}</p>}
+        {person.biography && <p className="profile-card__bio">{person.biography}</p>}
         {links.length > 0 && <div className="profile-card__links">{links.map(([label, url]) => <a href={url} target="_blank" rel="noreferrer" key={label}>{label}</a>)}</div>}
       </div>
     </article>
