@@ -53,8 +53,8 @@ export default async function ParticipantsPage({ searchParams }: { searchParams:
           <table className="admin-table"><thead><tr><th>{t('Participant')}</th><th>{t('Industry')}</th><th>{t('Location')}</th><th>{t('Status')}</th><th>{t('Rein identity ID')}</th><th>{t('Privacy')}</th></tr></thead>
             <tbody>{participants.map((participant) => <tr key={participant.id}>
               <td><strong>{participant.name || t('Unnamed')}</strong><br /><small>{participant.email}</small></td>
-              <td>{label(participant.industry)}{participant.industry_other ? ` — ${participant.industry_other}` : ''}</td>
-              <td>{[participant.city_region,participant.us_state,participant.country].filter(Boolean).join(', ')}</td>
+              <td>{participant.industry ? label(participant.industry) : t('Not supplied')}{participant.industry_other ? ` — ${participant.industry_other}` : ''}</td>
+              <td>{[participant.city_region,participant.us_state,participant.country].filter(Boolean).join(', ') || t('Not supplied')}</td>
               <td><span className="status-badge">{label(participant.subscription_status)}</span></td>
               <td><code>{participant.contact_id}</code></td>
               <td><details className="admin-disclosure"><summary>{t('Delete data')}</summary><div className="admin-disclosure__body"><AdminForm actionId="delete_participant_data" successMessage={t('Personal data deleted.')}><input type="hidden" name="id" value={participant.id} /><label className="admin-check"><input type="checkbox" name="confirm_delete" required /> {t('Confirm permanent deletion. The anonymous count remains.')}</label><AdminSubmitButton className="admin-button admin-button--quiet" pendingLabel={t('Deleting…')}>{t('Unsubscribe and delete')}</AdminSubmitButton></AdminForm></div></details></td>

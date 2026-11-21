@@ -34,7 +34,7 @@ export async function registerParticipant(_previous: ActionState, formData: Form
     const client = requireSecretClient()
     const data = result.data
     const { data: created, error } = await client.rpc('register_community_participant', {
-      p_email: normalizeEmail(data.email), p_name: data.name ?? null, p_industry: data.industry,
+      p_email: normalizeEmail(data.email), p_name: data.name ?? null, p_industry: data.industry ?? null,
       p_industry_other: data.industry_other ?? null, p_location_scope: data.location_scope,
       p_country: data.location_scope === 'international' ? data.country : 'United States',
       p_us_state: data.location_scope === 'united_states' ? data.us_state : null,

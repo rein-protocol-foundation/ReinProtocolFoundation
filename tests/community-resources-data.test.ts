@@ -8,6 +8,7 @@ const mocks = vi.hoisted(() => ({
   eq: vi.fn(),
   order: vi.fn(),
   range: vi.fn(),
+  contains: vi.fn(),
 }))
 
 vi.mock('next/cache', () => ({ unstable_noStore: vi.fn() }))
@@ -35,10 +36,11 @@ function resource(index: number): PublicResource {
 
 beforeEach(() => {
   vi.clearAllMocks()
-  const query = { select: mocks.select, eq: mocks.eq, order: mocks.order, range: mocks.range }
+  const query = { select: mocks.select, eq: mocks.eq, order: mocks.order, range: mocks.range, contains: mocks.contains }
   mocks.getPublicClient.mockReturnValue({ from: mocks.from })
   mocks.from.mockReturnValue(query)
   mocks.select.mockReturnValue(query)
+  mocks.contains.mockReturnValue(query)
   mocks.eq.mockReturnValue(query)
   mocks.order.mockReturnValue(query)
   mocks.range.mockResolvedValue({ data: [], error: null })
@@ -51,7 +53,7 @@ describe('published learning resources', () => {
 
     await expect(getPublishedResources({ limit: 3 })).resolves.toEqual({
       resources: rows.slice(0, 3),
-      hasMore: true,
+      hasMore: true, unavailable: false,
     })
     expect(mocks.from).toHaveBeenCalledWith('resources')
     expect(mocks.eq).toHaveBeenCalledWith('publication_status', 'published')
@@ -63,11 +65,18 @@ describe('published learning resources', () => {
     expect(mocks.range).toHaveBeenCalledWith(0, 3)
   })
 
+  it('filters matching editions and coding requirements before pagination', async () => {
+    await getPublishedResources({ language: 'zh-CN', coding: 'none', offset: 12 })
+    expect(mocks.contains).toHaveBeenCalledWith('learning_metadata', { languages: [{ code: 'zh-CN' }] })
+    expect(mocks.eq).toHaveBeenCalledWith('learning_metadata->>coding_requirement', 'none')
+    expect(mocks.range).toHaveBeenCalledWith(12, 24)
+  })
+
   it('defaults to twelve resources and applies the next page offset at the database', async () => {
     const rows = Array.from({ length: 12 }, (_, index) => resource(index + 12))
     mocks.range.mockResolvedValue({ data: rows, error: null })
 
-    await expect(getPublishedResources({ offset: 12 })).resolves.toEqual({ resources: rows, hasMore: false })
+    await expect(getPublishedResources({ offset: 12 })).resolves.toEqual({ resources: rows, hasMore: false, unavailable: false })
     expect(mocks.range).toHaveBeenCalledWith(12, 24)
 
     await getPublishedResources()
@@ -77,15 +86,15 @@ describe('published learning resources', () => {
   it('returns an empty result when the public database client is unavailable', async () => {
     mocks.getPublicClient.mockReturnValue(null)
 
-    await expect(getPublishedResources()).resolves.toEqual({ resources: [], hasMore: false })
+    await expect(getPublishedResources()).resolves.toEqual({ resources: [], hasMore: false, unavailable: true })
     expect(mocks.from).not.toHaveBeenCalled()
   })
 
   it('returns an empty result on query errors or missing data', async () => {
     mocks.range.mockResolvedValue({ data: [resource(1)], error: { message: 'Unavailable' } })
-    await expect(getPublishedResources()).resolves.toEqual({ resources: [], hasMore: false })
+    await expect(getPublishedResources()).resolves.toEqual({ resources: [], hasMore: false, unavailable: true })
 
     mocks.range.mockResolvedValue({ data: null, error: null })
-    await expect(getPublishedResources()).resolves.toEqual({ resources: [], hasMore: false })
+    await expect(getPublishedResources()).resolves.toEqual({ resources: [], hasMore: false, unavailable: false })
   })
 })

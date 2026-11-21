@@ -87,7 +87,7 @@ export function SubmitButton({ children, pending: pendingOverride }: { children:
   return <button className="primary-action submit-button" type="submit" disabled={isPending} aria-disabled={isPending}>{isPending ? 'Submitting…' : children}</button>
 }
 
-export function LocationFields({ state }: { state: ActionState }) {
+export function LocationFields({ state, participant = false }: { state: ActionState; participant?: boolean }) {
   const [scope, setScope] = useState<'united_states' | 'international'>('united_states')
   const regionLabelId = useId()
   const isInternational = scope === 'international'
@@ -98,19 +98,26 @@ export function LocationFields({ state }: { state: ActionState }) {
     <div className="field-group field-group--full location-group" role="group" aria-labelledby={regionLabelId}>
       <div className="location-header">
         <span className="field-label" id={regionLabelId}>Region</span>
-        <button className="location-switch" type="button" role="switch" aria-checked={isInternational} onClick={() => setScope(isInternational ? 'united_states' : 'international')}>
-          <span className="location-switch__track" aria-hidden="true"><span className="location-switch__thumb" /></span>
-          <span>Outside the United States</span>
-        </button>
+        {participant ? (
+          <label className="choice">
+            <input type="checkbox" checked={isInternational} onChange={event => setScope(event.target.checked ? 'international' : 'united_states')} />
+            <span>Outside the United States</span>
+          </label>
+        ) : (
+          <button className="location-switch" type="button" role="switch" aria-checked={isInternational} onClick={() => setScope(isInternational ? 'united_states' : 'international')}>
+            <span className="location-switch__track" aria-hidden="true"><span className="location-switch__thumb" /></span>
+            <span>Outside the United States</span>
+          </button>
+        )}
       </div>
       <input type="hidden" name="location_scope" value={scope} />
       <div className="location-grid">
         {!isInternational ? (
-          <label className="field-group"><span className="field-label">State <span aria-hidden="true">*</span></span><select name="us_state" autoComplete="address-level1" required defaultValue=""><option value="" disabled>Select a state</option>{US_STATES.map(([code, name]) => <option value={code} key={code}>{name}</option>)}</select><FieldError state={state} name="us_state" /></label>
+          <label className="field-group"><span className="field-label">State <span aria-hidden="true">*</span></span><select key="us_state" name="us_state" autoComplete="address-level1" required defaultValue=""><option value="" disabled>Select a state</option>{US_STATES.map(([code, name]) => <option value={code} key={code}>{name}</option>)}</select><FieldError state={state} name="us_state" /></label>
         ) : (
-          <label className="field-group"><span className="field-label">Country <span aria-hidden="true">*</span></span><select name="country" autoComplete="country-name" required defaultValue=""><option value="" disabled>Select a country</option>{COUNTRIES.map((country) => <option value={country} key={country}>{country}</option>)}</select><FieldError state={state} name="country" /></label>
+          <label className="field-group"><span className="field-label">Country <span aria-hidden="true">*</span></span><select key="country" name="country" autoComplete="country-name" required defaultValue=""><option value="" disabled>Select a country</option>{COUNTRIES.map((country) => <option value={country} key={country}>{country}</option>)}</select><FieldError state={state} name="country" /></label>
         )}
-        <label className="field-group"><span className="field-label">{isInternational ? 'City or region' : 'City'} <span aria-hidden="true">*</span></span><input type="text" name="city_region" maxLength={120} autoComplete="address-level2" required aria-describedby="city_region-error" /><FieldError state={state} name="city_region" /></label>
+        <label className="field-group"><span className="field-label">{isInternational && !participant ? 'City or region' : 'City'} <span aria-hidden="true">*</span></span><input type="text" name="city_region" maxLength={120} autoComplete="address-level2" required aria-describedby="city_region-error" /><FieldError state={state} name="city_region" /></label>
       </div>
       <FieldError state={state} name="location_scope" />
     </div>

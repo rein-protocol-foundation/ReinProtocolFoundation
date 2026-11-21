@@ -46,7 +46,7 @@ export function isPublicHttpUrl(value: string) {
 export const participantSchema = z.object({
   email,
   name: optionalText(120),
-  industry: z.enum(INDUSTRIES),
+  industry: z.preprocess(value => value === '' ? undefined : value, z.enum(INDUSTRIES).optional()),
   industry_other: optionalText(120),
   ...locationFields,
   communications_consent: z.literal('on', { message: 'Consent is required to register.' }),

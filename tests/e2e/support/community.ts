@@ -1,21 +1,24 @@
 import { expect, type Locator, type Page } from '@playwright/test'
 
-export const communityNavigationLabels = ['Overview', 'Program', 'People', 'Connect', 'Contribute'] as const
+export const communityNavigationLabels = ['Overview', 'Program', 'Learn', 'People', 'Email updates', 'Contribute'] as const
 
 export function communityNavigation(page: Page) {
   return page.getByRole('navigation', { name: 'Community navigation' })
 }
 
+function outsideUnitedStates(form: Locator) {
+  const name = 'Outside the United States'
+  return form.getByRole('checkbox', { name }).or(form.getByRole('switch', { name }))
+}
+
 export async function selectInternationalLocation(form: Locator, country = 'Canada', cityOrRegion = 'Toronto') {
-  const internationalSwitch = form.getByRole('switch', { name: 'Outside the United States' })
-  if (await internationalSwitch.getAttribute('aria-checked') === 'false') await internationalSwitch.click()
+  await outsideUnitedStates(form).check()
   await form.getByLabel(/^Country/).selectOption({ label: country })
-  await form.getByLabel(/^City or region/).fill(cityOrRegion)
+  await form.getByLabel(/^City/).fill(cityOrRegion)
 }
 
 export async function selectUnitedStatesLocation(form: Locator, state = 'CA', city = 'San Francisco') {
-  const internationalSwitch = form.getByRole('switch', { name: 'Outside the United States' })
-  if (await internationalSwitch.getAttribute('aria-checked') === 'true') await internationalSwitch.click()
+  await outsideUnitedStates(form).uncheck()
   await form.getByLabel(/^State/).selectOption(state)
   await form.getByLabel(/^City/).fill(city)
 }

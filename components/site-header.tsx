@@ -17,10 +17,20 @@ const links = [
 const communityLinks = [
   ['/community', 'Overview'],
   ['/community#program', 'Program'],
+  ['/community/learn', 'Learn'],
   ['/community#people', 'People'],
-  ['/community#register', 'Connect'],
+  ['/community#register', 'Email updates'],
   ['/community#contribute', 'Contribute'],
 ] as const
+
+function currentCommunityLink(pathname: string, hash: string) {
+  if (pathname === '/community/learn') return pathname
+  if (pathname.startsWith('/community/contribute')) return '/community#contribute'
+  if (pathname.startsWith('/community/gather/')) return '/community#program'
+  if (pathname !== '/community') return null
+  if (hash === '#learn' || hash === '#gather') return '/community#program'
+  return communityLinks.find(([href]) => href === pathname + hash)?.[0] ?? pathname
+}
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -29,21 +39,7 @@ export function SiteHeader() {
   const [communityHash, setCommunityHash] = useState('')
   const communityNavigationRef = useRef<HTMLElement>(null)
   const inCommunity = pathname === '/community' || pathname.startsWith('/community/')
-  const activeCommunityHref = pathname.startsWith('/community/contribute')
-    ? '/community#contribute'
-    : pathname.startsWith('/community/gather/') || pathname === '/community/learn'
-      ? '/community#program'
-      : pathname === '/community'
-        ? communityHash === '#program' || communityHash === '#learn' || communityHash === '#gather'
-          ? '/community#program'
-          : communityHash === '#people'
-            ? '/community#people'
-            : communityHash === '#register'
-              ? '/community#register'
-              : communityHash === '#contribute'
-                ? '/community#contribute'
-                : '/community'
-        : null
+  const activeCommunityHref = currentCommunityLink(pathname, communityHash)
 
   useEffect(() => {
     setMenuOpen(false)

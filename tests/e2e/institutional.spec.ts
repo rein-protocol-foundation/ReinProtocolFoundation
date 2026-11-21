@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 const institutionalRoutes = [
   { path: '/', heading: 'Making AI agents safe for people and society.', title: 'AI Agent Safety — Rein Protocol Foundation' },
   { path: '/mission', heading: 'AI agent safety, with people accountable.', title: 'Our Mission: AI Agent Safety' },
-  { path: '/programs', heading: 'Learn, meet, and build safer AI agents.', title: 'AI Agent Community Programs' },
+  { path: '/programs', heading: 'Community, research, and open source.', title: 'Community, Research, and Open Source Programs' },
   { path: '/governance', heading: 'AI agents help run Rein. People remain responsible.', title: 'Governance and Stewardship' },
   { path: '/giving', heading: 'Support AI agent safety.', title: 'Giving' },
 ] as const
@@ -17,6 +17,15 @@ test.describe('institutional site', () => {
       await expect(page.locator('main#main-content')).toBeVisible()
     })
   }
+
+  test('programs link to community resources, research and open-source projects', async ({ page }) => {
+    await page.goto('/programs')
+    await expect(page.locator('#community a[href="/community/learn"]')).toBeVisible()
+    await expect(page.locator('#research a')).toHaveAttribute('href', 'https://arxiv.org/abs/2611.18064')
+    await expect(page.locator('#open-source a').first()).toHaveAttribute('href', 'https://nori.rein-protocol.org/')
+    await expect(page.locator('#open-source a').last()).toHaveAttribute('href', 'https://github.com/rein-protocol-foundation')
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  })
 
   test('home hero communicates the nonprofit mission and work', async ({ page }) => {
     await page.goto('/')

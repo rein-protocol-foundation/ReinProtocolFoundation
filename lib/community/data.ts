@@ -2,7 +2,7 @@ import 'server-only'
 import { unstable_noStore as noStore } from 'next/cache'
 import { getPublicClient } from '@/lib/supabase/public'
 import { getSecretClient } from '@/lib/supabase/secret'
-import { publishedEventsQuery, publishedResourcesQuery } from '@/lib/community/queries'
+import { RESOURCE_PUBLIC_FIELDS, publishedEventsQuery, publishedResourcesQuery } from '@/lib/community/queries'
 import type { MemberMetrics, PublicEvent, PublicPerson, PublicResource } from '@/lib/community/types'
 
 const emptyMetrics: MemberMetrics = { allTime: 0, thisMonth: 0, bySource: {} }
@@ -30,22 +30,26 @@ export async function getPublicPeople(options: { featured?: boolean } = {}): Pro
   return error ? [] : (data as PublicPerson[])
 }
 
-export async function getPublishedResources({ limit = 12, offset = 0 } = {}): Promise<{ resources: PublicResource[]; hasMore: boolean }> {
+export async function getPublishedResources({ limit = 12, offset = 0, language = '', coding = '' } = {}) {
   noStore()
   const client = getPublicClient()
-  if (!client) return { resources: [], hasMore: false }
-  const { data, error } = await publishedResourcesQuery(client).range(offset, offset + limit)
-  if (error) return { resources: [], hasMore: false }
+  const unavailable = { resources: [] as PublicResource[], hasMore: false, unavailable: true }
+  if (!client) return unavailable
+  let query = publishedResourcesQuery(client, RESOURCE_PUBLIC_FIELDS + ',background:learning_metadata->>prerequisite_notes,languages:learning_metadata->languages')
+  if (language) query = query.contains('learning_metadata', { languages: [{ code: language }] })
+  if (coding) query = query.eq('learning_metadata->>coding_requirement', coding)
+  const { data, error } = await query.range(offset, offset + limit)
+  if (error) return unavailable
   const resources = (data ?? []) as unknown as PublicResource[]
-  return { resources: resources.slice(0, limit), hasMore: resources.length > limit }
+  return { resources: resources.slice(0, limit), hasMore: resources.length > limit, unavailable: false }
 }
 
-export async function getPublishedEvents(): Promise<PublicEvent[]> {
+export async function getPublishedEvents(): Promise<PublicEvent[] | null> {
   noStore()
   const client = getPublicClient()
-  if (!client) return []
+  if (!client) return null
   const { data, error } = await publishedEventsQuery(client)
-  return error ? [] : (data as unknown as PublicEvent[])
+  return error ? null : (data as unknown as PublicEvent[])
 }
 
 export async function getPublishedEvent(slug: string): Promise<PublicEvent | null> {
