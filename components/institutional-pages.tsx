@@ -13,18 +13,10 @@ import { ArticleHero, TextLink } from '@/components/primitives'
 import { getPublicMemberMetrics } from '@/lib/community/data'
 import { publicCommunityAudience } from '@/lib/community/presentation'
 
-export const programs = [
-  {
-    number: '01', title: 'In-person events', short: 'Meet peers, share work, and explore AI agent development and safety.',
-    detail: 'Local meetups, workshops, presentations, and discussions bring people working with AI agents into the same room. Members can share projects, discuss research, and find collaborators.',
-    approach: 'We welcome member-led events in local communities, on campuses, and alongside research conferences. Events should be accessible and primarily free, with any conference affiliation stated accurately.',
-  },
-  {
-    number: '02', title: 'Online community and learning', short: 'Keep the conversation going through group discussions, live sessions, and shared learning.',
-    detail: 'Slack and Discord discussions, online presentations, and virtual events connect members across locations. Bring questions, share what you are working on, and learn about AI agent development, security, and safety together.',
-    approach: 'Members are encouraged to contribute learning materials, lead discussions, and offer practical guidance to peers moving into AI agent roles. Sharing project feedback, study resources, and career experience helps more people participate in the field.',
-  },
-]
+const audioAgentPaper = {
+  title: 'A³: Adaptive Audio Agent Framework for Collaborative Edge Computing',
+  url: 'https://arxiv.org/abs/2611.18064',
+}
 
 const fundPath = [
   { label: 'Accept', text: 'Only through verified channels and approved assets.' },
@@ -89,12 +81,12 @@ export function InstitutionalHomePage() {
               <p>Rein’s open-source community agent answers questions on Discord and helps members find resources.</p>
             </article>
             <article>
-              <h3><a href="https://arxiv.org/abs/2611.18064">A³: Adaptive Audio Agent Framework for Collaborative Edge Computing</a></h3>
+              <h3><a href={audioAgentPaper.url}>{audioAgentPaper.title}</a></h3>
               <p>November 2026 preprint by Zexin Li, Xueyi Zhang, Tao Ren, and Yiming Chen. The authors study how an audio agent can keep answering on-device when it loses its server connection.</p>
             </article>
           </div>
           <p><a className="text-action" href={githubOrganizationUrl}>Browse Rein’s repositories on GitHub</a></p>
-          <TextLink href="/programs">Explore our community programs</TextLink>
+          <TextLink href="/programs">Explore our programs</TextLink>
         </div>
       </section>
 
@@ -135,21 +127,46 @@ export function MissionPage() {
       <section id="constructive" data-reveal><p className="article-kicker">01 / Community and participation</p><h2>Help more people participate in AI agent development.</h2><p>Rein brings learners, researchers, and practitioners together to share knowledge and work on agent safety. Our role as a nonprofit includes supporting open-source projects, research, public discussion, and access to learning.</p><p>Members can meet at events, exchange ideas online, contribute learning materials, and guide peers moving into AI agent roles. These relationships help people turn an interest in the field into informed participation.</p><TextLink href="/community/learn">Explore AI agent learning resources</TextLink></section>
       <section id="protective" data-reveal><p className="article-kicker">02 / Security, visibility, and oversight</p><h2>Understand what agents do. Keep their actions accountable.</h2><p>Agent safety includes the systems around a language model: the harness that coordinates its work, the tools it can use, and the permissions it receives. We support work that makes those systems easier to inspect, test, and supervise.</p><p>Our areas of interest include monitoring agent behavior, detecting security threats and failures, explaining actions, and enabling human intervention. The long-term goal is to prevent serious harm to people and society as agents take on greater responsibilities.</p></section>
       <blockquote className="article-proposition" data-reveal>We believe AI agents can help monitor and supervise other agents, with people setting the rules and remaining accountable.</blockquote>
-      <section id="practice" data-reveal><p className="article-kicker">03 / An AI-native organization</p><h2>Use agents to advance agent safety.</h2><p>We use AI agents to help operate and grow Rein. Applying them to research, coordination, and oversight also helps us understand the safety infrastructure an AI-native organization needs.</p><p>Our early programs focus on in-person events and an online community for discussions, presentations, shared learning, and career guidance. These activities support a broader mission of open-source development and safety research.</p><TextLink href="/programs">Explore our early programs</TextLink></section>
+      <section id="practice" data-reveal><p className="article-kicker">03 / An AI-native organization</p><h2>Use agents to advance agent safety.</h2><p>We use AI agents to help operate and grow Rein. Applying them to research, coordination, and oversight also helps us understand the safety infrastructure an AI-native organization needs.</p><p>Our programs connect people through events and campus outreach, support AI researchers, and help open-source communities develop and maintain their projects.</p><TextLink href="/programs">Explore our programs</TextLink></section>
     </ArticleLayout>
   </main>
 }
 
 export function ProgramsPage() {
-  return <main id="main-content"><ArticleHero eyebrow="Our early programs" title="Learn, meet, and build safer AI agents." lead="Our early work has two priorities: in-person events and an online community. Both help people learn about AI agents, share their work, and take part in making agents safe." image={stanford} imagePosition="50% 58%" caption="Knowledge and duty / Stanford" />
-    <ArticleLayout summaryLabel="Two connected priorities" summary="Meet through local events, then continue the exchange through online discussions, presentations, shared resources, and peer guidance.">
-      <p className="article-standfirst" data-reveal>Community is the starting point for Rein’s work. We want members to learn from one another, find collaborators, and develop the knowledge and experience to contribute to AI agent development and safety.</p>
-      <div className="program-essay-list">{programs.map((program) => <section key={program.number} data-reveal><span>{program.number}</span><div><p className="article-kicker">{program.short}</p><h2>{program.title}</h2><p>{program.detail}</p><p>{program.approach}</p></div></section>)}</div>
-      <aside className="article-inset" data-reveal><p className="article-kicker">Contribute your experience</p><h2>Help someone take their next step into AI agents.</h2><p>Share a tutorial or reading list, give a presentation, review a peer’s project, or offer guidance from your own career. Members from different backgrounds can help one another identify skills to learn and prepare for roles working with AI agents.</p><TextLink href="/community/contribute" light>Find a way to contribute</TextLink></aside>
-      <section data-reveal><p className="article-kicker">Start learning</p><h2>Bring a question. Find a resource. Discuss what you learn.</h2><p>Explore the public resource library for courses, tutorials, and research discussions. As you work through a resource, consider what tools an agent can access, how its actions are recorded, and when a person should review or stop its work. Bring those questions to the community, or recommend a resource that helped you.</p><TextLink href="/community/learn">Browse AI agent learning resources</TextLink></section>
-      <section data-reveal><p className="article-kicker">Connection to our mission</p><h2>Grow participation in agent safety.</h2><p>Events and online exchange help people discover safety research, contribute to open-source projects, and learn how agents behave in practice. Our broader work includes supporting research and open infrastructure for agent security, monitoring, and oversight.</p><TextLink href="/community#program">Explore community activities</TextLink></section>
-    </ArticleLayout>
-  </main>
+  return (
+    <main id="main-content">
+      <ArticleHero eyebrow="Our programs" title="Community, research, and open source."
+        lead="Rein brings people together to learn about AI agents, supports the researchers who study them, and helps maintainers build tools others can use."
+        image={stanford} imagePosition="50% 58%" caption="Knowledge and duty / Stanford" />
+      <section className="article-body">
+        <div className="page-shell article-layout">
+          <nav className="article-rail" aria-label="Programs on this page">
+            <span>Our programs</span>
+            <p><a href="#community">Community</a><br /><a href="#research">Research</a><br /><a href="#open-source">Open source</a></p>
+          </nav>
+          <article className="article-copy">
+            <section id="community" data-reveal>
+              <h2>Community</h2>
+              <p>Local meetups, online talks, and workshops give people a place to share projects and ask questions about AI agents. Through campus outreach, students can introduce their peers to the field or help organize an event at their school.</p>
+              <p>On Discord, members can keep a discussion going after a talk, exchange job opportunities, and get career guidance from peers. Our <Link href="/community/learn">learning library</Link> collects free courses and tutorials for people studying on their own.</p>
+              <TextLink href="/community">Join the community</TextLink>
+            </section>
+            <section id="research" data-reveal>
+              <h2>Research</h2>
+              <p>Rein has an in-house research team and a sponsorship program for researchers, including PhD students working on AI. One question our team studies is how an agent can keep working when its connection to a server fails.</p>
+              <p>In the preprint <a href={audioAgentPaper.url}>{audioAgentPaper.title}</a>, Zexin Li, Xueyi Zhang, Tao Ren, and Yiming Chen describe and test an audio agent that can continue answering on the device during an outage.</p>
+            </section>
+            <section id="open-source" data-reveal>
+              <h2>Open source</h2>
+              <p>Rein’s open-source program sponsors independent open-source communities and incubates projects within the Foundation.</p>
+              <p>One of those projects is <a href="https://nori.rein-protocol.org/">Nori</a>, the community agent that answers questions on Discord and helps members find learning resources. Its code is public alongside the Foundation’s other projects.</p>
+              <TextLink href={githubOrganizationUrl}>Explore Rein’s projects on GitHub</TextLink>
+            </section>
+          </article>
+        </div>
+      </section>
+    </main>
+  )
 }
 
 export function GovernancePage() {
