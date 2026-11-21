@@ -36,7 +36,7 @@ const communityProfiles: Profile[] = [
   {
     slug: 'dwan-zhang',
     display_name: 'Dwan Zhang',
-    role: 'Senior Researcher',
+    role: 'Senior Researcher at ByteDance, Seed Team',
     linkedin_url: 'https://www.linkedin.com/in/dwan-zhang-b6a852295/',
     photo_url: '/people/dwan-zhang.webp',
     photo_alt: 'Illustrated portrait of Dwan Zhang',
