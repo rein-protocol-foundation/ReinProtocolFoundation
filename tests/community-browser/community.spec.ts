@@ -39,3 +39,12 @@ test('community navigation fits and remains usable during a calendar outage', as
   await expect(page).toHaveURL(/language=zh-CN&coding=none/)
   await expect(page.getByText('No resources match this selection.')).toBeVisible()
 })
+
+test('shared homepage registration link stays on the form after people load', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/#register')
+  await page.getByRole('heading', { name: 'Zexin Li' }).waitFor({ state: 'attached' })
+  await page.evaluate(() => document.fonts.ready)
+  await expect(page.locator('#register h2')).toBeInViewport({ ratio: 1 })
+  await expect(page.locator('.community-form--participant input[name=email]')).toBeInViewport({ ratio: 1 })
+})

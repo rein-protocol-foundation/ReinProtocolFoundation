@@ -3,6 +3,7 @@ import { createServer } from 'node:http'
 createServer(async (request, response) => {
   const { pathname: path, searchParams } = new URL(request.url, 'http://localhost')
   let result = []
+  if (path.endsWith('/dev_people')) await new Promise(resolve => setTimeout(resolve, 1200))
   if (path.endsWith('/dev_consume_form_rate_limit')) result = true
   if (path.endsWith('/dev_register_community_participant')) {
     let body = ''

@@ -99,6 +99,10 @@ export function InstitutionalHomePage() {
         </div>
       </section>
 
+      <CommunitySection id="register" title="Register for community updates." eyebrow="Stay connected" lead="Get news about Rein’s research, learning resources, and community activities by email.">
+        <ParticipantForm />
+      </CommunitySection>
+
       <section className="community-section community-section--soft" aria-labelledby="home-community-title">
         <div className="page-shell">
           <div className="community-heading"><p className="section-index">04 / Community</p><div><h2 id="home-community-title">A public network of <Suspense fallback={<span className="audience-pending">many active participants</span>}><HomeAudience /></Suspense>.</h2><p>Meet people working with AI agents, join local and online events, share learning materials, and help each other prepare for AI agent roles.</p><TextLink href="/community/learn">Browse AI agent learning resources</TextLink></div></div>
@@ -108,10 +112,6 @@ export function InstitutionalHomePage() {
           </Suspense>
         </div>
       </section>
-
-      <CommunitySection id="register" title="Register for community updates." eyebrow="Stay connected" lead="Get news about Rein’s research, learning resources, and community activities by email.">
-        <ParticipantForm />
-      </CommunitySection>
     </main>
   )
 }
