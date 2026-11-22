@@ -8,7 +8,7 @@ export const curatedPeople = peopleSchema.parse(records)
 const rank = {board:0,staff:1,core_contributor:2,contributor:3,community_member:4}
 export function organizePeople(database: PublicPerson[], curated: Person[] = curatedPeople) {
   const slugs = new Set(curated.map(p=>p.slug))
-  const people: Person[] = [...curated, ...database.filter(p=>!slugs.has(p.slug)).map((p,i): Person=>({
+  const people: Person[] = [...curated.map(p=>({...database.find(record=>record.slug===p.slug),...p})), ...database.filter(p=>!slugs.has(p.slug)).map((p,i): Person=>({
     ...p, directoryRole:p.person_type === 'director' ? 'board' : 'core_contributor',
     profession:p.role, role:p.person_type === 'director' ? 'Board Director' : 'Core Contributor',
     sort_order:i,homepage_featured:false,homepage_order:100,
