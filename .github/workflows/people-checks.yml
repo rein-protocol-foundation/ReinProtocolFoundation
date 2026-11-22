@@ -15,6 +15,7 @@ jobs:
       - run: npm ci
       - run: npm run validate:people
       - run: npm run lint
+      - run: npx next typegen
       - run: npm run typecheck
       - run: npx vitest run tests/people-directory.test.tsx tests/people-policy.test.ts
       - run: npm run build
