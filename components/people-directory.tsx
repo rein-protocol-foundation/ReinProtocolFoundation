@@ -2,6 +2,7 @@ import { getPublicPeople } from '@/lib/community/data'
 import type { PublicPerson } from '@/lib/community/types'
 
 type Profile = Pick<PublicPerson, 'slug' | 'display_name' | 'role' | 'photo_url' | 'photo_alt' | 'biography'> & {
+  directoryRole: 'board' | 'staff' | 'core_contributor' | 'contributor' | 'community_member'
   profession?: string
   website_url?: string | null
   github_url?: string | null
@@ -9,9 +10,10 @@ type Profile = Pick<PublicPerson, 'slug' | 'display_name' | 'role' | 'photo_url'
   linkedin_url?: string | null
 }
 
-const boardProfiles: Profile[] = [
+const staffProfiles: Profile[] = [
   {
     slug: 'tempest-ren',
+    directoryRole: 'board',
     website_url: 'https://tempest.fun/',
     display_name: 'Tempest Ren',
     role: 'Founder & Board Chair',
@@ -22,6 +24,7 @@ const boardProfiles: Profile[] = [
   },
   {
     slug: 'zexin-li',
+    directoryRole: 'board',
     display_name: 'Zexin Li',
     role: 'Board Director',
     profession: 'Postdoctoral Researcher · NTU Singapore',
@@ -35,6 +38,7 @@ const boardProfiles: Profile[] = [
 const communityProfiles: Profile[] = [
   {
     slug: 'yicheng-zhang',
+    directoryRole: 'community_member',
     display_name: 'Yicheng Zhang',
     role: 'Community Member',
     profession: 'Assistant Professor · George Mason University',
@@ -45,6 +49,7 @@ const communityProfiles: Profile[] = [
   },
   {
     slug: 'dwan-zhang',
+    directoryRole: 'core_contributor',
     display_name: 'Dwan Zhang',
     role: 'Core Contributor',
     profession: 'Senior Researcher at ByteDance, Seed Team',
@@ -55,6 +60,7 @@ const communityProfiles: Profile[] = [
   },
   {
     slug: 'yiming-zeng',
+    directoryRole: 'core_contributor',
     display_name: 'Yiming Zeng',
     role: 'Core Contributor',
     profession: 'Researcher Scientist Intern at ByteDance, Seed Team',
@@ -65,15 +71,15 @@ const communityProfiles: Profile[] = [
   },
 ]
 
-function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
-  const organizationRole = board || person.profession ? person.role : undefined
-  const profession = person.profession ?? (board ? undefined : person.role)
+function ProfileCard({ person, staff }: { person: Profile; staff?: boolean }) {
+  const organizationRole = staff || person.profession ? person.role : undefined
+  const profession = person.profession ?? (staff ? undefined : person.role)
   const links = [
     ['Website', person.website_url], ['GitHub', person.github_url], ['Google Scholar', person.scholar_url], ['LinkedIn', person.linkedin_url],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]))
 
   return (
-    <article className={`profile-card ${board ? 'profile-card--board' : 'profile-card--member'}`}>
+    <article className={`profile-card ${staff ? 'profile-card--board' : 'profile-card--member'}`}>
       {person.photo_url && <img className="profile-card__portrait" src={person.photo_url} alt={person.photo_alt ?? ''} loading="lazy" />}
       <div>
         {organizationRole && <p className="profile-card__role">{organizationRole}</p>}
@@ -88,28 +94,36 @@ function ProfileCard({ person, board }: { person: Profile; board?: boolean }) {
 
 export async function PeopleDirectory({ featured = false }: { featured?: boolean }) {
   const people = await getPublicPeople({ featured })
-  const boardSlugs = new Set(boardProfiles.map((profile) => profile.slug))
-  const remaining = people.filter((person) => !boardSlugs.has(person.slug))
-  const directors = [
-    ...boardProfiles.map((profile) => ({
+  const staticProfiles = [...staffProfiles, ...communityProfiles]
+  const staticSlugs = new Set(staticProfiles.map((profile) => profile.slug))
+  const profiles: Profile[] = [
+    ...staticProfiles.map((profile) => ({
       ...people.find((person) => person.slug === profile.slug),
       ...profile,
     })),
-    ...remaining.filter((person) => person.person_type === 'director'),
+    ...people.filter((person) => !staticSlugs.has(person.slug)).map((person): Profile => ({
+      ...person,
+      directoryRole: person.person_type === 'director' ? 'board' : 'core_contributor',
+    })),
   ]
-  const communitySlugs = new Set(communityProfiles.map((profile) => profile.slug))
-  const members = [
-    ...communityProfiles,
-    ...remaining.filter((person) => person.person_type !== 'director' && !communitySlugs.has(person.slug)),
+  const staff = profiles.filter((person) => person.directoryRole === 'board' || person.directoryRole === 'staff')
+  const contributors = [
+    ...profiles.filter((person) => person.directoryRole === 'core_contributor'),
+    ...profiles.filter((person) => person.directoryRole === 'contributor'),
   ]
+  const members = profiles.filter((person) => person.directoryRole === 'community_member')
 
   return (
     <div className="people-directory">
-      <section>
-        <h3 className="article-kicker">Board members</h3>
-        {directors.map((person) => <ProfileCard person={person} board key={person.slug} />)}
-      </section>
-      {members.length > 0 && <section>
+      {staff.length > 0 && <section data-people-tier="staff">
+        <h3 className="article-kicker">Rein staff</h3>
+        {staff.map((person) => <ProfileCard person={person} staff key={person.slug} />)}
+      </section>}
+      {contributors.length > 0 && <section data-people-tier="contributors">
+        <h3 className="article-kicker">Community contributors</h3>
+        <div className="profile-grid">{contributors.map((person) => <ProfileCard person={person} key={person.slug} />)}</div>
+      </section>}
+      {members.length > 0 && <section data-people-tier="members">
         <h3 className="article-kicker">Community members</h3>
         <div className="profile-grid">{members.map((person) => <ProfileCard person={person} key={person.slug} />)}</div>
       </section>}
