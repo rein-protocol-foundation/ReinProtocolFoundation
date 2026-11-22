@@ -34,6 +34,16 @@ const boardProfiles: Profile[] = [
 
 const communityProfiles: Profile[] = [
   {
+    slug: 'yicheng-zhang',
+    display_name: 'Yicheng Zhang',
+    role: 'Community Member',
+    profession: 'Assistant Professor · George Mason University',
+    website_url: 'https://yichez.site/',
+    photo_url: '/people/yicheng-zhang.webp',
+    photo_alt: 'Illustrated portrait of Yicheng Zhang',
+    biography: 'Yicheng researches hardware and system security, focusing on GPU vulnerabilities, side-channel attacks, and privacy in AR/VR and AI glasses. His work helps protect computing systems.',
+  },
+  {
     slug: 'dwan-zhang',
     display_name: 'Dwan Zhang',
     role: 'Core Contributor',
