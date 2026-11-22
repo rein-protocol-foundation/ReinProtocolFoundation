@@ -8,6 +8,21 @@ vi.mock('@/lib/community/data', () => ({ getPublicPeople }))
 import { PeopleDirectory } from '@/components/people-directory'
 
 describe('People directory hierarchy', () => {
+  it('shows only staff in the homepage scope, including database directors', async () => {
+    getPublicPeople.mockResolvedValue([
+      { slug: 'another-director', display_name: 'Another Director', person_type: 'director', role: 'Board Director' },
+      { slug: 'database-contributor', display_name: 'Database Contributor', person_type: 'core_contributor', role: 'Researcher' },
+    ] satisfies Partial<PublicPerson>[])
+    render(await PeopleDirectory({ scope: 'staff' }))
+
+    expect(screen.getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent))
+      .toEqual(['Rein staff'])
+    expect(screen.getAllByRole('heading', { level: 4 }).map((heading) => heading.textContent))
+      .toEqual(['Tempest Ren', 'Zexin Li', 'Another Director'])
+    expect(getPublicPeople).toHaveBeenLastCalledWith({ featured: false })
+    expect(screen.queryByText('Database Contributor')).not.toBeInTheDocument()
+  })
+
   it('shows staff, contributors, and general members in separate ordered sections', async () => {
     getPublicPeople.mockResolvedValue([])
     render(await PeopleDirectory({}))

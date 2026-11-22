@@ -92,7 +92,7 @@ function ProfileCard({ person, staff }: { person: Profile; staff?: boolean }) {
   )
 }
 
-export async function PeopleDirectory({ featured = false }: { featured?: boolean }) {
+export async function PeopleDirectory({ featured = false, scope = 'all' }: { featured?: boolean; scope?: 'all' | 'staff' }) {
   const people = await getPublicPeople({ featured })
   const staticProfiles = [...staffProfiles, ...communityProfiles]
   const staticSlugs = new Set(staticProfiles.map((profile) => profile.slug))
@@ -119,11 +119,11 @@ export async function PeopleDirectory({ featured = false }: { featured?: boolean
         <h3 className="article-kicker">Rein staff</h3>
         {staff.map((person) => <ProfileCard person={person} staff key={person.slug} />)}
       </section>}
-      {contributors.length > 0 && <section data-people-tier="contributors">
+      {scope === 'all' && contributors.length > 0 && <section data-people-tier="contributors">
         <h3 className="article-kicker">Community contributors</h3>
         <div className="profile-grid">{contributors.map((person) => <ProfileCard person={person} key={person.slug} />)}</div>
       </section>}
-      {members.length > 0 && <section data-people-tier="members">
+      {scope === 'all' && members.length > 0 && <section data-people-tier="members">
         <h3 className="article-kicker">Community members</h3>
         <div className="profile-grid">{members.map((person) => <ProfileCard person={person} key={person.slug} />)}</div>
       </section>}

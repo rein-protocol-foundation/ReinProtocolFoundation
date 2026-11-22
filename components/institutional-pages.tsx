@@ -108,8 +108,9 @@ export function InstitutionalHomePage() {
           <div className="community-heading"><p className="section-index">04 / Community</p><div><h2 id="home-community-title">A public network of <Suspense fallback={<span className="audience-pending">many active participants</span>}><HomeAudience /></Suspense>.</h2><p>Meet people working with AI agents, join local and online events, share learning materials, and help each other prepare for AI agent roles.</p><TextLink href="/community/learn">Browse AI agent learning resources</TextLink></div></div>
           <Link href="/community" className="text-action">Explore the community</Link>
           <Suspense fallback={null}>
-            <PeopleDirectory featured />
+            <PeopleDirectory scope="staff" />
           </Suspense>
+          <Link href="/community#people" className="primary-action">View all people <span aria-hidden="true">↗</span></Link>
         </div>
       </section>
     </main>
