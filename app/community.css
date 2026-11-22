@@ -1249,3 +1249,20 @@
     background: Highlight;
   }
 }
+
+/* Directory variants share compact typography; role controls density, not job title. */
+.people-directory .profile-card { min-width: 0; align-items: flex-start; gap: 1rem; padding-block: 1.5rem; }
+.people-directory .profile-card > div { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+.people-directory .profile-card h4 { font-size: 1.25rem; line-height: 1.2; }
+.people-directory .profile-card p { font-size: .9rem; line-height: 1.5; }
+.people-directory .profile-card .profile-card__role { font-size: .72rem; }
+.people-directory .profile-card__portrait { width: clamp(5rem, 8vw, 6rem); aspect-ratio: 4 / 5; }
+.people-directory .profile-card--compact .profile-card__portrait { width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover; }
+.people-directory .profile-card--compact h4 { font-size: 1rem; }
+.people-directory .profile-card--compact p { font-size: .875rem; }
+.profile-card--compact h4 a { color: inherit; }
+.profile-card__initials { display: grid; place-items: center; background: var(--paper-deep); color: var(--ink-soft); }
+.people-directory > section { scroll-margin-top: 9rem; }
+.people-pagination { display: flex; align-items: center; gap: 1.5rem; margin-top: 1rem; }
+.people-pagination a { padding-block: .75rem; }
+@media (min-width: 64rem) { .profile-grid--compact { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

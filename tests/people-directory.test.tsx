@@ -5,9 +5,26 @@ import type { PublicPerson } from '@/lib/community/types'
 const { getPublicPeople } = vi.hoisted(() => ({ getPublicPeople: vi.fn() }))
 vi.mock('@/lib/community/data', () => ({ getPublicPeople }))
 
-import { PeopleDirectory } from '@/components/people-directory'
+import { CompactPersonCard, PersonCard, PeopleDirectory } from '@/components/people-directory'
+
+import { curatedPeople } from '@/lib/people/directory'
 
 describe('People directory hierarchy', () => {
+  it('renders compact cards without biographies or role labels and supports initials', () => {
+    const person = { ...curatedPeople[0], directoryRole: 'community_member' as const, role: 'Community Member', photo_url: null, photo_alt: null }
+    render(<CompactPersonCard person={person} />)
+    expect(screen.queryByText(person.biography!)).not.toBeInTheDocument()
+    expect(screen.queryByText('Community Member')).not.toBeInTheDocument()
+    expect(screen.getByText('TR')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: person.display_name })).toHaveAttribute('href', person.website_url)
+  })
+
+  it('retains core contributor biographies in their card variant', () => {
+    const person = curatedPeople.find(person => person.directoryRole === 'core_contributor')!
+    render(<PersonCard person={person} kind="core" />)
+    expect(screen.getByText(person.biography!)).toBeInTheDocument()
+  })
+
   it('shows only staff in the homepage scope, including database directors', async () => {
     getPublicPeople.mockResolvedValue([
       { slug: 'another-director', display_name: 'Another Director', person_type: 'director', role: 'Board Director' },
@@ -18,8 +35,8 @@ describe('People directory hierarchy', () => {
     expect(screen.getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent))
       .toEqual(['Rein staff'])
     expect(screen.getAllByRole('heading', { level: 4 }).map((heading) => heading.textContent))
-      .toEqual(['Tempest Ren', 'Zexin Li', 'Another Director'])
-    expect(getPublicPeople).toHaveBeenLastCalledWith({ featured: false })
+      .toEqual(['Tempest Ren', 'Zexin Li'])
+    expect(getPublicPeople).toHaveBeenLastCalledWith()
     expect(screen.queryByText('Database Contributor')).not.toBeInTheDocument()
   })
 

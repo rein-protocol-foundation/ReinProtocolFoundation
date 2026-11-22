@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "tempest-ren",
+    "directoryRole": "board",
+    "website_url": "https://tempest.fun/",
+    "display_name": "Tempest Ren",
+    "role": "Founder & Board Chair",
+    "profession": "AI Researcher & Serial Entrepreneur",
+    "photo_url": "/people/tempest-ren.webp",
+    "photo_alt": "Portrait of Tempest Ren",
+    "biography": "Tempest is an AI researcher and serial entrepreneur studying agent safety, evaluation, and human oversight. He builds AI agents for real-world work and leads Rein’s research and community initiatives.",
+    "sort_order": 0,
+    "homepage_featured": true,
+    "homepage_order": 0
+  },
+  {
+    "slug": "zexin-li",
+    "directoryRole": "board",
+    "display_name": "Zexin Li",
+    "role": "Board Director",
+    "profession": "Postdoctoral Researcher · NTU Singapore",
+    "photo_url": "/people/zexin-li.webp",
+    "photo_alt": "Illustrated portrait of Zexin Li",
+    "biography": "Zexin studies how advanced AI agents can run reliably on edge devices. To make these agents trustworthy, he investigates how to continually adapt models while meeting response deadlines, detect system failures and recover safely, and verify that a model’s behavior on the device is consistent with its behavior before deployment.",
+    "website_url": "https://zexinli.com/",
+    "sort_order": 1,
+    "homepage_featured": true,
+    "homepage_order": 1
+  },
+  {
+    "slug": "yicheng-zhang",
+    "directoryRole": "community_member",
+    "display_name": "Yicheng Zhang",
+    "role": "Community Member",
+    "profession": "Assistant Professor · George Mason University",
+    "website_url": "https://yichez.site/",
+    "photo_url": "/people/yicheng-zhang.webp",
+    "photo_alt": "Illustrated portrait of Yicheng Zhang",
+    "biography": "Yicheng researches hardware and system security, focusing on GPU vulnerabilities, side-channel attacks, and privacy in AR/VR and AI glasses. His work helps protect computing systems.",
+    "sort_order": 2,
+    "homepage_featured": false,
+    "homepage_order": 2
+  },
+  {
+    "slug": "dwan-zhang",
+    "directoryRole": "core_contributor",
+    "display_name": "Dwan Zhang",
+    "role": "Core Contributor",
+    "profession": "Senior Researcher at ByteDance, Seed Team",
+    "linkedin_url": "https://www.linkedin.com/in/dwan-zhang-b6a852295/",
+    "photo_url": "/people/dwan-zhang.webp",
+    "photo_alt": "Illustrated portrait of Dwan Zhang",
+    "biography": "Dwan studies large language model evaluation and data, developing reliable tests to understand model capabilities, identify failures, and guide improvements.",
+    "sort_order": 3,
+    "homepage_featured": false,
+    "homepage_order": 3
+  },
+  {
+    "slug": "yiming-zeng",
+    "directoryRole": "core_contributor",
+    "display_name": "Yiming Zeng",
+    "role": "Core Contributor",
+    "profession": "Researcher Scientist Intern at ByteDance, Seed Team",
+    "website_url": "https://yiming-zeng.github.io/",
+    "photo_url": "/people/yiming-zeng.webp",
+    "photo_alt": "Illustrated portrait of Yiming Zeng",
+    "biography": "Yiming researches efficient, adaptive language models, post-training, and evaluation. His work spans AI agents and natural language processing for healthcare and scientific discovery.",
+    "sort_order": 4,
+    "homepage_featured": false,
+    "homepage_order": 4
+  }
+]
