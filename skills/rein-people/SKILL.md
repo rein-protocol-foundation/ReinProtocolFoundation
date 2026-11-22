@@ -27,6 +27,6 @@ Staff and core contributors use smaller biography cards. Contributors and genera
 
 ## Validate and submit
 
-Run `npm run validate:people`, `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. Fix relevant failures. Create a focused `codex/` branch from the current target branch, preserving unrelated work. Commit only intended public data/assets and necessary code. Push and create a PR with public sources, the requested role, concise change description and checks. Wait for applicable PR CI to pass; report failures or blockers accurately. Do not merge or deploy without authorization.
+Run `npm run validate:people`, `npm run lint`, `npx next typegen` (generates Next types on a clean checkout), `npm run typecheck`, `npm test`, and `npm run build`. Fix relevant failures. Create a focused `codex/` branch from the current target branch, preserving unrelated work. Commit only intended public data/assets and necessary code. Push and create a PR with public sources, the requested role, concise change description and checks. Wait for applicable PR CI to pass; report failures or blockers accurately. Do not merge or deploy without authorization.
 
 No browser/device/screenshot acceptance is required. Actual Nori skill usage is manually accepted separately; do not simulate an end-to-end skill run as part of this development task.
