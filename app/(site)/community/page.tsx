@@ -95,7 +95,8 @@ function ContributeFallback() {
   )
 }
 
-export default function CommunityPage() {
+export default async function CommunityPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const peopleQuery = await searchParams
   return <main id="main-content" className="community-shell">
     <header className="community-hero" aria-labelledby="community-title">
       <div className="page-shell community-hero__grid">
@@ -116,7 +117,7 @@ export default function CommunityPage() {
     </CommunitySection>
 
     <CommunitySection eyebrow="02 / People" title="People behind the work." id="people">
-      <Suspense fallback={null}><PeopleDirectory /></Suspense>
+      <Suspense fallback={null}><PeopleDirectory query={peopleQuery} /></Suspense>
     </CommunitySection>
 
     <CommunitySection eyebrow="03 / Stay connected" title="Register for community updates." lead="Hear about local events, online presentations, learning materials, and ways to contribute, with updates relevant to your field and region." id="register" tone="soft">

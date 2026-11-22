@@ -18,7 +18,8 @@
     "test:e2e": "playwright test",
     "test:e2e:auth": "playwright test --config=playwright.auth.config.ts",
     "test:e2e:data": "node scripts/run-e2e-data.mjs",
-    "test:e2e:all": "npm run test:e2e && npm run test:e2e:data"
+    "test:e2e:all": "npm run test:e2e && npm run test:e2e:data",
+    "validate:people": "node scripts/validate-people.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "latest",

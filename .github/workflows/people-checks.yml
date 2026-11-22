@@ -1,0 +1,21 @@
+name: People checks
+on: pull_request
+permissions:
+  contents: read
+jobs:
+  people:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run validate:people
+      - run: npm run lint
+      - run: npx next typegen
+      - run: npm run typecheck
+      - run: npx vitest run tests/people-directory.test.tsx tests/people-policy.test.ts
+      - run: npm run build
