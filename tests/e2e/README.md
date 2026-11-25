@@ -24,3 +24,11 @@ Run `npm run test:e2e:data` for the real submission path. This suite:
 Docker and Supabase CLI 2.100 or newer are required. Set `SUPABASE_CLI` only if the current CLI is not on `PATH`. Resend and OpenAI are deliberately disabled: this suite tests durable application behavior without sending real email or invoking a model.
 
 Use `npm run test:e2e:all` to run both suites.
+
+The community PR workflow also runs the database suite. Before browser submissions,
+`scripts/check-participant-optional-profile.sql` exercises both table prefixes inside a
+rolled-back transaction: blank optional fields, participant upserts, international and
+Other fields, contributor profile links/preferences, and every resource format. Browser
+coverage includes empty contributor industry, a minimal participant insert, and clearing
+industry on repeat registration. The disposable stack copies the configured local email
+templates as well as migrations so clean-checkout startup validates the same configuration.

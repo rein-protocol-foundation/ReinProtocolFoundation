@@ -48,14 +48,19 @@ function run(binary, args, options = {}) {
     const child = spawn(binary, args, {
       cwd: repositoryRoot,
       env: options.env ?? process.env,
-      stdio: options.capture ? ['ignore', 'pipe', 'inherit'] : 'inherit',
+      stdio: [options.input ? 'pipe' : 'ignore', options.capture ? 'pipe' : 'inherit', 'inherit'],
     })
+    if (options.input) child.stdin.end(options.input)
     let stdout = ''
     if (options.capture) child.stdout.on('data', (chunk) => { stdout += chunk })
     child.on('error', reject)
     child.on('exit', (code, signal) => {
       if (code === 0) resolvePromise(stdout)
-      else reject(new Error(`${binary} ${args.join(' ')} exited with ${signal ?? code}.`))
+      else {
+        // Startup diagnostics are otherwise lost when stdout is captured.
+        if (options.capture && stdout) console.error(stdout.replace(/sb_(?:secret|publishable)_[A-Za-z0-9_-]+/g, '[redacted]'))
+        reject(new Error(`${binary} ${args.join(' ')} exited with ${signal ?? code}.`))
+      }
     })
   })
 }
@@ -81,6 +86,7 @@ try {
   const temporarySupabase = join(temporaryRoot, 'supabase')
   await mkdir(temporarySupabase)
   await cp(join(repositoryRoot, 'supabase', 'migrations'), join(temporarySupabase, 'migrations'), { recursive: true })
+  await cp(join(repositoryRoot, 'supabase', 'templates'), join(temporarySupabase, 'templates'), { recursive: true })
 
   let config = await readFile(join(repositoryRoot, 'supabase', 'config.toml'), 'utf8')
   config = config.replace(/^project_id\s*=.*$/m, `project_id = "${projectId}"`)
@@ -108,6 +114,12 @@ try {
     'start', '--workdir', temporaryRoot, '--yes',
     '--exclude', 'realtime,storage-api,imgproxy,postgres-meta,studio,edge-runtime,logflare,vector,supavisor,mailpit',
   ], { capture: true })
+
+  // psql supports the transaction-wrapped, multi-statement regression script.
+  await run('docker', [
+    'exec', '-i', `supabase_db_${projectId}`, 'psql', '-U', 'postgres', '-d', 'postgres',
+    '-v', 'ON_ERROR_STOP=1',
+  ], { input: await readFile(join(repositoryRoot, 'scripts/check-participant-optional-profile.sql'), 'utf8') })
 
   const statusText = await run(supabaseCli, ['status', '--workdir', temporaryRoot, '--output', 'json'], { capture: true })
   const status = JSON.parse(statusText)

@@ -11,12 +11,12 @@ const sharedEmail = e2eEmail('shared')
 const contributorName = `E2E Contributor ${e2eRunId}`
 const resourceTitle = `E2E Agent Resource ${e2eRunId}`
 
-async function submitParticipant(page: Page, email: string, name: string) {
+async function submitParticipant(page: Page, email: string, name: string, industry = 'AI / Software / Technology') {
   await page.goto('/community#register')
   const form = page.locator('.community-form--participant')
   await form.getByLabel(/^Email/).fill(email)
   await form.getByLabel(/^Name/).fill(name)
-  await form.getByLabel(/^Field or industry/).selectOption('AI / Software / Technology')
+  await form.getByLabel(/^Field or industry/).selectOption(industry)
   await selectUnitedStatesLocation(form, 'CA', 'San Francisco')
   await form.getByLabel(/receive community and activity messages/).check()
   await form.getByLabel(/Privacy Policy/).check()
@@ -67,6 +67,13 @@ test.describe.serial('database-writing community flows', () => {
     expect(await memberCount()).toBe(before + 1)
     const updated = await oneRecord('dev_community_participants', 'email', participantEmail)
     expect(updated.name).toBe(`Updated Participant ${e2eRunId}`)
+
+    await page.getByRole('button', { name: 'Done' }).click()
+    await submitParticipant(page, participantEmail, '', '')
+    const withoutIndustry = await oneRecord('dev_community_participants', 'email', participantEmail)
+    expect(withoutIndustry.industry).toBeNull()
+    expect(await recordCount('dev_community_participants', 'email', participantEmail)).toBe(1)
+    expect(await memberCount()).toBe(before + 1)
   })
 
   test('a valid Contributor application stores all fields and verifies exactly once', async ({ page }) => {
@@ -76,7 +83,7 @@ test.describe.serial('database-writing community flows', () => {
     await form.getByLabel(/^Name/).fill(contributorName)
     await form.getByLabel(/^Email/).fill(contributorEmail)
     await selectInternationalLocation(form, 'Spain', 'Madrid')
-    await form.getByLabel(/^Field or industry/).selectOption('Academic / Research')
+    // Keep the browser's empty optional industry value to exercise its real FormData.
     await form.getByLabel('Advance a public-benefit mission').check()
     await form.getByLabel('Research and paper discussions').check()
     await form.getByRole('textbox', { name: 'Personal website' }).fill(`https://example.com/people/${e2eRunId}`)
@@ -93,7 +100,7 @@ test.describe.serial('database-writing community flows', () => {
     const application = await oneRecord('dev_contributor_applications', 'email', contributorEmail)
     expect(application).toMatchObject({
       name: contributorName,
-      industry: 'Academic / Research',
+      industry: null,
       location_scope: 'international',
       country: 'Spain',
       city_region: 'Madrid',
@@ -153,7 +160,10 @@ test.describe.serial('database-writing community flows', () => {
 
   test('one email used across Participant and resource forms creates one member', async ({ page }) => {
     const before = await memberCount()
-    await submitParticipant(page, sharedEmail, `Shared Identity ${e2eRunId}`)
+    await submitParticipant(page, sharedEmail, '', '')
+    const minimalParticipant = await oneRecord('dev_community_participants', 'email', sharedEmail)
+    expect(minimalParticipant.name).toBeNull()
+    expect(minimalParticipant.industry).toBeNull()
     await page.getByRole('button', { name: 'Done' }).click()
     await submitResource(page, sharedEmail, `Shared Identity Resource ${e2eRunId}`)
 
@@ -173,7 +183,7 @@ test.describe.serial('database-writing community flows', () => {
     await page.goto('/admin/applications')
     await expect(page.getByText(contributorName)).toBeVisible()
     await expect(page.getByText(contributorEmail).first()).toBeVisible()
-    await expect(page.getByText('submitted', { exact: true })).toBeVisible()
+    await expect(page.getByText('Submitted', { exact: true })).toBeVisible()
 
     await page.goto('/admin/resources')
     await expect(page.getByText(resourceTitle)).toBeVisible()

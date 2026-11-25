@@ -29,3 +29,25 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Before troubleshooting repository identity, Vercel linkage, Nori deployment reports, or source-snapshot CI failures,
   read [the migration record](docs/github-organization-migration-2026-10-zh.md). It distinguishes historical observations
   from pending production verification; recheck live state rather than assuming completion.
+
+## Public form contracts and database releases
+
+- Treat each public form as one contract across rendered controls, submitted `FormData`, server validation,
+  action/RPC arguments, and database columns/constraints. Audit all layers when changing any field.
+- Optional HTML selects submit `''`, not `undefined`. Test actual browser-shaped payloads, including blank
+  optional fields, whitespace, conditional “Other” details, U.S./international location switching,
+  multi-select arrays, URL errors, length limits, and required consents. Invalid input must return field
+  errors, not throw or erase the user's other entries.
+- Test real database inserts and repeat submissions, including minimal required-only forms. Mocked RPC
+  responses and successful Vercel builds do not establish compatibility with the deployed schema.
+- Changes to form behavior or database constraints must be delivered through a PR with the migration,
+  regression tests, and release order. Do not directly change production as a shortcut for a code fix.
+  Production migration execution requires explicit authorization for that production action, even when
+  a general bug fix has been requested. An emergency repair must be explicitly authorized and recorded
+  in the PR with the exact migration version and verification results.
+- Before release, compare repository migrations with remote migration history. Apply authorized,
+  backward-compatible migrations before the dependent application release. Do not mark unrelated
+  remote migrations reverted merely to make `db push` succeed.
+- After release, verify the relevant production constraints and a clearly marked test submission's
+  stored values. Report separately what is fixed locally, reviewed in a PR, deployed, and verified live;
+  never describe a local-only fix or mocked test as a production fix.
