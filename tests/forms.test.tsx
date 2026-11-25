@@ -15,7 +15,7 @@ import { ContributorForm } from '@/components/forms/contributor-form'
 import { ParticipantForm } from '@/components/forms/participant-form'
 import { ResourceSubmissionForm } from '@/components/forms/resource-form'
 import { FormStatus } from '@/components/forms/form-controls'
-import { registerParticipant } from '@/lib/community/actions'
+import { registerParticipant, submitContributorApplication, submitResource } from '@/lib/community/actions'
 
 describe('public community forms', () => {
   it('includes the optional profile links and omits a time-commitment question', () => {
@@ -136,5 +136,23 @@ describe('public community forms', () => {
     expect(screen.getByRole('textbox', { name: /^Description/ })).toHaveAttribute('placeholder', expect.stringMatching(/what members can learn about AI agents/))
     expect(screen.queryByRole('textbox', { name: /How is this relevant/ })).not.toBeInTheDocument()
     expect(container.querySelector('input[type="file"]')).toBeNull()
+  })
+})
+
+
+describe('contribution form data retention', () => {
+  it.each([
+    { label: 'contributor', Form: ContributorForm, submit: submitContributorApplication, field: /^Name/ },
+    { label: 'resource', Form: ResourceSubmissionForm, submit: submitResource, field: /^Resource title/ },
+  ])('preserves $label entries on field errors and clears only after success', async ({ Form, submit, field }) => {
+    vi.mocked(submit).mockResolvedValueOnce({ status: 'error', message: 'Review the highlighted fields.', fieldErrors: { email: ['Enter a valid email address.'] } })
+    const { container } = render(<Form />)
+    fireEvent.change(screen.getByRole('textbox', { name: field }), { target: { value: '保留输入' } })
+    fireEvent.submit(container.querySelector('form')!)
+    await screen.findByRole('alert')
+    expect(screen.getByRole('textbox', { name: field })).toHaveValue('保留输入')
+    vi.mocked(submit).mockResolvedValueOnce({ status: 'success' })
+    fireEvent.submit(container.querySelector('form')!)
+    await waitFor(() => expect(screen.getByRole('textbox', { name: field })).toHaveValue(''))
   })
 })

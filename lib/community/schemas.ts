@@ -3,14 +3,16 @@ import { CONTRIBUTION_AREAS, COUNTRIES, INDUSTRIES, PARTICIPATION_REASONS, RESOU
 
 const clean = (max: number) => z.string().trim().min(1, 'This field is required.').max(max, `Use ${max} characters or fewer.`)
 const optionalText = (max: number) => z.preprocess((value) => typeof value === 'string' && value.trim() === '' ? undefined : value, z.string().trim().max(max).optional())
+const optionalIndustry = z.preprocess(value => value === '' ? undefined : value, z.enum(INDUSTRIES).optional())
 const email = z.string().trim().toLowerCase().email('Enter a valid email address.').max(320)
 
 function optionalHttpsUrl(hosts?: string[]) {
   return z.preprocess(
     (value) => typeof value === 'string' && value.trim() === '' ? undefined : value,
     z.string().trim().url('Enter a complete URL.').max(2048).refine((value) => {
+      if (!isPublicHttpUrl(value)) return false
       const url = new URL(value)
-      return url.protocol === 'https:' && isPublicHttpUrl(value) && (!hosts || hosts.some((host) => url.hostname === host || url.hostname.endsWith(`.${host}`)))
+      return url.protocol === 'https:' && (!hosts || hosts.some((host) => url.hostname === host || url.hostname.endsWith(`.${host}`)))
     }, hosts ? 'Use a valid HTTPS link from the requested service.' : 'Use an HTTPS URL.').optional(),
   )
 }
@@ -46,7 +48,7 @@ export function isPublicHttpUrl(value: string) {
 export const participantSchema = z.object({
   email,
   name: optionalText(120),
-  industry: z.preprocess(value => value === '' ? undefined : value, z.enum(INDUSTRIES).optional()),
+  industry: optionalIndustry,
   industry_other: optionalText(120),
   ...locationFields,
   communications_consent: z.literal('on', { message: 'Consent is required to register.' }),
@@ -59,7 +61,7 @@ export const participantSchema = z.object({
 export const contributorSchema = z.object({
   name: clean(120),
   email,
-  industry: z.enum(INDUSTRIES).optional(),
+  industry: optionalIndustry,
   industry_other: optionalText(120),
   ...locationFields,
   participation_reasons: z.array(z.enum(PARTICIPATION_REASONS)).min(1, 'Choose at least one reason.'),
