@@ -1,3 +1,4 @@
+import { discordInviteUrl } from '@/lib/community-invites.json'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
@@ -117,7 +118,7 @@ describe('public community forms', () => {
     fireEvent.submit(container.querySelector('form')!)
     await screen.findByRole('dialog')
 
-    expect(screen.getByRole('link', { name: 'Join our Discord server' })).toHaveAttribute('href', 'https://discord.gg/m8qnWv9XX')
+    expect(screen.getByRole('link', { name: 'Join our Discord server' })).toHaveAttribute('href', discordInviteUrl)
     await waitFor(() => {
       expect(screen.getByRole('textbox', { name: /^Email/ })).toHaveValue('')
       expect(screen.getByRole('combobox', { name: /^Field or industry/ })).toHaveValue('')
