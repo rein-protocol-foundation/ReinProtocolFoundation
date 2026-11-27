@@ -19,6 +19,7 @@ jobs:
           JOB_SECRET: ${{ secrets.ORGANIZATION_EMAIL_JOB_SECRET }}
         run: |
           test -n "$JOB_SECRET"
-          curl --fail --silent --show-error --max-time 65 --request POST \
+          result=$(curl --fail --silent --show-error --max-time 65 --request POST \
             --header "Authorization: Bearer $JOB_SECRET" \
-            https://rein-protocol.org/api/jobs/organization-email
+            https://www.rein-protocol.org/api/jobs/organization-email)
+          jq -ec 'select(.checked | type == "number") | {checked}' <<< "$result"
