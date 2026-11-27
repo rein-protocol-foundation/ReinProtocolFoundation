@@ -21,15 +21,11 @@ The optional Resend import retains the `USER_NAME` placeholder for manual templa
 
 The announcement is for all existing registered Community Members, inviting them to the live Discord community and to interact with Nori Agent. Subject: **Rein’s Discord is live — come meet Nori Agent**.
 
-`discordCommunityLaunchTemplate(name)` in `lib/email-templates.ts` renders the draft in the shared Rein layout, using the Rein-branded static Discord QR image. It is listed under “欢迎与社区动态” in the review gallery as “草稿 · 未发送”. `npm run preview:emails` also produces `discord-community-launch-preview.html` and `discord-community-launch-resend.html`, preserving the `USER_NAME` variable. No recipient selection, campaign, scheduled job, or sending action is connected to this draft.
+`discordCommunityLaunchTemplate(name)` in `lib/email-templates.ts` renders the draft in the shared Rein layout, with a direct Discord invitation link. It is listed under “欢迎与社区动态” in the review gallery as “草稿 · 未发送”. `npm run preview:emails` also produces `discord-community-launch-preview.html` and `discord-community-launch-resend.html`, preserving the `USER_NAME` variable. No recipient selection, campaign, scheduled job, or sending action is connected to this draft.
 
 ## Discord invitation
 
-The welcome email and Community page share the Discord URL and QR asset path in `lib/community-invites.json`. `public/images/discord-qrcode.png` is a 1000 × 1000 PNG generated with 草料 (https://cli.im/url) using its static URL mode, the Rein icon, and 30% error correction. The original downloaded file, `httpsdiscord.ggm8qnWv9XX.png`, is copied without image modifications. Scanning it directly opens `https://discord.gg/m8qnWv9XX`, matching the adjacent button and clickable image; it does not use a QR-provider redirect or require a QR-provider subscription. The Discord invitation itself must remain valid.
-
-On November 7, 2026 (America/Los_Angeles), this static image replaced the previous artwork encoding `https://qrc-ai.com/Ax2Qx`. That provider account was paused after its seven-day trial ended, while the underlying Discord invite still worked. Reusing the existing asset path updates the website and email image references when deployed; previously printed or downloaded copies of the old QR are unchanged and need replacement.
-
-When replacing the artwork or invitation, decode the image and verify that its payload exactly matches `discordInviteUrl` in the JSON. Run `node scripts/preview-welcome-email.mjs` and `npm run preview:emails` to refresh the previews and imports, including the gallery's embedded image. Deploy the PNG alongside these updates. The static artwork has been decoded successfully with Apple Vision at both its original 1000px size and its 164px display size.
+The Community page, registration confirmation, welcome email, and Discord launch announcement use the direct invite URL from `lib/community-invites.json`. When changing it, verify that Discord resolves the invite to the Rein server and regenerate the previews and Resend imports.
 
 ## Contributor welcome email
 

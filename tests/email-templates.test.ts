@@ -1,6 +1,8 @@
+import { discordInviteUrl } from '@/lib/community-invites.json'
 import { identityLinkCodeTemplate } from '@/lib/email-templates'
 import { describe, expect, it } from 'vitest'
 import {
+  discordCommunityLaunchTemplate,
   githubOrganizationLaunchTemplate,
   automaticRejectionTemplate,
   applicationReceivedTemplate,
@@ -32,8 +34,12 @@ describe('transactional email templates', () => {
 
   it('invites participants to Discord without exposing a Contributor Slack invitation', () => {
     const html = participantConfirmationTemplate('New member')
-    expect(html).toContain('href="https://discord.gg/m8qnWv9XX"')
-    expect(html).toContain('src="https://www.rein-protocol.org/images/discord-qrcode.png"')
+    for (const invitation of [html, discordCommunityLaunchTemplate()]) {
+      const document = new DOMParser().parseFromString(invitation, 'text/html')
+      const links = [...document.links].filter(link => link.href === discordInviteUrl)
+      expect(links.some(link => link.textContent?.includes('Join'))).toBe(true)
+      expect(invitation).not.toMatch(/discord-qrcode|QR code|scan to join/i)
+    }
     expect(html).not.toContain('SLACK_INVITE_URL')
     expect(html).not.toContain('Join the Contributor Slack')
     for (const applicantHtml of [

@@ -20,8 +20,7 @@ export function discordCommunityLaunchTemplate(name?: string) {
 <p style="margin:0 0 16px;">You’ll also find Nori Agent, Rein’s community AI agent, on Discord. Introduce yourself and start a conversation about your interests, questions, or projects.</p>
 <p style="margin:0 0 20px;">Not sure where to start? Try: “Hi Nori! I’m new here, and I’m interested in learning more about AI agents. How can I get involved?”</p>
 ${emailActionButton('Join the Rein Discord community', communityInvites.discordInviteUrl)}
-<p style="margin:18px 0 8px;"><a href="${communityInvites.discordInviteUrl}"><img src="https://www.rein-protocol.org${communityInvites.discordQrCodePath}" width="164" height="164" alt="QR code to join the Rein Discord server" style="display:block;border:0;width:164px;height:164px;"></a></p>
-<p style="margin:0 0 22px;color:#75695e;font-size:12px;line-height:1.6;">Scan to join on your phone, or open <a href="${communityInvites.discordInviteUrl}" style="color:#a83f22;text-decoration:underline;">${communityInvites.discordInviteUrl}</a>.</p>
+<p style="margin:12px 0 22px;color:#75695e;font-size:12px;line-height:1.6;">Invitation link: <a href="${communityInvites.discordInviteUrl}" style="color:#a83f22;text-decoration:underline;">${communityInvites.discordInviteUrl}</a>.</p>
 <p style="margin:0 0 16px;">Already on the server? Drop by and say hello—we’d love to hear what you’ve been working on.</p>
 <p style="margin:0 0 20px;">We look forward to seeing you there.</p>`,
     footerNote: 'You’re receiving this community update because you registered with Rein Protocol Foundation.',

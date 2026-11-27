@@ -63,7 +63,7 @@ function applicationEmail(id, title, group, renderer, args, sender, description,
   })
 }
 applicationEmail('participant-welcome', 'Community Welcome', 'welcome', 'participantConfirmationTemplate', [name], 'sendParticipantConfirmation',
-  '社区用户登记后发送。包含 Discord 邀请、二维码，以及学习和参与入口。', { USER_NAME: name })
+  '社区用户登记后发送。包含 Discord 邀请链接，以及学习和参与入口。', { USER_NAME: name })
 applicationEmail('discord-community-launch', 'Discord 上线通知 · Nori Agent', 'welcome', 'discordCommunityLaunchTemplate', [name], null,
   '面向所有已注册 Community Member 的社区公告草稿：Discord 已上线，邀请成员加入并与 Nori Agent 互动。仅供审阅，尚未接入发送。',
   { USER_NAME: name }, { status: '草稿 · 未发送', subject: templates.discordCommunityLaunchSubject })
