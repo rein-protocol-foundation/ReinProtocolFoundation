@@ -1,8 +1,8 @@
 import { beforeEach, afterEach, expect, it, vi } from 'vitest'
-const mocks = vi.hoisted(() => ({ from: vi.fn(), provision: vi.fn() }))
+const mocks = vi.hoisted(() => ({ from: vi.fn(), provision: vi.fn(), find: vi.fn(), remove: vi.fn() }))
 vi.mock('@supabase/supabase-js', () => ({ createClient: () => ({ from: mocks.from }) }))
-vi.mock('@/lib/organization-email/cloudflare', async original => ({ ...await original<object>(), provisionMailbox: mocks.provision }))
-import { reconcileMailboxes, saveMailbox } from '@/lib/organization-email/store'
+vi.mock('@/lib/organization-email/cloudflare', async original => ({ ...await original<object>(), findDeletionTarget: mocks.find, removeRoutingRule: mocks.remove, provisionMailbox: mocks.provision }))
+import { deleteForwardingRule, reconcileMailboxes, saveMailbox } from '@/lib/organization-email/store'
 const input = { localPart: 'zexin.li', destination: 'zexin.li@ntu.edu.sg' }
 let results: unknown[]
 let builders: Record<string, ReturnType<typeof vi.fn>>[]
@@ -13,7 +13,7 @@ beforeEach(() => {
   mocks.from.mockImplementation(() => {
     const result = results.shift()
     const builder: Record<string, ReturnType<typeof vi.fn>> = {}
-    for (const method of ['select', 'update', 'upsert', 'or', 'order', 'limit', 'eq', 'lt', 'single', 'maybeSingle']) builder[method] = vi.fn(() => builder)
+    for (const method of ['delete', 'is', 'neq', 'select', 'update', 'upsert', 'or', 'order', 'limit', 'eq', 'lt', 'single', 'maybeSingle']) builder[method] = vi.fn(() => builder)
     builder.then = vi.fn((resolve: (value: unknown) => void) => Promise.resolve(result).then(resolve))
     builders.push(builder); return builder
   })
@@ -54,4 +54,30 @@ it('activates an existing verified request in the background without a new reser
   expect(builders[1].or).toHaveBeenCalledWith(builders[0].or.mock.calls[0][0])
   expect(builders[1].update.mock.calls[0][0]).not.toHaveProperty('last_actor_id')
   expect(builders[2].update).toHaveBeenCalledWith(expect.objectContaining({ status: 'active', rule_id: 'rule' }))
+})
+
+it('finishes an interrupted deletion after Cloudflare has already removed the rule', async () => {
+  mocks.find.mockResolvedValue(false)
+  results = [{ data: { destination: input.destination, status: 'deleting', rule_id: 'r' } }, { data: { address: 'x' } }, { data: { address: 'x' } }]
+  await deleteForwardingRule({ ...input, ruleId: 'r' }, 'admin')
+  expect(builders[1].eq).toHaveBeenCalledWith('status', 'deleting')
+  expect(builders[2].delete).toHaveBeenCalledOnce()
+  expect(builders[2].eq).toHaveBeenCalledWith('lock_token', expect.any(String))
+})
+it('does not consume a fresh pending reservation when a deleted rule is retried', async () => {
+  mocks.find.mockResolvedValue(false)
+  results = [{ data: { destination: input.destination, status: 'pending', rule_id: null } }]
+  await expect(deleteForwardingRule({ ...input, ruleId: 'old' }, 'admin')).rejects.toThrow('conflict')
+  expect(mocks.remove).not.toHaveBeenCalled()
+})
+
+it('locks an existing active reservation and persists deletion intent before removing the rule', async () => {
+  mocks.find.mockResolvedValue(true)
+  results = [{ data: null }, { data: { destination: input.destination, status: 'active', rule_id: 'r' } },
+    { data: { address: 'x' } }, { data: { address: 'x' } }, { data: { address: 'x' } }]
+  await deleteForwardingRule({ ...input, ruleId: 'r' }, 'admin')
+  expect(builders[2].lt).toHaveBeenCalledWith('lock_until', expect.any(String))
+  expect(builders[3].update).toHaveBeenCalledWith({ status: 'deleting', rule_id: 'r' })
+  expect(builders[3].update.mock.invocationCallOrder[0]).toBeLessThan(mocks.remove.mock.invocationCallOrder[0])
+  expect(builders[4].delete).toHaveBeenCalledOnce()
 })

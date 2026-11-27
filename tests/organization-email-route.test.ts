@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
-const mocks = vi.hoisted(() => ({ auth: vi.fn(), save: vi.fn(), list: vi.fn(), rules: vi.fn() }))
+const mocks = vi.hoisted(() => ({ remove: vi.fn(), auth: vi.fn(), save: vi.fn(), list: vi.fn(), rules: vi.fn() }))
 vi.mock('@/lib/admin/auth', () => ({ requireAdmin: mocks.auth }))
-vi.mock('@/lib/organization-email/store', () => ({ saveMailbox: mocks.save, listMailboxes: mocks.list }))
+vi.mock('@/lib/organization-email/store', () => ({ deleteForwardingRule: mocks.remove, saveMailbox: mocks.save, listMailboxes: mocks.list }))
 vi.mock('@/lib/organization-email/cloudflare', async importOriginal => ({ ...await importOriginal<object>(), listRoutingRules: mocks.rules }))
-import { GET, POST } from '@/app/api/admin/organization-email/route'
+import { GET, POST, DELETE } from '@/app/api/admin/organization-email/route'
 beforeEach(() => { vi.clearAllMocks(); mocks.auth.mockResolvedValue({ user: { id: 'admin' } }); mocks.save.mockResolvedValue({ status: 'pending' }) })
 afterEach(() => vi.restoreAllMocks())
 function request(body: unknown, origin = 'https://rein-protocol.org') {
@@ -28,4 +28,15 @@ it('submits valid normalized input as the authenticated admin', async () => {
   expect(response.status).toBe(200)
   expect(response.headers.get('cache-control')).toBe('no-store')
   expect(mocks.save).toHaveBeenCalledWith({ localPart: 'zexin.li', destination: 'zexin.li@ntu.edu.sg' }, 'admin')
+})
+
+it('requires admin, same-origin JSON and an exact rule identifier for deletion', async () => {
+  const input = { localPart: 'tom.wang', destination: 'tom@example.org', ruleId: 'rule-1' }
+  mocks.auth.mockRejectedValueOnce(new Error('unauthorized'))
+  await expect(DELETE(request(input))).rejects.toThrow('unauthorized')
+  expect((await DELETE(request(input, 'https://other.example'))).status).toBe(403)
+  expect((await DELETE(request({ ...input, ruleId: '../other' }))).status).toBe(400)
+  expect(mocks.remove).not.toHaveBeenCalled()
+  expect((await DELETE(request(input))).status).toBe(200)
+  expect(mocks.remove).toHaveBeenCalledWith(input, 'admin')
 })

@@ -8,11 +8,14 @@ export const mailboxSchema = z.object({
     .refine(value => !value.endsWith(`@${organizationDomain}`), 'Use an external inbox.'),
 }).strict()
 
+export const deleteRuleSchema = mailboxSchema.extend({ ruleId: z.string().regex(/^[a-zA-Z0-9_-]{1,64}$/) })
+export type DeleteRuleInput = z.infer<typeof deleteRuleSchema>
 export type MailboxInput = z.infer<typeof mailboxSchema>
 export type Mailbox = {
   address: string
   destination: string
-  status: 'pending' | 'active' | 'error'
+  status: 'pending' | 'active' | 'error' | 'deleting'
+  rule_id?: string | null
   last_error: string | null
   updated_at: string
 }

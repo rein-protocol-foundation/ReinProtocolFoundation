@@ -2,8 +2,8 @@ import 'server-only'
 import { createClient } from '@supabase/supabase-js'
 import { randomUUID } from 'node:crypto'
 import { isSupabaseSecretKey } from '@/lib/env'
-import { emailConfiguration, MailboxError, provisionMailbox } from './cloudflare'
-import { organizationDomain, type Mailbox, type MailboxInput } from './contracts'
+import { emailConfiguration, MailboxError, provisionMailbox, findDeletionTarget, removeRoutingRule } from './cloudflare'
+import { organizationDomain, type Mailbox, type DeleteRuleInput, type MailboxInput } from './contracts'
 
 // Deliberately unscoped: both deployments manage the same real Cloudflare domain.
 function store() {
@@ -13,7 +13,7 @@ function store() {
   return createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } })
     .from('organization_email_mailboxes')
 }
-const columns = 'address,destination,status,last_error,updated_at'
+const columns = 'address,destination,status,rule_id,last_error,updated_at'
 export async function listMailboxes(): Promise<Mailbox[]> {
   const mailboxes: Mailbox[] = []
   let cursor = ''
@@ -43,6 +43,7 @@ async function processMailbox(input: MailboxInput, address: string, actorId?: st
   let claim = store().update({ lock_token: token,
     lock_until: new Date(now.getTime() + 300_000).toISOString(), ...(actorId ? { last_actor_id: actorId } : {}),
   }).eq('address', address).eq('destination', input.destination).lt('lock_until', now.toISOString())
+  claim = claim.neq('status', 'deleting')
   if (!actorId) claim = claim.or(retryable)
   const { data: lease, error: leaseError } = await claim.select('address').maybeSingle()
   if (leaseError) throw new MailboxError('database_error', 503)
@@ -75,4 +76,55 @@ export async function reconcileMailboxes() {
     !(result.reason instanceof MailboxError && ['busy', 'conflict'].includes(result.reason.code)))
   if (failed) throw new MailboxError('provider_error')
   return { checked: outcomes.filter(result => result.status === 'fulfilled').length }
+}
+
+export async function deleteForwardingRule(input: DeleteRuleInput, actorId: string) {
+  const address = `${input.localPart}@${organizationDomain}`
+  const signal = AbortSignal.timeout(45_000)
+  const exists = await findDeletionTarget(input, signal)
+  const token = randomUUID()
+  const now = new Date()
+  const intent = { status: 'deleting', rule_id: input.ruleId, lock_token: token,
+    last_actor_id: actorId, lock_until: new Date(now.getTime() + 300_000).toISOString() }
+  // External rules need the same address lock as dashboard-created rules.
+  let claimed = false
+  let needsIntent = false
+  if (exists) {
+    const { data, error } = await store().upsert({ address, destination: input.destination,
+      requested_by: actorId, ...intent }, { onConflict: 'address', ignoreDuplicates: true }).select('address').maybeSingle()
+    if (error) throw new MailboxError('database_error', 503)
+    claimed = Boolean(data)
+  }
+  if (!claimed) {
+    const { data: row, error } = await store().select('destination,status,rule_id').eq('address', address).maybeSingle()
+    if (error) throw new MailboxError('database_error', 503)
+    if (!row && !exists) return
+    if (!row || row.destination !== input.destination ||
+      (row.status === 'deleting' && row.rule_id !== input.ruleId) ||
+      (!exists && row.status !== 'deleting')) throw new MailboxError('conflict', 409)
+    needsIntent = row.status !== 'deleting'
+    let claim = store().update({ lock_token: token, lock_until: intent.lock_until, last_actor_id: actorId }).eq('address', address).eq('destination', input.destination)
+      .eq('status', row.status).lt('lock_until', now.toISOString())
+    claim = row.rule_id ? claim.eq('rule_id', row.rule_id) : claim.is('rule_id', null)
+    const result = await claim.select('address').maybeSingle()
+    if (result.error) throw new MailboxError('database_error', 503)
+    if (!result.data) throw new MailboxError('busy', 409)
+  }
+  try {
+    if (needsIntent) {
+      // A stale tab may race with a new reservation for the same address.
+      if (!await findDeletionTarget(input, signal)) throw new MailboxError('conflict', 409)
+      const result = await store().update({ status: 'deleting', rule_id: input.ruleId })
+        .eq('address', address).eq('lock_token', token).select('address').single()
+      if (result.error) throw new MailboxError('database_error', 503)
+    }
+    await removeRoutingRule(input, signal)
+    const { data, error } = await store().delete().eq('address', address).eq('lock_token', token).select('address').single()
+    if (error || !data) throw new MailboxError('database_error', 503)
+  } catch (error) {
+    // Preserve deletion intent even when the provider response or final database write was lost.
+    await store().update({ lock_token: null, lock_until: new Date(0).toISOString() })
+      .eq('address', address).eq('lock_token', token)
+    throw error
+  }
 }

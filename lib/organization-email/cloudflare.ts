@@ -1,5 +1,5 @@
 import 'server-only'
-import { organizationDomain, type MailboxInput } from './contracts'
+import { organizationDomain, type DeleteRuleInput, type MailboxInput } from './contracts'
 
 export class MailboxError extends Error {
   constructor(public code: string, public status = 502) { super(code) }
@@ -20,17 +20,17 @@ export function emailConfiguration() {
   return { accountId, token, zoneId }
 }
 
-async function request<T>(path: string, body?: unknown, signal?: AbortSignal): Promise<Envelope<T>> {
+async function request<T>(path: string, body?: unknown, signal?: AbortSignal, method = body === undefined ? 'GET' : 'POST'): Promise<Envelope<T>> {
   const { token } = emailConfiguration()
   try {
     const response = await fetch(`https://api.cloudflare.com/client/v4${path}`, {
-      method: body === undefined ? 'GET' : 'POST',
+      method,
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: body === undefined ? undefined : JSON.stringify(body),
       cache: 'no-store', signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(10_000)]) : AbortSignal.timeout(10_000),
     })
     const data = await response.json() as Envelope<T>
-    if (!response.ok || !data.success || data.result == null) throw new Error('provider_error')
+    if (!response.ok || !data.success || (method !== 'DELETE' && data.result == null)) throw new Error('provider_error')
     return data
   } catch { throw new MailboxError('provider_error') }
 }
@@ -57,12 +57,36 @@ export function matchingRule(rules: RoutingRule[], address: string, destination:
     rule.actions[0].value[0].toLowerCase() !== destination) throw new MailboxError('conflict', 409)
   return rule
 }
+async function verifyZone(signal: AbortSignal) {
+  const { accountId, zoneId } = emailConfiguration()
+  const zone = (await request<{ name: string; account: { id: string } }>(`/zones/${zoneId}`, undefined, signal)).result
+  if (zone.name !== organizationDomain || zone.account.id !== accountId) throw new MailboxError('not_configured', 503)
+}
+
+export async function findDeletionTarget(input: DeleteRuleInput, signal: AbortSignal) {
+  await verifyZone(signal)
+  const rule = (await listRoutingRules(signal)).find(rule => rule.id === input.ruleId)
+  if (!rule) return false
+  const [matcher] = rule.matchers
+  const [action] = rule.actions
+  if (rule.matchers.length !== 1 || matcher.type !== 'literal' || matcher.field !== 'to' ||
+    matcher.value?.toLowerCase() !== `${input.localPart}@${organizationDomain}` ||
+    rule.actions.length !== 1 || action.type !== 'forward' || action.value?.length !== 1 ||
+    action.value[0].toLowerCase() !== input.destination) throw new MailboxError('conflict', 409)
+  return true
+}
+
+export async function removeRoutingRule(input: DeleteRuleInput, signal: AbortSignal) {
+  if (!await findDeletionTarget(input, signal)) return
+  const { zoneId } = emailConfiguration()
+  await request(`/zones/${zoneId}/email/routing/rules/${input.ruleId}`, undefined, signal, 'DELETE')
+  if (await findDeletionTarget(input, signal)) throw new MailboxError('provider_error')
+}
+
 export async function provisionMailbox(input: MailboxInput) {
   const { accountId, zoneId } = emailConfiguration()
   const signal = AbortSignal.timeout(45_000)
-  // Verify the configured zone before any mutation, even if a deployment has the wrong zone ID.
-  const zone = (await request<{ name: string; account: { id: string } }>(`/zones/${zoneId}`, undefined, signal)).result
-  if (zone.name !== organizationDomain || zone.account.id !== accountId) throw new MailboxError('not_configured', 503)
+  await verifyZone(signal)
   const address = `${input.localPart}@${organizationDomain}`
   const existing = matchingRule(await listRoutingRules(signal), address, input.destination)
   const destinationsPath = `/accounts/${accountId}/email/routing/addresses`

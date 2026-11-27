@@ -1,8 +1,8 @@
 # Organization email forwarding
 
 Administrator dashboard: `/admin/organization-email` (System → Organization email).
-API: `GET` and `POST /api/admin/organization-email`. Both require an authenticated
-administrator using the existing admin authorization checks. POST requires
+API: `GET`, `DELETE`, and `POST /api/admin/organization-email`. All require an authenticated
+administrator using the existing admin authorization checks. Mutations require
 same-origin JSON and an `Origin` header matching the request origin.
 
 ```json
@@ -68,7 +68,7 @@ rules by organization address, including rules created outside this application.
 Live rules show the actual destination and enabled state. Conflicts and missing
 previously active rules are flagged for admin attention.
 A mistaken destination reservation needs administrator database reconciliation;
-this version does not expose reassignment/deletion controls.
+pending requests have no forwarding rule to delete.
 
 Validation: provider lifecycle, pagination, conflict refusal, normalization,
 authentication and CSRF, lease behavior, UI retry/activation tests; live database
@@ -87,3 +87,17 @@ requests, oldest check first, using the same leases as manual operations. It
 also picks up pre-existing pending requests and retries transient errors.
 Conflicting rules require admin review. To verify rollout, check the workflow
 run result and confirm a verified pending address appears as enabled in Admin.
+
+## Rule deletion
+
+Apply migration `20261127223944_organization_email_rule_deletion.sql` before
+releasing the dashboard and API changes. It allows a deleting status and grants
+the server role DELETE on the reservation table. Public and authenticated
+clients retain their existing restrictions.
+
+An admin confirms the displayed organization address and destination. The server
+checks the zone, address, destination, and rule ID before removing a literal
+single-destination forwarding rule. It retains the verified Cloudflare destination
+for other aliases. A leased deletion intent excludes automatic and manual activation.
+After Cloudflare confirms the rule is absent, the server removes the reservation
+so the address can be reused. Use Retry deletion to finish interrupted cleanup.

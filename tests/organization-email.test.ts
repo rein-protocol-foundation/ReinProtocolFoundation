@@ -1,5 +1,5 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest'
-import { matchingRule, provisionMailbox, type RoutingRule } from '@/lib/organization-email/cloudflare'
+import { removeRoutingRule, matchingRule, provisionMailbox, type RoutingRule } from '@/lib/organization-email/cloudflare'
 import { mailboxSchema } from '@/lib/organization-email/contracts'
 
 const input = { localPart: 'zexin.li', destination: 'zexin.li@ntu.edu.sg' }
@@ -65,4 +65,18 @@ describe('organization email routing', () => {
     fetchMock.mockResolvedValueOnce({ ok: false, json: async () => ({ success: false, errors: [{ message: 'secret' }] }) })
     await expect(provisionMailbox(input)).rejects.toThrow('provider_error')
   })
+})
+
+it('deletes the selected disabled rule and checks its absence without deleting the destination', async () => {
+  zone(); fetchMock.mockResolvedValueOnce(ok([{ ...rule, enabled: false }])).mockResolvedValueOnce(ok(null))
+  zone(); fetchMock.mockResolvedValueOnce(ok([]))
+  await removeRoutingRule({ ...input, ruleId: rule.id }, AbortSignal.timeout(1000))
+  expect(fetchMock.mock.calls.filter(([, opt]) => opt.method !== 'GET')).toEqual([
+    [expect.stringContaining('/email/routing/rules/rule-1'), expect.objectContaining({ method: 'DELETE' })],
+  ])
+})
+it('rejects a changed destination before deleting a rule', async () => {
+  zone(); fetchMock.mockResolvedValueOnce(ok([rule]))
+  await expect(removeRoutingRule({ ...input, destination: 'changed@example.org', ruleId: rule.id }, AbortSignal.timeout(1000))).rejects.toThrow('conflict')
+  expect(fetchMock.mock.calls.every(([, opt]) => opt.method === 'GET')).toBe(true)
 })
