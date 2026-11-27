@@ -11,10 +11,9 @@ same-origin JSON and an `Origin` header matching the request origin.
 
 A request reserves the organization address, registers the destination with
 Cloudflare if necessary, and returns `mailbox.status = pending` until the
-recipient verifies Cloudflare's email. Use **Check and activate** after verification;
-this submits the saved pair again, creates the forwarding rule, and reads it back.
-There is no background verification poller. Refresh only reloads the dashboard;
-it does not activate pending requests. Existing verified destinations activate
+recipient verifies Cloudflare's email. The scheduled production job checks outstanding requests and creates the
+rule after verification, even with the dashboard closed. Refresh shows the latest records.
+Existing verified destinations activate
 immediately. Existing identical rules are reused. Disabled, ambiguous, or
 conflicting rules are never overwritten. Pending destinations are reused without
 resending verification emails on retries. Resending expired verification emails
@@ -64,12 +63,27 @@ succeeds but the response/database update fails, retry checks Cloudflare before
 creating anything. External Cloudflare clients are not covered by these database
 leases; conflicting rules produce an error requiring manual reconciliation.
 
-The page shows up to 500 recent requests and current Cloudflare literal-address
-rules (including pre-existing rules created outside this application). Request
-status is last checked state; use Check and activate to reconcile with Cloudflare.
+The forwarding inventory groups all saved requests and Cloudflare literal-address
+rules by organization address, including rules created outside this application.
+Live rules show the actual destination and enabled state. Conflicts and missing
+previously active rules are flagged for admin attention.
 A mistaken destination reservation needs administrator database reconciliation;
 this version does not expose reassignment/deletion controls.
 
 Validation: provider lifecycle, pagination, conflict refusal, normalization,
 authentication and CSRF, lease behavior, UI retry/activation tests; live database
 privileges and lease exclusion verified without retaining test records.
+
+## Automatic activation
+
+Configure the same random server-only `ORGANIZATION_EMAIL_JOB_SECRET` in Vercel
+Production and GitHub Actions repository secrets. Deploy the authenticated
+`POST /api/jobs/organization-email` handler and enable the organization-email
+workflow on the default branch. No database migration is needed.
+
+GitHub Actions schedules a check every five minutes. Scheduling delays and queue
+depth can extend activation time. Each invocation claims up to five eligible
+requests, oldest check first, using the same leases as manual operations. It
+also picks up pre-existing pending requests and retries transient errors.
+Conflicting rules require admin review. To verify rollout, check the workflow
+run result and confirm a verified pending address appears as enabled in Admin.
