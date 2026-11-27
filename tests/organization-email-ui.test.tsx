@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
 import { AdminOrganizationEmail } from '@/components/admin-organization-email'
 vi.mock('@/components/admin-i18n', () => ({ useAdminI18n: () => ({ t: (s: string) => s }) }))
@@ -31,6 +31,11 @@ it('lists external rules and pending requests together and displays a matching l
   render(<AdminOrganizationEmail />)
   expect(await screen.findAllByRole('article')).toHaveLength(3)
   expect(screen.getAllByText(address)).toHaveLength(1)
-  expect(screen.getAllByText('Awaiting verification')).toHaveLength(1)
+  const groups = screen.getAllByRole('region')
+  expect(groups[0]).toHaveAccessibleName('Awaiting verification')
+  expect(within(groups[0]).getAllByRole('article')).toHaveLength(1)
+  expect(groups[0]).toHaveTextContent('pending@rein-protocol.org')
+  expect(groups[1]).toHaveTextContent(address)
+  expect(screen.getByPlaceholderText('tom.wang')).toHaveValue('')
   expect(screen.queryByRole('button', { name: 'Retry activation' })).toBeNull()
 })
