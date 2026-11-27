@@ -2,7 +2,7 @@ import { beforeEach, afterEach, expect, it, vi } from 'vitest'
 const mocks = vi.hoisted(() => ({ from: vi.fn(), provision: vi.fn() }))
 vi.mock('@supabase/supabase-js', () => ({ createClient: () => ({ from: mocks.from }) }))
 vi.mock('@/lib/organization-email/cloudflare', async original => ({ ...await original<object>(), provisionMailbox: mocks.provision }))
-import { saveMailbox } from '@/lib/organization-email/store'
+import { reconcileMailboxes, saveMailbox } from '@/lib/organization-email/store'
 const input = { localPart: 'zexin.li', destination: 'zexin.li@ntu.edu.sg' }
 let results: unknown[]
 let builders: Record<string, ReturnType<typeof vi.fn>>[]
@@ -13,7 +13,7 @@ beforeEach(() => {
   mocks.from.mockImplementation(() => {
     const result = results.shift()
     const builder: Record<string, ReturnType<typeof vi.fn>> = {}
-    for (const method of ['select', 'update', 'upsert', 'eq', 'lt', 'single', 'maybeSingle']) builder[method] = vi.fn(() => builder)
+    for (const method of ['select', 'update', 'upsert', 'or', 'order', 'limit', 'eq', 'lt', 'single', 'maybeSingle']) builder[method] = vi.fn(() => builder)
     builder.then = vi.fn((resolve: (value: unknown) => void) => Promise.resolve(result).then(resolve))
     builders.push(builder); return builder
   })
@@ -43,4 +43,15 @@ it('records provider failure and releases the lease for a safe retry', async () 
   mocks.provision.mockRejectedValue(new Error('secret provider payload'))
   await expect(saveMailbox(input, 'actor')).rejects.toThrow()
   expect(builders[3].update).toHaveBeenCalledWith(expect.objectContaining({ status: 'error', last_error: 'provider_error', lock_token: null }))
+})
+
+it('activates an existing verified request in the background without a new reservation or admin actor', async () => {
+  const address = 'zexin.li@rein-protocol.org'
+  results = [{ data: [{ address, destination: input.destination }] }, { data: { address } }, { data: { status: 'active' } }]
+  mocks.provision.mockResolvedValue({ status: 'active', ruleId: 'rule' })
+  expect(await reconcileMailboxes()).toEqual({ checked: 1 })
+  expect(mocks.provision).toHaveBeenCalledWith(input)
+  expect(builders[1].or).toHaveBeenCalledWith(builders[0].or.mock.calls[0][0])
+  expect(builders[1].update.mock.calls[0][0]).not.toHaveProperty('last_actor_id')
+  expect(builders[2].update).toHaveBeenCalledWith(expect.objectContaining({ status: 'active', rule_id: 'rule' }))
 })

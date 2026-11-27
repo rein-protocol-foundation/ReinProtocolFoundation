@@ -1,0 +1,25 @@
+name: Activate verified organization addresses
+on:
+  schedule:
+    - cron: '3-59/5 * * * *'
+  workflow_dispatch:
+
+permissions: {}
+concurrency:
+  group: organization-email-production
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check outstanding forwarding requests
+        env:
+          JOB_SECRET: ${{ secrets.ORGANIZATION_EMAIL_JOB_SECRET }}
+        run: |
+          test -n "$JOB_SECRET"
+          result=$(curl --fail --silent --show-error --max-time 65 --request POST \
+            --header "Authorization: Bearer $JOB_SECRET" \
+            https://www.rein-protocol.org/api/jobs/organization-email)
+          jq -ec 'select(.checked | type == "number") | {checked}' <<< "$result"
