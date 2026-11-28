@@ -39,3 +39,27 @@ it('lists external rules and pending requests together and displays a matching l
   expect(screen.getByPlaceholderText('tom.wang')).toHaveValue('')
   expect(screen.queryByRole('button', { name: 'Retry activation' })).toBeNull()
 })
+
+it('asks for confirmation before deleting the selected rule and refreshes the inventory', async () => {
+  const address = 'tom.wang@rein-protocol.org'
+  const destination = 'member@example.org'
+  const rule = { id: 'rule-1', enabled: true, matchers: [{ type: 'literal', field: 'to', value: address }],
+    actions: [{ type: 'forward', value: [destination] }] }
+  const response = (value: unknown) => ({ ok: true, json: async () => value })
+  const fetchMock = vi.fn().mockResolvedValueOnce(response({ mailboxes: [], rules: [rule] }))
+    .mockResolvedValueOnce(response({ deleted: true })).mockResolvedValueOnce(response({ mailboxes: [], rules: [] }))
+  vi.stubGlobal('fetch', fetchMock)
+  const confirm = vi.spyOn(window, 'confirm').mockReturnValueOnce(false).mockReturnValueOnce(true)
+  try {
+    render(<AdminOrganizationEmail />)
+    const button = await screen.findByRole('button', { name: 'Delete forwarding rule' })
+    fireEvent.click(button)
+    expect(confirm).toHaveBeenCalledWith(expect.stringContaining(address + ' → ' + destination))
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    fireEvent.click(button)
+    await waitFor(() => expect(screen.queryByText(address)).toBeNull())
+    expect(fetchMock).toHaveBeenCalledWith('/api/admin/organization-email', expect.objectContaining({
+      method: 'DELETE', body: JSON.stringify({ localPart: 'tom.wang', destination, ruleId: rule.id }),
+    }))
+  } finally { confirm.mockRestore() }
+})

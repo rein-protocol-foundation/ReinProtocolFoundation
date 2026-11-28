@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useAdminI18n } from './admin-i18n'
-import { emailErrors, organizationDomain, type Mailbox } from '@/lib/organization-email/contracts'
+import { deleteRuleSchema, emailErrors, organizationDomain, type Mailbox } from '@/lib/organization-email/contracts'
 import type { RoutingRule } from '@/lib/organization-email/cloudflare'
 
 type Snapshot = { mailboxes: Mailbox[]; rules: RoutingRule[] }
@@ -58,6 +58,24 @@ export function AdminOrganizationEmail() {
     } catch (e) { setError(e instanceof Error ? e.message : emailErrors.provider_error) }
     finally { setBusy(false) }
   }
+  async function remove(address: string, destination: string, ruleId: string) {
+    if (!window.confirm(`${t('Delete this forwarding rule?')}\n${address} → ${destination}\n${t('Incoming email will no longer be forwarded by this rule.')}`)) return
+    setBusy(true); setError(''); setNotice('')
+    try {
+      const response = await fetch('/api/admin/organization-email', {
+        method: 'DELETE', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ localPart: address.split('@')[0], destination, ruleId }),
+      })
+      if (response.redirected) throw new Error('Please sign in again.')
+      const data = await response.json()
+      if (!response.ok) throw new Error(emailErrors[data.error] ?? emailErrors.provider_error)
+      setNotice('Forwarding rule deleted.')
+    } catch (e) { setError(e instanceof Error ? e.message : emailErrors.provider_error) }
+    finally {
+      try { await load() } catch (e) { setError(e instanceof Error ? e.message : emailErrors.provider_error) }
+      setBusy(false)
+    }
+  }
   const records = snapshot ? forwardingRecords(snapshot) : []
   const isPending = (record: typeof records[number]) => record.mailbox?.status === 'pending' && !record.rules.length
   const pending = records.filter(isPending)
@@ -68,13 +86,25 @@ export function AdminOrganizationEmail() {
     const matches = rules.length === 1 && rule.matchers.length === 1 && rule.actions.length === 1 &&
       rule.actions[0].type === 'forward' && rule.actions[0].value?.length === 1 &&
       rule.actions[0].value[0].toLowerCase() === mailbox?.destination
-    const needsAttention = mailbox && (rules.length ? !matches || !rule.enabled : mailbox.status !== 'pending')
+    const deleting = mailbox?.status === 'deleting'
+    const needsAttention = mailbox && !deleting && (rules.length ? !matches || !rule.enabled : mailbox.status !== 'pending')
     return <article key={address} className="admin-record" style={{ padding: '1rem', overflowWrap: 'anywhere' }}>
       <h4>{address}</h4>
-      {rules.map(rule => <div key={rule.id}>
+      {rules.map(rule => {
+        const target = rule.actions[0]?.value?.[0]?.toLowerCase()
+        const canDelete = !deleting && rule.matchers.length === 1 && rule.actions.length === 1 &&
+          rule.actions[0].type === 'forward' && rule.actions[0].value?.length === 1 && target &&
+          (!mailbox || mailbox.destination === target) && address.endsWith('@' + organizationDomain) &&
+          deleteRuleSchema.safeParse({ localPart: address.split('@')[0], destination: target, ruleId: rule.id }).success
+        return <div key={rule.id}>
         <p>{rule.actions.map(action => action.type === 'forward' ? '→ ' + action.value?.join(', ') : [action.type, ...(action.value ?? [])].join(' ')).join(' · ')}</p>
         <span className="status-badge">{t(rule.enabled ? 'Enabled' : 'Disabled')}</span>
-      </div>)}
+        {canDelete && <p><button className="admin-button admin-button--quiet" disabled={busy} type="button"
+          onClick={() => void remove(address, target, rule.id)}>{t('Delete forwarding rule')}</button></p>}
+        </div>
+      })}
+      {deleting && mailbox.rule_id && <p><button className="admin-button admin-button--quiet" disabled={busy} type="button"
+        onClick={() => void remove(address, mailbox.destination, mailbox.rule_id!)}>{t('Retry deletion')}</button></p>}
       {mailbox && !matches && <p>{rules.length > 0 && t('Requested destination') + ' '}→ {mailbox.destination}</p>}
       {mailbox && !rules.length && !needsAttention && <span className="status-badge">{t('Awaiting verification')}</span>}
       {needsAttention && <>

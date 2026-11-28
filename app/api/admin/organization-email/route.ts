@@ -1,7 +1,7 @@
 import { requireAdmin } from '@/lib/admin/auth'
-import { mailboxSchema, emailErrors } from '@/lib/organization-email/contracts'
+import { mailboxSchema, deleteRuleSchema, emailErrors } from '@/lib/organization-email/contracts'
 import { MailboxError, listRoutingRules } from '@/lib/organization-email/cloudflare'
-import { listMailboxes, saveMailbox } from '@/lib/organization-email/store'
+import { listMailboxes, saveMailbox, deleteForwardingRule } from '@/lib/organization-email/store'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -17,7 +17,10 @@ export async function GET() {
     return json({ mailboxes, rules })
   } catch (error) { return failure(error) }
 }
-export async function POST(request: Request) {
+export function POST(request: Request) { return mutate(request, 'create') }
+export function DELETE(request: Request) { return mutate(request, 'delete') }
+
+async function mutate(request: Request, operation: 'create' | 'delete') {
   const { user } = await requireAdmin()
   // Cookie-authenticated mutations are same-origin JSON requests only.
   if (request.headers.get('origin') !== new URL(request.url).origin ||
@@ -28,6 +31,12 @@ export async function POST(request: Request) {
     if (body.length > 4096) throw new MailboxError('invalid_request', 400)
     let input: unknown
     try { input = JSON.parse(body) } catch { throw new MailboxError('invalid_request', 400) }
+    if (operation === 'delete') {
+      const parsed = deleteRuleSchema.safeParse(input)
+      if (!parsed.success) throw new MailboxError('invalid_request', 400)
+      await deleteForwardingRule(parsed.data, user.id)
+      return json({ deleted: true })
+    }
     const parsed = mailboxSchema.safeParse(input)
     if (!parsed.success) throw new MailboxError('invalid_request', 400)
     return json({ mailbox: await saveMailbox(parsed.data, user.id) })
