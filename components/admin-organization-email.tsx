@@ -58,14 +58,41 @@ export function AdminOrganizationEmail() {
     } catch (e) { setError(e instanceof Error ? e.message : emailErrors.provider_error) }
     finally { setBusy(false) }
   }
+  const records = snapshot ? forwardingRecords(snapshot) : []
+  const isPending = (record: typeof records[number]) => record.mailbox?.status === 'pending' && !record.rules.length
+  const pending = records.filter(isPending)
+  const other = records.filter(record => !isPending(record))
+
+  function renderRecord({ address, mailbox, rules }: typeof records[number]) {
+    const rule = rules[0]
+    const matches = rules.length === 1 && rule.matchers.length === 1 && rule.actions.length === 1 &&
+      rule.actions[0].type === 'forward' && rule.actions[0].value?.length === 1 &&
+      rule.actions[0].value[0].toLowerCase() === mailbox?.destination
+    const needsAttention = mailbox && (rules.length ? !matches || !rule.enabled : mailbox.status !== 'pending')
+    return <article key={address} className="admin-record" style={{ padding: '1rem', overflowWrap: 'anywhere' }}>
+      <h4>{address}</h4>
+      {rules.map(rule => <div key={rule.id}>
+        <p>{rule.actions.map(action => action.type === 'forward' ? '→ ' + action.value?.join(', ') : [action.type, ...(action.value ?? [])].join(' ')).join(' · ')}</p>
+        <span className="status-badge">{t(rule.enabled ? 'Enabled' : 'Disabled')}</span>
+      </div>)}
+      {mailbox && !matches && <p>{rules.length > 0 && t('Requested destination') + ' '}→ {mailbox.destination}</p>}
+      {mailbox && !rules.length && !needsAttention && <span className="status-badge">{t('Awaiting verification')}</span>}
+      {needsAttention && <>
+        <span className="status-badge">{t('Needs attention')}</span>
+        {mailbox.last_error && <p>{t(emailErrors[mailbox.last_error] ?? emailErrors.provider_error)}</p>}
+        <p><button className="admin-button admin-button--quiet" type="button" disabled={busy} onClick={() => void submit(address.split('@')[0], mailbox.destination)}>{t('Retry activation')}</button></p>
+      </>}
+    </article>
+  }
+
   return <>
     <aside className="admin-note">{t('Stage and production manage the same live organization email addresses. This creates inbound forwarding, not a separate inbox or outbound email account.')}</aside>
     <section className="admin-panel" style={{ marginBlock: '1.5rem' }}>
       <h2>{t('Create organization email')}</h2>
       <form className="admin-form admin-form--grid" onSubmit={event => { event.preventDefault(); void submit(localPart, destination) }}>
-        <label>{t('Mailbox name')}<input name="localPart" value={localPart} onChange={event => setLocalPart(event.target.value)} required maxLength={64} pattern="[a-zA-Z0-9]+([._\-][a-zA-Z0-9]+)*" placeholder="zexin.li" disabled={busy} /><small>@{organizationDomain}</small></label>
+        <label>{t('Mailbox name')}<input name="localPart" value={localPart} onChange={event => setLocalPart(event.target.value)} required maxLength={64} pattern="[a-zA-Z0-9]+([._\-][a-zA-Z0-9]+)*" placeholder="tom.wang" disabled={busy} /><small>@{organizationDomain}</small></label>
         <label>{t('Destination email')}<input name="destination" value={destination} onChange={event => setDestination(event.target.value)} type="email" required maxLength={254} placeholder="name@example.org" disabled={busy} /></label>
-        <p className="admin-note admin-field--wide">{t('Cloudflare emails new recipients a verification link. Forwarding activates automatically after verification.')}</p>
+        <p className="admin-note admin-field--wide">{t('Cloudflare sends a verification link to each new destination. Forwarding activates after verification. Previously verified destinations activate immediately.')}</p>
         <button className="admin-button" disabled={busy} type="submit">{t(busy ? 'Processing…' : 'Create forwarding address')}</button>
       </form>
     </section>
@@ -73,29 +100,16 @@ export function AdminOrganizationEmail() {
     {notice && <p role="status" className="admin-note">{t(notice)}</p>}
     <div className="admin-toolbar"><h2>{t('Email forwarding records')}</h2><button type="button" className="admin-button admin-button--quiet" disabled={busy} onClick={() => void refresh()}>{t('Refresh')}</button></div>
     {!snapshot && !error && <p role="status">{t('Loading…')}</p>}
-    {snapshot && <div className="admin-record-list">
-      {forwardingRecords(snapshot).map(({ address, mailbox, rules }) => {
-        const rule = rules[0]
-        const matches = rules.length === 1 && rule.matchers.length === 1 && rule.actions.length === 1 &&
-          rule.actions[0].type === 'forward' && rule.actions[0].value?.length === 1 &&
-          rule.actions[0].value[0].toLowerCase() === mailbox?.destination
-        const needsAttention = mailbox && (rules.length ? !matches || !rule.enabled : mailbox.status !== 'pending')
-        return <article key={address} className="admin-record" style={{ padding: '1rem', overflowWrap: 'anywhere' }}>
-          <h3>{address}</h3>
-          {rules.map(rule => <div key={rule.id}>
-            <p>{rule.actions.map(action => action.type === 'forward' ? '→ ' + action.value?.join(', ') : [action.type, ...(action.value ?? [])].join(' ')).join(' · ')}</p>
-            <span className="status-badge">{t(rule.enabled ? 'Enabled' : 'Disabled')}</span>
-          </div>)}
-          {mailbox && !matches && <p>{rules.length > 0 && t('Requested destination') + ' '}→ {mailbox.destination}</p>}
-          {mailbox && !rules.length && !needsAttention && <span className="status-badge">{t('Awaiting verification')}</span>}
-          {needsAttention && <>
-            <span className="status-badge">{t('Needs attention')}</span>
-            {mailbox.last_error && <p>{t(emailErrors[mailbox.last_error] ?? emailErrors.provider_error)}</p>}
-            <p><button className="admin-button admin-button--quiet" type="button" disabled={busy} onClick={() => void submit(address.split('@')[0], mailbox.destination)}>{t('Retry activation')}</button></p>
-          </>}
-        </article>
-      })}
-      {!snapshot.mailboxes.length && !snapshot.rules.some(rule => rule.matchers.some(m => m.type === 'literal' && m.field === 'to')) && <p>{t('No forwarding records yet.')}</p>}
-    </div>}
+    {snapshot && <>
+      <section aria-label={t('Awaiting verification')}>
+        <h3>{t('Awaiting verification')} ({pending.length})</h3>
+        <div className="admin-record-list">{pending.map(renderRecord)}</div>
+        {!pending.length && <p>{t('No addresses awaiting verification.')}</p>}
+      </section>
+      {other.length > 0 && <section aria-label={t('Other forwarding records')}>
+        <h3>{t('Other forwarding records')}</h3>
+        <div className="admin-record-list">{other.map(renderRecord)}</div>
+      </section>}
+    </>}
   </>
 }
